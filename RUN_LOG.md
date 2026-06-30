@@ -1,0 +1,66 @@
+# RUN_LOG — apartment-shopping
+
+Append before and after every spawn. Times are local (PT).
+
+---
+
+### 2026-06-29 — Setup (Orchestrator/PM · Opus 4.8)
+- Triaged request → FULL BUILD, reuse-first (adapt `garage`). Wrote acceptance criteria into PRD.md.
+- Explored garage template: types.ts, state/useGarage.ts, lib/{flags,derive,format,exportSheet}.ts, data/{cars,features,sheetCols}.ts, App.tsx, vite/ts config, CI workflow. Result: architecture understood; reusable spine confirmed.
+- Clarified 3 decisions with the user (name, distance type, anchor model).
+- Scaffolded apartment-shopping by copying garage `app/` (excl. node_modules/dist/img/tco/_extract) + .github + .gitignore.
+- Authored frozen contract app/src/types.ts; created STATE/DECISIONS/RUN_LOG + PRD.md.
+- Status: ✅ scaffold + contract ready.
+
+---
+<!-- New entries below -->
+
+### 2026-06-29 — ✔ Reviewer (Opus 4.8) — DONE
+- Verdict: SHIP-WITH-MUST-FIXES. 3 must-fix, 6 should-fix, 6 nice-to-have. Report: docs/review-findings.md. (109k tok, 37 tools, 279s)
+- Confirmed clean: sort-context trap threaded, haversine/null-degrade, geocode precedence+cache, leaseFits, flag engine, hydrate/seed-merge, no dangerouslySetInnerHTML/eval, Sheets POST data-only, no garage/TCO remnants.
+
+### 2026-06-29 — ✔ PM remediation — DONE (re-verified)
+- Fixed M1 (XSS safeHref guard ×3 sites + form-save + 8 tests), M2 (removed share-hash import path → also resolves S4), M3 (mergeWithSeed order: user-added first), S2 (compare null no longer "best"), S5 (dropped forbidden fetch headers + test), QA reset-chips gap.
+- Deferred (accepted, low-risk): S1, S3, S6, N1–N6. Tracked in STATE.md.
+- Re-verify: `npm run build` exit 0; `npm test` **173/173**; browser reload — no console errors, distance persists (0.6/10.7mi), XSS guard rejects javascript:.
+
+### 2026-06-29 — ✔ PM ACCEPTANCE GATE — PASSED
+- Vs original ask: named folder (apartment-shopping) ✓; garage-style compare ✓; dropped TCO/car fields, kept price/location/photo/your★/my★ ✓; screenshot+link → I append to seed ✓; search/filter/rank ✓; rank by distance (Bay Area, offline) ✓; 6–12mo lease fit ✓; cost tracked-not-computed (scope cut) ✓.
+- Status: **product accepted.** Next: deploy gate (human approval) — NOT yet deployed.
+
+### 2026-06-29 — ▶ Tech Lead (Opus 4.8) — STARTED
+- Why: freeze the api-contract (lib/* + data/* signatures) before the parallel build; design the distance/geocode subsystem + cost derive + file layout.
+- Inputs: docs/PRD.md, app/src/types.ts, garage template (lib/derive,flags,format; data/features,sheetCols).
+- Expected out: docs/tech-plan.md + docs/api-contract.md. Status: ✔ done (282s, 67k tok). Contract is complete: SortKey, Filters, distance resolver (offline-first), import DAG. 3 risks flagged (thresholds → PM accepted; Nominatim unverified → non-blocking, offline path primary; geo sourcing → PM handled below).
+
+### 2026-06-29 — PM scope cut + geo data prep
+- User cut derived/total cost mid-run: track cost fields only, no effectiveMonthly/moveInCost/cost-asc. Updated api-contract §4/§6/§9/§10, tech-plan §2/§4/§5, DECISIONS ADR-002. Contract re-frozen.
+- De-risked geo sourcing (PM): downloaded US Census 2023 ZCTA + Place gazetteers (schannel TLS), filtered to 9-county Bay Area bounding box → **429 ZIP centroids** + **106 city/neighborhood centroids** (cities derived from trusted ZIP centroids to avoid Census place-centroid pollution, e.g. SF/Farallones). Staged at app/src/data/geo/_bay_zips.json + _bay_cities.json. Spot-checks pass.
+
+### 2026-06-29 — ▶ Parallel build (Frontend + Data engineers, Opus 4.8) — STARTED
+- Contract frozen → fan out two non-overlapping lanes per tech-plan §2. Status: ✔ both done.
+
+### 2026-06-29 — ✔ Frontend Engineer (Opus 4.8) — DONE
+- Output: state/useApartments.ts, App.tsx, styles.css, components/{Card,Grid,CompareTable,DetailModal,ApartmentForm,Filters,ExportModal,SettingsModal,Modal,RatingStars,ThemeToggle,icons,helpers}. Deleted useGarage.ts/CarForm.tsx. (189k tok, 87 tools, 833s)
+- Self-reported: tsc 0 errors, build ok, 116 tests, offline distance smoke ok. Anchor UX split: Filters sets primary anchor, Settings manages full list.
+
+### 2026-06-29 — ✔ PM Integration checkpoint — PASSED
+- Authoritative `npm run build` exit 0 (56 modules, 224KB/70KB gz); `npm test` 116/116.
+- Browser verify (preview :5180): no console errors; light+dark render clean; **distance offline** (94103→0.6/10.7mi, persisted); Nearest sort correct; **Nominatim browser CORS 200** (address fallback works — open question RESOLVED); Compare best/worst (rent/beds/sqft/$ per sqft/distance); Gone hidden (2 of 3). Screenshots captured.
+
+### 2026-06-29 — ▶ QA (Sonnet 4.6) + Reviewer (Opus 4.8) — STARTED (parallel)
+- App already verified working by PM; QA maps acceptance criteria + coverage gaps, Reviewer audits correctness/security. Status: QA ✔, Reviewer running.
+
+### 2026-06-29 — ✔ QA (Sonnet 4.6) — DONE
+- 11/11 acceptance criteria PASS. Tests 116 → **165** (+49 in components/helpers.test.ts for applyFilters/applySort; all green). Build exit 0. Report: docs/test-report.md. (90k tok, 34 tools, 250s)
+- Finding (low): resetFilters() doesn't clear furnishedOnly/leaseFitsTarget chips → PM to fix in integration cleanup.
+- Untestable without DOM lib (covered by PM browser smoke): component render, localStorage round-trip, ExportModal sync fetch.
+
+### 2026-06-29 — ✔ Data/Pure-Lib Engineer (Opus 4.8) — DONE
+- Output: lib/{distance,derive,flags,format,exportSheet}.ts + tests; data/{amenities,sheetCols,apartments}.ts; data/geo/bayAreaGeo.ts (429 ZIP + 106 city, BOM-stripped) + data/geocode.ts; _fixtures.ts. Deleted garage cars.ts/features.ts. (101k tok, 59 tools, 520s)
+- Validation: `vitest run src/lib src/data` → **116 tests passing**; lane tsc-clean. Full build deferred to PM integration.
+- Nominatim probe: HTTP 000 (no egress from subagent). Non-blocking — offline table is primary. PM to verify browser CORS in-app at integration.
+- Product finding (ACCEPTED, no change): `leaseFits` per frozen formula treats a min-12mo lease as fitting a 6–12 target (12≤12). Correct for user intent ("6–12 mo" includes a standard 12-mo lease); only min≥13 trips the lease-risk flag. Seed a2 set to min-18 as the genuine "doesn't fit" example.
+
+
+

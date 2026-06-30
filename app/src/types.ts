@@ -1,0 +1,137 @@
+// ============================================================================
+// FROZEN CONTRACT — owned by the orchestrator/PM. Do NOT edit in a build lane.
+// If a type change is needed, route it through the PM (it affects both lanes:
+// the pure lib/data lane AND the UI lane). This is the apartment data model,
+// adapted from the garage (used-car) template.
+// ============================================================================
+
+/**
+ * Tracked amenities shown as tri-state pills, in display order.
+ * Trimmed (2026-06-30) to the few that matter at a glance. Other facts live elsewhere:
+ * laundry → its own `laundry` field (in-unit vs on-site is a real distinction, not yes/no);
+ * pets → petPolicy; one-offs (A/C, EV, dishwasher, deck…) → free-text `amenities`; who's
+ * renting it → listingType ("Listed by" pill).
+ */
+export type AmenityKey =
+  | 'parking' // dedicated/garage/assigned parking
+  | 'gym'; // on-site fitness
+
+/** Laundry as a first-class field: in-unit and on-site are meaningfully different (and "none"). */
+export type LaundryType = 'in-unit' | 'on-site' | 'none' | 'unknown';
+
+/** Tri-state per amenity: true = has · false = confirmed absent · null/undefined = unknown. */
+export type Amen = { [K in AmenityKey]?: boolean | null };
+
+/** Rendered tri-state. 'unk' must always stay visually distinct from 'no'. */
+export type AmenState = 'yes' | 'no' | 'unk';
+
+export type Status =
+  | 'New'
+  | 'Shortlist'
+  | 'Contacted'
+  | 'Toured'
+  | 'Applied'
+  | 'Rejected'
+  | 'Leased' // you signed it (won) — kept, but flagged as the chosen one
+  | 'Gone'; // off the market / leased to someone else — hidden from the active list by default
+
+export type ListingType = 'Property mgmt' | 'Landlord' | 'Sublet' | 'Broker' | 'Unknown';
+export type PetPolicy = 'Allowed' | 'Cats only' | 'Dogs only' | 'No pets' | 'Unknown';
+
+export interface Apartment {
+  id: string; // 'a1', 'a2', … (matches the id badge on the photo + chat references)
+  status: Status;
+
+  // identity / location
+  title: string; // building name or a short label, e.g. "Sunny 1BR — Hayes Valley"
+  address: string; // street address as listed (used for geocoding at add-time)
+  neighborhood: string;
+  city: string;
+  lat: number | null; // geocoded at add-time; null = not yet geocoded (distance hidden)
+  lng: number | null;
+
+  // unit
+  beds: number; // 0 = studio
+  baths: number; // 1, 1.5, 2 …
+  sqft: number | null;
+  floor: string; // free text, e.g. "3rd floor", "garden level" ('' = unknown)
+  laundry: LaundryType; // in-unit / on-site / none / unknown — shown as its own pill
+
+  // monthly cost
+  rent: number; // base monthly rent
+  parkingCost: number | null; // monthly, if parking is paid separately (null = unknown/none)
+  petRent: number | null; // monthly pet rent (null = none/unknown)
+  utilitiesIncluded: boolean | null; // null = unknown
+  utilitiesEstimate: number | null; // monthly est. when utilities are NOT included
+
+  // one-time / move-in cost
+  deposit: number | null; // refundable security deposit
+  appFee: number | null; // non-refundable application fee
+  brokerFee: number | null; // one-time broker/leasing fee (non-refundable)
+
+  // lease
+  leaseTermMonths: number | null; // the offered/desired term for THIS listing
+  minLeaseMonths: number | null; // shortest term the landlord will sign
+  maxLeaseMonths: number | null; // longest term offered
+  availableDate: string; // ISO date the unit is available ('' = unknown)
+  furnished: boolean | null; // null = unknown (first-class: matters for short-term)
+
+  // policy / source
+  petPolicy: PetPolicy;
+  listingType: ListingType;
+
+  // amenities
+  amen: Amen; // tri-state tracked amenities
+  amenities: string[]; // free-text extras the listing mentions
+
+  // tracking / market
+  dateSeen: string; // ISO date you saw it
+  daysOnMarket: number | null;
+  marketRent: number | null; // comparable rent for the area/size, if known (drives over/under-market flags)
+
+  // ratings / notes / media
+  expertRating: number; // 0–5 — my (Claude's) rating
+  rating: number; // 0–5 — your rating
+  notes: string; // supports \n
+  image: string; // path under public/ (e.g. "img/a1.jpg") OR a data: URI fallback
+  sourceUrl: string;
+}
+
+/** A saved place the user ranks distance against (entered at runtime, e.g. a city, zip, or address). */
+export interface Anchor {
+  id: string;
+  label: string; // "Work", "Gym", "Partner's place"
+  query: string; // exactly what the user typed: a city, ZIP, or full address
+  lat: number | null; // resolved via the bundled offline table or geocode fallback
+  lng: number | null;
+}
+
+export interface Settings {
+  anchors: Anchor[]; // user-entered places (empty until they add one)
+  primaryAnchorId: string | null; // which anchor "Sort → Nearest" and the per-card distance use
+  distanceUnit: 'mi' | 'km'; // default 'mi'
+  targetMinLease: number | null; // your desired lease window (months) — drives the lease-fit flag
+  targetMaxLease: number | null;
+  sheetUrl?: string; // Google Apps Script Web App URL for direct Sheets sync ('' = not configured)
+}
+
+export const DEFAULT_SETTINGS: Settings = {
+  anchors: [],
+  primaryAnchorId: null,
+  distanceUnit: 'mi',
+  targetMinLease: 6, // the user is looking for a 6–12 month lease
+  targetMaxLease: 12,
+  sheetUrl: '',
+};
+
+export type FlagLevel = 'risk' | 'warn' | 'info' | 'good';
+export interface Flag {
+  lvl: FlagLevel;
+  t: string;
+}
+
+/** Overall card signal. '' = none. */
+export type SignalLevel = 'risk' | 'warn' | 'good' | '';
+
+/** A SHEET_COLS column: [title, accessor]. Accessor returns a cell value. */
+export type SheetCol = [string, (a: Apartment) => string | number];
