@@ -45,6 +45,8 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'Cats only', // cats OK; no dogs mentioned
     listingType: 'Landlord', // small 7-unit complex, "email Chris" — reads as a private owner/manager
+    contact: { company: '', name: 'Chris', phone: '', email: '', website: '' }, // craigslist email relay only; no phone/email published
+    comments: [],
 
     laundry: 'on-site', // on-site laundry (not in-unit) — now its own field
     amen: {
@@ -109,6 +111,14 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'Allowed', // cats + dogs OK, up to 2 pets, breed restrictions, refundable pet deposit
     listingType: 'Property mgmt', // Apartment Management Consultants (AMC-CA Inc), CA BRE #01525033
+    contact: {
+      company: 'Apartment Management Consultants (AMC-CA Inc) — Woodside Place',
+      name: '',
+      phone: '(510) 899-5584 x66', // "Call Now" — or text 66 to the same number, per the listing
+      email: '',
+      website: 'amc.touraptnow.com/mjig3o', // "Interested in more information? See link below" — this unit's leasing page
+    },
+    comments: [],
 
     amen: {
       parking: true, // assigned parking + carport (dedicated)
@@ -158,14 +168,14 @@ export const APARTMENTS: Apartment[] = [
     rent: 2250, // Unit 304, 480 sqft (headline "1 bed $2,250+"); Unit 309 (640 sqft) is $2,450
     parkingCost: null, // covered/assigned parking with outdoor storage — included
     petRent: null, // not stated
-    utilitiesIncluded: null, // not stated
+    utilitiesIncluded: false, // Policies: "Utilities included in rent: Heat" ONLY — water/trash/electric not listed as included
     utilitiesEstimate: null,
 
-    deposit: null, // not stated
+    deposit: null, // not stated (no cost calculator shown for this listing, unlike a6)
     appFee: null, // not stated
     brokerFee: null,
 
-    leaseTermMonths: null, // not stated — likely a standard 12-mo community lease; confirm they'll do ≤12
+    leaseTermMonths: 12, // Policies: "Lease terms: One year" — confirmed 2026-07-01
     minLeaseMonths: null,
     maxLeaseMonths: null,
     availableDate: '', // both listed units "Currently unavailable" (Available "--") — rolling community, ask what's open
@@ -173,13 +183,15 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'Allowed', // "Cats and dogs" — small + large dogs allowed, up to 2 large dogs
     listingType: 'Property mgmt', // listed by a management company (Teri Penpraze, Verified Source); on-site mgmt + maintenance
+    contact: { company: 'Fiesta Apartments', name: 'Teri Penpraze', phone: '', email: '', website: '' }, // Zillow "Verified Source"; office Mon–Fri 9–5, contact via Zillow
+    comments: [],
 
     laundry: 'on-site', // "Shared laundry" / "Community laundry in building" — not in-unit
     amen: {
       parking: true, // covered / assigned parking with outdoor storage
       gym: null,
     },
-    amenities: ['Pool', 'Covered/assigned parking + outdoor storage', 'Picnic & BBQ area', 'Controlled access', 'On-site management & maintenance', 'Community laundry'],
+    amenities: ['Pool', 'Covered/assigned parking + outdoor storage', 'Picnic & BBQ area', 'Controlled access', '24-hr maintenance + on-site management', 'Dishwasher + microwave', 'Laminate floors, patio balcony', 'Online rent payment'],
 
     dateSeen: '2026-07-01',
     daysOnMarket: null,
@@ -195,9 +207,10 @@ export const APARTMENTS: Apartment[] = [
       'Confirm before signing: (1) AVAILABILITY — both listed 1BR units show "Currently unavailable"; it\'s a ' +
       'rolling-availability community, so call to ask what\'s actually open (office Mon–Fri 9–5, Sat by appointment, Sun closed). ' +
       '(2) TWO OPTIONS — Unit 304 = 480 sqft @ $2,250 (tracked here); Unit 309 = 640 sqft @ $2,450 (bigger, +$200/mo, has a floor plan + 6 photos). ' +
-      '(3) Laundry is community/on-site, NOT in-unit. (4) Lease term, deposit, and application fee are not stated — ' +
-      'confirm they\'ll do a 6–12 mo term and ask move-in costs. (5) Pets OK — cats + dogs, up to 2 large dogs. ' +
-      '(6) Parking is covered/assigned with outdoor storage (included).',
+      '(3) Laundry is community/on-site, NOT in-unit. (4) Lease term is 12 months (confirmed) — deposit and application fee ' +
+      'are still not stated; ask for move-in costs directly. (5) Utilities — only HEAT is included in rent; water, trash, ' +
+      'and electric are not listed as included, so confirm what you\'ll actually pay. (6) Pets OK — cats + dogs, up to 2 large dogs. ' +
+      '(7) Parking is covered/assigned with outdoor storage (included).',
     image: 'img/a5.webp',
     sourceUrl: 'https://www.zillow.com/apartments/san-mateo-ca/fiesta-apartments/CmJHfp/',
   },
@@ -237,6 +250,8 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'No pets', // "Dogs are not allowed" + "Cats are not allowed" — both explicit
     listingType: 'Property mgmt', // Zac Amero, Verified Source; professional screening (2.5x rent, 660+ credit)
+    contact: { company: 'Imperial Apartments', name: 'Zac Amero', phone: '', email: '', website: '' }, // Zillow "Verified Source"; contact via Zillow
+    comments: [],
 
     laundry: 'on-site', // "Laundry: Shared"
     amen: {
