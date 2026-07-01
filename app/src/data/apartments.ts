@@ -195,4 +195,66 @@ export const APARTMENTS: Apartment[] = [
     sourceUrl:
       'https://www.craigslist.org/view/d/san-carlos-beautiful-bed-bath-apartment/uajPQJhUrdfmNkTknHYMDi',
   },
+  {
+    // a4 — Woodside Place Apartments, Mountain View. Exact-building geocode (Nominatim,
+    // OSM names the building "Woodside Place"). ✅ Reads LEGIT — real managed community.
+    id: 'a4',
+    status: 'New',
+    title: 'Woodside Place 1BR — Mountain View',
+    address: '2033 Latham Street, Mountain View, CA 94040',
+    neighborhood: '',
+    city: 'Mountain View',
+    lat: 37.3959885,
+    lng: -122.0997126,
+
+    beds: 1,
+    baths: 1,
+    sqft: 500,
+    floor: '',
+    laundry: 'on-site', // "On-site Laundry Facility" — not in-unit
+
+    rent: 2199, // advertised headline; body lists current rent $2,305–$2,315/mo (see notes)
+    parkingCost: null, // assigned parking / carport included
+    petRent: null, // refundable pet deposit (not monthly) — see notes
+    utilitiesIncluded: false, // water & trash included, but TENANT PAYS PG&E (electric + gas)
+    utilitiesEstimate: null,
+
+    deposit: null, // security deposit not stated
+    appFee: null, // "additional fees may apply" — none quantified
+    brokerFee: null,
+
+    leaseTermMonths: null, // not stated — likely a standard 12-mo community lease; confirm they'll do ≤12
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '2026-05-15', // "Available Mid-May 2026" (rolling-availability community — a past date just means "ask about current openings")
+    furnished: false,
+
+    petPolicy: 'Allowed', // cats + dogs OK, up to 2 pets, breed restrictions, refundable pet deposit
+    listingType: 'Property mgmt', // Apartment Management Consultants (AMC-CA Inc), CA BRE #01525033
+
+    amen: {
+      parking: true, // assigned parking + carport (dedicated)
+      gym: null,
+    },
+    amenities: ['Hardwood floor', 'Assigned carport', 'Fully equipped kitchen', 'BBQ/picnic area', 'Courtyard', 'Water & trash included'],
+
+    dateSeen: '2026-06-30',
+    daysOnMarket: null,
+    marketRent: 2500, // Est. — MV 1BR comp; $2,199–2,315 is at/slightly under market (fairly priced, not scam-cheap)
+
+    expertRating: 4,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — real managed community (Woodside Place; OSM confirms the building), run by ' +
+      'Apartment Management Consultants (AMC-CA Inc) with a valid 8-digit CA BRE #01525033 — the opposite of a1/a2. ' +
+      'Market-rate price, professional leasing flow (tour link, 3× income requirement, Equal Housing), building number matches the photo.\n' +
+      'Confirm before signing: (1) PRICE — advertised $2,199 but the body lists current rent $2,305–$2,315/mo; budget ~$2,310, not $2,199. ' +
+      '(2) Utilities — water & trash included, but YOU pay PG&E (electric + gas) on top. (3) Laundry is on-site, NOT in-unit. ' +
+      '(4) Lease term not stated — likely a standard 12-mo; confirm they will do a 6–12 mo term. ' +
+      '(5) "Available Mid-May 2026" has passed — it\'s a rolling-availability community, so just ask what\'s open now. ' +
+      '(6) Up to 2 pets w/ breed restrictions + a refundable pet deposit.',
+    image: 'img/a4.jpg',
+    sourceUrl:
+      'https://www.craigslist.org/view/d/mountain-view-convenient-location/eSvSAk7oVas4GQwv5h9Qpw',
+  },
 ];
