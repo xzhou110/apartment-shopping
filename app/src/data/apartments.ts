@@ -201,4 +201,69 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a5.webp',
     sourceUrl: 'https://www.zillow.com/apartments/san-mateo-ca/fiesta-apartments/CmJHfp/',
   },
+  {
+    // a6 — Imperial Apartments, Burlingame. Exact house-level geocode (Nominatim, 2026-07-01 —
+    // "1900, Trousdale Drive, Burlingame, 94010"). ✅ Reads LEGIT — a Zillow "Verified Source" managed
+    // property with a full cost calculator + GreatSchools/Walk Score data (most detailed listing yet).
+    id: 'a6',
+    status: 'New',
+    title: 'Imperial Apartments — Burlingame',
+    address: '1900 Trousdale Dr, Burlingame, CA 94010',
+    neighborhood: '',
+    city: 'Burlingame',
+    lat: 37.591785,
+    lng: -122.386339,
+
+    beds: 1,
+    baths: 1,
+    sqft: 720, // Unit 109
+    floor: '', // not stated
+
+    rent: 2450, // Unit 109 base rent; cost calculator confirms $2,450/mo est. total (utilities below are included)
+    parkingCost: null, // attached garage + covered parking — no separate charge stated
+    petRent: null, // n/a — no pets allowed
+    utilitiesIncluded: true, // garbage, hot water, sewer, water included; electric/gas not listed — likely tenant-paid
+    utilitiesEstimate: null,
+
+    deposit: 2000, // cost calculator: "Security deposit $2,000"
+    appFee: 30, // cost calculator: "Application fee $30"
+    brokerFee: null,
+
+    leaseTermMonths: 12, // "Lease terms: One year" — stated explicitly
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // Unit 109 "Currently unavailable" (Available "--") — ask what's open
+    furnished: false,
+
+    petPolicy: 'No pets', // "Dogs are not allowed" + "Cats are not allowed" — both explicit
+    listingType: 'Property mgmt', // Zac Amero, Verified Source; professional screening (2.5x rent, 660+ credit)
+
+    laundry: 'on-site', // "Laundry: Shared"
+    amen: {
+      parking: true, // attached garage + covered parking
+      gym: null, // not mentioned (pool + elevator are, but no gym)
+    },
+    amenities: ['Large balcony', 'Elevator', 'Pool', 'Dishwasher', 'Hardwood floors + carpet', 'Gas heating', 'On-site management'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null,
+    marketRent: 2900, // Est. — Burlingame 1BR comp (top schools + hospital-adjacent premium); $2,450 is under market
+
+    expertRating: 4,
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing managed by Zac Amero, with professional ' +
+      'screening (2.5× gross monthly income, 660+ credit score) and a transparent built-in cost calculator. ' +
+      'Excellent location: 2 blocks to groceries/pharmacy/Starbucks, 1 block to Mills Peninsula Hospital, ' +
+      '4 blocks to BART/Caltrain, near 101/280. Walk Score 80 (Very Walkable), Bike Score 56. ' +
+      'Nearby schools all GreatSchools 10/10 (Franklin Elementary, Burlingame Intermediate, Burlingame HS).\n' +
+      'Confirm before signing: (1) AVAILABILITY — Unit 109 shows "Currently unavailable"; call to ask what\'s open now. ' +
+      '(2) NO PETS — both cats and dogs disallowed (dealbreaker if you have a pet). ' +
+      '(3) Utilities — garbage/hot water/sewer/water included, but electric & gas are NOT listed as included (likely tenant-paid PG&E). ' +
+      '(4) Lease is a stated 12-mo term — confirm they\'ll flex to 6–12 if you want shorter. ' +
+      '(5) Move-in cost per their calculator: $30 application fee + $2,000 deposit = ~$2,030, on top of first month\'s rent.',
+    image: 'img/a6.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/burlingame-ca/imperial-apartments/CkBCvC/',
+  },
 ];
