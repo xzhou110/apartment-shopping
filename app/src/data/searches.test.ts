@@ -3,7 +3,7 @@ import { SEARCH_LINKS, CRITERIA, SEARCH_CRITERIA_LABEL } from './searches';
 
 describe('search launcher links', () => {
   it('has craigslist + facebook sources', () => {
-    expect(SEARCH_LINKS.length).toBeGreaterThanOrEqual(4);
+    expect(SEARCH_LINKS.length).toBeGreaterThanOrEqual(3);
     expect(SEARCH_LINKS.some((s) => s.url.includes('craigslist.org'))).toBe(true);
     expect(SEARCH_LINKS.some((s) => s.url.includes('facebook.com/marketplace'))).toBe(true);
   });
@@ -23,17 +23,24 @@ describe('search launcher links', () => {
     }
   });
 
-  it('craigslist links carry the bed/bath minimums and exclude East Bay (no /eby/)', () => {
+  it('craigslist links are radius searches at the configured distance with bed/bath mins', () => {
     const cl = SEARCH_LINKS.filter((s) => s.url.includes('craigslist.org'));
     for (const s of cl) {
+      expect(s.url).toContain(`search_distance=${CRITERIA.radiusMi}`);
       expect(s.url).toContain(`min_bedrooms=${CRITERIA.minBeds}`);
       expect(s.url).toContain(`min_bathrooms=${CRITERIA.minBaths}`);
-      expect(s.url).not.toContain('/eby/'); // east-bay subregion must never be a source
+      expect(s.url).toMatch(/postal=\d{5}/);
     }
   });
 
-  it('criteria label mentions San Mateo + the radius', () => {
-    expect(SEARCH_CRITERIA_LABEL).toContain('San Mateo');
+  it('covers both San Mateo (94402) and Redwood City (94063)', () => {
+    expect(SEARCH_LINKS.some((s) => s.url.includes('postal=94402'))).toBe(true);
+    expect(SEARCH_LINKS.some((s) => s.url.includes('postal=94063'))).toBe(true);
+  });
+
+  it('criteria label states the radius but no longer claims to exclude East Bay', () => {
     expect(SEARCH_CRITERIA_LABEL).toContain(String(CRITERIA.radiusMi));
+    expect(SEARCH_CRITERIA_LABEL).toContain('San Mateo');
+    expect(SEARCH_CRITERIA_LABEL.toLowerCase()).not.toContain('east bay');
   });
 });
