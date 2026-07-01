@@ -34,6 +34,13 @@ const CL_Q = `min_price=${CRITERIA.minPrice}&max_price=${CRITERIA.maxPrice}&min_
 /** A craigslist apartments search within CRITERIA.radiusMi of a ZIP. */
 const clRadius = (postal: string) => `${CL}?${CL_Q}&postal=${postal}`;
 
+/**
+ * FB Marketplace property-rentals for a city slug, price pre-filled. FB's radius + beds are set
+ * in its own UI (its URL params for those aren't reliable), so each link is city + price only.
+ */
+const fbRentals = (citySlug: string) =>
+  `https://www.facebook.com/marketplace/${citySlug}/propertyrentals?minPrice=${CRITERIA.minPrice}&maxPrice=${CRITERIA.maxPrice}&sortBy=creation_time_descend&exact=false`;
+
 export const SEARCH_LINKS: SearchLink[] = [
   {
     label: 'Craigslist · 15 mi of San Mateo',
@@ -48,6 +55,11 @@ export const SEARCH_LINKS: SearchLink[] = [
   {
     label: 'Facebook Marketplace · San Mateo',
     sub: 'San Mateo rentals — set the 15-mi radius + beds in FB (login required)',
-    url: `https://www.facebook.com/marketplace/sanmateo/propertyrentals?minPrice=${CRITERIA.minPrice}&maxPrice=${CRITERIA.maxPrice}&sortBy=creation_time_descend&exact=false`,
+    url: fbRentals('sanmateo'),
+  },
+  {
+    label: 'Facebook Marketplace · Redwood City',
+    sub: 'Redwood City rentals — set the 15-mi radius + beds in FB (login required)',
+    url: fbRentals('redwoodcity'),
   },
 ];

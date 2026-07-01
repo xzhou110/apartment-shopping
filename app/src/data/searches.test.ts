@@ -38,6 +38,13 @@ describe('search launcher links', () => {
     expect(SEARCH_LINKS.some((s) => s.url.includes('postal=94063'))).toBe(true);
   });
 
+  it('facebook marketplace covers both San Mateo and Redwood City', () => {
+    const fb = SEARCH_LINKS.filter((s) => s.url.includes('facebook.com/marketplace'));
+    expect(fb.length).toBeGreaterThanOrEqual(2);
+    expect(fb.some((s) => s.url.includes('/sanmateo/'))).toBe(true);
+    expect(fb.some((s) => s.url.includes('/redwoodcity/'))).toBe(true);
+  });
+
   it('criteria label states the radius but no longer claims to exclude East Bay', () => {
     expect(SEARCH_CRITERIA_LABEL).toContain(String(CRITERIA.radiusMi));
     expect(SEARCH_CRITERIA_LABEL).toContain('San Mateo');
