@@ -7,8 +7,9 @@
 // Criteria: within ~15 mi of San Mateo / Redwood City · $1,500–2,500 · 1+ bd / 1+ ba.
 // These are true RADIUS searches (craigslist search_distance + postal). A straight-line
 // radius will include a few across-the-bay listings — there's no reliable region-exclude,
-// so we don't pretend to filter them; skim past what you don't want. FB Marketplace needs
-// login and a couple of filters set in its own UI (its URL params are limited).
+// so we don't pretend to filter them; skim past what you don't want. FB Marketplace CAN'T preset
+// location or radius via URL (account/UI controls), so it's ONE generic rentals link — not fake
+// per-city links that would all behave identically — and you set location + radius in FB.
 // ============================================================================
 
 export interface SearchLink {
@@ -34,13 +35,6 @@ const CL_Q = `min_price=${CRITERIA.minPrice}&max_price=${CRITERIA.maxPrice}&min_
 /** A craigslist apartments search within CRITERIA.radiusMi of a ZIP. */
 const clRadius = (postal: string) => `${CL}?${CL_Q}&postal=${postal}`;
 
-/**
- * FB Marketplace property-rentals for a city slug, price pre-filled. FB's radius + beds are set
- * in its own UI (its URL params for those aren't reliable), so each link is city + price only.
- */
-const fbRentals = (citySlug: string) =>
-  `https://www.facebook.com/marketplace/${citySlug}/propertyrentals?minPrice=${CRITERIA.minPrice}&maxPrice=${CRITERIA.maxPrice}&sortBy=creation_time_descend&exact=false`;
-
 export const SEARCH_LINKS: SearchLink[] = [
   {
     label: 'Craigslist · 15 mi of San Mateo',
@@ -53,13 +47,10 @@ export const SEARCH_LINKS: SearchLink[] = [
     url: clRadius('94063'),
   },
   {
-    label: 'Facebook Marketplace · San Mateo',
-    sub: 'San Mateo rentals — set the 15-mi radius + beds in FB (login required)',
-    url: fbRentals('sanmateo'),
-  },
-  {
-    label: 'Facebook Marketplace · Redwood City',
-    sub: 'Redwood City rentals — set the 15-mi radius + beds in FB (login required)',
-    url: fbRentals('redwoodcity'),
+    // One generic FB link: FB can't preset location/radius via URL, so per-city links would be
+    // identical — you set San Mateo / Redwood City + the 15-mi radius in FB's own filters.
+    label: 'Facebook Marketplace · rentals',
+    sub: 'Set location (San Mateo / Redwood City) + 15-mi radius + beds in FB — login required',
+    url: `https://www.facebook.com/marketplace/category/propertyrentals?minPrice=${CRITERIA.minPrice}&maxPrice=${CRITERIA.maxPrice}&sortBy=creation_time_descend&exact=false`,
   },
 ];
