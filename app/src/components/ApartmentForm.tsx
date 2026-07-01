@@ -60,6 +60,7 @@ interface Draft {
   sourceUrl: string;
   image: string;
   expertRating: string;
+  scamRisk: boolean;
   rating: string;
   notes: string;
 }
@@ -100,6 +101,7 @@ function emptyDraft(): Draft {
     sourceUrl: '',
     image: '',
     expertRating: '',
+    scamRisk: false,
     rating: '',
     notes: '',
   };
@@ -148,6 +150,7 @@ function aptToDraft(a: Apartment): Draft {
     sourceUrl: a.sourceUrl,
     image: a.image,
     expertRating: s(a.expertRating),
+    scamRisk: a.scamRisk,
     rating: s(a.rating),
     notes: a.notes,
   };
@@ -210,6 +213,7 @@ function draftToApt(d: Draft, existing: Apartment | null): Apartment {
     daysOnMarket: num(d.daysOnMarket),
     marketRent: num(d.marketRent),
     expertRating: num(d.expertRating) ?? 0,
+    scamRisk: d.scamRisk,
     rating: num(d.rating) ?? 0,
     notes: d.notes,
     image: d.image.trim(),
@@ -385,6 +389,16 @@ export function ApartmentForm({ apt, onClose, onSave }: Props): ReactElement {
           </div>
           {txt('expertRating', 'Expert rating (0–5)', 'number', false, true, 'my take — leave as is')}
           {txt('rating', 'Your rating (0–5)', 'number', false, true)}
+          <div className="field span2">
+            <label>
+              <input
+                type="checkbox"
+                checked={draft.scamRisk}
+                onChange={(e) => set('scamRisk', e.target.checked)}
+              />{' '}
+              Mark as possible scam <span className="opt">— shows a red flag on the card</span>
+            </label>
+          </div>
           <div className="field span2">
             <label>
               Notes <span className="opt">(optional)</span>

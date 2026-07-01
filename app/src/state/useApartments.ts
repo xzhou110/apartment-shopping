@@ -89,6 +89,7 @@ const DEFAULT_APARTMENT: Apartment = {
   daysOnMarket: null,
   marketRent: null,
   expertRating: 0,
+  scamRisk: false,
   rating: 0,
   notes: '',
   image: '',

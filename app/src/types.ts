@@ -91,6 +91,7 @@ export interface Apartment {
 
   // ratings / notes / media
   expertRating: number; // 0–5 — my (Claude's) rating
+  scamRisk: boolean; // true = I judged it a possible scam → a red 'risk' flag shows on the card
   rating: number; // 0–5 — your rating
   notes: string; // supports \n
   image: string; // path under public/ (e.g. "img/a1.jpg") OR a data: URI fallback

@@ -40,6 +40,11 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
   const tMax = settings.targetMaxLease ?? 12;
 
   // ---- risk -------------------------------------------------------------
+  // Possible scam — pushed FIRST so it's the top (red) flag on the card. Set by hand
+  // (apt.scamRisk) when the listing shows scam signals; the specifics live in notes.
+  if (apt.scamRisk)
+    f.push({ lvl: 'risk', t: 'Possible scam — verify the listing before you contact or pay.' });
+
   // Lease window can't be met — only fires on a definite false, never null.
   if (leaseFits(apt, settings) === false)
     f.push({

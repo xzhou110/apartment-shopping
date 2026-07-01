@@ -72,6 +72,7 @@ export function buildSheetCols(settings: Settings = DEFAULT_SETTINGS): SheetCol[
     ['Rent/sqft', (a) => pricePerSqft(a) ?? ''],
 
     ['Expert rating', (a) => a.expertRating ?? ''],
+    ['Scam risk', (a) => (a.scamRisk ? 'YES — verify' : '')],
     ['Your rating', (a) => a.rating ?? ''],
 
     ...AMENITIES.map(([k, , long]): SheetCol => [

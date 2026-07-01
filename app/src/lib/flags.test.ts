@@ -28,6 +28,18 @@ describe('risk: lease window can\'t be met', () => {
   });
 });
 
+// ---- risk: scam -----------------------------------------------------------
+describe('risk: possible scam', () => {
+  it('scamRisk true → red risk flag, pushed first', () => {
+    const f = getFlags(makeApt({ scamRisk: true }), ctx());
+    expect(f[0].lvl).toBe('risk');
+    expect(f[0].t.toLowerCase()).toContain('scam');
+  });
+  it('scamRisk false → no scam flag', () => {
+    expect(has(makeApt({ scamRisk: false }), ctx(), 'scam')).toBe(false);
+  });
+});
+
 // ---- warn -----------------------------------------------------------------
 describe('warn rules', () => {
   it('no laundry (none in-unit or on-site)', () => {
