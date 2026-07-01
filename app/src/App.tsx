@@ -11,8 +11,9 @@ import { DetailModal } from './components/DetailModal';
 import { ApartmentForm } from './components/ApartmentForm';
 import { ExportModal } from './components/ExportModal';
 import { SettingsModal } from './components/SettingsModal';
+import { FindModal } from './components/FindModal';
 import { ThemeToggle } from './components/ThemeToggle';
-import { IconBrand, IconCompare, IconExport, IconGrid, IconPlus, IconSettings } from './components/icons';
+import { IconBrand, IconCompare, IconExport, IconGrid, IconPlus, IconSearch, IconSettings } from './components/icons';
 
 export default function App() {
   const g = useApartments();
@@ -21,6 +22,7 @@ export default function App() {
   const [formApt, setFormApt] = useState<Apartment | null | undefined>(undefined);
   const [exportOpen, setExportOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [findOpen, setFindOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const toastTimer = useRef<number | undefined>(undefined);
 
@@ -153,6 +155,10 @@ export default function App() {
               <IconSettings />
               Settings
             </button>
+            <button className="btn btn-ghost" onClick={() => setFindOpen(true)}>
+              <IconSearch />
+              Find
+            </button>
             <button className="btn btn-accent" onClick={() => setFormApt(null)}>
               <IconPlus />
               Add listing
@@ -232,6 +238,8 @@ export default function App() {
         onClose={() => setExportOpen(false)}
         onToast={showToast}
       />
+
+      <FindModal open={findOpen} onClose={() => setFindOpen(false)} />
 
       <SettingsModal
         open={settingsOpen}

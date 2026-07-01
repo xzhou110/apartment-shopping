@@ -381,6 +381,15 @@ td.worst { background: var(--risk-soft); }
 .terms-row .term { white-space: nowrap; }
 .terms-row .term-l { color: var(--ink-3); font-weight: 600; }
 
+/* ---- Find listings launcher (modal) ---- */
+.find-links { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.find-link { display: flex; flex-direction: column; gap: 2px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); text-decoration: none; transition: border-color .12s, background .12s; }
+.find-link:hover { border-color: var(--accent); background: var(--accent-soft); }
+.find-link-main { font-weight: 700; font-size: 14px; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+.find-link-main svg { width: 13px; height: 13px; color: var(--accent); flex: none; }
+.find-link-sub { font-size: 12px; color: var(--ink-3); }
+.find-note { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; margin: 0; }
+
 /* ---- Settings: anchor list + lease window ---- */
 .set-help { font-size: 12.5px; color: var(--ink-3); line-height: 1.5; margin-bottom: 12px; }
 .anchor-empty { font-size: 13px; color: var(--ink-3); padding: 10px 0; }
