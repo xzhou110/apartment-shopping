@@ -136,4 +136,69 @@ export const APARTMENTS: Apartment[] = [
     sourceUrl:
       'https://www.craigslist.org/view/d/mountain-view-convenient-location/eSvSAk7oVas4GQwv5h9Qpw',
   },
+  {
+    // a5 — Fiesta Apartments, San Mateo (Hayward Park). Exact house-level geocode
+    // (Nominatim, 2026-07-01 — "640, 19th Avenue, Hayward Park, San Mateo, 94403"). ✅ Reads LEGIT —
+    // a Zillow "Verified Source" managed community; standard screening. Two 1BR units listed, both
+    // "Currently unavailable" (rolling-availability); tracked row = the $2,250 entry unit (Unit 304).
+    id: 'a5',
+    status: 'New',
+    title: 'Fiesta Apartments — San Mateo',
+    address: '640 19th Ave, San Mateo, CA 94403',
+    neighborhood: 'Hayward Park',
+    city: 'San Mateo',
+    lat: 37.5520296,
+    lng: -122.3028616,
+
+    beds: 1,
+    baths: 1,
+    sqft: 480, // Unit 304 (the $2,250 unit). The other listed 1BR, Unit 309, is 640 sqft @ $2,450 — see notes.
+    floor: '', // unit #304/#309 hint at 3rd floor, but the listing doesn't state it — left unknown
+
+    rent: 2250, // Unit 304, 480 sqft (headline "1 bed $2,250+"); Unit 309 (640 sqft) is $2,450
+    parkingCost: null, // covered/assigned parking with outdoor storage — included
+    petRent: null, // not stated
+    utilitiesIncluded: null, // not stated
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // not stated — likely a standard 12-mo community lease; confirm they'll do ≤12
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // both listed units "Currently unavailable" (Available "--") — rolling community, ask what's open
+    furnished: false,
+
+    petPolicy: 'Allowed', // "Cats and dogs" — small + large dogs allowed, up to 2 large dogs
+    listingType: 'Property mgmt', // listed by a management company (Teri Penpraze, Verified Source); on-site mgmt + maintenance
+
+    laundry: 'on-site', // "Shared laundry" / "Community laundry in building" — not in-unit
+    amen: {
+      parking: true, // covered / assigned parking with outdoor storage
+      gym: null,
+    },
+    amenities: ['Pool', 'Covered/assigned parking + outdoor storage', 'Picnic & BBQ area', 'Controlled access', 'On-site management & maintenance', 'Community laundry'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null,
+    marketRent: 2700, // Est. — San Mateo 1BR comp; $2,250 is under market (fairly priced, not scam-cheap)
+
+    expertRating: 4,
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" managed community (Fiesta Apartments), listed by a ' +
+      'management company (Teri Penpraze) with on-site management + maintenance and standard screening (3× gross monthly income). ' +
+      'Under-market price, controlled access, pool + BBQ area — the opposite of the a1/a2 scam pattern.\n' +
+      'Confirm before signing: (1) AVAILABILITY — both listed 1BR units show "Currently unavailable"; it\'s a ' +
+      'rolling-availability community, so call to ask what\'s actually open (office Mon–Fri 9–5, Sat by appointment, Sun closed). ' +
+      '(2) TWO OPTIONS — Unit 304 = 480 sqft @ $2,250 (tracked here); Unit 309 = 640 sqft @ $2,450 (bigger, +$200/mo, has a floor plan + 6 photos). ' +
+      '(3) Laundry is community/on-site, NOT in-unit. (4) Lease term, deposit, and application fee are not stated — ' +
+      'confirm they\'ll do a 6–12 mo term and ask move-in costs. (5) Pets OK — cats + dogs, up to 2 large dogs. ' +
+      '(6) Parking is covered/assigned with outdoor storage (included).',
+    image: 'img/a5.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/san-mateo-ca/fiesta-apartments/CmJHfp/',
+  },
 ];
