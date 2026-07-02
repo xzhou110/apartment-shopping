@@ -53,6 +53,16 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
     });
 
   // ---- warn -------------------------------------------------------------
+  // A stated single lease term at/above your target max — distinct from the risk check
+  // above (which only catches a hard range mismatch). 12 mo can technically satisfy a
+  // 6–12 mo goal, but a landlord's fixed default term of a year+ signals they may not
+  // flex shorter, so it's worth a caveat even when leaseFits() says true.
+  if (apt.leaseTermMonths != null && apt.leaseTermMonths >= tMax)
+    f.push({
+      lvl: 'warn',
+      t: `Lease is a stated ${apt.leaseTermMonths} mo term — at/above your ${tMax}-mo max; confirm they'll flex shorter.`,
+    });
+
   if (apt.laundry === 'none')
     f.push({ lvl: 'warn', t: 'No laundry — none in-unit or on-site.' });
 

@@ -68,6 +68,26 @@ describe('warn rules', () => {
   });
 });
 
+describe('warn: stated lease term at/above target max', () => {
+  it('fires at exactly the target max (default 12 mo — "1 year")', () => {
+    expect(has(makeApt({ leaseTermMonths: 12 }), ctx(), 'stated 12 mo term')).toBe(true);
+  });
+  it('fires for a longer stated term too (e.g. 24 mo)', () => {
+    expect(has(makeApt({ leaseTermMonths: 24 }), ctx(), 'stated 24 mo term')).toBe(true);
+  });
+  it('does NOT fire below the target max (e.g. 9 mo)', () => {
+    expect(has(makeApt({ leaseTermMonths: 9 }), ctx(), 'mo term')).toBe(false);
+  });
+  it('does NOT fire when no single term is stated (null = unknown)', () => {
+    expect(has(makeApt({ leaseTermMonths: null }), ctx(), 'mo term')).toBe(false);
+  });
+  it('respects a custom target max from settings', () => {
+    const looseCtx = ctx({ settings: { ...DEFAULT_SETTINGS, targetMaxLease: 18 } });
+    expect(has(makeApt({ leaseTermMonths: 12 }), looseCtx, 'mo term')).toBe(false);
+    expect(has(makeApt({ leaseTermMonths: 18 }), looseCtx, 'mo term')).toBe(true);
+  });
+});
+
 // ---- info -----------------------------------------------------------------
 describe('info rules', () => {
   it('unfurnished for short-term (target max ≤ 12)', () => {
@@ -140,17 +160,18 @@ describe('signalLevel escalation', () => {
       furnished: true,
       minLeaseMonths: 6,
       maxLeaseMonths: 12,
+      leaseTermMonths: null, // isolate from the "stated term at/above max" warn rule
     });
     expect(signalLevel(apt, ctx())).toBe('good');
   });
   it('nothing fires → ""', () => {
     // neutral: lease fits, no market/amenity/date signals, furnished true so no unfurnished info
-    const apt = makeApt({ furnished: true, laundry: 'in-unit', amen: { parking: true } });
+    const apt = makeApt({ furnished: true, laundry: 'in-unit', amen: { parking: true }, leaseTermMonths: null });
     expect(signalLevel(apt, ctx())).toBe('good'); // this combo also hits good
   });
   it('truly empty signal → ""', () => {
     // lease fits (true) but not the full good combo (furnished unknown), nothing else fires
-    const apt = makeApt({ furnished: null });
+    const apt = makeApt({ furnished: null, leaseTermMonths: null });
     expect(signalLevel(apt, ctx())).toBe('');
   });
 });
