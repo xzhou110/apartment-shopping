@@ -5,6 +5,25 @@
 > `effectiveMonthly`, no `moveInCost`, no `cost-asc` sort.** Raw cost fields are tracked/displayed/exported
 > only; cost ranking is by base **rent**. The affected sections below (§4, §6, §9, §10) reflect this.
 
+> **POST-LAUNCH ADDENDUM — 2026-07-02.** Changes made after the app shipped; where they conflict with the
+> body below, this addendum wins (the body is kept as the original build record). See `DECISIONS.md`
+> ADR-006/007/008 for rationale.
+> - **Amenities trimmed (2026-06-30):** `AmenityKey` is now just `'parking' | 'gym'` (not the 10 in §8).
+>   Laundry became its own first-class field `laundry: 'in-unit' | 'on-site' | 'none' | 'unknown'`. `AMENITY_TOTAL = AMENITIES.length + 1` (the +1 is laundry).
+> - **New model fields (`types.ts`):** `Apartment.contact: Contact` (company, name, phone, email, website — all
+>   `''` = unknown) and `Apartment.comments: Comment[]` (`{ id, text, ts }`). Contact is *listing data* (seed +
+>   form). Comments are *user state*: persisted in `apt.v2` and overlaid onto seed listings in `mergeWithSeed`
+>   alongside `rating`/`status`. `hydrateApartment` fills defaults for older saves.
+> - **Contact links (`lib/format.ts`):** `telHref` (encodes extensions as `;ext=`), `mailtoHref`, `siteHref`
+>   (bare domain → https; rejects non-http(s) schemes). Rendered by `components/ContactLinks.tsx`.
+> - **Lease target = single 6-mo goal** (`DEFAULT_SETTINGS.targetMinLease = targetMaxLease = 6`, was 6/12).
+>   A one-time localStorage migration bumps the exact old default 6/12 → 6/6. `leaseFits`'s formula is unchanged.
+> - **Flag rules (§6) updated:** lease-doesn't-fit risk copy is goal-aware and names the stated term; the
+>   "stated term at/above max — flex shorter" **warn now only fires for a range goal** (`tMax > tMin`); **new
+>   amber warn** when `leaseFits === null` (no lease term stated); **new green good** for month-to-month
+>   (shortest term 1 mo, no fixed longer commitment). Persistence key is `apt.v2` (not `apt.v1`).
+> - **Export (§9):** contact columns (company, person, phone, email, website) and a `Comments` column added.
+
 This is the **keystone seam** between the two build lanes. The **data/pure-lib lane**
 (`data-engineer`) implements every signature below; the **UI lane** (`frontend-engineer`)
 imports them. Both lanes import data shapes from the frozen `app/src/types.ts`.

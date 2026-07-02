@@ -28,6 +28,22 @@ describe('risk: lease window can\'t be met', () => {
   });
 });
 
+describe('warn: no lease term stated (amber)', () => {
+  it('fires an amber warn when no lease info at all (leaseFits === null)', () => {
+    const apt = makeApt({ minLeaseMonths: null, maxLeaseMonths: null, leaseTermMonths: null });
+    const f = getFlags(apt, ctx());
+    expect(f.some((x) => x.lvl === 'warn' && x.t.includes('Lease term not stated'))).toBe(true);
+  });
+  it('does NOT fire when a term IS stated', () => {
+    expect(has(makeApt({ leaseTermMonths: 12 }), ctx(), 'Lease term not stated')).toBe(false);
+  });
+  it('does NOT fire when only a min bound is known', () => {
+    expect(
+      has(makeApt({ minLeaseMonths: 6, maxLeaseMonths: null, leaseTermMonths: null }), ctx(), 'Lease term not stated'),
+    ).toBe(false);
+  });
+});
+
 // ---- risk: scam -----------------------------------------------------------
 describe('risk: possible scam', () => {
   it('scamRisk true → red risk flag, pushed first', () => {

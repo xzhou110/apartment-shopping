@@ -30,3 +30,21 @@
 - **Decision:** Folder/app name is `apartment-shopping` (→ xzhou110.github.io/apartment-shopping). App display title "Apartment Shopping".
 - **Context:** Offered nest/digs/pad/roost; user chose `apartment-shopping`.
 - **Reversible?** Yes, but renaming the GitHub Pages path later breaks the URL.
+
+## ADR-006 — Owner/contact is listing data; user comments are a persisted overlay (2026-07)
+- **Decision:** Add two things to the `Apartment` model. **`contact: Contact`** (company/owner, person, phone, email, website) is *listing data* — it lives in the seed, is edited via the form, and follows the same persistence rule as address/rent (seed is source of truth; in-app edits to a seed listing don't survive reload). **`comments: Comment[]`** (timestamped, add/delete) is *user state* — it's persisted in localStorage and overlaid onto seed listings on reload, exactly like `rating`/`status`.
+- **Context:** User asked to show the owner/management contact on the card and to add a per-listing comment section.
+- **Rationale:** Matches the app's existing split (seed = authoritative listing data; localStorage = the user's own overlay). Comments would be lost on every seed refresh if they weren't merged like ratings; contact belongs in the data file so I can populate it from the listing. Contact links use safe schemes only (`tel:`/`mailto:`/`https:`), and `tel:` encodes extensions as `;ext=` so a "x66" isn't mis-dialed.
+- **Reversible?** Yes — both are additive fields; hydrate/merge fill defaults for older saves.
+
+## ADR-007 — Lease goal is a single 6-month target (was 6–12), with a safe migration (2026-07)
+- **Decision:** `DEFAULT_SETTINGS.targetMaxLease` 12 → **6** (min stays 6), so the goal is a single 6-month length. Add a one-time localStorage migration: a browser still holding the exact old default (6/12) is bumped to 6/6; a user who set some other window is left untouched.
+- **Context:** User: *"actually lease I'm looking for is 6 month."* (Supersedes the earlier "6–12 month" framing in ADR-nothing/PRD.)
+- **Rationale:** Keeps the automated flags/filters truthful and consistent with the written notes — a plain 12-mo lease genuinely doesn't fit a hard 6-month need. The migration makes the deployed app reflect the change without wiping the user's data. Flag copy is goal-aware (`"6 mo"` for a single point, `"6–12 mo"` for a range); the "flex shorter" warn is now scoped to range goals only (a 6-mo term is a perfect single-point fit, and a longer term is already the risk flag).
+- **Reversible?** Yes — set the window back to 6–12 in Settings (or change the default); the migration only touches the exact old-default value.
+
+## ADR-008 — Lease-fit flags: green month-to-month, amber "term not stated" (2026-07)
+- **Decision:** Two new flags keyed off lease info. **Green (good):** a true **month-to-month** listing (shortest term = 1 mo, no fixed longer commitment) → *"maximum flexibility, easily fits your 6 mo goal."* **Amber (warn):** **no lease term stated at all** (`leaseFits === null`) → *"Lease term not stated — confirm they'll do a 6 mo term."*
+- **Context:** User: *"if lease is month-to-month, please highlight as green"* and *"add yellow/orange comment if no lease term is specified."* ("Comment" here = the card's colored flags.)
+- **Rationale:** Month-to-month is strictly the most flexible term, so it's a positive signal, not a caveat. A listing with no stated term can't be judged for fit until you ask, so an amber "confirm" beats silently passing. Both are pure, tested rules in `lib/flags.ts`.
+- **Reversible?** Yes — pure flag rules; remove or retune in one place.

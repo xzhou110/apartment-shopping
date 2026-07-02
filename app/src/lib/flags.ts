@@ -67,6 +67,14 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
     });
 
   // ---- warn -------------------------------------------------------------
+  // No lease term stated at all (leaseFits can't decide → null). You can't tell whether it fits your
+  // goal until you ask, so surface an amber caveat rather than silently passing.
+  if (leaseFits(apt, settings) === null)
+    f.push({
+      lvl: 'warn',
+      t: `Lease term not stated — confirm they'll do a ${goalLabel} term.`,
+    });
+
   // A stated single lease term at/above your target max, but ONLY for a RANGE goal (tMax > tMin):
   // e.g. a 12-mo term can satisfy a 6–12 window yet a landlord's fixed year-long default signals they
   // may not flex to the shorter end, so it's worth a caveat even when leaseFits() says true. For a

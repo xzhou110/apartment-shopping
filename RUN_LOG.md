@@ -62,5 +62,18 @@ Append before and after every spawn. Times are local (PT).
 - Nominatim probe: HTTP 000 (no egress from subagent). Non-blocking — offline table is primary. PM to verify browser CORS in-app at integration.
 - Product finding (ACCEPTED, no change): `leaseFits` per frozen formula treats a min-12mo lease as fitting a 6–12 target (12≤12). Correct for user intent ("6–12 mo" includes a standard 12-mo lease); only min≥13 trips the lease-risk flag. Seed a2 set to min-18 as the genuine "doesn't fit" example.
 
+---
+
+### 2026-07-01 — Deployed + real listings (Opus 4.8, direct with user)
+- User approved deploy. Live at https://xzhou110.github.io/apartment-shopping/ (GitHub Pages, push-to-main). Placeholder seed a1/a2 replaced with real listings a3–a7 (San Carlos, Woodside Place MV, Fiesta San Mateo, Imperial Burlingame, Tradewind Foster City) — each geocoded, scam-screened, notes written.
+
+### 2026-07-02 — Owner/contact + comments + 6-mo lease + doc pass (Opus 4.8, direct with user)
+- **Owner/management contact** added to the model (`Contact`) — card (name + tap-to-call/email/site rows), detail, form, export. Safe `tel:`/`mailto:`/`https:`; `tel:` encodes extensions (`;ext=`). Populated a4 (Woodside Place, (510) 899-5584 x66 + leasing page) and a7 (Blvd Residential, (650) 547-8025). Fixed a7 missing contact/comments (latent type error). See ADR-006.
+- **User comments** added (`Comment`) — timestamped add/delete; latest on card below flags, full thread in detail; persisted + seed-merged like ratings/status. See ADR-006.
+- **Lease goal → 6 months** (single-point; was 6–12) + safe localStorage migration (old 6/12 → 6/6). Goal-aware flag copy; "flex shorter" warn scoped to range goals. All listing notes updated. See ADR-007.
+- **New flags:** green **month-to-month** (a7), amber **"lease term not stated"** (a3/a4). See ADR-008.
+- Validation each step: `tsc` clean, **228 tests** pass, prod build clean, browser-verified (flags/colors/contact/comments/migration/no-overflow), live site 200 + serves current bundle. Pushed to `main`; deploy succeeded.
+- **Docs pass (this entry):** refreshed README (live status, 6-mo, contact/comments, flags, amenity count), STATE.md (current), DECISIONS ADR-006/007/008, api-contract post-launch addendum.
+
 
 

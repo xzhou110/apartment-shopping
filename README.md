@@ -4,12 +4,12 @@ A single-user dashboard for hunting an apartment: capture each candidate from a 
 see auto flags, **rank by distance** from any place you type in (city / ZIP / address), compare
 side-by-side, record your rating, and track each listing through a pipeline. Static, free, no backend.
 
-Built for a **6–12 month Bay Area** search, but works anywhere (Bay Area ZIP/city distance is offline;
+Built for a **6-month Bay Area** search, but works anywhere (Bay Area ZIP/city distance is offline;
 other places fall back to on-the-fly geocoding). It's the apartment sibling of [`garage`](../garage) (used cars).
 
-**Live:** _not deployed yet_ → will be `https://xzhou110.github.io/apartment-shopping/` (GitHub Pages via
-`.github/workflows/deploy.yml`, same as garage). The Google Sheet sync URL is **never** in the bundle (it
-lives only in your browser's localStorage), so it's not exposed by the public site.
+**Live:** **https://xzhou110.github.io/apartment-shopping/** (GitHub Pages via `.github/workflows/deploy.yml`;
+push to `main` auto-deploys). The Google Sheet sync URL is **never** in the bundle (it lives only in your
+browser's localStorage), so it's not exposed by the public site.
 
 ## Run it
 ```bash
@@ -36,17 +36,23 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
    and free; it doesn't account for bridges/traffic (driving time is a future add). Save several places
    (Work, Gym, …) in **Settings** and pick which one is primary.
 3. **Triage** — each card shows rent + the cost fields, beds/baths/sqft, the amenity pill row (✓ / ✕ /
-   **? = unknown**), a distance chip, and auto **flags** (e.g. lease window doesn't fit, no in-unit
-   laundry, over market, broker fee). A colored top border flags overall risk (red) / caution (amber) /
-   good (green). A small id badge (e.g. `a2`) on each photo maps the card to the data file / chat
-   references — and the search box matches the id.
+   **? = unknown**), a distance chip, the **owner / management contact** (company/owner name + tap-to-call
+   phone, email, website), and auto **flags**. Lease flags track your **6-month goal**: a stated 12-mo term
+   reads **red** (doesn't fit — ask if they'll do 6), a listing with **no lease term stated** reads **amber**
+   (confirm before you commit), and a true **month-to-month** listing reads **green** (maximum flexibility).
+   Other flags: no laundry, over/under market, utilities not included, available date passed, broker fee, far
+   from your anchor. A colored top border flags overall risk (red) / caution (amber) / good (green). Your
+   latest **comment** shows on the card below the flags. A small id badge (e.g. `a4`) on each photo maps the
+   card to the data file / chat references — and the search box matches the id.
 4. **Filter / sort** — search (title / neighborhood / city / address / id); quick chips (Furnished only,
    Lease fits my target, Hide rejected, Show gone); a filter panel (max rent, min beds, must-have
    amenities); and sorts (Nearest, Rent low→high / high→low, Beds, Sqft, Your rating, Added).
 5. **Compare** — tick ≥2 listings → the Compare tab shows them side-by-side and auto-highlights the
    **best (green) / worst (red)** in each row (cheapest rent, nearest, most amenities, biggest sqft).
-6. **Rate** — click the **You ★** stars on a card (or in detail) to rate; saves instantly and persists.
-   **Expert ★** is my rating.
+6. **Rate & comment** — click the **You ★** stars on a card (or in detail) to rate; **Expert ★** is my
+   rating. Open a card and add **comments** (timestamped, delete any) in the detail view — your latest one
+   also shows on the card. Ratings, status, and comments are your per-listing state and persist in your
+   browser even when I refresh the seed data.
 7. **Track status** — New → Shortlist → Contacted → Toured → Applied → Rejected → **Leased** / **Gone**.
    Marking a listing **Gone** (off market / leased to someone else) hides it; the **Show gone** chip
    brings it back.
@@ -57,14 +63,17 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
 
 ## What's tracked (and what's deliberately not)
 **Tracked:** rent + all cost fields (deposit, app/broker fees, parking, pet rent, utilities) · beds/baths/
-sqft · lease term (+ min/max) · available date · furnished · pet policy · listing type · neighborhood/city/
-address (+ geocoded lat/lng) · 10 amenities · your ★ / my ★ · status · photo · source URL · notes.
+sqft · laundry · lease term (+ min/max) · available date · furnished · pet policy · listing type ·
+**owner / management contact** (company/owner, contact person, phone, email, website) · neighborhood/city/
+address (+ geocoded lat/lng) · amenities · your ★ / my ★ · status · photo · source URL · my notes ·
+**your comments** (timestamped, add/delete — the one field that persists per-listing in your browser).
 
 **Tracked, not computed:** cost fields are shown as plain values for your own comparison — there's no
 "total cost"/amortization engine (you asked to keep it simple). Cost ranking is by base **rent**.
 
-**The 10 amenities** (tri-state ✓ / ✕ / **?**): in-unit laundry · parking · A/C · dishwasher · pet-friendly ·
-on-site gym · pool · balcony/patio/yard · elevator · EV charging.
+**Amenities** (tri-state ✓ / ✕ / **?**): **parking** and **on-site gym** are the two tracked pills (trimmed
+from a longer list on 2026-06-30 to what matters at a glance); **laundry** is its own field (in-unit / on-site
+/ none), and any other perks a listing mentions live in free-text "other amenities".
 
 ## Project layout
 ```
@@ -73,8 +82,8 @@ app/src/
   data/                apartments.ts (seed = source of truth) · amenities.ts · sheetCols.ts
   data/geo/            bayAreaGeo.ts (offline ZIP+city centroids) · geocode.ts (anchor resolver)
   lib/                 distance.ts · derive.ts · flags.ts · format.ts · exportSheet.ts  (PURE, unit-tested)
-  state/useApartments.ts  listings + settings + filters; localStorage autosave + URL-hash share
-  components/          Card · Grid · CompareTable · DetailModal · Filters · ApartmentForm · Export/Settings
+  state/useApartments.ts  listings + settings + filters + comments; localStorage autosave (+ seed-merge)
+  components/          Card · Grid · CompareTable · DetailModal · Filters · ApartmentForm · ContactLinks · Export/Settings
 docs/                  PRD.md · tech-plan.md · api-contract.md
 ```
 Design rule: all domain logic is pure functions in `lib/*` + `data/*` (no DOM), covered by Vitest; the UI
