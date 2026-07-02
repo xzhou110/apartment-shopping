@@ -426,4 +426,75 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a8.webp',
     sourceUrl: 'https://www.zillow.com/apartments/belmont-ca/three21@belmont/9NGvp2/',
   },
+  {
+    // a9 — 735 Glenmere Way #B, Redwood City (Emerald Hills). A 300 sqft TINY HOUSE / backyard
+    // ADU, not a normal apartment. Geocoded via the US Census geocoder (rooftop match) —
+    // Nominatim had no record of this small residential way. ✅ Reads LEGIT (real Zillow home-detail
+    // page w/ zpid, 24 days on market, 39 contacts, accepts Zillow applications) but very niche.
+    id: 'a9',
+    status: 'New',
+    title: 'Tiny House — Redwood City (Emerald Hills)',
+    address: '735 Glenmere Way #B, Redwood City, CA 94062',
+    neighborhood: 'Emerald Hills',
+    city: 'Redwood City',
+    lat: 37.459878,
+    lng: -122.272013,
+
+    beds: 2, // Zillow lists "2 beds," but this is a 300 sqft tiny house — nominal sleeping lofts, not two real bedrooms
+    baths: 1,
+    sqft: 300, // "Total interior livable area: 300 sqft" — extremely small; drives a very high $/sqft (~$8.50)
+    floor: '',
+
+    rent: 2550, // "$2,550/mo Total monthly price" — INCLUDES utilities (see below)
+    parkingCost: null, // off-street parking included; two-car limit
+    petRent: null, // n/a — no pets
+    utilitiesIncluded: true, // "Utilities included." — stated explicitly (a real plus vs the others)
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // no property app fee; note: Zillow's own application is $35/30 days (cross-property, not this landlord's)
+    brokerFee: null,
+
+    leaseTermMonths: null, // no single fixed term — month-to-month (see min); "Lease term: 1 Month" = billed monthly
+    minLeaseMonths: 1, // "Month to month" — open-ended, maximally flexible (like a7)
+    maxLeaseMonths: null,
+    availableDate: '', // "Available now" — left blank on purpose (a concrete today-date instantly reads as "passed" once UTC rolls over; empty = no false stale flag)
+    furnished: null, // "Fully equipped tiny house" + a couch in photos suggests furnished, but appliances ≠ furniture — CONFIRM
+
+    petPolicy: 'No pets', // "Pets allowed: No" + "No pets" chip — explicit
+    listingType: 'Landlord', // private tiny-house/ADU (unit "#B"), "Contact manager," no mgmt company named
+    contact: { company: '', name: '', phone: '', email: '', website: '' }, // no contact published in the listing — inquire via Zillow
+    comments: [],
+
+    laundry: 'in-unit', // "In unit laundry" chip + "Laundry: In Unit" + washer/dryer in appliances
+    amen: {
+      parking: true, // off-street parking (two-car limit)
+      gym: null, // n/a
+    },
+    amenities: ['Utilities included', 'Wall A/C unit', 'In-unit washer/dryer', 'Full kitchen (dishwasher, gas oven, microwave)', 'Hardwood floors', 'Private deck + views', 'Bicycle storage', '5-min walk to Edgewood Park'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: 24, // "24 days on Zillow" (39 contacts) — real interest, not stale
+    marketRent: null, // deliberately null — a 300 sqft tiny house has no clean 2BR comp; the ~$8.50/sqft on the card is the honest signal
+
+    expertRating: 3, // flexible + utilities-included + in-unit laundry + parking are strong, BUT 300 sqft for a nominal "2 beds," no pets, and high $/sqft are real limits
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Reads LEGITIMATE but VERY NICHE — a real Zillow home-detail listing (24 days on market, 39 contacts, ' +
+      'accepts Zillow applications) for a 300 sqft TINY HOUSE / backyard ADU in quiet Emerald Hills, a 5-min walk ' +
+      'to Edgewood Park. Genuinely strong flexibility perks: 🟢 MONTH-TO-MONTH (open-ended — great for your 6-mo ' +
+      'goal), UTILITIES INCLUDED (the only listing so far that bundles them), in-unit washer/dryer, off-street ' +
+      'parking, wall A/C + wall furnace, hardwood floors, private deck.\n' +
+      'Reality check before you get excited: (1) SIZE — this is 300 sqft. Zillow says "2 beds," but that\'s nominal ' +
+      'sleeping lofts in a tiny house, NOT two real bedrooms; the description even says "sleep location in tiny ' +
+      'house only" w/ a separate work/play structure. At ~$8.50/sqft it\'s the priciest-per-foot on your list — ' +
+      'the value is the flexibility + utilities, not the space. (2) NO PETS (explicit). (3) NON-SMOKING, two-car ' +
+      'limit. (4) FURNISHED? — "fully equipped" + a couch in photos hint yes, but that\'s unconfirmed; ask, since ' +
+      'it matters for a short stay. (5) Deposit not stated — ask move-in cost. (6) The $35 "application" is ' +
+      'Zillow\'s own cross-property fee (30 days), not this landlord\'s. Tour in person — a 300 sqft space is very ' +
+      'hard to judge from photos.',
+    image: 'img/a9.webp',
+    sourceUrl: 'https://www.zillow.com/homedetails/735-Glenmere-Way-B-Redwood-City-CA-94062/463007839_zpid/',
+  },
 ];
