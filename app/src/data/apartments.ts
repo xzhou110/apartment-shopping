@@ -52,6 +52,7 @@ export const APARTMENTS: Apartment[] = [
     amen: {
       parking: true, // one-car carport (dedicated/covered)
       gym: null,
+      balcony: true, // "Large deck" — private outdoor space
     },
     amenities: ['One-car carport', 'Large deck', 'Hardwood floors', 'Granite counters', 'Ceiling fans', 'Outside storage'],
 
@@ -258,6 +259,7 @@ export const APARTMENTS: Apartment[] = [
     amen: {
       parking: true, // attached garage + covered parking
       gym: null, // not mentioned (pool + elevator are, but no gym)
+      balcony: true, // "Large balcony" — private outdoor space
     },
     amenities: ['Large balcony', 'Elevator', 'Pool', 'Dishwasher', 'Hardwood floors + carpet', 'Gas heating', 'On-site management'],
 
@@ -470,6 +472,7 @@ export const APARTMENTS: Apartment[] = [
     amen: {
       parking: true, // off-street parking (two-car limit)
       gym: null, // n/a
+      balcony: true, // "private deck" — private outdoor space
     },
     amenities: ['Utilities included', 'Wall A/C unit', 'In-unit washer/dryer', 'Full kitchen (dishwasher, gas oven, microwave)', 'Hardwood floors', 'Private deck + views', 'Bicycle storage', '5-min walk to Edgewood Park'],
 
@@ -496,5 +499,145 @@ export const APARTMENTS: Apartment[] = [
       'hard to judge from photos.',
     image: 'img/a9.webp',
     sourceUrl: 'https://www.zillow.com/homedetails/735-Glenmere-Way-B-Redwood-City-CA-94062/463007839_zpid/',
+  },
+  {
+    // a10 — 4711 Callan Blvd #16, Daly City. Rooftop geocode via US Census (2026-07-01).
+    // ✅ Reads LEGIT — a real Zillow home-detail listing (zpid) by a private owner (Nelly Chin),
+    // standard terms, market price. A basic 3rd-floor walk-up unit.
+    id: 'a10',
+    status: 'New',
+    title: 'Bright 1BR (3rd floor) — Daly City',
+    address: '4711 Callan Blvd #16, Daly City, CA 94015',
+    neighborhood: '',
+    city: 'Daly City',
+    lat: 37.669734,
+    lng: -122.475597,
+
+    beds: 1,
+    baths: 1,
+    sqft: null, // "-- sqft" — not stated
+    floor: '3rd floor', // "Bright 1 bedroom apartment on the third floor"
+
+    rent: 2400, // "$2,400/mo" (fees may apply)
+    parkingCost: null, // no paid parking — street only (see parking note)
+    petRent: null, // n/a — no pets
+    utilitiesIncluded: true, // "Water, garbage, gas" included; "Only extra cost - electricity and internet" (mostly included — see notes)
+    utilitiesEstimate: null,
+
+    deposit: 2400, // "Move in cost minimum: $2400 (1st month rent) + $2400 (security deposit)"
+    appFee: 30, // "$30 for credit reports" (per adult)
+    brokerFee: null,
+
+    leaseTermMonths: null, // "6 month lease, then month to month" — modeled as a 6-mo minimum, open after
+    minLeaseMonths: 6, // shortest commitment is 6 months (then rolls to month-to-month) — an exact fit for your goal
+    maxLeaseMonths: null, // open-ended after the initial 6 months
+    availableDate: '', // "Available now"
+    furnished: false, // empty rooms in photos
+
+    petPolicy: 'No pets', // "No animals" + "Pets allowed: No" — explicit
+    listingType: 'Landlord', // "Listed by property owner — Nelly Chin"
+    contact: { company: '', name: 'Nelly Chin', phone: '', email: '', website: '' }, // property owner; inquire via Zillow ("Contact manager for more details")
+    comments: [],
+
+    laundry: 'on-site', // "Shared laundry" / "Coin operated laundry facilities in the building"
+    amen: {
+      parking: false, // owner says "No assigned parking, only street parking" (Zillow's structured field mislabels it "Off Street" — see notes)
+      gym: null, // n/a
+      balcony: null, // not mentioned
+    },
+    amenities: ['Water/garbage/gas included', 'Hardwood floors', 'Near BART (Daly City & Colma) + Serramonte/Target/Home Depot'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: 1, // "1 day on Zillow" (13 contacts) — fresh listing (updated Jun 29, 2026)
+    marketRent: 2600, // Est. — Daly City 1BR comp; $2,400 w/ water+garbage+gas included is fair-to-slightly-under
+
+    expertRating: 3, // fair price + utilities mostly included + a 6-mo-then-M2M lease that fits perfectly, BUT 3rd-floor walk-up (no elevator), street parking only, coin laundry, no pets — a basic unit
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Reads LEGITIMATE — a real Zillow home-detail listing (1 day on market, 13 contacts) by a private ' +
+      'owner (Nelly Chin) with standard terms: first month + an equal $2,400 deposit + a $30 credit report, ' +
+      'proof of income required. Central Daly City near Serramonte, Target, Home Depot, Gellert Park, and BART ' +
+      '(Daly City + Colma). 🟢 LEASE FIT: "6 month lease, then month to month" — a 6-mo minimum that then goes ' +
+      'flexible, an exact match for your 6-mo goal. Utilities mostly included (water, garbage, gas — you only ' +
+      'pay electricity + internet).\n' +
+      'Reality check before signing: (1) PARKING — the owner says "No assigned parking, ONLY STREET PARKING." ' +
+      'Zillow\'s structured field mislabels it "Off Street," but per the owner\'s own words there is NO dedicated ' +
+      'parking; the card shows a "No parking" flag on that basis — confirm with them. (2) 3rd-FLOOR WALK-UP — ' +
+      '"no elevators" stated. (3) Laundry is COIN-OPERATED / shared, not in-unit. (4) NO PETS, non-smoking, no ' +
+      'BBQ. (5) sqft not listed — ask. (6) "Fees may apply" — confirm any beyond the $30 credit report.',
+    image: 'img/a10.webp',
+    sourceUrl: 'https://www.zillow.com/homedetails/4711-Callan-Blvd-16-Daly-City-CA-94015/463541127_zpid/',
+  },
+  {
+    // a11 — Gatewood Village, Daly City. Rooftop geocode via US Census (2026-07-01). ✅ Reads LEGIT —
+    // a Zillow "Verified Source" community (Brighthaven Communities) w/ a real unit table + a
+    // "reduced rent" special offer. Tracked row = Unit 618 (1BR, 570 sqft, $2,500, available now).
+    id: 'a11',
+    status: 'New',
+    title: 'Gatewood Village 1BR — Daly City',
+    address: '500 King Dr, Daly City, CA 94015',
+    neighborhood: '',
+    city: 'Daly City',
+    lat: 37.654653,
+    lng: -122.453089,
+
+    beds: 1,
+    baths: 1,
+    sqft: 570, // Unit 618
+    floor: '',
+
+    rent: 2500, // Unit 618, 570 sqft, "Now" (studio from $2,000; 2BR from $3,007) — a "reduced rent" offer
+    parkingCost: null, // covered parking included
+    petRent: null, // not stated (pet deposit is $300/pet — see notes)
+    utilitiesIncluded: null, // not stated
+    utilitiesEstimate: null,
+
+    deposit: null, // unit security deposit not stated (pet deposit $300/pet)
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // no "Lease terms" line shown — unknown; ask
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // Unit 618 "Now"
+    furnished: false,
+
+    petPolicy: 'Allowed', // Dogs + Cats allowed, but a LOW 20 lb weight limit each + $300 deposit per pet
+    listingType: 'Property mgmt', // Brighthaven Communities, Zillow "Verified Source", (760) 546-5420
+    contact: { company: 'Brighthaven Communities', name: 'Gatewood Village', phone: '(760) 546-5420', email: '', website: '' }, // Verified Source; note: 760 = a San Diego-area code (likely a central leasing line)
+    comments: [],
+
+    laundry: 'unknown', // not listed in the captured facts — ask (in-unit vs on-site)
+    amen: {
+      parking: true, // covered parking + off-street covered lot
+      gym: true, // "Fitness Center"
+      balcony: true, // "Patio Balcony" / "Patio: Patio/balcony"
+    },
+    amenities: ['Pool', 'Spa', 'Club house', 'Fitness center', 'Rec room', 'BBQ/picnic area', 'Courtyard', 'A/C', 'Covered parking', 'Cable ready'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null,
+    marketRent: 2700, // Est. — Daly City 1BR comp; $2,500 (reduced-rent offer) is at/under market
+
+    expertRating: 4, // strong amenity set (pool, spa, gym, clubhouse, covered parking, balcony, A/C) + reduced-rent offer + pet-friendly; downsides are the low 20 lb pet limit, unstated laundry/lease term, and a non-local contact number
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" community (Gatewood Village, run by Brighthaven ' +
+      'Communities) with a real per-unit table and its own website — the opposite of the a1/a2 scam pattern. ' +
+      'Resort-style amenities: pool, spa, fitness center, club house (Zillow notes <8% of Daly City buildings ' +
+      'have one), rec room, BBQ/picnic area, courtyard, covered parking, A/C, and a private patio/balcony. ' +
+      '🎁 SPECIAL OFFER: "Now offering reduced rent" — ask what the actual reduced number + any term/lease-up ' +
+      'conditions are.\n' +
+      'Confirm before signing: (1) LEASE TERM not stated on the page — ask if they will do a 6–12 mo term. ' +
+      '(2) PETS — cats + dogs OK, but a LOW 20 lb weight limit each (small pets only) + a $300 deposit per pet. ' +
+      '(3) LAUNDRY type isn\'t in the captured facts — confirm in-unit vs on-site. (4) Deposit, application fee, ' +
+      'and utilities not stated — ask for exact move-in costs. (5) Unit 618 is the tracked 1BR (570 sqft, $2,500, ' +
+      'available now); studios start ~$2,000 and 2BRs ~$3,007 if you want a different size. (6) Minor: the (760) ' +
+      'contact number is a San Diego-area code (likely a central leasing line, not a red flag given the Verified ' +
+      'Source + real unit data) — confirm you\'re reaching the Daly City office.',
+    image: 'img/a11.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/daly-city-ca/gatewood-village/5XjTQL/',
   },
 ];

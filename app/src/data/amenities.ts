@@ -8,6 +8,7 @@ import type { AmenityKey } from '../types';
 export const AMENITIES: ReadonlyArray<readonly [AmenityKey, string, string]> = [
   ['parking', 'Parking', 'Parking'],
   ['gym', 'Gym', 'On-site gym'],
+  ['balcony', 'Balcony', 'Balcony / patio'],
 ];
 
 /**

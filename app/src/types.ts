@@ -14,7 +14,8 @@
  */
 export type AmenityKey =
   | 'parking' // dedicated/garage/assigned parking
-  | 'gym'; // on-site fitness
+  | 'gym' // on-site fitness
+  | 'balcony'; // private outdoor space — balcony / patio / deck
 
 /** Laundry as a first-class field: in-unit and on-site are meaningfully different (and "none"). */
 export type LaundryType = 'in-unit' | 'on-site' | 'none' | 'unknown';

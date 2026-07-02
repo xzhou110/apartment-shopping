@@ -88,8 +88,8 @@ describe('amenCount', () => {
     expect(amenCount(makeApt({ laundry: 'on-site', amen: {} }))).toBe(1);
     expect(amenCount(makeApt({ laundry: 'none', amen: {} }))).toBe(0);
   });
-  it('all tracked when all true (laundry + parking + gym = 3)', () => {
-    const apt = makeApt({ laundry: 'in-unit', amen: { parking: true, gym: true } });
-    expect(amenCount(apt)).toBe(3);
+  it('all tracked when all true (laundry + parking + gym + balcony = 4)', () => {
+    const apt = makeApt({ laundry: 'in-unit', amen: { parking: true, gym: true, balcony: true } });
+    expect(amenCount(apt)).toBe(4);
   });
 });
