@@ -297,9 +297,9 @@ export const APARTMENTS: Apartment[] = [
     appFee: null, // not stated
     brokerFee: null,
 
-    leaseTermMonths: 1, // Policies: "Lease terms: 1 month" — true month-to-month, most flexible seen yet
-    minLeaseMonths: null,
-    maxLeaseMonths: null,
+    leaseTermMonths: null, // no single fixed term — this IS month-to-month, not a "1-mo-only" lease (see min below)
+    minLeaseMonths: 1, // Policies: "Lease terms: 1 month" = billed monthly, open-ended commitment
+    maxLeaseMonths: null, // open-ended — month-to-month has no max
     availableDate: '', // not stated
     furnished: false,
 
