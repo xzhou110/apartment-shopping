@@ -850,4 +850,143 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a14.webp',
     sourceUrl: 'https://www.zillow.com/apartments/mountain-view-ca/del-medio-garden-apartments/CgsndL/',
   },
+  {
+    // a15 — El Portal Apartments, Mountain View. Rooftop geocode via US Census (2026-07-01).
+    // ✅ Reads LEGIT — a Zillow "Verified Source" listing by Blvd Residential (same mgmt co as a7).
+    // Tracked row = Unit 38 (1BR, 800 sqft, $2,800) — the largest 1BR on your list.
+    id: 'a15',
+    status: 'New',
+    title: 'El Portal 1BR — Mountain View',
+    address: '2065 California St, Mountain View, CA 94040',
+    neighborhood: '',
+    city: 'Mountain View',
+    lat: 37.398639,
+    lng: -122.099245,
+
+    beds: 1,
+    baths: 1,
+    sqft: 800, // Unit 38 — the largest 1BR on your list
+    floor: '',
+
+    rent: 2800, // Unit 38, 800 sqft, available Now
+    parkingCost: null, // parking NOT mentioned anywhere in the listing — ask (see notes)
+    petRent: null, // not stated
+    utilitiesIncluded: null, // not stated
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // a menu of terms (see min/max)
+    minLeaseMonths: 1, // "Lease terms: 1 month, 7, 9, 10, 11, 12, 13, 14, 17, 18 months" — they'll do as short as 1 mo
+    maxLeaseMonths: 18, // …up to 18 mo; the 7–12 mo options are direct fits for your goal
+    availableDate: '', // "Available now"
+    furnished: false,
+
+    petPolicy: 'Cats only', // pet essentials shows ONLY Cats (2 max) — and a very low 5 lb weight limit; no dogs listed
+    listingType: 'Property mgmt', // Blvd Residential, Zillow "Verified Source", (650) 750-0967
+    contact: { company: 'Blvd Residential', name: '', phone: '(650) 750-0967', email: '', website: '' }, // Verified Source; local 650 number
+    comments: [],
+
+    laundry: 'unknown', // NOT mentioned anywhere (no chip, no building-amenity line, no in-unit W/D) — ask
+    amen: {
+      parking: null, // not mentioned at all — ask (unusual gap)
+      gym: true, // "Fitness Center: Gym"
+      balcony: null, // not mentioned
+    },
+    amenities: ['Heated pool', 'Fitness center', 'Club house', 'Poolside lounge', 'BBQ area', 'Wi-Fi in clubhouse', '800 sqft (large 1BR)', 'Positive credit reporting available'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null,
+    marketRent: 3100, // Est. — MV 1BR comp; at 800 sqft w/ pool+gym, $2,800 is under market
+
+    expertRating: 4, // big draws: the LARGEST 1BR (800 sqft) + heated pool + gym + very flexible lease menu (7–12 mo all fit); held back by cats-only (odd 5 lb limit) and — notably — parking + laundry are NOT mentioned at all
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing by Blvd Residential (the same management ' +
+      'company as the Tradewind listing, a7), (650) 750-0967. Biggest draw: at 800 sqft it\'s the LARGEST ' +
+      '1BR you\'re tracking, with a heated pool, fitness center, club house, and poolside lounge. 🟢 LEASE: a wide ' +
+      'menu — 1, 7, 9, 10, 11, 12, 13, 14, 17, 18 months — so the 7–12 mo options are direct fits for your goal ' +
+      '(they\'ll even do a single month). Under market at $2,800 for the size.\n' +
+      'Confirm before signing — this listing has two notable GAPS: (1) PARKING is not mentioned anywhere on the ' +
+      'page (no chip, no policy line) — ask whether there is any, and if it costs extra. (2) LAUNDRY is likewise ' +
+      'not mentioned (no in-unit W/D, no shared-laundry line) — ask if it\'s in-unit, on-site, or none. ' +
+      '(3) PETS — CATS ONLY (2 max), and the listed weight limit is a very low 5 lb; there are NO dogs allowed — ' +
+      'a dealbreaker if you have a dog. (4) Utilities, deposit, and application fee are not stated — ask move-in ' +
+      'costs and what utilities you pay.',
+    image: 'img/a15.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/mountain-view-ca/el-portal-apartments/CkBcMW/',
+  },
+  {
+    // a16 — Ednamary Apartments, Mountain View. Rooftop geocode via US Census (2026-07-01).
+    // ✅ Reads LEGIT — a Zillow "Verified Source" 18-unit garden community. NOTE: this is a 2-BEDROOM
+    // (the only 2BR on your list) — more space for near-1BR money. Tracked row = the "Upstairs" 2BR.
+    id: 'a16',
+    status: 'New',
+    title: 'Ednamary 2BR — Mountain View',
+    address: '1765 Ednamary Way, Mountain View, CA 94040',
+    neighborhood: '',
+    city: 'Mountain View',
+    lat: 37.39186,
+    lng: -122.096945,
+
+    beds: 2, // a 2-bedroom (still fits your "1+ bd" criteria) — the only 2BR you're tracking
+    baths: 1, // 2 bd / 1 ba
+    sqft: 850, // "Upstairs" unit
+    floor: 'Upstairs',
+
+    rent: 2850, // "Upstairs" 2BR/1ba, 850 sqft ("2 bed $2,850+")
+    parkingCost: null, // carport included
+    petRent: null, // n/a — no pets
+    utilitiesIncluded: true, // "Garbage, Hot water, Sewer, Water" included; you still pay gas (heat) + electric (see notes)
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // a menu of terms (see min/max)
+    minLeaseMonths: 1, // "Lease terms: Monthly, One year, Six months" — they offer month-to-month, 6-mo, and 12-mo
+    maxLeaseMonths: 12, // longest is 12 mo; the monthly + 6-mo options are direct fits for your goal
+    availableDate: '', // unit table says "Currently unavailable"; the blurb says "available June 10th" (already past) — ask what's actually open
+    furnished: false,
+
+    petPolicy: 'No pets', // "Dogs are not allowed" + "Cats are not allowed" — both explicit
+    listingType: 'Property mgmt', // Don Dilbeck, Zillow "Verified Source"
+    contact: { company: '', name: 'Don Dilbeck', phone: '', email: '', website: '' }, // Verified Source; no phone published — inquire via Zillow
+    comments: [],
+
+    laundry: 'on-site', // "Shared laundry" / "Laundry: Shared" — not in-unit
+    amen: {
+      parking: true, // "Carport parking" / "Carports with storage" (dedicated)
+      gym: null, // not mentioned
+      balcony: true, // "Large balcony" / "Patio Balcony"
+    },
+    amenities: ['Large balcony', 'Carport w/ storage', 'Upgraded appliances', 'Recessed lighting', 'Pool', 'Garden + lawn + picnic area + BBQ + deck', 'Building-wide WiFi', '24-hr maintenance', 'Water/sewer/garbage/hot-water included'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null,
+    marketRent: 3300, // Est. — MV 2BR comp; $2,850 for a 2BR is clearly under market (older/compact 1-bath — the tradeoff)
+
+    expertRating: 4, // strong VALUE angle: a 2BR/850sqft for $2,850 = more room than the 1BRs at similar money, + large balcony + carport-with-storage + monthly/6-mo lease options + water/sewer/garbage/hot-water included + open 7 days; tradeoffs are NO PETS, only 1 bath, older finishes, and current unavailability
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" quiet 18-unit garden community (managed by Don Dilbeck), ' +
+      'open 7 days a week. 💡 THE ANGLE: this is a 2-BEDROOM at $2,850 — for about the same money as your 1BRs ' +
+      'you get a second room (good for a home office / guest). Nice extras: a LARGE balcony, a carport WITH ' +
+      'storage, upgraded appliances, recessed lighting, a pool + garden, building-wide WiFi, and 24-hr ' +
+      'maintenance. 🟢 LEASE: offers Monthly, Six-month, and One-year terms — the monthly + 6-mo options are ' +
+      'direct fits for your goal. Water/sewer/garbage/hot water included.\n' +
+      'Confirm before signing: (1) NO PETS — dogs AND cats both disallowed (dealbreaker if you have one). ' +
+      '(2) Only 1 BATHROOM (for a 2BR) and older finishes (carpet/laminate/linoleum) — it\'s value, not luxury. ' +
+      '(3) AVAILABILITY — the unit shows "Currently unavailable" while the blurb says "available June 10th" ' +
+      '(already past); call to confirm what\'s actually open. (4) UTILITIES — water/sewer/garbage/hot water ' +
+      'included, but you still pay gas (heat) + electric. (5) Laundry is shared/on-site, NOT in-unit. ' +
+      '(6) Deposit + application fee not stated — ask move-in costs.',
+    image: 'img/a16.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/mountain-view-ca/ednamary-apartments/CrHWyv/',
+  },
 ];
