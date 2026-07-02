@@ -45,8 +45,6 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'Cats only', // cats OK; no dogs mentioned
     listingType: 'Landlord', // small 7-unit complex, "email Chris" — reads as a private owner/manager
-    contact: { company: '', name: 'Chris', phone: '', email: '', website: '' }, // craigslist email relay only; no phone/email published
-    comments: [],
 
     laundry: 'on-site', // on-site laundry (not in-unit) — now its own field
     amen: {
@@ -111,14 +109,6 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'Allowed', // cats + dogs OK, up to 2 pets, breed restrictions, refundable pet deposit
     listingType: 'Property mgmt', // Apartment Management Consultants (AMC-CA Inc), CA BRE #01525033
-    contact: {
-      company: 'Apartment Management Consultants (AMC-CA Inc) — Woodside Place',
-      name: '',
-      phone: '(510) 899-5584 x66', // "Call Now" — or text 66 to the same number, per the listing
-      email: '',
-      website: 'amc.touraptnow.com/mjig3o', // "Interested in more information? See link below" — this unit's leasing page
-    },
-    comments: [],
 
     amen: {
       parking: true, // assigned parking + carport (dedicated)
@@ -183,8 +173,6 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'Allowed', // "Cats and dogs" — small + large dogs allowed, up to 2 large dogs
     listingType: 'Property mgmt', // listed by a management company (Teri Penpraze, Verified Source); on-site mgmt + maintenance
-    contact: { company: 'Fiesta Apartments', name: 'Teri Penpraze', phone: '', email: '', website: '' }, // Zillow "Verified Source"; office Mon–Fri 9–5, contact via Zillow
-    comments: [],
 
     laundry: 'on-site', // "Shared laundry" / "Community laundry in building" — not in-unit
     amen: {
@@ -250,8 +238,6 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'No pets', // "Dogs are not allowed" + "Cats are not allowed" — both explicit
     listingType: 'Property mgmt', // Zac Amero, Verified Source; professional screening (2.5x rent, 660+ credit)
-    contact: { company: 'Imperial Apartments', name: 'Zac Amero', phone: '', email: '', website: '' }, // Zillow "Verified Source"; contact via Zillow
-    comments: [],
 
     laundry: 'on-site', // "Laundry: Shared"
     amen: {
