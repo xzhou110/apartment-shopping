@@ -640,4 +640,75 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a11.webp',
     sourceUrl: 'https://www.zillow.com/apartments/daly-city-ca/gatewood-village/5XjTQL/',
   },
+  {
+    // a12 — Carlmont Heights Apartments, Belmont (Belmont Hills). Rooftop geocode via US Census
+    // (2026-07-01). ✅ Reads LEGIT — a Zillow "Verified Source" hillside community (4 acres) with a
+    // real unit table, floor plan, and premium finishes. The most premium (and priciest) 1BR so far.
+    id: 'a12',
+    status: 'New',
+    title: 'Carlmont Heights 1BR — Belmont',
+    address: '2203 Hastings Dr, Belmont, CA 94002',
+    neighborhood: 'Belmont Hills',
+    city: 'Belmont',
+    lat: 37.509347,
+    lng: -122.295831,
+
+    beds: 1,
+    baths: 1,
+    sqft: 717, // Unit 35 — the largest 1BR on your list
+    floor: '',
+
+    rent: 2995, // Unit 35, 717 sqft ("1 bed $2,995+") — the highest rent on your list
+    parkingCost: null, // covered parking included
+    petRent: null, // not stated
+    utilitiesIncluded: null, // not stated (heating is electric = tenant-paid)
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // "Lease terms: Monthly" = month-to-month (see min)
+    minLeaseMonths: 1, // month-to-month — open-ended, maximally flexible (fits your goal)
+    maxLeaseMonths: null,
+    availableDate: '', // Unit 35 "Currently unavailable" (rolling community) — ask what's open
+    furnished: false,
+
+    petPolicy: 'Allowed', // small dogs + large dogs + cats allowed — pet-friendly
+    listingType: 'Property mgmt', // large managed community (leasing office, on-site mgmt, online rent); Zillow byline says "property owner" but it's professionally managed — Verified Source
+    contact: { company: 'Carlmont Heights Apartments', name: 'Leasing Agent', phone: '', email: '', website: '' }, // Zillow "Verified Source"; no phone published — inquire via Zillow
+    comments: [],
+
+    laundry: 'in-unit', // "In-unit laundry (W/D)" chip + "Laundry: In Unit" + washer/dryer in appliances
+    amen: {
+      parking: true, // covered parking
+      gym: true, // "Fitness Center"
+      balcony: true, // "Private patio or balcony" / "Balcony" / "Patio Balcony"
+    },
+    amenities: ['Pool', 'Club house', 'Fitness center', 'Putting green', 'Sunken lounge', 'BBQ/picnic area', 'Nature trail', 'Storage space', 'Granite countertops', 'Vaulted ceilings (select units)', 'SF Bay views', 'Online rent payment'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null,
+    marketRent: 3000, // Est. — Belmont Hills 1BR w/ views + premium finishes; $2,995 is about at-market for this tier
+
+    expertRating: 4, // excellent fit: month-to-month + in-unit W/D + covered parking + balcony + pool/gym/clubhouse + Bay views + the largest 1BR (717 sqft) & nicest finishes on your list — held from 5 only by the top-of-list price and current unavailability
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" hillside community (Carlmont Heights, spanning ~4 acres ' +
+      'in Belmont Hills) with a real unit table, floor plan, leasing office, and online rent payment. The most ' +
+      'premium option on your list: panoramic SF Bay views, pool, club house, fitness center, putting green, ' +
+      'sunken lounge, BBQ/picnic area, nature trail, plus in-unit finishes (granite counters, vaulted ceilings + ' +
+      'recessed lighting in select units, dual-pane windows). 🟢 STANDOUT FITS FOR YOU: MONTH-TO-MONTH lease ' +
+      '(maximum flexibility), in-unit washer/dryer, covered parking, and a private patio/balcony — and at 717 ' +
+      'sqft it\'s the LARGEST 1BR you\'re tracking.\n' +
+      'Confirm before signing: (1) PRICE — at $2,995 it\'s the priciest on your list (about at-market for this ' +
+      'premium tier, not a deal); make sure the extra ~$450–$700/mo vs your other 1BRs is worth the views + ' +
+      'amenities to you. (2) AVAILABILITY — Unit 35 shows "Currently unavailable"; it\'s a rolling community, so ' +
+      'call to ask what\'s actually open (office Mon–Sat 10–6). (3) Utilities not stated + heating is electric ' +
+      '(tenant-paid) — ask for a typical monthly. (4) Deposit + application fee not stated — ask move-in costs. ' +
+      '(5) Some premium finishes are "in select units" — confirm the actual unit you\'d get has them.',
+    image: 'img/a12.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/belmont-ca/carlmont-heights-apartments/ChVVch/',
+  },
 ];
