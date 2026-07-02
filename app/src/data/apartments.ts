@@ -711,4 +711,75 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a12.webp',
     sourceUrl: 'https://www.zillow.com/apartments/belmont-ca/carlmont-heights-apartments/ChVVch/',
   },
+  {
+    // a13 — Kent Court, Daly City. Rooftop geocode via US Census (2026-07-01). ✅ Reads LEGIT —
+    // a Zillow "Verified Source" listing by a management company (GPS/Logos Property Investment),
+    // small 30-unit gated complex. Tracked row = Unit 25 (1BR, 700 sqft, $2,350).
+    id: 'a13',
+    status: 'New',
+    title: 'Kent Court 1BR — Daly City',
+    address: '90 Kent Ct, Daly City, CA 94015',
+    neighborhood: '',
+    city: 'Daly City',
+    lat: 37.669752,
+    lng: -122.479004,
+
+    beds: 1,
+    baths: 1,
+    sqft: 700, // Unit 25
+    floor: '',
+
+    rent: 2350, // Unit 25, 700 sqft ("1 bed $2,350+"); studios start ~$2,095
+    parkingCost: null, // off-street resident parking lot included
+    petRent: null, // not stated
+    utilitiesIncluded: true, // "Utilities included: Garbage, Sewer, Water" — the trio; you still pay gas (heat) + electric (see notes)
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // offers BOTH terms (see min/max)
+    minLeaseMonths: 6, // "Lease terms: One year, Six months" — they explicitly offer a 6-mo lease (a perfect fit for your goal)
+    maxLeaseMonths: 12, // …and a 12-mo option
+    availableDate: '', // Unit 25 "Currently unavailable" (rolling) — ask what's open
+    furnished: false,
+
+    petPolicy: 'Allowed', // cats + small dogs (2 each) confirmed; large dogs shown on a pet card but criteria says "Cats and small dogs" — see notes
+    listingType: 'Property mgmt', // GPS/Logos Property Investment (Nate Chen), Zillow "Verified Source"
+    contact: { company: 'GPS/Logos Property Investment', name: 'Nate Chen', phone: '', email: '', website: '' }, // Verified Source; no phone published — inquire via Zillow
+    comments: [],
+
+    laundry: 'on-site', // "Shared laundry" / "Laundry: Shared" — not in-unit
+    amen: {
+      parking: true, // off-street resident parking lot (may be unassigned/first-come — see notes)
+      gym: null, // not mentioned
+      balcony: null, // not listed as a unit feature (exterior photo shows some balconies, but not stated) — ask
+    },
+    amenities: ['Gated entry', 'Off-street parking lot', 'Water/sewer/garbage included', 'Online rent payment + maintenance portal', 'On-site management'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null,
+    marketRent: 2600, // Est. — Daly City 1BR comp; $2,350 (w/ water/sewer/garbage included) is under market
+
+    expertRating: 4, // strong practical fit: EXPLICIT 6-mo lease option (exactly your goal) + gated + off-street parking + water/sewer/garbage included + under market + 700 sqft; basic finishes (carpet/vinyl), on-site (not in-unit) laundry, no gym keep it from higher
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing by a management company (GPS/Logos Property ' +
+      'Investment, Nate Chen), a quiet, well-maintained 30-unit gated complex in central Daly City with an ' +
+      'online rent/maintenance portal and standard screening (2.5× income, 660+ credit, negotiable). 🟢 BEST ' +
+      'LEASE FIT ON YOUR LIST: they explicitly offer a SIX-MONTH lease (as well as a 12-mo) — a direct match for ' +
+      'your 6-mo goal, no negotiation needed. Also under market at $2,350 with water/sewer/garbage included, ' +
+      'gated entry, and an off-street parking lot.\n' +
+      'Confirm before signing: (1) AVAILABILITY — Unit 25 shows "Currently unavailable"; call to ask what\'s open ' +
+      '(office Mon–Fri 9–5). (2) PETS — cats + small dogs (2 each) are confirmed, but the criteria says "Cats and ' +
+      'small dogs" while a pet card also shows "Large dogs" — clarify if large dogs are actually allowed. ' +
+      '(3) UTILITIES — water/sewer/garbage are included, but you still pay GAS (heat is gas) + electricity. ' +
+      '(4) Laundry is shared/on-site, NOT in-unit. (5) Basic finishes (carpet + vinyl), no gym. (6) Parking is a ' +
+      'shared lot — confirm whether spots are assigned or first-come. (7) Deposit + application fee not stated — ' +
+      'ask move-in costs.',
+    image: 'img/a13.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/daly-city-ca/kent-court/CmPfSY/',
+  },
 ];
