@@ -355,4 +355,75 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a7.webp',
     sourceUrl: 'https://www.zillow.com/apartments/foster-city-ca/tradewind-surf-apartments/CqZtYk/',
   },
+  {
+    // a8 — Three21@Belmont, Belmont. Exact house-level geocode (Nominatim, 2026-07-01 —
+    // "321, Oxford Way, Belmont, 94002"). ✅ Reads LEGIT — a Zillow "Verified Source" community
+    // with a real per-unit table, floor plans, and a 3D tour. Two identical 1BR units listed
+    // (both 650 sqft @ $2,550); tracked row = Unit 32 (the sooner-available one, Jul 7).
+    id: 'a8',
+    status: 'New',
+    title: 'Three21@Belmont — Belmont',
+    address: '321 Oxford Way, Belmont, CA 94002',
+    neighborhood: '',
+    city: 'Belmont',
+    lat: 37.5280101,
+    lng: -122.2732257,
+
+    beds: 1,
+    baths: 1,
+    sqft: 650, // Unit 32 (and Unit 76) — both 650 sqft per the unit table
+    floor: '', // not stated (unit #s don't reliably map to a floor)
+
+    rent: 2550, // Unit 32, 650 sqft (Unit 76 is identical: 650 sqft @ $2,550)
+    parkingCost: null, // detached garage / garage / off-street surface lot — no separate charge stated
+    petRent: 50, // "Monthly dog rent $50" / "Monthly cat rent $50"
+    utilitiesIncluded: null, // not stated
+    utilitiesEstimate: null,
+
+    deposit: null, // unit security deposit not stated (pet deposit is $500/pet — see notes)
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // no "Lease terms" line shown — unknown; ask
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '2026-07-07', // Unit 32 available Jul 7 (Unit 76 available Jul 25) — both near-term
+    furnished: false,
+
+    petPolicy: 'Allowed', // Dogs + Cats Allowed, 2 max each; $50/mo pet rent + $500 deposit per pet
+    listingType: 'Property mgmt', // Vasona (Leasing Agent), Zillow "Verified Source", (214) 833-5650
+    contact: { company: 'Vasona', name: 'Leasing Agent', phone: '(214) 833-5650', email: '', website: '' }, // Zillow "Verified Source"; note: 214 = a Dallas TX area code (likely a central leasing line)
+    comments: [],
+
+    laundry: 'on-site', // "Shared: Laundry" — community/shared, not in-unit
+    amen: {
+      parking: true, // detached garage + garage + off-street surface lot
+      gym: true, // "Fitness Center" under Community Rooms
+    },
+    amenities: ['Club house', 'Fitness center', 'Pool', 'Elevator', 'Hardwood floors', 'Ceiling fans', 'Package receiving', 'On-site management & maintenance'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null,
+    marketRent: 2800, // Est. — Belmont 1BR comp; $2,550 is under market (before the up-to-2-weeks-off concession)
+
+    expertRating: 4,
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" community (Three21@Belmont) with a real per-unit ' +
+      'availability table, floor plans, and a 3D tour — the opposite of the a1/a2 scam pattern. Managed by ' +
+      'Vasona (Leasing Agent, (214) 833-5650). Strong amenities: club house, fitness center, pool, elevator, ' +
+      'hardwood floors, garage parking, package receiving. 🎁 SPECIAL OFFER: "up to 2 weeks off" — a move-in ' +
+      'concession worth ~$1,275 off first-year rent; ask exactly how it applies.\n' +
+      'Confirm before signing: (1) LEASE TERM not stated anywhere on the page — this is the one big unknown; ' +
+      'ask if they will do a 6–12 mo term (and whether the special offer requires a 12-mo lease). ' +
+      '(2) TWO UNITS, both 650 sqft @ $2,550 — Unit 32 available Jul 7 (tracked here), Unit 76 available Jul 25. ' +
+      '(3) Laundry is shared/on-site, NOT in-unit. (4) Pets: cats + dogs OK (2 max each) but $50/mo pet rent ' +
+      'AND a $500 deposit PER pet — budget that if bringing one. (5) Security deposit, application fee, and ' +
+      'utilities are not stated — ask for exact move-in costs. (6) Minor: the (214) contact number is a Dallas ' +
+      'TX area code (likely a central leasing line, not a red flag given the Verified Source + real unit data), ' +
+      'but confirm you\'re reaching the actual Belmont office.',
+    image: 'img/a8.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/belmont-ca/three21@belmont/9NGvp2/',
+  },
 ];
