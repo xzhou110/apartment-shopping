@@ -53,6 +53,11 @@ interface Draft {
   furnished: '' | 'Yes' | 'No';
   petPolicy: PetPolicy;
   listingType: ListingType;
+  company: string;
+  contactName: string;
+  contactPhone: string;
+  contactEmail: string;
+  contactWebsite: string;
   daysOnMarket: string;
   marketRent: string;
   amen: Record<string, AmenChoice>;
@@ -94,6 +99,11 @@ function emptyDraft(): Draft {
     furnished: '',
     petPolicy: 'Unknown',
     listingType: 'Unknown',
+    company: '',
+    contactName: '',
+    contactPhone: '',
+    contactEmail: '',
+    contactWebsite: '',
     daysOnMarket: '',
     marketRent: '',
     amen,
@@ -143,6 +153,11 @@ function aptToDraft(a: Apartment): Draft {
     furnished: triStr(a.furnished),
     petPolicy: a.petPolicy,
     listingType: a.listingType,
+    company: a.contact?.company || '',
+    contactName: a.contact?.name || '',
+    contactPhone: a.contact?.phone || '',
+    contactEmail: a.contact?.email || '',
+    contactWebsite: a.contact?.website || '',
     daysOnMarket: s(a.daysOnMarket),
     marketRent: s(a.marketRent),
     amen,
@@ -202,6 +217,13 @@ function draftToApt(d: Draft, existing: Apartment | null): Apartment {
     furnished: triBool(d.furnished),
     petPolicy: d.petPolicy || 'Unknown',
     listingType: d.listingType || 'Unknown',
+    contact: {
+      company: d.company.trim(),
+      name: d.contactName.trim(),
+      phone: d.contactPhone.trim(),
+      email: d.contactEmail.trim(),
+      website: d.contactWebsite.trim(),
+    },
     amen,
     amenities: d.amenities
       ? d.amenities
@@ -216,6 +238,7 @@ function draftToApt(d: Draft, existing: Apartment | null): Apartment {
     scamRisk: d.scamRisk,
     rating: num(d.rating) ?? 0,
     notes: d.notes,
+    comments: existing?.comments ?? [], // user overlay — never edited via this form, preserve as-is
     image: d.image.trim(),
     sourceUrl: safeHref(d.sourceUrl) ?? '', // store only safe schemes (defense in depth — review M1)
   };
@@ -354,6 +377,13 @@ export function ApartmentForm({ apt, onClose, onSave }: Props): ReactElement {
             </select>
           </div>
           {txt('daysOnMarket', 'Days on market', 'number', false, true)}
+
+          <div className="section-label">Owner / contact</div>
+          {txt('company', 'Company / owner', 'text', true, true, 'management company or owner name')}
+          {txt('contactName', 'Contact person', 'text', false, true, 'e.g. "Chris"')}
+          {txt('contactPhone', 'Phone', 'tel', false, true)}
+          {txt('contactEmail', 'Email', 'email', false, true)}
+          {txt('contactWebsite', 'Website', 'text', true, true, 'leasing/management site (separate from the listing URL)')}
 
           <div className="section-label">Amenities (Yes / No / ? unknown)</div>
           {AMENITIES.map(([k, , long]) => (

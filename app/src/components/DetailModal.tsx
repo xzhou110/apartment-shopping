@@ -3,14 +3,15 @@ import { useState } from 'react';
 import type { Apartment, Settings } from '../types';
 import type { Coord } from '../lib/distance';
 import { AMENITIES } from '../data/amenities';
-import { amenState, money, num, bedsLabel, safeHref } from '../lib/format';
+import { amenState, money, num, bedsLabel, safeHref, telHref, mailtoHref, siteHref } from '../lib/format';
 import { pricePerSqft, leaseFits } from '../lib/derive';
 import { distanceToAnchor, formatDistance } from '../lib/distance';
 import { getFlags } from '../lib/flags';
 import { Modal } from './Modal';
 import { RatingStars } from './RatingStars';
+import { hasContact } from './ContactLinks';
 import { assetUrl, flagIcon, LAUNDRY_LABEL, LISTED_BY_LABEL } from './helpers';
-import { IconExt, IconClose, IconHome } from './icons';
+import { IconExt, IconClose, IconHome, IconTrash } from './icons';
 
 interface Props {
   apt: Apartment | null;
@@ -26,6 +27,8 @@ interface Props {
   onMarkGone: (id: string) => void;
   onSetExpert: (id: string, n: number) => void;
   onSetYou: (id: string, n: number) => void;
+  onAddComment: (id: string, text: string) => void;
+  onDeleteComment: (id: string, commentId: string) => void;
 }
 
 /** Renders a labelled field only when the value is meaningful. */
@@ -65,6 +68,94 @@ function leaseFitNode(a: Apartment, settings: Settings): ReactNode {
   return <span style={{ color: 'var(--warn)' }}>Unknown</span>;
 }
 
+/** A contact value as a link when it resolves to a safe href, else the raw text (or '' → Field hides it). */
+function contactLink(value: string, href: string | undefined, external = false): ReactNode {
+  if (!value) return '';
+  if (!href) return value;
+  return (
+    <a className="clink" href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+      {value}
+    </a>
+  );
+}
+
+/** Full timestamp for a comment ("Jul 1, 2026, 3:42 PM"). Safe for a real instant (not a date-only value). */
+function fmtTs(iso: string): string {
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return '';
+  return d.toLocaleString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+}
+
+/** Your comments on a listing: newest-at-bottom list with delete, plus an add box. */
+function CommentsSection({
+  apt,
+  onAdd,
+  onDelete,
+}: {
+  apt: Apartment;
+  onAdd: (id: string, text: string) => void;
+  onDelete: (id: string, commentId: string) => void;
+}): ReactElement {
+  const [text, setText] = useState('');
+  const submit = () => {
+    const t = text.trim();
+    if (!t) return;
+    onAdd(apt.id, t);
+    setText('');
+  };
+  return (
+    <section className="det-section">
+      <h4>Comments</h4>
+      {apt.comments.length > 0 ? (
+        <ul className="cmt-list">
+          {apt.comments.map((c) => (
+            <li key={c.id} className="cmt">
+              <div className="cmt-main">
+                <div className="cmt-text">{c.text}</div>
+                <div className="cmt-ts">{fmtTs(c.ts)}</div>
+              </div>
+              <button
+                className="cmt-del"
+                onClick={() => onDelete(apt.id, c.id)}
+                aria-label="Delete comment"
+                title="Delete comment"
+              >
+                <IconTrash />
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="cmt-empty">No comments yet — add your first note below.</div>
+      )}
+      <div className="cmt-add">
+        <textarea
+          className="cmt-input"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Add a comment… e.g. Called Chris — unit still open, tour booked Sat 2pm"
+          rows={2}
+          onKeyDown={(e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+              e.preventDefault();
+              submit();
+            }
+          }}
+        />
+        <button className="btn btn-accent cmt-submit" onClick={submit} disabled={!text.trim()}>
+          Add comment
+        </button>
+      </div>
+    </section>
+  );
+}
+
 export function DetailModal({
   apt,
   settings,
@@ -78,6 +169,8 @@ export function DetailModal({
   onMarkGone,
   onSetExpert,
   onSetYou,
+  onAddComment,
+  onDeleteComment,
 }: Props): ReactElement {
   const open = !!apt;
   const unit = settings.distanceUnit;
@@ -166,6 +259,19 @@ export function DetailModal({
               </div>
             </section>
 
+            {hasContact(apt.contact) && (
+              <section className="det-section">
+                <h4>Owner / contact</h4>
+                <div className="det-grid">
+                  <Field label="Company / owner">{apt.contact.company}</Field>
+                  <Field label="Contact person">{apt.contact.name}</Field>
+                  <Field label="Phone">{contactLink(apt.contact.phone, telHref(apt.contact.phone))}</Field>
+                  <Field label="Email">{contactLink(apt.contact.email, mailtoHref(apt.contact.email))}</Field>
+                  <Field label="Website">{contactLink(apt.contact.website, siteHref(apt.contact.website), true)}</Field>
+                </div>
+              </section>
+            )}
+
             <section className="det-section">
               <h4>Ratings</h4>
               <div className="ratings">
@@ -219,6 +325,8 @@ export function DetailModal({
                 <div className="det-notes">{apt.notes}</div>
               </section>
             )}
+
+            <CommentsSection key={apt.id} apt={apt} onAdd={onAddComment} onDelete={onDeleteComment} />
 
             <div className="det-actions">
               {safeHref(apt.sourceUrl) && (

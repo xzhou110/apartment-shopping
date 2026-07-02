@@ -7,7 +7,7 @@ import type { Coord } from './distance';
 const TODAY = '2026-06-29';
 const SF: Coord = { lat: 37.7793, lng: -122.4193 };
 
-/** Base ctx: target 6–12, no anchor, fixed today. */
+/** Base ctx: single-point 6-mo goal (DEFAULT_SETTINGS), no anchor, fixed today. */
 function ctx(overrides: Partial<FlagCtx> = {}): FlagCtx {
   return { settings: DEFAULT_SETTINGS, primaryAnchor: null, today: TODAY, ...overrides };
 }
@@ -68,23 +68,29 @@ describe('warn rules', () => {
   });
 });
 
-describe('warn: stated lease term at/above target max', () => {
-  it('fires at exactly the target max (default 12 mo — "1 year")', () => {
-    expect(has(makeApt({ leaseTermMonths: 12 }), ctx(), 'stated 12 mo term')).toBe(true);
+describe('warn: stated lease term at/above target max (RANGE goal only)', () => {
+  // The "confirm they'll flex shorter" warn is a range-goal concern; use an explicit 6–12 window.
+  const rangeCtx = ctx({ settings: { ...DEFAULT_SETTINGS, targetMinLease: 6, targetMaxLease: 12 } });
+  it('fires at exactly the target max (12 mo — "1 year")', () => {
+    expect(has(makeApt({ leaseTermMonths: 12 }), rangeCtx, 'stated 12 mo term')).toBe(true);
   });
   it('fires for a longer stated term too (e.g. 24 mo)', () => {
-    expect(has(makeApt({ leaseTermMonths: 24 }), ctx(), 'stated 24 mo term')).toBe(true);
+    expect(has(makeApt({ leaseTermMonths: 24 }), rangeCtx, 'stated 24 mo term')).toBe(true);
   });
   it('does NOT fire below the target max (e.g. 9 mo)', () => {
-    expect(has(makeApt({ leaseTermMonths: 9 }), ctx(), 'mo term')).toBe(false);
+    expect(has(makeApt({ leaseTermMonths: 9 }), rangeCtx, 'mo term')).toBe(false);
   });
   it('does NOT fire when no single term is stated (null = unknown)', () => {
-    expect(has(makeApt({ leaseTermMonths: null }), ctx(), 'mo term')).toBe(false);
+    expect(has(makeApt({ leaseTermMonths: null }), rangeCtx, 'mo term')).toBe(false);
   });
   it('respects a custom target max from settings', () => {
-    const looseCtx = ctx({ settings: { ...DEFAULT_SETTINGS, targetMaxLease: 18 } });
+    const looseCtx = ctx({ settings: { ...DEFAULT_SETTINGS, targetMinLease: 6, targetMaxLease: 18 } });
     expect(has(makeApt({ leaseTermMonths: 12 }), looseCtx, 'mo term')).toBe(false);
     expect(has(makeApt({ leaseTermMonths: 18 }), looseCtx, 'mo term')).toBe(true);
+  });
+  it('does NOT fire for a single-point 6-mo goal at a 6-mo term (that IS the goal)', () => {
+    // A 6-mo term perfectly matches the default 6-mo goal → no "flex shorter" warn.
+    expect(has(makeApt({ leaseTermMonths: 6 }), ctx(), 'mo term')).toBe(false);
   });
 });
 
@@ -128,6 +134,31 @@ describe('good rule: low-friction short-term fit', () => {
     });
     const f = getFlags(apt, ctx());
     expect(f.some((x) => x.lvl === 'good' && x.t.includes('low-friction'))).toBe(true);
+  });
+});
+
+describe('good rule: month-to-month is a green flag', () => {
+  it('minLeaseMonths=1, open-ended → green "month-to-month" good flag', () => {
+    const apt = makeApt({ minLeaseMonths: 1, maxLeaseMonths: null, leaseTermMonths: null });
+    const f = getFlags(apt, ctx());
+    expect(f.some((x) => x.lvl === 'good' && /month-to-month/i.test(x.t))).toBe(true);
+  });
+  it('leaseTermMonths=1 alone counts as month-to-month', () => {
+    const apt = makeApt({ minLeaseMonths: null, maxLeaseMonths: null, leaseTermMonths: 1 });
+    expect(getFlags(apt, ctx()).some((x) => /month-to-month/i.test(x.t))).toBe(true);
+  });
+  it('a fixed 12-mo term is NOT month-to-month', () => {
+    const apt = makeApt({ minLeaseMonths: null, maxLeaseMonths: null, leaseTermMonths: 12 });
+    expect(getFlags(apt, ctx()).some((x) => /month-to-month/i.test(x.t))).toBe(false);
+  });
+  it('a 1–12 range (has a 12-mo ceiling) is NOT month-to-month', () => {
+    const apt = makeApt({ minLeaseMonths: 1, maxLeaseMonths: 12, leaseTermMonths: null });
+    expect(getFlags(apt, ctx()).some((x) => /month-to-month/i.test(x.t))).toBe(false);
+  });
+  it('month-to-month escalates the card signal to good', () => {
+    // Isolate: furnished true (no unfurnished info), no other signals.
+    const apt = makeApt({ minLeaseMonths: 1, maxLeaseMonths: null, leaseTermMonths: null, furnished: true });
+    expect(signalLevel(apt, ctx())).toBe('good');
   });
 });
 

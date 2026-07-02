@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { money, num, amenState, yn, stars, bedsLabel, safeHref, shortDate, leaseSummary } from './format';
+import { money, num, amenState, yn, stars, bedsLabel, safeHref, telHref, mailtoHref, siteHref, shortDate, leaseSummary } from './format';
 import { makeApt } from './_fixtures';
 import type { AmenityKey } from '../types';
 
@@ -29,6 +29,47 @@ describe('safeHref — only http(s)/mailto pass (XSS guard)', () => {
   it('null/empty → undefined', () => {
     expect(safeHref(null)).toBeUndefined();
     expect(safeHref('')).toBeUndefined();
+  });
+});
+
+describe('telHref — tel: link from a phone string', () => {
+  it('strips formatting, keeps digits', () => expect(telHref('(650) 555-0142')).toBe('tel:6505550142'));
+  it('keeps a leading +', () => expect(telHref('+1 415 555 9000')).toBe('tel:+14155559000'));
+  it('keeps extension markers * #', () => expect(telHref('555-0142 x*#')).toBe('tel:5550142*#'));
+  it('encodes a "x NN" extension as ;ext= (does not merge digits)', () =>
+    expect(telHref('(510) 899-5584 x 66')).toBe('tel:5108995584;ext=66'));
+  it('encodes a "x66" (no space) extension', () =>
+    expect(telHref('510-899-5584 x66')).toBe('tel:5108995584;ext=66'));
+  it('encodes an "ext. NN" extension', () =>
+    expect(telHref('510-899-5584 ext. 66')).toBe('tel:5108995584;ext=66'));
+  it('no digits → undefined', () => expect(telHref('call me')).toBeUndefined());
+  it('null/empty → undefined', () => {
+    expect(telHref(null)).toBeUndefined();
+    expect(telHref('')).toBeUndefined();
+  });
+});
+
+describe('mailtoHref — mailto: link from an email', () => {
+  it('valid email passes', () => expect(mailtoHref('chris@cedar.com')).toBe('mailto:chris@cedar.com'));
+  it('trims first', () => expect(mailtoHref('  a@b.io ')).toBe('mailto:a@b.io'));
+  it('rejects a bare word', () => expect(mailtoHref('chris')).toBeUndefined());
+  it('rejects a missing TLD', () => expect(mailtoHref('a@b')).toBeUndefined());
+  it('null/empty → undefined', () => {
+    expect(mailtoHref(null)).toBeUndefined();
+    expect(mailtoHref('')).toBeUndefined();
+  });
+});
+
+describe('siteHref — website link, bare domain normalized to https', () => {
+  it('bare domain → https', () => expect(siteHref('cedarstreetapts.com')).toBe('https://cedarstreetapts.com'));
+  it('keeps an explicit https URL', () => expect(siteHref('https://x.com/a')).toBe('https://x.com/a'));
+  it('keeps an explicit http URL', () => expect(siteHref('http://x.com')).toBe('http://x.com'));
+  it('blocks javascript: (other scheme)', () => expect(siteHref('javascript:alert(1)')).toBeUndefined());
+  it('blocks mailto: (other scheme)', () => expect(siteHref('mailto:a@b.com')).toBeUndefined());
+  it('trims first', () => expect(siteHref('  example.org ')).toBe('https://example.org'));
+  it('null/empty → undefined', () => {
+    expect(siteHref(null)).toBeUndefined();
+    expect(siteHref('')).toBeUndefined();
   });
 });
 

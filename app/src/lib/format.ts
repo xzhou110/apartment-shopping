@@ -83,3 +83,37 @@ export function safeHref(u: string | null | undefined): string | undefined {
   const s = (u || '').trim();
   return /^(https?:\/\/|mailto:)/i.test(s) ? s : undefined;
 }
+
+/**
+ * `tel:` href from a phone string (keeps digits, +, *, #). Recognizes a trailing extension
+ * ("x66", "ext. 66") and encodes it as `;ext=` (RFC 3966) instead of merging its digits into the
+ * main number — e.g. "(510) 899-5584 x 66" → "tel:5108995584;ext=66", not "tel:510899558466".
+ * '' / no digits → undefined.
+ */
+export function telHref(phone: string | null | undefined): string | undefined {
+  const raw = (phone || '').trim();
+  const extMatch = raw.match(/^(.*?)\s*(?:x|ext\.?)\s*(\d+)\s*$/i);
+  const mainPart = extMatch ? extMatch[1] : raw;
+  const ext = extMatch ? extMatch[2] : '';
+  const cleaned = mainPart.replace(/[^\d+*#]/g, '');
+  if (!/\d/.test(cleaned)) return undefined;
+  return 'tel:' + cleaned + (ext ? ';ext=' + ext : '');
+}
+
+/** `mailto:` href from an email. Requires a minimal `x@y` shape, else undefined. */
+export function mailtoHref(email: string | null | undefined): string | undefined {
+  const s = (email || '').trim();
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) ? 'mailto:' + s : undefined;
+}
+
+/**
+ * A website href for the contact block. Accepts a bare domain ("example.com") or a full URL and
+ * normalizes to https. Rejects anything with a non-http(s) scheme (defense in depth). '' → undefined.
+ */
+export function siteHref(u: string | null | undefined): string | undefined {
+  const s = (u || '').trim();
+  if (!s) return undefined;
+  if (/^https?:\/\//i.test(s)) return s;
+  if (/^[a-z][a-z0-9+.-]*:/i.test(s)) return undefined; // some other scheme (mailto:, javascript:, …) — reject
+  return 'https://' + s;
+}

@@ -219,3 +219,51 @@ export const IconDownload = ({ className }: IconProps): ReactElement => (
     <path d="M12 4v10m0 0l-3.5-3.5M12 14l3.5-3.5M5 19h14" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
+
+/** Phone handset — contact phone link. */
+export const IconPhone = ({ className }: IconProps): ReactElement => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+    <path
+      d="M4 5c0 8.3 6.7 15 15 15a1.5 1.5 0 001.5-1.5v-2.6a1 1 0 00-.8-1l-3-.6a1 1 0 00-1 .4l-.9 1.2A11.5 11.5 0 019.7 10l1.2-.9a1 1 0 00.4-1l-.6-3a1 1 0 00-1-.8H7.5A1.5 1.5 0 004 5z"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+/** Envelope — contact email link. */
+export const IconMail = ({ className }: IconProps): ReactElement => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.6" />
+    <path d="M4 7l8 6 8-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+/** Globe — contact website link. */
+export const IconGlobe = ({ className }: IconProps): ReactElement => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
+    <path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9S14.5 18.5 12 21c-2.5-2.5-3.5-6-3.5-9S9.5 5.5 12 3z" stroke="currentColor" strokeWidth="1.6" />
+  </svg>
+);
+
+/** Speech bubble — comments section + card count. */
+export const IconChat = ({ className }: IconProps): ReactElement => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+    <path
+      d="M21 12a8 8 0 01-11.5 7.2L4 20l.9-5A8 8 0 1121 12z"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+/** Trash — delete a comment. */
+export const IconTrash = ({ className }: IconProps): ReactElement => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+    <path d="M4 7h16M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m-8 0v12a1 1 0 001 1h8a1 1 0 001-1V7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M10 11v6M14 11v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);

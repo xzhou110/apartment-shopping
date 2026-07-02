@@ -83,6 +83,7 @@ const DEFAULT_APARTMENT: Apartment = {
   furnished: null,
   petPolicy: 'Unknown',
   listingType: 'Unknown',
+  contact: { company: '', name: '', phone: '', email: '', website: '' },
   amen: {},
   amenities: [],
   dateSeen: '',
@@ -92,6 +93,7 @@ const DEFAULT_APARTMENT: Apartment = {
   scamRisk: false,
   rating: 0,
   notes: '',
+  comments: [],
   image: '',
   sourceUrl: '',
 };
@@ -101,8 +103,10 @@ function hydrateApartment(saved: Partial<Apartment>): Apartment {
   return {
     ...DEFAULT_APARTMENT,
     ...saved,
+    contact: { ...DEFAULT_APARTMENT.contact, ...(saved.contact || {}) },
     amen: { ...(saved.amen || {}) },
     amenities: Array.isArray(saved.amenities) ? [...saved.amenities] : [],
+    comments: Array.isArray(saved.comments) ? saved.comments.map((c) => ({ ...c })) : [],
   };
 }
 
@@ -121,9 +125,9 @@ interface RawPersist {
 /**
  * The seed (data/apartments.ts) is authoritative for the listing SET + DATA — so listings I add or
  * update there (from your screenshots) always show up. localStorage only overlays YOUR in-app state
- * (rating + status, incl. "Gone"), keeps listings you added in-app, and remembers deletions.
- * (Editing a seed listing's other fields in the form isn't persisted — tell me and I'll update the
- * data file, which is the source of truth.)
+ * (rating + status incl. "Gone", and your comments), keeps listings you added in-app, and remembers
+ * deletions. (Editing a seed listing's other fields — including owner/contact — in the form isn't
+ * persisted; tell me and I'll update the data file, which is the source of truth.)
  */
 function mergeWithSeed(saved: Partial<Apartment>[], removed: string[]): Apartment[] {
   const removedSet = new Set(removed);
@@ -140,7 +144,17 @@ function mergeWithSeed(saved: Partial<Apartment>[], removed: string[]): Apartmen
     if (removedSet.has(seed.id)) continue;
     const base = hydrateApartment(seed);
     const s = savedById.get(seed.id);
-    out.push(s ? { ...base, rating: s.rating ?? base.rating, status: s.status ?? base.status } : base);
+    out.push(
+      s
+        ? {
+            ...base,
+            rating: s.rating ?? base.rating,
+            status: s.status ?? base.status,
+            // Comments are USER content → the saved overlay wins (base/seed has none).
+            comments: Array.isArray(s.comments) ? s.comments.map((c) => ({ ...c })) : base.comments,
+          }
+        : base,
+    );
   }
   return out;
 }
@@ -154,9 +168,14 @@ function parsePersist(raw: string | null): RawPersist | null {
       removed?: string[];
     };
     if (!data || !Array.isArray(data.apartments)) return null;
+    const settings = { ...DEFAULT_SETTINGS, ...(data.settings || {}) };
+    // Migration (2026-07): the lease target moved from a 6–12 window to a single 6-mo goal. A browser
+    // still holding the exact OLD default (6/12) is bumped to 6/6 so the deployed app reflects the new
+    // target; anyone who deliberately set a different window is left untouched.
+    if (settings.targetMinLease === 6 && settings.targetMaxLease === 12) settings.targetMaxLease = 6;
     return {
       apartments: data.apartments,
-      settings: { ...DEFAULT_SETTINGS, ...(data.settings || {}) },
+      settings,
       removed: Array.isArray(data.removed) ? data.removed : [],
     };
   } catch {
@@ -249,6 +268,24 @@ export function useApartments() {
 
   const setStatus = useCallback((id: string, status: Status) => {
     setApartments((prev) => prev.map((a) => (a.id === id ? { ...a, status } : a)));
+  }, []);
+
+  // ---- comments (your own overlay; persisted + merged onto the seed) ----
+  const addComment = useCallback((id: string, text: string) => {
+    const t = text.trim();
+    if (!t) return;
+    const comment = { id: 'c' + Date.now(), text: t, ts: new Date().toISOString() };
+    setApartments((prev) =>
+      prev.map((a) => (a.id === id ? { ...a, comments: [...a.comments, comment] } : a)),
+    );
+  }, []);
+
+  const deleteComment = useCallback((id: string, commentId: string) => {
+    setApartments((prev) =>
+      prev.map((a) =>
+        a.id === id ? { ...a, comments: a.comments.filter((c) => c.id !== commentId) } : a,
+      ),
+    );
   }, []);
 
   // ---- compare ----
@@ -378,6 +415,8 @@ export function useApartments() {
     deleteApartment,
     setRating,
     setStatus,
+    addComment,
+    deleteComment,
     toggleCompare,
     clearCompare,
     setSettings,

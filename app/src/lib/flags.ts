@@ -28,6 +28,16 @@ function parseDate(iso: string): Date | null {
 }
 
 /**
+ * Month-to-month: shortest term is 1 month with no fixed longer commitment (max/term open or also 1).
+ * A range like min 1 / max 12 is NOT month-to-month — it has a 12-mo ceiling.
+ */
+function isMonthToMonth(apt: Apartment): boolean {
+  const lo = apt.minLeaseMonths ?? apt.leaseTermMonths;
+  const hiFixed = apt.maxLeaseMonths ?? apt.leaseTermMonths;
+  return lo === 1 && (hiFixed == null || hiFixed === 1);
+}
+
+/**
  * Risk / warn / info / good flags for one apartment. PURE: no DOM, no Date.now()
  * except via the injectable ctx.today. Order: risk first, then warn, info, good
  * (push in this order) so the card's first-3 preview shows the most severe first.
@@ -37,7 +47,9 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
   const { settings } = ctx;
   const unit = settings.distanceUnit || 'mi';
   const tMin = settings.targetMinLease ?? 6;
-  const tMax = settings.targetMaxLease ?? 12;
+  const tMax = settings.targetMaxLease ?? 6;
+  // "6 mo" for a single-point goal, "6–12 mo" for a range — used in the lease flag copy.
+  const goalLabel = tMin === tMax ? `${tMin} mo` : `${tMin}–${tMax} mo`;
 
   // ---- risk -------------------------------------------------------------
   // Possible scam — pushed FIRST so it's the top (red) flag on the card. Set by hand
@@ -49,15 +61,18 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
   if (leaseFits(apt, settings) === false)
     f.push({
       lvl: 'risk',
-      t: `Lease window doesn't fit your ${tMin}–${tMax} mo goal.`,
+      t: apt.leaseTermMonths != null
+        ? `Lease is a stated ${apt.leaseTermMonths} mo term — doesn't fit your ${goalLabel} goal; ask if they'll do ${goalLabel}.`
+        : `Lease window doesn't fit your ${goalLabel} goal.`,
     });
 
   // ---- warn -------------------------------------------------------------
-  // A stated single lease term at/above your target max — distinct from the risk check
-  // above (which only catches a hard range mismatch). 12 mo can technically satisfy a
-  // 6–12 mo goal, but a landlord's fixed default term of a year+ signals they may not
-  // flex shorter, so it's worth a caveat even when leaseFits() says true.
-  if (apt.leaseTermMonths != null && apt.leaseTermMonths >= tMax)
+  // A stated single lease term at/above your target max, but ONLY for a RANGE goal (tMax > tMin):
+  // e.g. a 12-mo term can satisfy a 6–12 window yet a landlord's fixed year-long default signals they
+  // may not flex to the shorter end, so it's worth a caveat even when leaseFits() says true. For a
+  // single-point goal (tMin === tMax) this doesn't apply: a matching term is a perfect fit, and a
+  // longer term is already the risk flag above — so we skip it to avoid a redundant/wrong warning.
+  if (apt.leaseTermMonths != null && apt.leaseTermMonths >= tMax && tMax > tMin)
     f.push({
       lvl: 'warn',
       t: `Lease is a stated ${apt.leaseTermMonths} mo term — at/above your ${tMax}-mo max; confirm they'll flex shorter.`,
@@ -126,6 +141,15 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
     });
 
   // ---- good -------------------------------------------------------------
+  // Month-to-month = the most flexible term there is (leave on ~30 days' notice), so it always
+  // accommodates a short goal → a green highlight. Detected as a 1-mo shortest term with no fixed
+  // longer commitment.
+  if (isMonthToMonth(apt))
+    f.push({
+      lvl: 'good',
+      t: `Month-to-month lease — maximum flexibility, easily fits your ${goalLabel} goal.`,
+    });
+
   if (
     apt.laundry === 'in-unit' &&
     amenState(apt, 'parking') === 'yes' &&

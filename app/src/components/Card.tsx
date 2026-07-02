@@ -9,7 +9,8 @@ import { distanceToAnchor, formatDistance } from '../lib/distance';
 import { getFlags, signalLevel } from '../lib/flags';
 import { assetUrl, flagIcon, LAUNDRY_LABEL, laundryState, LISTED_BY_LABEL, STATUS_BADGE } from './helpers';
 import { RatingStars } from './RatingStars';
-import { IconBath, IconBed, IconExt, IconHome, IconPin, IconRoute, IconRuler } from './icons';
+import { ContactRows, contactLabel, hasContact } from './ContactLinks';
+import { IconBath, IconBed, IconChat, IconExt, IconHome, IconPin, IconRoute, IconRuler } from './icons';
 
 interface Props {
   apt: Apartment;
@@ -56,6 +57,10 @@ export function Card({ apt, ctx, anchorLabel, inCompare, onToggleCompare, onOpen
   const leaseStr = leaseSummary(apt);
   const lState = laundryState(apt.laundry);
   const lMark = lState === 'yes' ? '✓' : lState === 'no' ? '✕' : '?';
+  const showContact = hasContact(apt.contact);
+  const cWho = showContact ? contactLabel(apt.contact) || 'Contact' : '';
+  const commentCount = apt.comments.length;
+  const latestComment = commentCount > 0 ? apt.comments[commentCount - 1] : null;
 
   return (
     <article
@@ -167,6 +172,13 @@ export function Card({ apt, ctx, anchorLabel, inCompare, onToggleCompare, onOpen
           </span>
         )}
 
+        {showContact && (
+          <div className="contact-block" title="Owner / management contact">
+            <span className="contact-who">{cWho}</span>
+            <ContactRows contact={apt.contact} />
+          </div>
+        )}
+
         <div className="kf-block">
           <div className="kf-head">
             Amenities <span className="kf-score num">{amenCount(apt)}/{AMENITY_TOTAL}</span>
@@ -197,6 +209,18 @@ export function Card({ apt, ctx, anchorLabel, inCompare, onToggleCompare, onOpen
                 <span>{f.t}</span>
               </div>
             ))}
+          </div>
+        )}
+
+        {latestComment && (
+          <div className="card-comment" title="Your latest comment — open the card to see all">
+            <div className="card-comment-head">
+              <IconChat />
+              <span>Your note</span>
+              {commentCount > 1 && <span className="card-comment-more">+{commentCount - 1} earlier</span>}
+              <span className="card-comment-ts">{shortDate(latestComment.ts)}</span>
+            </div>
+            <div className="card-comment-text">{latestComment.text}</div>
           </div>
         )}
 

@@ -226,6 +226,8 @@ export default function App() {
         onMarkGone={handleMarkGone}
         onSetExpert={(id, n) => g.setRating(id, 'expert', n)}
         onSetYou={(id, n) => g.setRating(id, 'you', n)}
+        onAddComment={g.addComment}
+        onDeleteComment={g.deleteComment}
       />
 
       <ApartmentForm apt={formApt} onClose={() => setFormApt(undefined)} onSave={handleSave} />

@@ -38,6 +38,29 @@ export type Status =
 export type ListingType = 'Property mgmt' | 'Landlord' | 'Sublet' | 'Broker' | 'Unknown';
 export type PetPolicy = 'Allowed' | 'Cats only' | 'Dogs only' | 'No pets' | 'Unknown';
 
+/**
+ * Owner / management-company contact for a listing. LISTING DATA (part of the seed, editable in
+ * the form) — not user state. Every field '' = unknown → nothing rendered for it. `website` is the
+ * leasing/management site and is kept separate from the listing's `sourceUrl`.
+ */
+export interface Contact {
+  company: string; // management company or owner entity, e.g. "Woodside Place (AMC-CA)"
+  name: string; // named contact person, e.g. "Chris"
+  phone: string; // as listed ('' = none)
+  email: string; // '' = none
+  website: string; // management/leasing site ('' = none)
+}
+
+/**
+ * A user-authored note on a listing. USER STATE — persisted in localStorage and overlaid onto seed
+ * listings on reload (exactly like rating/status), so your comments survive a seed data refresh.
+ */
+export interface Comment {
+  id: string; // 'c' + timestamp
+  text: string;
+  ts: string; // ISO timestamp when added
+}
+
 export interface Apartment {
   id: string; // 'a1', 'a2', … (matches the id badge on the photo + chat references)
   status: Status;
@@ -79,6 +102,7 @@ export interface Apartment {
   // policy / source
   petPolicy: PetPolicy;
   listingType: ListingType;
+  contact: Contact; // owner / management-company contact (structured listing data)
 
   // amenities
   amen: Amen; // tri-state tracked amenities
@@ -94,6 +118,7 @@ export interface Apartment {
   scamRisk: boolean; // true = I judged it a possible scam → a red 'risk' flag shows on the card
   rating: number; // 0–5 — your rating
   notes: string; // supports \n
+  comments: Comment[]; // your own running notes on this listing (persisted as a user overlay)
   image: string; // path under public/ (e.g. "img/a1.jpg") OR a data: URI fallback
   sourceUrl: string;
 }
@@ -120,8 +145,8 @@ export const DEFAULT_SETTINGS: Settings = {
   anchors: [],
   primaryAnchorId: null,
   distanceUnit: 'mi',
-  targetMinLease: 6, // the user is looking for a 6–12 month lease
-  targetMaxLease: 12,
+  targetMinLease: 6, // the user is looking for a 6-month lease (single-point goal, updated 2026-07)
+  targetMaxLease: 6,
   sheetUrl: '',
 };
 

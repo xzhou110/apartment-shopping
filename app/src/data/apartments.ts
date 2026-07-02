@@ -37,7 +37,7 @@ export const APARTMENTS: Apartment[] = [
     appFee: null, // none stated (a credit report is required, but no fee named)
     brokerFee: null,
 
-    leaseTermMonths: null, // not stated — likely a standard 12-mo; confirm they'll do ≤12
+    leaseTermMonths: null, // not stated — likely a standard 12-mo; confirm they'll do a 6-mo term
     minLeaseMonths: null,
     maxLeaseMonths: null,
     availableDate: '2026-08-01', // body: "available around August 1st" (the sidebar's "Jul 1" conflicts — see notes)
@@ -45,6 +45,8 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'Cats only', // cats OK; no dogs mentioned
     listingType: 'Landlord', // small 7-unit complex, "email Chris" — reads as a private owner/manager
+    contact: { company: '', name: 'Chris', phone: '', email: '', website: '' }, // craigslist email relay only; no phone/email published
+    comments: [],
 
     laundry: 'on-site', // on-site laundry (not in-unit) — now its own field
     amen: {
@@ -65,7 +67,7 @@ export const APARTMENTS: Apartment[] = [
       'specific grounded description (granite, hardwood, carport, on-site laundry), standard terms ' +
       '(rent + an equal $2,290 deposit + a credit report), and contact via the craigslist email relay — no ' +
       '"send your phone number," no up-front holding fee.\n' +
-      'Confirm before signing: (1) lease term is not stated — likely a standard 12-mo, so check they will do ≤12 for a 6–12 mo plan. ' +
+      'Confirm before signing: (1) lease term is not stated — likely a standard 12-mo, so confirm up front they will do a 6-month term (a standard 12-mo lease would NOT fit your 6-month goal). ' +
       '(2) Available date conflicts: sidebar says "Jul 1," body says "around Aug 1." (3) Laundry is on-site, NOT in-unit. ' +
       '(4) No A/C (ceiling fans only). (5) Cats OK but no dogs. (6) Address is "Cedar near Cherry" with no house number, so the map pin is approximate. ' +
       'Standard due diligence still applies: tour in person and verify "Chris" manages the unit before paying anything.',
@@ -101,7 +103,7 @@ export const APARTMENTS: Apartment[] = [
     appFee: null, // "additional fees may apply" — none quantified
     brokerFee: null,
 
-    leaseTermMonths: null, // not stated — likely a standard 12-mo community lease; confirm they'll do ≤12
+    leaseTermMonths: null, // not stated — likely a standard 12-mo community lease; confirm they'll do a 6-mo term
     minLeaseMonths: null,
     maxLeaseMonths: null,
     availableDate: '2026-05-15', // "Available Mid-May 2026" (rolling-availability community — a past date just means "ask about current openings")
@@ -109,6 +111,14 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'Allowed', // cats + dogs OK, up to 2 pets, breed restrictions, refundable pet deposit
     listingType: 'Property mgmt', // Apartment Management Consultants (AMC-CA Inc), CA BRE #01525033
+    contact: {
+      company: 'Apartment Management Consultants (AMC-CA Inc) — Woodside Place',
+      name: '',
+      phone: '(510) 899-5584 x66', // "Call Now" — or text 66 to the same number, per the listing
+      email: '',
+      website: 'amc.touraptnow.com/mjig3o', // "Interested in more information? See link below" — this unit's leasing page
+    },
+    comments: [],
 
     amen: {
       parking: true, // assigned parking + carport (dedicated)
@@ -129,7 +139,7 @@ export const APARTMENTS: Apartment[] = [
       'Market-rate price, professional leasing flow (tour link, 3× income requirement, Equal Housing), building number matches the photo.\n' +
       'Confirm before signing: (1) PRICE — advertised $2,199 but the body lists current rent $2,305–$2,315/mo; budget ~$2,310, not $2,199. ' +
       '(2) Utilities — water & trash included, but YOU pay PG&E (electric + gas) on top. (3) Laundry is on-site, NOT in-unit. ' +
-      '(4) Lease term not stated — likely a standard 12-mo; confirm they will do a 6–12 mo term. ' +
+      '(4) Lease term not stated — likely a standard 12-mo; confirm they will do a 6-month term (a 12-mo lease would NOT fit your 6-month goal). ' +
       '(5) "Available Mid-May 2026" has passed — it\'s a rolling-availability community, so just ask what\'s open now. ' +
       '(6) Up to 2 pets w/ breed restrictions + a refundable pet deposit.',
     image: 'img/a4.jpg',
@@ -173,6 +183,8 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'Allowed', // "Cats and dogs" — small + large dogs allowed, up to 2 large dogs
     listingType: 'Property mgmt', // listed by a management company (Teri Penpraze, Verified Source); on-site mgmt + maintenance
+    contact: { company: 'Fiesta Apartments', name: 'Teri Penpraze', phone: '', email: '', website: '' }, // Zillow "Verified Source"; office Mon–Fri 9–5, contact via Zillow
+    comments: [],
 
     laundry: 'on-site', // "Shared laundry" / "Community laundry in building" — not in-unit
     amen: {
@@ -195,8 +207,9 @@ export const APARTMENTS: Apartment[] = [
       'Confirm before signing: (1) AVAILABILITY — both listed 1BR units show "Currently unavailable"; it\'s a ' +
       'rolling-availability community, so call to ask what\'s actually open (office Mon–Fri 9–5, Sat by appointment, Sun closed). ' +
       '(2) TWO OPTIONS — Unit 304 = 480 sqft @ $2,250 (tracked here); Unit 309 = 640 sqft @ $2,450 (bigger, +$200/mo, has a floor plan + 6 photos). ' +
-      '(3) Laundry is community/on-site, NOT in-unit. (4) Lease term is 12 months (confirmed) — deposit and application fee ' +
-      'are still not stated; ask for move-in costs directly. (5) Utilities — only HEAT is included in rent; water, trash, ' +
+      '(3) Laundry is community/on-site, NOT in-unit. (4) Lease term is 12 months (confirmed) — that does NOT fit your ' +
+      '6-month goal, so ask up front whether they\'ll do a 6-month term; deposit and application fee ' +
+      'are still not stated, so ask for move-in costs directly. (5) Utilities — only HEAT is included in rent; water, trash, ' +
       'and electric are not listed as included, so confirm what you\'ll actually pay. (6) Pets OK — cats + dogs, up to 2 large dogs. ' +
       '(7) Parking is covered/assigned with outdoor storage (included).',
     image: 'img/a5.webp',
@@ -238,6 +251,8 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'No pets', // "Dogs are not allowed" + "Cats are not allowed" — both explicit
     listingType: 'Property mgmt', // Zac Amero, Verified Source; professional screening (2.5x rent, 660+ credit)
+    contact: { company: 'Imperial Apartments', name: 'Zac Amero', phone: '', email: '', website: '' }, // Zillow "Verified Source"; contact via Zillow
+    comments: [],
 
     laundry: 'on-site', // "Laundry: Shared"
     amen: {
@@ -262,7 +277,7 @@ export const APARTMENTS: Apartment[] = [
       'Confirm before signing: (1) AVAILABILITY — Unit 109 shows "Currently unavailable"; call to ask what\'s open now. ' +
       '(2) NO PETS — both cats and dogs disallowed (dealbreaker if you have a pet). ' +
       '(3) Utilities — garbage/hot water/sewer/water included, but electric & gas are NOT listed as included (likely tenant-paid PG&E). ' +
-      '(4) Lease is a stated 12-mo term — confirm they\'ll flex to 6–12 if you want shorter. ' +
+      '(4) Lease is a stated 12-mo term — that does NOT fit your 6-month goal; confirm they\'ll do a 6-month term. ' +
       '(5) Move-in cost per their calculator: $30 application fee + $2,000 deposit = ~$2,030, on top of first month\'s rent.',
     image: 'img/a6.webp',
     sourceUrl: 'https://www.zillow.com/apartments/burlingame-ca/imperial-apartments/CkBCvC/',
@@ -305,6 +320,8 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'Allowed', // Dogs Allowed + Cats Allowed, 2 max each, 45 lb weight limit
     listingType: 'Property mgmt', // Blvd Residential, "Leasing Agent," Verified Source, (650) 547-8025
+    contact: { company: 'Blvd Residential', name: 'Leasing Agent', phone: '(650) 547-8025', email: '', website: '' }, // Zillow "Verified Source"; phone from the listing
+    comments: [],
 
     laundry: 'unknown', // not mentioned anywhere (no chip, no unit-feature line)
     amen: {
@@ -325,7 +342,8 @@ export const APARTMENTS: Apartment[] = [
       '(650) 547-8025), a long-standing pet-friendly community in a quiet Foster City neighborhood near ' +
       'Highway 101/92, equidistant from SF and Silicon Valley. Fitness center + community room; pool is ' +
       'temporarily closed. Notable: lease term is stated as 1 MONTH — true month-to-month, the most flexible ' +
-      'term of any listing you\'ve tracked so far, an easy fit for your 6–12 mo window.\n' +
+      'term of any listing you\'ve tracked so far, and a perfect fit for your 6-month goal (it shows a green ' +
+      'month-to-month flag on the card).\n' +
       'Confirm before signing: (1) UNIT SPECIFICS — the page shows a Studio–2BR range with no per-unit table; ' +
       'the $2,300 / 1 bed you gave me should be checked against their current "Available units" list (exact ' +
       'unit, sqft, floor). (2) Laundry type isn\'t stated anywhere — ask if it\'s in-unit, on-site, or none. ' +

@@ -4,7 +4,9 @@ import { makeApt } from './_fixtures';
 import { DEFAULT_SETTINGS } from '../types';
 import type { Settings } from '../types';
 
-const settings: Settings = DEFAULT_SETTINGS; // target 6–12
+// Explicit 6–12 range so the truth table exercises leaseFits' overlap logic independent of the
+// app default (which is now a single-point 6-mo goal — asserted separately below).
+const settings: Settings = { ...DEFAULT_SETTINGS, targetMinLease: 6, targetMaxLease: 12 };
 
 describe('pricePerSqft', () => {
   it('rent / sqft, two decimals', () => {
@@ -63,9 +65,9 @@ describe('leaseFits — truth table (target 6–12)', () => {
     ).toBe(false);
   });
 
-  it('target defaults to 6–12 when settings bounds present (DEFAULT_SETTINGS)', () => {
+  it('app default is a single-point 6-mo goal (DEFAULT_SETTINGS)', () => {
     expect(DEFAULT_SETTINGS.targetMinLease).toBe(6);
-    expect(DEFAULT_SETTINGS.targetMaxLease).toBe(12);
+    expect(DEFAULT_SETTINGS.targetMaxLease).toBe(6);
   });
 
   it('open target (both null) → anything with lease info fits', () => {

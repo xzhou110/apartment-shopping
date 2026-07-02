@@ -31,7 +31,7 @@ export function SettingsModal({
 }: Props): ReactElement {
   const [unit, setUnit] = useState<'mi' | 'km'>(settings.distanceUnit);
   const [minLease, setMinLease] = useState(String(settings.targetMinLease ?? 6));
-  const [maxLease, setMaxLease] = useState(String(settings.targetMaxLease ?? 12));
+  const [maxLease, setMaxLease] = useState(String(settings.targetMaxLease ?? 6));
   const [sheetUrlStr, setSheetUrlStr] = useState(settings.sheetUrl || '');
   // new-anchor draft
   const [newLabel, setNewLabel] = useState('');
@@ -42,7 +42,7 @@ export function SettingsModal({
     if (open) {
       setUnit(settings.distanceUnit);
       setMinLease(String(settings.targetMinLease ?? 6));
-      setMaxLease(String(settings.targetMaxLease ?? 12));
+      setMaxLease(String(settings.targetMaxLease ?? 6));
       setSheetUrlStr(settings.sheetUrl || '');
       setNewLabel('');
       setNewQuery('');
@@ -53,7 +53,7 @@ export function SettingsModal({
     onSave({
       distanceUnit: unit,
       targetMinLease: Number(minLease) || 6,
-      targetMaxLease: Number(maxLease) || 12,
+      targetMaxLease: Number(maxLease) || 6,
       sheetUrl: sheetUrlStr.trim(),
     });
     onToast('Settings applied');
@@ -203,7 +203,7 @@ export function SettingsModal({
         <div className="set-row">
           <div className="l">
             <b>Target lease window (months)</b>
-            <span>Drives the lease-fit flag &amp; the “Lease fits my target” filter (default 6–12)</span>
+            <span>Drives the lease-fit flag &amp; the “Lease fits my target” filter (default 6 mo — set min = max for a single-length goal)</span>
           </div>
           <div className="lease-inputs">
             <input

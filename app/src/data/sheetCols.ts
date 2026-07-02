@@ -67,6 +67,12 @@ export function buildSheetCols(settings: Settings = DEFAULT_SETTINGS): SheetCol[
     ['Pet policy', (a) => a.petPolicy || ''],
     ['Listing type', (a) => a.listingType || ''],
 
+    ['Company / owner', (a) => a.contact?.company || ''],
+    ['Contact person', (a) => a.contact?.name || ''],
+    ['Contact phone', (a) => a.contact?.phone || ''],
+    ['Contact email', (a) => a.contact?.email || ''],
+    ['Contact website', (a) => a.contact?.website || ''],
+
     ['Days on market', (a) => a.daysOnMarket ?? ''],
     ['Market rent', (a) => a.marketRent ?? ''],
     ['Rent/sqft', (a) => pricePerSqft(a) ?? ''],
@@ -85,6 +91,10 @@ export function buildSheetCols(settings: Settings = DEFAULT_SETTINGS): SheetCol[
     ['Other amenities', (a) => (a.amenities || []).join('; ')],
 
     ['Notes', (a) => a.notes || ''],
+    [
+      'Comments',
+      (a) => (a.comments || []).map((c) => `[${c.ts.slice(0, 10)}] ${c.text}`).join(' | '),
+    ],
     ['Listing URL', (a) => a.sourceUrl || ''],
   ];
 }
