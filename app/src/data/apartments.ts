@@ -267,4 +267,74 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a6.webp',
     sourceUrl: 'https://www.zillow.com/apartments/burlingame-ca/imperial-apartments/CkBCvC/',
   },
+  {
+    // a7 — Tradewind Surf Apartments, Foster City. Exact house-level geocode (Nominatim,
+    // 2026-07-01 — "1110, Polynesia Drive, Foster City, 94404"). ✅ Reads LEGIT — a Zillow
+    // "Verified Source" community. No per-unit table was captured (page shows a Studio–2BR
+    // range only) — rent/beds below are USER-PROVIDED (you confirmed $2,300 / 1 bed), not
+    // scraped from a unit row like the others.
+    id: 'a7',
+    status: 'New',
+    title: 'Tradewind Surf Apartments — Foster City',
+    address: '1110 Polynesia Dr, Foster City, CA 94404',
+    neighborhood: '',
+    city: 'Foster City',
+    lat: 37.5589561,
+    lng: -122.2629116,
+
+    beds: 1, // you confirmed
+    baths: 1, // inferred (typical for a 1BR) — not explicitly confirmed, no per-unit table shown
+    sqft: null, // not stated — no per-unit table captured
+    floor: '', // not stated
+
+    rent: 2300, // you confirmed
+    parkingCost: null, // parking not mentioned anywhere in the listing — ask
+    petRent: 50, // "Monthly dog rent $50" / "Monthly cat rent $50"
+    utilitiesIncluded: null, // not stated
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: 1, // Policies: "Lease terms: 1 month" — true month-to-month, most flexible seen yet
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // not stated
+    furnished: false,
+
+    petPolicy: 'Allowed', // Dogs Allowed + Cats Allowed, 2 max each, 45 lb weight limit
+    listingType: 'Property mgmt', // Blvd Residential, "Leasing Agent," Verified Source, (650) 547-8025
+
+    laundry: 'unknown', // not mentioned anywhere (no chip, no unit-feature line)
+    amen: {
+      parking: null, // not mentioned at all
+      gym: true, // "Fitness Center: Gym" under Building Amenities
+    },
+    amenities: ['Fitness center', 'Pool (temporarily closed)', 'Community room', 'Dishwasher', 'Positive credit reporting available'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null,
+    marketRent: 2700, // Est. — Foster City 1BR comp; $2,300 is under market
+
+    expertRating: 4,
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing managed by Blvd Residential (Leasing Agent, ' +
+      '(650) 547-8025), a long-standing pet-friendly community in a quiet Foster City neighborhood near ' +
+      'Highway 101/92, equidistant from SF and Silicon Valley. Fitness center + community room; pool is ' +
+      'temporarily closed. Notable: lease term is stated as 1 MONTH — true month-to-month, the most flexible ' +
+      'term of any listing you\'ve tracked so far, an easy fit for your 6–12 mo window.\n' +
+      'Confirm before signing: (1) UNIT SPECIFICS — the page shows a Studio–2BR range with no per-unit table; ' +
+      'the $2,300 / 1 bed you gave me should be checked against their current "Available units" list (exact ' +
+      'unit, sqft, floor). (2) Laundry type isn\'t stated anywhere — ask if it\'s in-unit, on-site, or none. ' +
+      '(3) Parking isn\'t mentioned at all — ask if it\'s included, assigned, or extra. (4) Pool is temporarily ' +
+      'closed — ask when it reopens if that matters. (5) Pet rent is $50/mo per pet (dogs + cats, up to 2, ' +
+      '45 lb limit) — budget that on top of rent if bringing a pet. (6) Utilities, deposit, and application ' +
+      'fee are not stated — ask for exact move-in costs. (7) Month-to-month often carries a premium over a ' +
+      'signed 12-mo lease — confirm $2,300 is the actual month-to-month rate, not a longer-term rate.',
+    image: 'img/a7.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/foster-city-ca/tradewind-surf-apartments/CqZtYk/',
+  },
 ];
