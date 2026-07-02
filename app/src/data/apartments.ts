@@ -782,4 +782,72 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a13.webp',
     sourceUrl: 'https://www.zillow.com/apartments/daly-city-ca/kent-court/CmPfSY/',
   },
+  {
+    // a14 — Del Medio Garden Apartments, Mountain View (Palo Alto border). Rooftop geocode via
+    // US Census (2026-07-01). ✅ Reads LEGIT — a Zillow "Verified Source" 85-unit community
+    // (Gibraltar Investment Corp). Two 1BR units listed; tracked row = Unit 309A ($2,700, the cheaper).
+    id: 'a14',
+    status: 'New',
+    title: 'Del Medio Garden 1BR — Mountain View',
+    address: '250 Del Medio Ave, Mountain View, CA 94040',
+    neighborhood: '',
+    city: 'Mountain View',
+    lat: 37.408171,
+    lng: -122.112357,
+
+    beds: 1,
+    baths: 1,
+    sqft: 640, // Unit 309A (and 302A) — both 640 sqft
+    floor: '',
+
+    rent: 2700, // Unit 309A, 640 sqft, avail Aug 1 (Unit 302A is $2,750, avail Jul 14 — see notes)
+    parkingCost: null, // carport / covered / lot included
+    petRent: null, // not stated
+    utilitiesIncluded: true, // "Garbage, Hot water, Sewer, Water" included; you still pay gas (heat) + electric (see notes)
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // offers both terms (see min/max)
+    minLeaseMonths: 6, // "Lease terms: One year, Six months" — explicit 6-mo option (a direct fit for your goal)
+    maxLeaseMonths: 12, // …and a 12-mo option
+    availableDate: '2026-08-01', // Unit 309A (Unit 302A is available sooner, Jul 14, at $2,750)
+    furnished: false,
+
+    petPolicy: 'Allowed', // small dogs (1) + large dogs + cats allowed
+    listingType: 'Property mgmt', // Gibraltar Investment Corporation (Leasing Agent), Zillow "Verified Source"
+    contact: { company: 'Gibraltar Investment Corporation', name: 'Leasing Agent', phone: '(650) 420-2749', email: '', website: '' }, // Verified Source; local 650 number
+    comments: [],
+
+    laundry: 'on-site', // "Shared laundry" / "Laundry: Shared" — not in-unit
+    amen: {
+      parking: true, // carport + covered parking + parking lot
+      gym: null, // not mentioned (club house + party room + pool, but no fitness center)
+      balcony: true, // "Patios and balconies" / "Balcony" / "Patio Balcony"
+    },
+    amenities: ['Heated pool', 'Club house', 'Party room', 'Remodeled rec room', 'Garden + lawn + water feature', 'Elevator', 'Bicycle storage', 'Mountain view', 'Ceiling fans', 'Water/sewer/garbage/hot-water included'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null,
+    marketRent: 3000, // Est. — MV/Palo Alto-border 1BR near Google + Caltrain; $2,700 is under market
+
+    expertRating: 4, // strong: EXPLICIT 6-mo lease option + balcony + covered parking + heated pool + prime location (5 min to Google, walk to Caltrain, Los Altos schools) + under market + hot-water/water/sewer/garbage included; held from 5 by shared (not in-unit) laundry, no gym, and a Saturday-only leasing office
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" 85-unit community (Del Medio Garden, run by Gibraltar ' +
+      'Investment Corporation) on the quiet Palo Alto/Mountain View border. Excellent location: walk to Caltrain ' +
+      '+ VTA + San Antonio Shopping Center, 5 min to Google HQ, 15 min to Stanford, Los Altos schools. 🟢 STANDOUT ' +
+      'FITS: explicit SIX-MONTH lease option (direct match for your goal), a private patio/balcony, covered ' +
+      'parking, a heated pool, and under-market rent with water/sewer/garbage/HOT WATER included.\n' +
+      'Confirm before signing: (1) TWO UNITS — Unit 309A tracked here ($2,700, 640 sqft, available Aug 1); ' +
+      'Unit 302A is $2,750 and available sooner (Jul 14). (2) UTILITIES — water/sewer/garbage/hot water included, ' +
+      'but you still pay gas (heat) + electric. (3) Laundry is shared/on-site, NOT in-unit. (4) No gym. ' +
+      '(5) LEASING OFFICE IS ONLY OPEN SATURDAYS (10–3) — plan tours accordingly; (650) 420-2749. ' +
+      '(6) Deposit + application fee not stated — ask move-in costs.',
+    image: 'img/a14.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/mountain-view-ca/del-medio-garden-apartments/CgsndL/',
+  },
 ];
