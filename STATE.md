@@ -7,7 +7,7 @@
 ## Current status
 - **258 tests pass**, `tsc --noEmit` clean, production build clean, live site verified 200 + serves current bundle.
 - Deployed from `main`; local == remote == GitHub HEAD (in sync).
-- **11 real listings seeded (a6–a16)**, each geocoded + scam-screened. (a3/a4/a5 retired 2026-07-07 — no longer available; ids are stable and never renumbered, so gaps are expected.)
+- **12 real listings seeded (a6–a17)**, each geocoded + scam-screened. (a3/a4/a5 retired 2026-07-07 — no longer available; a17 = Verandas, Menlo Park, added 2026-07-07. Ids are stable and never renumbered, so gaps are expected.)
 
 ## Feature set (as shipped)
 - **Capture → compare:** screenshot + link → I extract fields, geocode, append to `data/apartments.ts`. Grid + Compare views, filters, sorts, status pipeline, ratings, Sheets export.

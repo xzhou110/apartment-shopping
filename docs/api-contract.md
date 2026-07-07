@@ -52,7 +52,7 @@
 >   STORE_KEY stays `apt.v2`. (ADR-010.)
 > - **Lease-fit default:** `DEFAULT_SETTINGS.targetMinLease = targetMaxLease = 6` — the §5 `leaseFits`
 >   doc-comment "defaults 6 / 12" is superseded.
-> - **Seed inventory:** 11 listings, ids **a6–a16** (a3/a4/a5 retired 2026-07-07; a1/a2 were earlier placeholders).
+> - **Seed inventory:** 12 listings, ids **a6–a17** (a3/a4/a5 retired 2026-07-07; a1/a2 were earlier placeholders).
 
 This is the **keystone seam** between the two build lanes. The **data/pure-lib lane**
 (`data-engineer`) implements every signature below; the **UI lane** (`frontend-engineer`)
