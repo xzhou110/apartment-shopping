@@ -793,4 +793,78 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a16.webp',
     sourceUrl: 'https://www.zillow.com/apartments/mountain-view-ca/ednamary-apartments/CrHWyv/',
   },
+  {
+    // a17 — Verandas Apartments, Menlo Park. Rooftop geocode via US Census (2026-07-01, 720 Coleman Ave).
+    // Source is apartments.com (not Zillow). NOTE: the primary photo could NOT be fetched — apartments.com
+    // blocks server-side image requests (403, anti-hotlinking), unlike Zillow's static CDN. image left ''
+    // (placeholder) until a fetchable image URL is provided. Tracked row = the "Matches" 1x1 ($2,425).
+    id: 'a17',
+    status: 'New',
+    title: 'Verandas Apartments 1BR — Menlo Park',
+    address: '720 Coleman Ave, Menlo Park, CA 94025',
+    neighborhood: '',
+    city: 'Menlo Park',
+    lat: 37.462043,
+    lng: -122.161948,
+
+    beds: 1,
+    baths: 1,
+    sqft: 600, // 1x1 floor plan (the community spans 600–1,000 sqft across 1–2BR)
+    floor: '',
+
+    rent: 2425, // 1x1, 600 sqft, "Available Now" (community range is $2,425–$3,350 across 1–2BR)
+    parkingCost: null, // a "Parking" fees tab exists but its contents weren't captured — ask (may cost extra)
+    petRent: null, // a "Pets" fees tab exists but wasn't captured — ask
+    utilitiesIncluded: null, // not stated
+    utilitiesEstimate: null,
+
+    deposit: 500, // "$500 Deposit" — stated on the 1x1 floor plan (notably low)
+    appFee: 50, // "Application Fee Per Applicant: $50"; Administrative Fee at move-in = $0 (no admin fee)
+    brokerFee: null,
+
+    leaseTermMonths: null, // offers a range (see min/max)
+    minLeaseMonths: 6, // "6–12 Month Leases" + "Short term lease" — an EXPLICIT 6-mo option, a direct fit for your goal
+    maxLeaseMonths: 12,
+    availableDate: '', // "Available Now"
+    availability: 'now', // 1x1 shows "Available Now"
+    furnished: false,
+
+    petPolicy: 'Unknown', // a Pets fees tab exists but pet rules weren't shown — confirm (building is not labeled pet-friendly in the captured sections)
+    listingType: 'Property mgmt', // managed 34-unit community, Property Manager on Site, (650) 469-8458
+    contact: { company: 'Verandas Apartments', name: '', phone: '(650) 469-8458', email: '', website: '' }, // apartments.com listing; local 650 number + a property website (URL not captured)
+    comments: [],
+
+    laundry: 'in-unit', // "Washer/Dryer" listed under Apartment Features (unit-level); NOTE the community also has shared "Laundry Facilities" — confirm the actual unit has in-unit W/D (see notes)
+    amen: {
+      parking: null, // not shown (parking fees tab not captured)
+      gym: null, // not mentioned (pool + courtyard, but no fitness center)
+      balcony: true, // "Balcony" + "Patio" in Highlights and Model Details
+    },
+    amenities: ['Pool', 'Courtyard', 'Hardwood floors', 'In-unit W/D (confirm)', 'Stainless steel appliances', 'High-speed internet + WiFi', 'Ceiling fans', 'Smoke-free', '$0 admin fee', 'Built 1958 · 34 units'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null,
+    marketRent: 2800, // Est. — Menlo Park 1BR comp (pricey area near Meta/Stanford); $2,425 for a small older unit is under market
+
+    expertRating: 4, // one of your best FITS: prime Menlo Park (near Meta + Stanford + top schools), under-market $2,425, EXPLICIT 6–12 mo + short-term lease, likely in-unit W/D, a balcony/patio, hardwood, pool, $0 admin + low $500 deposit; held from 5 by small 600 sqft, a 1958 building (1 bath), and unconfirmed parking/pets
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — an apartments.com managed community (Verandas; built 1958, 34 units, Property ' +
+      'Manager on Site, (650) 469-8458) in prime Menlo Park near Meta/Facebook, Stanford, and top-rated schools. ' +
+      '🟢 ONE OF YOUR BEST 6-MONTH FITS: the listing explicitly offers "6–12 Month Leases" AND a "Short term ' +
+      'lease" — a direct match, no negotiation needed — at an under-market $2,425 for the area, with a low $500 ' +
+      'deposit, a $50 app fee, and a $0 admin fee. Also has a balcony/patio, hardwood floors, a pool, and likely ' +
+      'in-unit W/D.\n' +
+      'Confirm before signing: (1) LAUNDRY — "Washer/Dryer" is listed as a unit feature (great, in-unit), but the ' +
+      'community ALSO lists shared "Laundry Facilities" — confirm THIS unit actually has in-unit W/D. ' +
+      '(2) PARKING — a Parking fees tab exists but wasn\'t shown; ask if there\'s parking and whether it costs ' +
+      'extra. (3) PETS — a Pets fees tab exists but the policy wasn\'t shown; confirm if pets are allowed. ' +
+      '(4) SIZE/AGE — it\'s a small 600 sqft, 1-bath unit in a 1958 building — charming/value, not luxury. ' +
+      '(5) MOVE-IN SPECIAL applies to 1-YEAR leases (a concession on the 6th month), so a 6-mo lease likely ' +
+      'won\'t get it — ask. (6) 📷 No photo yet — apartments.com blocked the image download; send me a photo URL ' +
+      '(e.g. from Zillow) and I\'ll add it.',
+    image: '', // apartments.com blocked the photo fetch (403) — placeholder shown until a fetchable URL is provided
+    sourceUrl: 'https://www.apartments.com/verandas-apartments-menlo-park-ca/e7kcxrp/',
+  },
 ];
