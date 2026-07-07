@@ -392,6 +392,13 @@ td.worst { background: var(--risk-soft); }
 .find-link-main svg { width: 13px; height: 13px; color: var(--accent); flex: none; }
 .find-link-sub { font-size: 12px; color: var(--ink-3); }
 .find-note { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; margin: 0; }
+/* Criteria line + its copy button (Find modal header) — button pinned top-right, text wraps to its left. */
+.find-crit { display: flex; align-items: flex-start; gap: 10px; }
+.find-crit > span { flex: 1 1 auto; min-width: 0; }
+.crit-copy { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface-2); color: var(--ink-2); font-size: 12px; font-weight: 600; line-height: 1; flex: 0 0 auto; align-self: flex-start; transition: border-color .12s, background .12s, color .12s; }
+.crit-copy:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.crit-copy.is-copied { border-color: var(--good); background: var(--good-soft); color: var(--good); }
+.crit-copy svg { width: 13px; height: 13px; }
 
 /* ---- Settings: anchor list + lease window ---- */
 .set-help { font-size: 12.5px; color: var(--ink-3); line-height: 1.5; margin-bottom: 12px; }

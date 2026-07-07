@@ -14,6 +14,7 @@
  */
 export type AmenityKey =
   | 'parking' // dedicated/garage/assigned parking
+  | 'woodenFloor' // wood / hardwood (or wood-style) flooring
   | 'balcony' // private outdoor space — balcony / patio / deck
   | 'gym'; // on-site fitness
 
