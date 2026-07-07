@@ -3,8 +3,8 @@ import type { ReactElement } from 'react';
 import type { Apartment } from '../types';
 import type { FlagCtx } from '../lib/flags';
 import { AMENITIES } from '../data/amenities';
-import { amenState, money, num, bedsLabel, safeHref, shortDate, leaseSummary } from '../lib/format';
-import { amenCount, pricePerSqft, AMENITY_TOTAL } from '../lib/derive';
+import { amenState, availabilityLabel, money, num, bedsLabel, safeHref, shortDate } from '../lib/format';
+import { amenCount, leaseSummary, pricePerSqft, AMENITY_TOTAL } from '../lib/derive';
 import { distanceToAnchor, formatDistance } from '../lib/distance';
 import { getFlags, signalLevel } from '../lib/flags';
 import { assetUrl, flagIcon, LAUNDRY_LABEL, laundryState, LISTED_BY_LABEL, STATUS_BADGE } from './helpers';
@@ -53,7 +53,9 @@ export function Card({ apt, ctx, anchorLabel, inCompare, onToggleCompare, onOpen
   const ppsf = pricePerSqft(apt);
   const loc = [apt.neighborhood, apt.city].filter(Boolean).join(' · ');
   const listedBy = LISTED_BY_LABEL[apt.listingType] || '';
-  const availStr = shortDate(apt.availableDate);
+  const availStr = availabilityLabel(apt);
+  // Color the availability value: "Now" reads good, "Unavailable — ask" reads amber; a date stays neutral.
+  const availCls = availStr === 'Now' ? ' term-good' : availStr.startsWith('Unavailable') ? ' term-warn' : '';
   const leaseStr = leaseSummary(apt);
   const lState = laundryState(apt.laundry);
   const lMark = lState === 'yes' ? '✓' : lState === 'no' ? '✕' : '?';
@@ -137,8 +139,10 @@ export function Card({ apt, ctx, anchorLabel, inCompare, onToggleCompare, onOpen
               </span>
             )}
             {availStr && (
-              <span className="term">
-                <span className="term-l">Available</span> {availStr}
+              <span className={`term${availCls}`}>
+                {/* "Available Unavailable — ask" reads contradictory — that state stands alone. */}
+                {!availStr.startsWith('Unavailable') && <span className="term-l">Available</span>}{' '}
+                {availStr}
               </span>
             )}
             {leaseStr && (

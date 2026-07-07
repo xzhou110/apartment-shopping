@@ -14,11 +14,19 @@
  */
 export type AmenityKey =
   | 'parking' // dedicated/garage/assigned parking
-  | 'gym' // on-site fitness
-  | 'balcony'; // private outdoor space — balcony / patio / deck
+  | 'balcony' // private outdoor space — balcony / patio / deck
+  | 'gym'; // on-site fitness
 
 /** Laundry as a first-class field: in-unit and on-site are meaningfully different (and "none"). */
 export type LaundryType = 'in-unit' | 'on-site' | 'none' | 'unknown';
+
+/**
+ * Coarse availability status, used when the listing states no exact date. Rolling-availability
+ * communities routinely show "Currently unavailable" (= call and ask what's open) while private
+ * listings say "Available now" — meaningfully different, and neither has a date. When
+ * `availableDate` IS set, it wins and this field is ignored for display.
+ */
+export type Availability = 'now' | 'unavailable' | 'unknown';
 
 /** Tri-state per amenity: true = has · false = confirmed absent · null/undefined = unknown. */
 export type Amen = { [K in AmenityKey]?: boolean | null };
@@ -97,7 +105,8 @@ export interface Apartment {
   leaseTermMonths: number | null; // the offered/desired term for THIS listing
   minLeaseMonths: number | null; // shortest term the landlord will sign
   maxLeaseMonths: number | null; // longest term offered
-  availableDate: string; // ISO date the unit is available ('' = unknown)
+  availableDate: string; // ISO date the unit is available ('' = none stated → see availability)
+  availability: Availability; // now / unavailable / unknown — display fallback when no date
   furnished: boolean | null; // null = unknown (first-class: matters for short-term)
 
   // policy / source

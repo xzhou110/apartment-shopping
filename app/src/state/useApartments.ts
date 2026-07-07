@@ -80,6 +80,7 @@ const DEFAULT_APARTMENT: Apartment = {
   minLeaseMonths: null,
   maxLeaseMonths: null,
   availableDate: '',
+  availability: 'unknown',
   furnished: null,
   petPolicy: 'Unknown',
   listingType: 'Unknown',
@@ -123,27 +124,45 @@ interface RawPersist {
 }
 
 /**
+ * A GENUINELY user-added listing has a timestamp id (`'a' + Date.now()`, ≥13 digits); seed ids are
+ * short (`a3`…`a16`). mergeWithSeed uses this to resurrect a saved listing that's NOT in the current
+ * seed ONLY when it looks user-added — so RETIRING a listing from data/apartments.ts makes it vanish
+ * cleanly, instead of lingering as a ghost "user-added" card (its leftover rating/status overlay in
+ * localStorage would otherwise be mistaken for an in-app addition). This lets me delete seed listings
+ * anytime WITHOUT bumping STORE_KEY — a bump would wipe every one of the user's ratings/statuses/
+ * comments/removals. (Supersedes the old "bump STORE_KEY when you delete a seed listing" workaround.)
+ */
+export function looksUserAdded(id: string | undefined): boolean {
+  return !!id && /^a\d{5,}$/.test(id);
+}
+
+/**
  * The seed (data/apartments.ts) is authoritative for the listing SET + DATA — so listings I add or
  * update there (from your screenshots) always show up. localStorage only overlays YOUR in-app state
  * (rating + status incl. "Gone", and your comments), keeps listings you added in-app, and remembers
  * deletions. (Editing a seed listing's other fields — including owner/contact — in the form isn't
  * persisted; tell me and I'll update the data file, which is the source of truth.)
+ * `seed` is injectable for tests; defaults to the real APARTMENTS.
  */
-function mergeWithSeed(saved: Partial<Apartment>[], removed: string[]): Apartment[] {
+export function mergeWithSeed(
+  saved: Partial<Apartment>[],
+  removed: string[],
+  seed: Apartment[] = APARTMENTS,
+): Apartment[] {
   const removedSet = new Set(removed);
   const savedById = new Map(saved.filter((a) => a.id).map((a) => [a.id as string, a]));
-  const seedIds = new Set(APARTMENTS.map((a) => a.id));
   const out: Apartment[] = [];
   // User-added listings FIRST, preserving saved order (addApartment prepends → newest first), so a
   // freshly added listing stays at the top of the default "Added" view after a reload (review M3).
+  // Gate on looksUserAdded so a retired-seed remnant (short id) is NOT mistaken for an addition.
   for (const s of saved) {
-    if (s.id && !seedIds.has(s.id) && !removedSet.has(s.id)) out.push(hydrateApartment(s));
+    if (looksUserAdded(s.id) && !removedSet.has(s.id as string)) out.push(hydrateApartment(s));
   }
   // Then the authoritative seed listings, with the user's rating/status overlay.
-  for (const seed of APARTMENTS) {
-    if (removedSet.has(seed.id)) continue;
-    const base = hydrateApartment(seed);
-    const s = savedById.get(seed.id);
+  for (const seedApt of seed) {
+    if (removedSet.has(seedApt.id)) continue;
+    const base = hydrateApartment(seedApt);
+    const s = savedById.get(seedApt.id);
     out.push(
       s
         ? {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { ReactElement } from 'react';
-import type { Amen, Apartment, LaundryType, ListingType, PetPolicy, Status } from '../types';
+import type { Amen, Apartment, Availability, LaundryType, ListingType, PetPolicy, Status } from '../types';
 import { AMENITIES } from '../data/amenities';
 import { Modal } from './Modal';
 import { IconClose } from './icons';
@@ -50,6 +50,7 @@ interface Draft {
   minLeaseMonths: string;
   maxLeaseMonths: string;
   availableDate: string;
+  availability: Availability;
   furnished: '' | 'Yes' | 'No';
   petPolicy: PetPolicy;
   listingType: ListingType;
@@ -96,6 +97,7 @@ function emptyDraft(): Draft {
     minLeaseMonths: '',
     maxLeaseMonths: '',
     availableDate: '',
+    availability: 'unknown',
     furnished: '',
     petPolicy: 'Unknown',
     listingType: 'Unknown',
@@ -150,6 +152,7 @@ function aptToDraft(a: Apartment): Draft {
     minLeaseMonths: s(a.minLeaseMonths),
     maxLeaseMonths: s(a.maxLeaseMonths),
     availableDate: a.availableDate,
+    availability: a.availability || 'unknown',
     furnished: triStr(a.furnished),
     petPolicy: a.petPolicy,
     listingType: a.listingType,
@@ -214,6 +217,7 @@ function draftToApt(d: Draft, existing: Apartment | null): Apartment {
     minLeaseMonths: num(d.minLeaseMonths),
     maxLeaseMonths: num(d.maxLeaseMonths),
     availableDate: d.availableDate.trim(),
+    availability: d.availability || 'unknown',
     furnished: triBool(d.furnished),
     petPolicy: d.petPolicy || 'Unknown',
     listingType: d.listingType || 'Unknown',
@@ -355,6 +359,16 @@ export function ApartmentForm({ apt, onClose, onSave }: Props): ReactElement {
           {txt('minLeaseMonths', 'Min lease (months)', 'number', false, true)}
           {txt('maxLeaseMonths', 'Max lease (months)', 'number', false, true)}
           {txt('availableDate', 'Available date', 'date', false, true)}
+          <div className="field">
+            <label>
+              Availability <span className="opt">— when no exact date; a date wins</span>
+            </label>
+            <select value={draft.availability} onChange={(e) => set('availability', e.target.value as Availability)}>
+              <option value="unknown">? Unknown</option>
+              <option value="now">Available now</option>
+              <option value="unavailable">Currently unavailable</option>
+            </select>
+          </div>
           {tri('furnished', 'Furnished')}
           <div className="field">
             <label>Pet policy</label>

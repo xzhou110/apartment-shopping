@@ -82,6 +82,23 @@ describe('warn rules', () => {
   it('available date in the future does NOT fire', () => {
     expect(has(makeApt({ availableDate: '2026-08-01' }), ctx(), 'available date has passed')).toBe(false);
   });
+  it("availability 'unavailable' (rolling community) → warn to call and ask", () => {
+    expect(has(makeApt({ availability: 'unavailable' }), ctx(), 'currently unavailable')).toBe(true);
+  });
+  it("availability 'now' / 'unknown' do NOT fire the unavailable warn", () => {
+    expect(has(makeApt({ availability: 'now' }), ctx(), 'currently unavailable')).toBe(false);
+    expect(has(makeApt({ availability: 'unknown' }), ctx(), 'currently unavailable')).toBe(false);
+  });
+  it('a stated date suppresses the unavailable warn (the date wins)', () => {
+    expect(
+      has(makeApt({ availability: 'unavailable', availableDate: '2026-08-01' }), ctx(), 'currently unavailable'),
+    ).toBe(false);
+  });
+  it('a MALFORMED date does not suppress the warn (same validity predicate as the label)', () => {
+    expect(
+      has(makeApt({ availability: 'unavailable', availableDate: '2026-8-1' }), ctx(), 'currently unavailable'),
+    ).toBe(true);
+  });
 });
 
 describe('warn: stated lease term at/above target max (RANGE goal only)', () => {
@@ -112,8 +129,8 @@ describe('warn: stated lease term at/above target max (RANGE goal only)', () => 
 
 // ---- info -----------------------------------------------------------------
 describe('info rules', () => {
-  it('unfurnished for short-term (target max ≤ 12)', () => {
-    expect(has(makeApt({ furnished: false }), ctx(), 'extra setup cost')).toBe(true);
+  it('unfurnished info flag was removed (2026-07-07, user brings own furniture)', () => {
+    expect(has(makeApt({ furnished: false }), ctx(), 'extra setup cost')).toBe(false);
   });
   it('broker fee present', () => {
     expect(has(makeApt({ brokerFee: 1200 }), ctx(), 'Broker fee')).toBe(true);
@@ -179,7 +196,7 @@ describe('good rule: month-to-month is a green flag', () => {
 });
 
 // ---- order + signalLevel --------------------------------------------------
-describe('flag order: risk pushed before warn/info/good', () => {
+describe('flag order: scam first, then the lease-term flag, then the rest', () => {
   it('risk appears first when both risk and warn fire', () => {
     const apt = makeApt({
       minLeaseMonths: 18, // risk: can't fit
@@ -188,6 +205,33 @@ describe('flag order: risk pushed before warn/info/good', () => {
     });
     const f = getFlags(apt, ctx());
     expect(f[0].lvl).toBe('risk');
+  });
+  it('the lease flag leads even other warns (lease not stated + no parking)', () => {
+    const apt = makeApt({
+      leaseTermMonths: null,
+      minLeaseMonths: null,
+      maxLeaseMonths: null, // warn: lease term not stated
+      amen: { parking: false }, // warn: no parking
+    });
+    const f = getFlags(apt, ctx());
+    expect(f[0].t).toContain('Lease term not stated');
+  });
+  it('the GREEN month-to-month flag leads other warns too (lease is the #1 factor)', () => {
+    const apt = makeApt({
+      minLeaseMonths: 1,
+      maxLeaseMonths: null,
+      leaseTermMonths: null, // good: month-to-month
+      laundry: 'none', // warn: no laundry
+    });
+    const f = getFlags(apt, ctx());
+    expect(f[0].lvl).toBe('good');
+    expect(f[0].t).toContain('Month-to-month');
+  });
+  it('scam stays absolutely first, ahead of the lease flag', () => {
+    const apt = makeApt({ scamRisk: true, minLeaseMonths: 18, maxLeaseMonths: 24 });
+    const f = getFlags(apt, ctx());
+    expect(f[0].t.toLowerCase()).toContain('scam');
+    expect(f[1].t).toContain('Lease');
   });
 });
 

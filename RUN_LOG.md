@@ -75,5 +75,15 @@ Append before and after every spawn. Times are local (PT).
 - Validation each step: `tsc` clean, **228 tests** pass, prod build clean, browser-verified (flags/colors/contact/comments/migration/no-overflow), live site 200 + serves current bundle. Pushed to `main`; deploy succeeded.
 - **Docs pass (this entry):** refreshed README (live status, 6-mo, contact/comments, flags, amenity count), STATE.md (current), DECISIONS ADR-006/007/008, api-contract post-launch addendum.
 
+---
+
+### 2026-07-07 — Availability + lease labels + flag order + retire a3/a4/a5 (Fable 5 → Opus 4.8, direct with user)
+- **Availability status** (`availability: 'now'|'unavailable'|'unknown'` behind `availableDate`): card/detail/compare/export show a real date when stated, else "Now" (green) / "Unavailable — ask" (amber) + a new amber warn for rolling-availability communities. Populated all listings. See ADR-009.
+- **Friendly lease labels** (`leaseSummary` moved format→derive w/ shared `isMonthToMonth`): Month-to-month / Flexible (1–N mo) / Short-term (N mo) / N mo / N–M mo. Card/detail/compare/export consume it.
+- **Flag order:** scam first → **lease-term flag (any level) leads the rest** (lease fit is the #1 factor; cards preview only 3 flags). **Removed** the "Unfurnished — extra setup" info flag (user brings own furniture). Amenity order → parking/balcony/gym.
+- **Retired a3/a4/a5** (no longer available): deleted from the seed + their images. Hardened `mergeWithSeed` with `looksUserAdded` so retiring a seed listing no longer ghost-resurrects it from stale localStorage — enabling seed cleanups WITHOUT a `STORE_KEY` bump (which would wipe the user's ratings/status/comments). New `state/useApartments.test.ts`. See ADR-010.
+- **Review:** ran a 6-agent adversarial workflow on the availability diff; fixed 2 confirmed low-sev issues (label/flag date-validity mismatch; "Available: Unavailable — ask" contradiction → detail/compare row relabeled "Availability").
+- **Validation:** `tsc` clean, **258 tests** pass (+30 across derive/flags/format/useApartments), prod build clean. Browser-verified in the preview: reload with a3/a4/a5 still in localStorage → they vanish cleanly (no ghost), 11 of 11 listings show, no console errors, both themes. Pushed to `main` → auto-deploy; live verified.
+
 
 

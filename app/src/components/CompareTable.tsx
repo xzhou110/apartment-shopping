@@ -3,8 +3,8 @@ import type { ReactElement, ReactNode } from 'react';
 import type { Apartment, Settings } from '../types';
 import type { Coord } from '../lib/distance';
 import { AMENITIES } from '../data/amenities';
-import { amenState, money, num, bedsLabel, safeHref } from '../lib/format';
-import { amenCount, pricePerSqft, leaseFits, AMENITY_TOTAL } from '../lib/derive';
+import { amenState, availabilityLabel, money, num, bedsLabel, safeHref } from '../lib/format';
+import { amenCount, pricePerSqft, leaseFits, leaseSummary, AMENITY_TOTAL } from '../lib/derive';
 import { distanceToAnchor, formatDistance } from '../lib/distance';
 import { getFlags } from '../lib/flags';
 import { assetUrl, LAUNDRY_LABEL, STATUS_BADGE } from './helpers';
@@ -90,8 +90,8 @@ function buildRows(settings: Settings, primaryAnchor: Coord | null, anchorLabel:
     ['App fee', (a) => money(a.appFee), { numv: (a) => a.appFee, dir: 'min' }],
     ['Broker fee', (a) => money(a.brokerFee), { numv: (a) => a.brokerFee, dir: 'min' }],
     ['Lease fit', (a) => leaseFitCell(a, settings), {}],
-    ['Lease term', (a) => (a.leaseTermMonths != null ? `${a.leaseTermMonths} mo` : '—'), {}],
-    ['Available', (a) => a.availableDate || '—', {}],
+    ['Lease term', (a) => leaseSummary(a) || '—', {}],
+    ['Availability', (a) => availabilityLabel(a) || '—', {}],
     ['Furnished', (a) => triCell(a.furnished), {}],
     ['Pet policy', (a) => a.petPolicy || '—', {}],
     ['Listing type', (a) => a.listingType || '—', {}],

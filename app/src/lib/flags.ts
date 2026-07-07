@@ -1,8 +1,8 @@
 import type { Apartment, Flag, SignalLevel, Settings } from '../types';
 import type { Coord } from './distance';
 import { distanceToAnchor } from './distance';
-import { leaseFits } from './derive';
-import { amenState, money } from './format';
+import { isMonthToMonth, leaseFits } from './derive';
+import { amenState, money, shortDate } from './format';
 
 /** Context the flag engine needs beyond the apartment itself. Contract §6. */
 export interface FlagCtx {
@@ -28,19 +28,12 @@ function parseDate(iso: string): Date | null {
 }
 
 /**
- * Month-to-month: shortest term is 1 month with no fixed longer commitment (max/term open or also 1).
- * A range like min 1 / max 12 is NOT month-to-month — it has a 12-mo ceiling.
- */
-function isMonthToMonth(apt: Apartment): boolean {
-  const lo = apt.minLeaseMonths ?? apt.leaseTermMonths;
-  const hiFixed = apt.maxLeaseMonths ?? apt.leaseTermMonths;
-  return lo === 1 && (hiFixed == null || hiFixed === 1);
-}
-
-/**
  * Risk / warn / info / good flags for one apartment. PURE: no DOM, no Date.now()
- * except via the injectable ctx.today. Order: risk first, then warn, info, good
- * (push in this order) so the card's first-3 preview shows the most severe first.
+ * except via the injectable ctx.today. Order (2026-07-07, user): scam risk stays absolutely
+ * first (the "don't touch this" override), then the LEASE-TERM flag — whatever its level
+ * (risk / warn / good) — because lease fit is the user's #1 decision factor, then the
+ * remaining warns, infos, goods. The card previews only the first 3 flags, so this order
+ * guarantees the lease verdict is always visible.
  */
 export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
   const f: Flag[] = [];
@@ -51,12 +44,13 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
   // "6 mo" for a single-point goal, "6–12 mo" for a range — used in the lease flag copy.
   const goalLabel = tMin === tMax ? `${tMin} mo` : `${tMin}–${tMax} mo`;
 
-  // ---- risk -------------------------------------------------------------
+  // ---- scam (absolute first) ---------------------------------------------
   // Possible scam — pushed FIRST so it's the top (red) flag on the card. Set by hand
   // (apt.scamRisk) when the listing shows scam signals; the specifics live in notes.
   if (apt.scamRisk)
     f.push({ lvl: 'risk', t: 'Possible scam — verify the listing before you contact or pay.' });
 
+  // ---- lease term (always the first non-scam flag, whatever its level) ----
   // Lease window can't be met — only fires on a definite false, never null.
   if (leaseFits(apt, settings) === false)
     f.push({
@@ -66,7 +60,6 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
         : `Lease window doesn't fit your ${goalLabel} goal.`,
     });
 
-  // ---- warn -------------------------------------------------------------
   // No lease term stated at all (leaseFits can't decide → null). You can't tell whether it fits your
   // goal until you ask, so surface an amber caveat rather than silently passing.
   if (leaseFits(apt, settings) === null)
@@ -86,6 +79,16 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
       t: `Lease is a stated ${apt.leaseTermMonths} mo term — at/above your ${tMax}-mo max; confirm they'll flex shorter.`,
     });
 
+  // Month-to-month = the most flexible term there is (leave on ~30 days' notice), so it always
+  // accommodates a short goal → a green highlight, shown up here (not with the other goods)
+  // because it IS the lease verdict for such listings.
+  if (isMonthToMonth(apt))
+    f.push({
+      lvl: 'good',
+      t: `Month-to-month lease — maximum flexibility, easily fits your ${goalLabel} goal.`,
+    });
+
+  // ---- warn -------------------------------------------------------------
   if (apt.laundry === 'none')
     f.push({ lvl: 'warn', t: 'No laundry — none in-unit or on-site.' });
 
@@ -113,13 +116,19 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
       });
   }
 
-  // ---- info -------------------------------------------------------------
-  if (apt.furnished === false && (settings.targetMaxLease ?? 0) <= 12)
+  // Rolling-availability communities list units as "Currently unavailable" — worth a caveat, not a
+  // dealbreaker: the fix is one phone call. Only when no exact date is stated (a date wins) — and
+  // "stated" means a VALID date, the same shortDate() predicate availabilityLabel uses, so the
+  // amber label and this warn can never disagree on a malformed date string.
+  if (apt.availability === 'unavailable' && !shortDate(apt.availableDate))
     f.push({
-      lvl: 'info',
-      t: 'Unfurnished — extra setup cost for a short stay.',
+      lvl: 'warn',
+      t: "Listed unit shows currently unavailable — call to ask what's actually open.",
     });
 
+  // ---- info -------------------------------------------------------------
+  // (The "Unfurnished — extra setup cost" info flag was removed 2026-07-07: the user brings
+  // their own furniture, so it was pure noise. The furnished field/filter itself stays.)
   if (apt.brokerFee != null && apt.brokerFee > 0)
     f.push({
       lvl: 'info',
@@ -149,15 +158,6 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
     });
 
   // ---- good -------------------------------------------------------------
-  // Month-to-month = the most flexible term there is (leave on ~30 days' notice), so it always
-  // accommodates a short goal → a green highlight. Detected as a 1-mo shortest term with no fixed
-  // longer commitment.
-  if (isMonthToMonth(apt))
-    f.push({
-      lvl: 'good',
-      t: `Month-to-month lease — maximum flexibility, easily fits your ${goalLabel} goal.`,
-    });
-
   if (
     apt.laundry === 'in-unit' &&
     amenState(apt, 'parking') === 'yes' &&

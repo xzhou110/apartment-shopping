@@ -20,9 +20,11 @@ npm run dev        # → http://localhost:5173
 Other commands (from `app/`): `npm run build` (type-check + production bundle), `npm run preview`,
 `npm test` (pure-logic unit tests).
 
-> Data persists in your browser's localStorage (your in-app edits: ratings, status, listings you add).
-> The committed seed lives in `app/src/data/apartments.ts` and is the source of truth I edit when you
-> send screenshots.
+> Data persists in your browser's localStorage (your in-app edits: ratings, status, comments, deletions,
+> and listings you add). Clicking **Remove** on a listing keeps it gone in your browser — you don't need a
+> code change for your own view. The committed seed in `app/src/data/apartments.ts` is the source of truth I
+> edit when you send screenshots; retiring a seed listing there is safe and won't wipe or ghost your local
+> state (see DECISIONS ADR-010).
 
 ## How you'll use it
 1. **Add a listing** — paste me a listing screenshot (+ the URL). I extract rent, beds/baths/sqft, lease
@@ -71,9 +73,14 @@ address (+ geocoded lat/lng) · amenities · your ★ / my ★ · status · phot
 **Tracked, not computed:** cost fields are shown as plain values for your own comparison — there's no
 "total cost"/amortization engine (you asked to keep it simple). Cost ranking is by base **rent**.
 
-**Amenities** (tri-state ✓ / ✕ / **?**): **parking** and **on-site gym** are the two tracked pills (trimmed
-from a longer list on 2026-06-30 to what matters at a glance); **laundry** is its own field (in-unit / on-site
-/ none), and any other perks a listing mentions live in free-text "other amenities".
+**Amenities** (tri-state ✓ / ✕ / **?**): **parking**, **balcony/patio**, and **on-site gym** are the tracked
+pills, in that order after the laundry pill; **laundry** is its own field (in-unit / on-site / none), and any
+other perks a listing mentions live in free-text "other amenities".
+
+**Availability** (2026-07-07): each listing shows a real move-in **date** when the listing states one; otherwise
+a status — **"Now"** (green) or **"Unavailable — ask"** (amber, for rolling-availability communities that list
+units as "currently unavailable", plus a caveat flag to call and ask what's actually open). The **lease term**
+shows a friendly label: *Month-to-month*, *Flexible (1–N mo)*, *Short-term (N mo)*, *N mo*, or *N–M mo*.
 
 ## Project layout
 ```

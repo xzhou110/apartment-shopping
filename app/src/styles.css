@@ -380,6 +380,9 @@ td.worst { background: var(--risk-soft); }
 .terms-row { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink); }
 .terms-row .term { white-space: nowrap; }
 .terms-row .term-l { color: var(--ink-3); font-weight: 600; }
+/* Availability value coloring ("Now" good / "Unavailable" amber) — .term-l keeps its muted color. */
+.terms-row .term-good { color: var(--good); font-weight: 600; }
+.terms-row .term-warn { color: var(--warn); font-weight: 600; }
 
 /* ---- Find listings launcher (modal) ---- */
 .find-links { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }

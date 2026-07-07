@@ -38,6 +38,42 @@ export function leaseFits(apt: Apartment, settings: Settings): boolean | null {
   return (lo ?? 0) <= tMax && (hi ?? Infinity) >= tMin;
 }
 
+/**
+ * Month-to-month: shortest term is 1 month with no fixed longer commitment (max/term open or also 1).
+ * A range like min 1 / max 12 is NOT month-to-month — it has a 12-mo ceiling (it OFFERS monthly
+ * billing, rendered as "Flexible" by leaseSummary). Single source of truth — flags.ts (the green
+ * flag) and leaseSummary (the card label) both key off this.
+ */
+export function isMonthToMonth(apt: Apartment): boolean {
+  const lo = apt.minLeaseMonths ?? apt.leaseTermMonths;
+  const hiFixed = apt.maxLeaseMonths ?? apt.leaseTermMonths;
+  return lo === 1 && (hiFixed == null || hiFixed === 1);
+}
+
+/**
+ * Friendly lease-term label from a listing's term/min/max — the card/detail/compare/export value.
+ * Consolidated vocabulary (2026-07-06):
+ *   "Month-to-month"      — open-ended 1-mo commitment (isMonthToMonth)
+ *   "Flexible (1–N mo)"   — offers monthly AND fixed terms up to N (min 1 with a ceiling)
+ *   "Short-term (N mo)"   — a fixed term under 6 months
+ *   "N mo"                — one fixed term (exact term, or min === max)
+ *   "N–M mo"              — a range of fixed terms
+ *   "N+ mo" / "≤N mo"     — only one bound known
+ *   ''                    — nothing known (row hides; the amber "not stated" flag covers it)
+ */
+export function leaseSummary(apt: Apartment): string {
+  if (isMonthToMonth(apt)) return 'Month-to-month';
+  const t = apt.leaseTermMonths;
+  if (t != null) return t < 6 ? `Short-term (${t} mo)` : `${t} mo`;
+  const lo = apt.minLeaseMonths;
+  const hi = apt.maxLeaseMonths;
+  if (lo === 1 && hi != null) return `Flexible (1–${hi} mo)`;
+  if (lo != null && hi != null) return lo === hi ? `${lo} mo` : `${lo}–${hi} mo`;
+  if (lo != null) return `${lo}+ mo`;
+  if (hi != null) return `≤${hi} mo`;
+  return '';
+}
+
 /** Total amenities in the "X/N" tally: the tracked tri-state amenities PLUS the laundry field. */
 export const AMENITY_TOTAL = AMENITIES.length + 1;
 

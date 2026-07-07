@@ -32,6 +32,7 @@ export function makeApt(overrides: Partial<Apartment> = {}): Apartment {
     minLeaseMonths: 6,
     maxLeaseMonths: 12,
     availableDate: '',
+    availability: 'unknown',
     furnished: null,
     petPolicy: 'Unknown',
     listingType: 'Unknown',

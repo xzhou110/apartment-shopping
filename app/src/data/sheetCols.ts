@@ -1,7 +1,7 @@
-import type { LaundryType, SheetCol, Settings } from '../types';
+import type { Availability, LaundryType, SheetCol, Settings } from '../types';
 import { DEFAULT_SETTINGS } from '../types';
 import { AMENITIES } from './amenities';
-import { pricePerSqft } from '../lib/derive';
+import { leaseSummary, pricePerSqft } from '../lib/derive';
 import { amenState } from '../lib/format';
 
 /** Concise spreadsheet cell for laundry (kept here so the data layer stays UI-free). */
@@ -10,6 +10,13 @@ const LAUNDRY_CELL: Record<LaundryType, string> = {
   'on-site': 'On-site',
   none: 'None',
   unknown: '?',
+};
+
+/** Availability status cell, used when no exact date is stated (the ISO date wins). */
+const AVAIL_CELL: Record<Availability, string> = {
+  now: 'Now',
+  unavailable: 'Unavailable',
+  unknown: '',
 };
 
 /**
@@ -55,10 +62,11 @@ export function buildSheetCols(settings: Settings = DEFAULT_SETTINGS): SheetCol[
     ['App fee', (a) => a.appFee ?? ''],
     ['Broker fee', (a) => a.brokerFee ?? ''],
 
-    ['Lease term', (a) => a.leaseTermMonths ?? ''],
+    // Friendly label ("Month-to-month", "6–12 mo") — the raw numbers stay in Min/Max lease.
+    ['Lease term', (a) => leaseSummary(a)],
     ['Min lease', (a) => a.minLeaseMonths ?? ''],
     ['Max lease', (a) => a.maxLeaseMonths ?? ''],
-    ['Available', (a) => a.availableDate || ''],
+    ['Available', (a) => a.availableDate || AVAIL_CELL[a.availability] || ''],
     [
       'Furnished',
       (a) => (a.furnished === true ? 'Yes' : a.furnished === false ? 'No' : ''),

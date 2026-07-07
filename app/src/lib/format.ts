@@ -60,16 +60,16 @@ export function shortDate(iso: string | null | undefined): string {
 }
 
 /**
- * Compact lease-term label from a listing's term/min/max. '' when nothing is known.
- * Prefers an exact term; else a min–max range; else an open-ended bound.
+ * Display label for WHEN the unit is available. An exact `availableDate` wins (formatted via
+ * shortDate); otherwise the coarse `availability` status: 'now' → "Now", 'unavailable' →
+ * "Unavailable — ask" (rolling communities: call to hear what's actually open). '' when unknown
+ * (the row hides). (leaseSummary — the term label — lives in lib/derive with the lease logic.)
  */
-export function leaseSummary(apt: Apartment): string {
-  if (apt.leaseTermMonths != null) return `${apt.leaseTermMonths} mo`;
-  const lo = apt.minLeaseMonths;
-  const hi = apt.maxLeaseMonths;
-  if (lo != null && hi != null) return lo === hi ? `${lo} mo` : `${lo}–${hi} mo`;
-  if (lo != null) return `${lo}+ mo`;
-  if (hi != null) return `≤${hi} mo`;
+export function availabilityLabel(apt: Apartment): string {
+  const d = shortDate(apt.availableDate);
+  if (d) return d;
+  if (apt.availability === 'now') return 'Now';
+  if (apt.availability === 'unavailable') return 'Unavailable — ask';
   return '';
 }
 

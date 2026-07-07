@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { money, num, amenState, yn, stars, bedsLabel, safeHref, telHref, mailtoHref, siteHref, shortDate, leaseSummary } from './format';
+import { money, num, amenState, availabilityLabel, yn, stars, bedsLabel, safeHref, telHref, mailtoHref, siteHref, shortDate } from './format';
 import { makeApt } from './_fixtures';
 import type { AmenityKey } from '../types';
 
@@ -119,12 +119,16 @@ describe('shortDate', () => {
     expect(shortDate('2026-01-01T00:00:00Z')).toBe('Jan 1, 2026'));
 });
 
-describe('leaseSummary', () => {
-  it('exact term wins', () => expect(leaseSummary(makeApt({ leaseTermMonths: 9 }))).toBe('9 mo'));
-  it('min–max range', () =>
-    expect(leaseSummary(makeApt({ leaseTermMonths: null, minLeaseMonths: 6, maxLeaseMonths: 12 }))).toBe('6–12 mo'));
-  it('min only → open-ended', () =>
-    expect(leaseSummary(makeApt({ leaseTermMonths: null, minLeaseMonths: 6, maxLeaseMonths: null }))).toBe('6+ mo'));
-  it('nothing known → ""', () =>
-    expect(leaseSummary(makeApt({ leaseTermMonths: null, minLeaseMonths: null, maxLeaseMonths: null }))).toBe(''));
+describe('availabilityLabel — exact date wins over the coarse status', () => {
+  it('formats a stated date', () =>
+    expect(availabilityLabel(makeApt({ availableDate: '2026-08-01' }))).toBe('Aug 1, 2026'));
+  it('date wins even when the status disagrees', () =>
+    expect(availabilityLabel(makeApt({ availableDate: '2026-08-01', availability: 'unavailable' }))).toBe(
+      'Aug 1, 2026',
+    ));
+  it("'now' → Now", () => expect(availabilityLabel(makeApt({ availability: 'now' }))).toBe('Now'));
+  it("'unavailable' → Unavailable — ask", () =>
+    expect(availabilityLabel(makeApt({ availability: 'unavailable' }))).toBe('Unavailable — ask'));
+  it("'unknown' with no date → '' (row hides)", () =>
+    expect(availabilityLabel(makeApt({ availability: 'unknown', availableDate: '' }))).toBe(''));
 });

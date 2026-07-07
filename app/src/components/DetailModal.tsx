@@ -3,8 +3,8 @@ import { useState } from 'react';
 import type { Apartment, Settings } from '../types';
 import type { Coord } from '../lib/distance';
 import { AMENITIES } from '../data/amenities';
-import { amenState, money, num, bedsLabel, safeHref, telHref, mailtoHref, siteHref } from '../lib/format';
-import { pricePerSqft, leaseFits } from '../lib/derive';
+import { amenState, availabilityLabel, money, num, bedsLabel, safeHref, telHref, mailtoHref, siteHref } from '../lib/format';
+import { pricePerSqft, leaseFits, leaseSummary } from '../lib/derive';
 import { distanceToAnchor, formatDistance } from '../lib/distance';
 import { getFlags } from '../lib/flags';
 import { Modal } from './Modal';
@@ -247,10 +247,11 @@ export function DetailModal({
               <h4>Lease &amp; policy</h4>
               <div className="det-grid">
                 <Field label="Lease fit">{leaseFitNode(apt, settings)}</Field>
-                <Field label="Lease term">{apt.leaseTermMonths != null ? `${apt.leaseTermMonths} mo` : ''}</Field>
+                <Field label="Lease term">{leaseSummary(apt)}</Field>
                 <Field label="Min lease">{apt.minLeaseMonths != null ? `${apt.minLeaseMonths} mo` : ''}</Field>
                 <Field label="Max lease">{apt.maxLeaseMonths != null ? `${apt.maxLeaseMonths} mo` : ''}</Field>
-                <Field label="Available">{apt.availableDate}</Field>
+                {/* "Availability", not "Available" — the value can be "Unavailable — ask". */}
+                <Field label="Availability">{availabilityLabel(apt)}</Field>
                 <Field label="Furnished">{triNode(apt.furnished)}</Field>
                 <Field label="Pet policy">{apt.petPolicy}</Field>
                 <Field label="Listed by">{LISTED_BY_LABEL[apt.listingType] || apt.listingType}</Field>
