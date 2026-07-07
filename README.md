@@ -44,7 +44,7 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
    (confirm before you commit), and a true **month-to-month** listing reads **green** (maximum flexibility).
    Other flags: no laundry, over/under market, utilities not included, available date passed, broker fee, far
    from your anchor. A colored top border flags overall risk (red) / caution (amber) / good (green). Your
-   latest **comment** shows on the card below the flags. A small id badge (e.g. `a4`) on each photo maps the
+   latest **comment** shows on the card below the flags. A small id badge (e.g. `a6`) on each photo maps the
    card to the data file / chat references — and the search box matches the id.
 4. **Filter / sort** — search (title / neighborhood / city / address / id); quick chips (Furnished only,
    Lease fits my target, Hide rejected, Show gone); a filter panel (max rent, min beds, must-have
@@ -82,12 +82,29 @@ a status — **"Now"** (green) or **"Unavailable — ask"** (amber, for rolling-
 units as "currently unavailable", plus a caveat flag to call and ask what's actually open). The **lease term**
 shows a friendly label: *Month-to-month*, *Flexible (1–N mo)*, *Short-term (N mo)*, *N mo*, or *N–M mo*.
 
+## How your data is stored (and why deleting is safe)
+Think of it as **a printed catalog plus your sticky notes**:
+- **The catalog** = the listings baked into the code (`app/src/data/apartments.ts`, the "seed"). It's what a fresh
+  browser or a new device starts with, and it's what I edit when you send me screenshots.
+- **Your sticky notes** = everything that lives only in *your* browser (localStorage): your ★ ratings, statuses,
+  comments, which listings you deleted, and any you typed in by hand.
+
+Every time the app opens it **lays your sticky notes on top of the catalog**. So your ratings/notes survive even
+when I refresh the catalog data.
+
+**Deleting is safe both ways.** When you click **Remove**, that listing stays gone in your browser — you don't need
+a code change or a redeploy for your own view. And when *I* retire a listing from the catalog (e.g. it's no longer
+available), it disappears cleanly for everyone: the app tells a hand-added listing (a long timestamp id like
+`a1751430000000`) apart from a retired catalog listing (a short id like `a6`), so a removed catalog listing never
+"ghosts" back, and none of your saved ratings/notes are disturbed. (Earlier this required wiping *all* your local
+data to avoid the ghost — no longer. See `DECISIONS.md` ADR-010.)
+
 ## Project layout
 ```
 app/src/
   types.ts             data model (Apartment, Amen, Anchor, Settings, Flag)
-  data/                apartments.ts (seed = source of truth) · amenities.ts · sheetCols.ts
-  data/geo/            bayAreaGeo.ts (offline ZIP+city centroids) · geocode.ts (anchor resolver)
+  data/                apartments.ts (seed = source of truth) · amenities.ts · sheetCols.ts · geocode.ts (anchor resolver)
+  data/geo/            bayAreaGeo.ts (offline ZIP+city centroids)
   lib/                 distance.ts · derive.ts · flags.ts · format.ts · exportSheet.ts  (PURE, unit-tested)
   state/useApartments.ts  listings + settings + filters + comments; localStorage autosave (+ seed-merge)
   components/          Card · Grid · CompareTable · DetailModal · Filters · ApartmentForm · ContactLinks · Export/Settings

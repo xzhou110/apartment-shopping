@@ -3,6 +3,15 @@
 Architecture for the apartment adaptation of **garage**. Pairs with **api-contract.md** (the frozen
 seam between the two build lanes). Scope: the minimum architecture that satisfies the PRD — no more.
 
+> **Partially superseded (kept as the original build record).** For CURRENT behavior see `STATE.md`,
+> `DECISIONS.md` (ADR-002/006/007/008/009/010), and the **api-contract.md addendums**. Key deltas since this
+> plan: the cost engine was **scope-cut** (no `effectiveMonthly`/`moveInCost`/`cost-asc` — §4 already notes this,
+> but §5/§6/§8 still mention them); the **URL-hash share/import path was removed** (data-integrity/security); the
+> persistence key is **`apt.v2`** (not `apt.v2`) and the overlay also carries **comments**; the lease goal is a
+> single **6-mo** target (not 6–12); tracked amenities are **parking/balcony/gym** with laundry its own field; a
+> new **`availability`** field + label; flag order is **scam → lease-term → rest** and the "unfurnished" info flag
+> was removed; retiring a seed listing is now safe via `looksUserAdded` (no `STORE_KEY` bump — ADR-010).
+
 ## 1. Stack (confirmed) + the two non-negotiable rules
 
 - **Vite + React 18 + TypeScript + Vitest.** Static SPA, deployed to **GitHub Pages**. **No backend,
@@ -45,7 +54,7 @@ scripts/buildGeo.*          (OPTIONAL — emits bayAreaGeo.ts from Census/GeoNam
 
 **UI lane → `frontend-engineer`** (every file this agent creates):
 ```
-src/state/useApartments.ts   (ported from garage useGarage; namespaces apt.v1 / apt.theme)
+src/state/useApartments.ts   (ported from garage useGarage; namespaces apt.v2 / apt.theme)
 src/App.tsx
 src/styles.css
 src/components/*.tsx          (Card, Grid, CompareTable, DetailModal, ApartmentForm,
@@ -158,20 +167,24 @@ Every pure module gets a spec. Key cases:
 ## 6. Integration notes (cross-lane)
 
 - **localStorage namespaces (UI lane must use exactly these):**
-  - `apt.v1` — the persisted `{ apartments, settings, removed }` blob (the data overlay).
+  - `apt.v2` — the persisted `{ apartments, settings, removed }` blob (the data overlay).
   - `apt.theme` — `'light' | 'dark'`.
   - `apt.geocache` — the geocode cache (OWNED by `data/geocode.ts`, contract §3). Keep it separate
-    from `apt.v1` so clearing app data doesn't wipe the cache and vice-versa.
-- **Seed-merge + hash-share pattern (ported from garage `useGarage` → `useApartments`):** the seed
+    from `apt.v2` so clearing app data doesn't wipe the cache and vice-versa.
+- **Seed-merge pattern (ported from garage `useGarage` → `useApartments`):** the seed
   `data/apartments.ts` is the **source of truth** for the listing SET + data. `localStorage` overlays
-  only the user's **rating + status**, keeps user-added listings, and remembers **removed** ids so a
-  deleted seed listing doesn't reappear. The **URL-hash** (base64 of the persist blob) wins over
-  localStorage for explicit shares; both overlay the authoritative seed. Hydrate every saved/shared
-  apartment over a `DEFAULT_APARTMENT` so older saves missing a newly-added field can't crash a
-  render (same `hydrateCar`→`hydrateApartment` guard).
-  - **Carry-over note:** garage's merge persists only `rating` + `status` from the overlay
+  only the user's **rating + status + comments**, keeps user-added listings, and remembers **removed** ids so a
+  deleted seed listing doesn't reappear. Hydrate every saved apartment over a `DEFAULT_APARTMENT` so older
+  saves missing a newly-added field can't crash a render (same `hydrateCar`→`hydrateApartment` guard).
+  - **URL-hash share/import REMOVED (post-launch, code review M2/N1):** localStorage is the sole overlay
+    source — there is no hash read. A crafted `#hash` could have silently persisted attacker listings + a
+    `sheetUrl`, so the reader was deleted. If share links return, build an explicit writer + an "accept" gate
+    that strips `settings.sheetUrl` on import.
+  - **Retiring a seed listing is safe (ADR-010):** `mergeWithSeed` only resurrects a saved-not-in-seed listing
+    when `looksUserAdded(id)` (a timestamp id), so deleting a listing from the seed doesn't ghost-resurrect its
+    stale overlay — no `STORE_KEY` bump needed (a bump would wipe all of the user's overlay state).
+  - **Carry-over note:** the merge persists `rating`, `status`, and `comments` from the overlay
     (editing other fields of a *seed* listing in the form isn't persisted — the data file is truth).
-    Keep that behavior; surface it the same way garage does (a one-line note in the form/README).
 - **The sort-context trap (most likely integration failure):** `applySort` for `nearest`/`cost`
   needs the resolved **primary-anchor coord** + **unit** + **settings** passed in (contract §10), not
   read from a global. `App.tsx` resolves the primary anchor's coord ONCE (it's already stored on the

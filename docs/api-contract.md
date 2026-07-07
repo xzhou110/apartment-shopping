@@ -8,8 +8,9 @@
 > **POST-LAUNCH ADDENDUM — 2026-07-02.** Changes made after the app shipped; where they conflict with the
 > body below, this addendum wins (the body is kept as the original build record). See `DECISIONS.md`
 > ADR-006/007/008 for rationale.
-> - **Amenities trimmed (2026-06-30):** `AmenityKey` is now just `'parking' | 'gym'` (not the 10 in §8).
->   Laundry became its own first-class field `laundry: 'in-unit' | 'on-site' | 'none' | 'unknown'`. `AMENITY_TOTAL = AMENITIES.length + 1` (the +1 is laundry).
+> - **Amenities trimmed (2026-06-30):** `AmenityKey` was cut from the 10 in §8 to `'parking' | 'gym'`
+>   (later `'parking' | 'balcony' | 'gym'` — see the 2026-07-07 addendum). Laundry became its own first-class
+>   field `laundry: 'in-unit' | 'on-site' | 'none' | 'unknown'`. `AMENITY_TOTAL = AMENITIES.length + 1` (the +1 is laundry).
 > - **New model fields (`types.ts`):** `Apartment.contact: Contact` (company, name, phone, email, website — all
 >   `''` = unknown) and `Apartment.comments: Comment[]` (`{ id, text, ts }`). Contact is *listing data* (seed +
 >   form). Comments are *user state*: persisted in `apt.v2` and overlaid onto seed listings in `mergeWithSeed`
@@ -23,6 +24,35 @@
 >   amber warn** when `leaseFits === null` (no lease term stated); **new green good** for month-to-month
 >   (shortest term 1 mo, no fixed longer commitment). Persistence key is `apt.v2` (not `apt.v1`).
 > - **Export (§9):** contact columns (company, person, phone, email, website) and a `Comments` column added.
+
+> **POST-LAUNCH ADDENDUM — 2026-07-07.** Further changes; where they conflict with the body OR the 2026-07-02
+> addendum, **this wins**. See `DECISIONS.md` ADR-009/010.
+> - **Amenity set + order:** `AmenityKey = 'parking' | 'balcony' | 'gym'` — three tri-state pills in that order;
+>   §8's 10-item table is fully superseded. `laundry` stays its own field, rendered as a pill BEFORE the amenity
+>   pills. `AMENITY_TOTAL = AMENITIES.length + 1`.
+> - **New field `Apartment.availability: 'now' | 'unavailable' | 'unknown'`** (sits behind `availableDate`).
+>   `availabilityLabel(apt)` (`lib/format`) shows a valid date when stated, else "Now" / "Unavailable — ask" / ''.
+>   New amber warn when `availability === 'unavailable'` AND no valid date (rolling-availability communities).
+> - **`leaseSummary(apt)` and `isMonthToMonth(apt)` now live in `lib/derive`** (leaseSummary moved from
+>   `lib/format`). `leaseSummary` renders friendly labels: Month-to-month / Flexible (1–N mo) / Short-term (N mo) /
+>   N mo / N–M mo / N+ mo / ≤N mo. Consumed by card / detail / compare / export.
+> - **Flag order (§6) is no longer strict severity order:** the hand-set **scam-risk** flag (`apt.scamRisk`) is
+>   pushed first as an absolute override, then the **lease-term flag whatever its level** (the "doesn't fit" risk,
+>   the amber "not stated" warn, or the green month-to-month good), then the remaining warn → info → good. The
+>   card previews only 3 flags, so the lease verdict is always visible. `signalLevel`'s risk>warn>good>'' collapse is unchanged.
+> - **Flag rules (§6) changed:** the old "No in-unit laundry" warn is now **`apt.laundry === 'none'`** →
+>   "No laundry — none in-unit or on-site." (there is no `inUnitLaundry` amenity). The **"Unfurnished for
+>   short-term" info flag was REMOVED** (the `furnished` field + "Furnished only" filter chip remain).
+> - **Export (§9):** SHEET_COLS emits **3** amenity columns (Parking, Balcony / patio, On-site gym), not 10; plus a
+>   **Laundry** column after Floor and a **Scam risk** column between Expert rating and Your rating. Lease term
+>   exports the friendly `leaseSummary` label; Available exports the date or the availability status.
+> - **Persistence (`state/useApartments.ts`):** `mergeWithSeed` resurrects a saved-not-in-seed listing only when
+>   `looksUserAdded(id)` (`/^a\d{5,}$/` — a timestamp id from `'a'+Date.now()`; seed ids are short). So retiring a
+>   seed listing no longer ghost-resurrects it and needs **no `STORE_KEY` bump** (which would wipe user state).
+>   STORE_KEY stays `apt.v2`. (ADR-010.)
+> - **Lease-fit default:** `DEFAULT_SETTINGS.targetMinLease = targetMaxLease = 6` — the §5 `leaseFits`
+>   doc-comment "defaults 6 / 12" is superseded.
+> - **Seed inventory:** 11 listings, ids **a6–a16** (a3/a4/a5 retired 2026-07-07; a1/a2 were earlier placeholders).
 
 This is the **keystone seam** between the two build lanes. The **data/pure-lib lane**
 (`data-engineer`) implements every signature below; the **UI lane** (`frontend-engineer`)
@@ -160,7 +190,7 @@ export function cacheSet(query: string, c: Coord): void;      // localStorage wr
 
 Cache:
 - localStorage key: **`apt.geocache`** — a JSON object `{ [normalizedQuery: string]: [lat, lng] }`.
-  This is SEPARATE from the app data namespace `apt.v1` so clearing app data does not nuke the
+  This is SEPARATE from the app data namespace `apt.v2` so clearing app data does not nuke the
   geocode cache and vice-versa. Resolver writes are best-effort (wrap in try/catch; quota/private
   mode is non-fatal).
 
