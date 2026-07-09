@@ -839,6 +839,7 @@ export const APARTMENTS: Apartment[] = [
       parking: null, // not shown (parking fees tab not captured)
       gym: null, // not mentioned (pool + courtyard, but no fitness center)
       balcony: true, // "Balcony" + "Patio" in Highlights and Model Details
+      woodenFloor: true, // "Hardwood Floors" in Highlights + Model Details
     },
     amenities: ['Pool', 'Courtyard', 'Hardwood floors', 'In-unit W/D (confirm)', 'Stainless steel appliances', 'High-speed internet + WiFi', 'Ceiling fans', 'Smoke-free', '$0 admin fee', 'Built 1958 · 34 units'],
 
@@ -866,5 +867,78 @@ export const APARTMENTS: Apartment[] = [
       '(e.g. from Zillow) and I\'ll add it.',
     image: '', // apartments.com blocked the photo fetch (403) — placeholder shown until a fetchable URL is provided
     sourceUrl: 'https://www.apartments.com/verandas-apartments-menlo-park-ca/e7kcxrp/',
+  },
+  {
+    // a18 — 1300 Hoover St, APT 2, Menlo Park. Rooftop geocode via US Census (2026-07-01).
+    // ✅ Reads LEGIT — a Zillow homedetails unit listed by a named, 5★-reviewed agent (Tim Proschold,
+    // Luxuriant Realty). Small garden-style 1BR with a STATED 6-MONTH lease (your exact target).
+    id: 'a18',
+    status: 'New',
+    title: 'Charming 1BR (garden-style) — Menlo Park',
+    address: '1300 Hoover St APT 2, Menlo Park, CA 94025',
+    neighborhood: '',
+    city: 'Menlo Park',
+    lat: 37.454145,
+    lng: -122.1869,
+
+    beds: 1,
+    baths: 1,
+    sqft: 533, // the smallest 1BR on your list
+    floor: '',
+
+    rent: 2495, // "$2,495/mo" (Fees may apply — see utilities note)
+    parkingCost: null, // assigned covered parking included (no separate charge stated)
+    petRent: null, // not stated
+    utilitiesIncluded: false, // ONLY garbage is included; you pay electric, gas, internet + a required "utilities fee" (see notes)
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated (screening: 2.5× income, 680+ credit)
+    brokerFee: null,
+
+    leaseTermMonths: 6, // "Lease term: 6 Month" — a stated 6-mo lease, an EXACT match for your goal
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // "Available now"
+    availability: 'now',
+    furnished: false, // photos are virtually staged (disclosed) — unit is unfurnished
+
+    petPolicy: 'Allowed', // "Cats and dogs" OK (Negotiable)
+    listingType: 'Property mgmt', // Tim Proschold, Luxuriant Realty (5★, 13 reviews), (415) 223-8548
+    contact: { company: 'Luxuriant Realty', name: 'Tim Proschold', phone: '(415) 223-8548', email: '', website: '' }, // named agent w/ 5/5 rating (13 reviews); 415 = SF area code
+    comments: [],
+
+    laundry: 'on-site', // "Shared" coin-operated laundry facility — not in-unit
+    amen: {
+      parking: true, // "Assigned covered parking" (dedicated)
+      gym: null, // not mentioned
+      balcony: null, // not mentioned (ground-floor garden unit w/ private entry) — ask
+      woodenFloor: true, // "Flooring: Hardwood, Tile"
+    },
+    amenities: ['Assigned covered parking', 'Private entry', 'Garden-style complex', 'Mature landscaping', 'Hardwood + tile floors', 'Eat-in kitchen', 'Abundant natural light'],
+
+    dateSeen: '2026-07-01',
+    daysOnMarket: null, // brand-new (listed ~10 hours ago) — but 39 contacts already (see notes: acts fast)
+    marketRent: 2700, // Est. — Menlo Park 1BR comp; $2,495 for a tiny 533 sqft unit is modestly under market
+
+    expertRating: 4, // strong FIT: prime Menlo Park + a STATED 6-MONTH lease (your exact target) + assigned covered parking + cats/dogs OK + hardwood + under market + a 5★-reviewed agent; held from 5 by the TINY 533 sqft, shared coin laundry, wall-furnace-only heat, and utilities mostly tenant-paid
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a real Zillow unit listed by a NAMED, well-reviewed agent (Tim Proschold, ' +
+      'Luxuriant Realty, 5★ / 13 reviews, (415) 223-8548) with standard screening (2.5× income, 680+ credit). ' +
+      '🟢 BEST-CASE LEASE FIT: the listing states a "6 Month" lease term outright — an EXACT match for your goal, ' +
+      'no negotiation. In prime Menlo Park (near Meta + Stanford + top schools), under market at $2,495, with ' +
+      'ASSIGNED COVERED PARKING, cats + dogs OK (negotiable), hardwood/tile floors, a private entry, and a quiet ' +
+      'garden-style complex.\n' +
+      '⚠️ ACT FAST: it was listed only ~10 hours ago and already has 39 contacts — high demand; it may be gone ' +
+      'within a day or two, so call TODAY if interested.\n' +
+      'Confirm before signing: (1) TINY — 533 sqft is the SMALLEST 1BR on your list; make sure the space works. ' +
+      '(2) UTILITIES — only GARBAGE is included; you pay electricity, gas, internet, AND a required "utilities ' +
+      'fee" on top of the $2,495 — ask what that fee is. (3) Heat is a WALL FURNACE only (no central heat/AC). ' +
+      '(4) Laundry is shared/coin-operated, NOT in-unit. (5) Deposit + application fee not stated — ask move-in ' +
+      'costs. (6) "6 Month" appears to be the only stated term — confirm they\'ll renew/extend if you want longer.',
+    image: 'img/a18.webp',
+    sourceUrl: 'https://www.zillow.com/homedetails/1300-Hoover-St-APT-2-Menlo-Park-CA-94025/2060137151_zpid/',
   },
 ];
