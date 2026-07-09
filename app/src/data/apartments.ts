@@ -52,8 +52,9 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'on-site', // "Laundry: Shared"
     amen: {
       parking: true, // attached garage + covered parking
-      gym: null, // not mentioned (pool + elevator are, but no gym)
+      woodenFloor: true, // "Hardwood floors + carpet"
       balcony: true, // "Large balcony" — private outdoor space
+      gym: false, // building amenities listed (elevator, pool, package, laundry) but NO fitness center
     },
     amenities: ['Large balcony', 'Elevator', 'Pool', 'Dishwasher', 'Hardwood floors + carpet', 'Gas heating', 'On-site management'],
 
@@ -123,6 +124,8 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'unknown', // not mentioned anywhere (no chip, no unit-feature line)
     amen: {
       parking: null, // not mentioned at all
+      woodenFloor: null, // flooring not captured on the page
+      balcony: null, // not mentioned (no per-unit features captured)
       gym: true, // "Fitness Center: Gym" under Building Amenities
     },
     amenities: ['Fitness center', 'Pool (temporarily closed)', 'Community room', 'Dishwasher', 'Positive credit reporting available'],
@@ -196,6 +199,8 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'on-site', // "Shared: Laundry" — community/shared, not in-unit
     amen: {
       parking: true, // detached garage + garage + off-street surface lot
+      woodenFloor: true, // "Flooring: Carpet, Hardwood"
+      balcony: null, // not listed in the captured unit features
       gym: true, // "Fitness Center" under Community Rooms
     },
     amenities: ['Club house', 'Fitness center', 'Pool', 'Elevator', 'Hardwood floors', 'Ceiling fans', 'Package receiving', 'On-site management & maintenance'],
@@ -268,8 +273,9 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'in-unit', // "In unit laundry" chip + "Laundry: In Unit" + washer/dryer in appliances
     amen: {
       parking: true, // off-street parking (two-car limit)
-      gym: null, // n/a
+      woodenFloor: true, // "Hardwood floors"
       balcony: true, // "private deck" — private outdoor space
+      gym: false, // standalone tiny house / ADU — no community gym
     },
     amenities: ['Utilities included', 'Wall A/C unit', 'In-unit washer/dryer', 'Full kitchen (dishwasher, gas oven, microwave)', 'Hardwood floors', 'Private deck + views', 'Bicycle storage', '5-min walk to Edgewood Park'],
 
@@ -340,8 +346,9 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'on-site', // "Shared laundry" / "Coin operated laundry facilities in the building"
     amen: {
       parking: false, // owner says "No assigned parking, only street parking" (Zillow's structured field mislabels it "Off Street" — see notes)
-      gym: null, // n/a
+      woodenFloor: true, // "Flooring: Hardwood"
       balcony: null, // not mentioned
+      gym: false, // basic 3rd-floor walk-up; no community amenities (coin laundry, no elevator/gym)
     },
     amenities: ['Water/garbage/gas included', 'Hardwood floors', 'Near BART (Daly City & Colma) + Serramonte/Target/Home Depot'],
 
@@ -410,8 +417,9 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'unknown', // not listed in the captured facts — ask (in-unit vs on-site)
     amen: {
       parking: true, // covered parking + off-street covered lot
-      gym: true, // "Fitness Center"
+      woodenFloor: null, // no flooring line in the captured unit features
       balcony: true, // "Patio Balcony" / "Patio: Patio/balcony"
+      gym: true, // "Fitness Center"
     },
     amenities: ['Pool', 'Spa', 'Club house', 'Fitness center', 'Rec room', 'BBQ/picnic area', 'Courtyard', 'A/C', 'Covered parking', 'Cable ready'],
 
@@ -482,8 +490,9 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'in-unit', // "In-unit laundry (W/D)" chip + "Laundry: In Unit" + washer/dryer in appliances
     amen: {
       parking: true, // covered parking
-      gym: true, // "Fitness Center"
+      woodenFloor: true, // "Flooring: Carpet, Hardwood, Laminate"
       balcony: true, // "Private patio or balcony" / "Balcony" / "Patio Balcony"
+      gym: true, // "Fitness Center"
     },
     amenities: ['Pool', 'Club house', 'Fitness center', 'Putting green', 'Sunken lounge', 'BBQ/picnic area', 'Nature trail', 'Storage space', 'Granite countertops', 'Vaulted ceilings (select units)', 'SF Bay views', 'Online rent payment'],
 
@@ -554,8 +563,9 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'on-site', // "Shared laundry" / "Laundry: Shared" — not in-unit
     amen: {
       parking: true, // off-street resident parking lot (may be unassigned/first-come — see notes)
-      gym: null, // not mentioned
+      woodenFloor: false, // "Flooring: Carpet, Vinyl" — no wood/laminate
       balcony: null, // not listed as a unit feature (exterior photo shows some balconies, but not stated) — ask
+      gym: false, // building amenities captured (laundry, portal, gated) but NO fitness center
     },
     amenities: ['Gated entry', 'Off-street parking lot', 'Water/sewer/garbage included', 'Online rent payment + maintenance portal', 'On-site management'],
 
@@ -626,8 +636,9 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'on-site', // "Shared laundry" / "Laundry: Shared" — not in-unit
     amen: {
       parking: true, // carport + covered parking + parking lot
-      gym: null, // not mentioned (club house + party room + pool, but no fitness center)
+      woodenFloor: true, // "Wood Vinyl Flooring Throughout Unit" (+ laminate) — wood-style
       balcony: true, // "Patios and balconies" / "Balcony" / "Patio Balcony"
+      gym: false, // building amenities listed (club house, party room, pool, elevator) but NO fitness center
     },
     amenities: ['Heated pool', 'Club house', 'Party room', 'Remodeled rec room', 'Garden + lawn + water feature', 'Elevator', 'Bicycle storage', 'Mountain view', 'Ceiling fans', 'Water/sewer/garbage/hot-water included'],
 
@@ -695,8 +706,9 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'unknown', // NOT mentioned anywhere (no chip, no building-amenity line, no in-unit W/D) — ask
     amen: {
       parking: null, // not mentioned at all — ask (unusual gap)
-      gym: true, // "Fitness Center: Gym"
+      woodenFloor: null, // flooring not captured on the page
       balcony: null, // not mentioned
+      gym: true, // "Fitness Center: Gym"
     },
     amenities: ['Heated pool', 'Fitness center', 'Club house', 'Poolside lounge', 'BBQ area', 'Wi-Fi in clubhouse', '800 sqft (large 1BR)', 'Positive credit reporting available'],
 
@@ -765,8 +777,9 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'on-site', // "Shared laundry" / "Laundry: Shared" — not in-unit
     amen: {
       parking: true, // "Carport parking" / "Carports with storage" (dedicated)
-      gym: null, // not mentioned
+      woodenFloor: true, // "Flooring: Carpet, Laminate, Linoleum" — laminate is wood-style
       balcony: true, // "Large balcony" / "Patio Balcony"
+      gym: false, // building amenities captured (pool, garden, BBQ, deck, maintenance) but NO fitness center
     },
     amenities: ['Large balcony', 'Carport w/ storage', 'Upgraded appliances', 'Recessed lighting', 'Pool', 'Garden + lawn + picnic area + BBQ + deck', 'Building-wide WiFi', '24-hr maintenance', 'Water/sewer/garbage/hot-water included'],
 
@@ -837,9 +850,9 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'in-unit', // "Washer/Dryer" listed under Apartment Features (unit-level); NOTE the community also has shared "Laundry Facilities" — confirm the actual unit has in-unit W/D (see notes)
     amen: {
       parking: null, // not shown (parking fees tab not captured)
-      gym: null, // not mentioned (pool + courtyard, but no fitness center)
-      balcony: true, // "Balcony" + "Patio" in Highlights and Model Details
       woodenFloor: true, // "Hardwood Floors" in Highlights + Model Details
+      balcony: true, // "Balcony" + "Patio" in Highlights and Model Details
+      gym: false, // community amenities listed (pool, courtyard, laundry) but NO fitness center
     },
     amenities: ['Pool', 'Courtyard', 'Hardwood floors', 'In-unit W/D (confirm)', 'Stainless steel appliances', 'High-speed internet + WiFi', 'Ceiling fans', 'Smoke-free', '$0 admin fee', 'Built 1958 · 34 units'],
 
@@ -911,9 +924,9 @@ export const APARTMENTS: Apartment[] = [
     laundry: 'on-site', // "Shared" coin-operated laundry facility — not in-unit
     amen: {
       parking: true, // "Assigned covered parking" (dedicated)
-      gym: null, // not mentioned
-      balcony: null, // not mentioned (ground-floor garden unit w/ private entry) — ask
       woodenFloor: true, // "Flooring: Hardwood, Tile"
+      balcony: null, // not mentioned (ground-floor garden unit w/ private entry) — ask
+      gym: false, // private garden-style unit — no community gym
     },
     amenities: ['Assigned covered parking', 'Private entry', 'Garden-style complex', 'Mature landscaping', 'Hardwood + tile floors', 'Eat-in kitchen', 'Abundant natural light'],
 
