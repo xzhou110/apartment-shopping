@@ -1123,4 +1123,87 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a20.webp',
     sourceUrl: 'https://www.zillow.com/apartments/san-mateo-ca/hillsdale-garden/5Zc8my/',
   },
+  {
+    // a21 — Private furnished 1BR suite, San Carlos (address UNDISCLOSED). APPROXIMATE geocode = the
+    // San Carlos 94070 city/ZIP centroid (Nominatim, 2026-07-10) because the listing withholds the exact
+    // address ("shared upon scheduling") — distance ranking is area-level, not rooftop. ✅ Reads LEGIT (NOT
+    // a scam): priced AT/ABOVE market (scams bait below), specific grounded copy + real photos (a dog in the
+    // shots), real Zillow metadata (zpid, 2 days on market, "last checked 4h ago"), private owner Edrica O.
+    // It's a private upstairs in-law/ADU suite — SINGLE-OCCUPANT only, kitchenette (not a full kitchen).
+    id: 'a21',
+    status: 'New',
+    title: 'Furnished 1BR Suite (single-occupant) — San Carlos',
+    address: 'Undisclosed address, San Carlos, CA 94070 (shared after you schedule a tour)',
+    neighborhood: '', // ~1 mi from downtown San Carlos / walk to Caltrain (no named neighborhood given)
+    city: 'San Carlos',
+    lat: 37.504936, // ⚠️ APPROXIMATE — San Carlos 94070 centroid; exact address is undisclosed
+    lng: -122.261823,
+
+    beds: 1,
+    baths: 1,
+    sqft: 800,
+    floor: 'Upstairs', // "private upstairs 1-bedroom suite" with its own separate entrance
+
+    rent: 3000, // "$3,000/mo" — furnished + ALL utilities + internet included (see notes); highest raw rent on your list
+    parkingCost: null, // off-street parking included
+    petRent: null, // n/a — no pets
+    utilitiesIncluded: true, // "Utilities: all inclusive (electricity, gas, water, garbage) Free Internet" — a genuine plus
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated ("Contact manager for more details")
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // "Lease term: 1 Month" + "short term rental open to negotiate" — month-to-month/flexible
+    minLeaseMonths: 1, // maximally flexible; a 6-mo stay is easily negotiable
+    maxLeaseMonths: null, // open-ended / negotiable
+    availableDate: '2026-09-20', // "Available Sun Sep 20 2026"
+    availability: 'unknown', // date above wins for display
+    furnished: true, // "Fully Furnished" / "Furnished: Yes"
+
+    petPolicy: 'No pets', // "No pets" chip + "Pets allowed: No" — explicit (note: owner's own dog appears in photos)
+    listingType: 'Landlord', // "Listed by property owner — Edrica O." (private owner, not a mgmt company)
+    contact: { company: '', name: 'Edrica O.', phone: '', email: '', website: '' }, // private owner — inquire via Zillow
+    comments: [],
+
+    laundry: 'in-unit', // "In unit laundry" chip + "Laundry: In Unit" + Washer/Dryer in appliances
+    amen: {
+      parking: true, // "Off street parking"
+      woodenFloor: true, // "Flooring: Hardwood" + natural wood finishes
+      balcony: null, // not mentioned — ask
+      gym: false, // private in-law suite in a home — no community gym
+    },
+    amenities: ['Fully furnished', 'ALL utilities included (elec/gas/water/garbage)', 'Free internet', 'Private separate entrance', 'In-unit washer/dryer', 'Off-street parking', 'Heat pump + central heating', 'Window-unit A/C', 'Vaulted ceilings', 'Natural wood finishes + large windows', 'Rain shower + heated bidet toilet', 'Kitchenette (2-burner stove, under-counter fridge — no oven)', 'Walk to Caltrain · ~1 mi to downtown San Carlos'],
+
+    dateSeen: '2026-07-10',
+    daysOnMarket: 2, // "2 days on Zillow" · 4 contacts · listing updated Jul 8, 2026 — fresh + actively maintained
+    marketRent: null, // deliberately null — a furnished, all-utilities-included single-occupant suite has no clean unfurnished comp (like a19); the key point is $3,000 is AT/ABOVE market here, i.e. NOT a bait price
+
+    expertRating: 4, // strong FIT for a SOLO short stay: fully furnished + ALL utilities + free internet + flexible month-to-month + in-unit W/D + off-street parking + private entrance + walk to Caltrain + high-end bath, and reads legit; held from 5 by the SINGLE-OCCUPANT cap, KITCHENETTE-only (no oven), no pets, top-of-list $3,000, and the undisclosed address (area pin only)
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Reads LEGITIMATE (I do NOT think this is a scam) — a private upstairs 1-bedroom in-law/ADU suite with ' +
+      'its own separate entrance, listed by owner Edrica O. on a real Zillow home-detail page (2 days on market, ' +
+      '4 contacts, last checked 4h ago). The usual scam tells are ABSENT: it\'s priced AT/ABOVE market (~$3,000, ' +
+      'not a cheap bait), the copy is specific and grounded (heated bidet, 2-burner kitchenette, single occupant, ' +
+      'the owner\'s dog in the photos), and the photos are one consistent real space. 🟢 GENUINE STRENGTHS for a ' +
+      'short stay: FULLY FURNISHED, ALL utilities included (electricity, gas, water, garbage) + FREE internet, ' +
+      'month-to-month / "short term open to negotiate" (your 6-mo goal fits easily), in-unit W/D, off-street ' +
+      'parking, a private entrance, heat pump, and a high-end bathroom (rain shower + heated bidet) — walkable to ' +
+      'Caltrain, ~1 mi from downtown San Carlos.\n' +
+      'Know what this IS before you get attached: (1) 👤 SINGLE-OCCUPANT ONLY — explicitly "best suited for one ' +
+      'occupant"; if you need room for a partner/guest, this is out. (2) 🍳 KITCHENETTE, not a full kitchen — a ' +
+      '2-burner electric stove, sink, and an UNDER-COUNTER fridge, NO oven; fine for light cooking, limiting if ' +
+      'you cook seriously. (3) NO PETS, NO smoking. (4) 💲 $3,000 is the highest raw rent on your list — but it ' +
+      'bundles all utilities + internet + furniture, so vs an unfurnished unit where you\'d add those, the ' +
+      'effective gap is smaller; I left market-rent "—" (no clean furnished comp), so don\'t read a flag into it. ' +
+      '(5) 📍 ADDRESS IS UNDISCLOSED — the map pin is the San Carlos AREA (94070 centroid), not the exact ' +
+      'building, so the distance number is approximate; the owner shares the address after you schedule.\n' +
+      '🔒 Because it\'s a private owner with a withheld address, do the normal prudence: tour in person, confirm ' +
+      'it\'s really their property, and NEVER wire a deposit before you\'ve seen it and signed a lease. (This is ' +
+      'standard caution for any by-owner listing, not a red flag specific to this one.)',
+    image: 'img/a21.webp',
+    sourceUrl: 'https://www.zillow.com/homedetails/San-Carlos-CA-94070/15550757_zpid/',
+  },
 ];
