@@ -354,19 +354,22 @@ export const APARTMENTS: Apartment[] = [
     amenities: ['Water/garbage/gas included', 'Hardwood floors', 'Near BART (Daly City & Colma) + Serramonte/Target/Home Depot'],
 
     dateSeen: '2026-07-01',
-    daysOnMarket: 1, // "1 day on Zillow" (13 contacts) — fresh listing (updated Jun 29, 2026)
+    daysOnMarket: 10, // "10 days on Zillow" · 53 contacts (up from 13 on Jul 1) — very high demand; listing updated 14h ago
     marketRent: 2600, // Est. — Daly City 1BR comp; $2,400 w/ water+garbage+gas included is fair-to-slightly-under
 
     expertRating: 3, // fair price + utilities mostly included + a 6-mo-then-M2M lease that fits perfectly, BUT 3rd-floor walk-up (no elevator), street parking only, coin laundry, no pets — a basic unit
     scamRisk: false,
     rating: 0,
     notes:
-      '✅ Reads LEGITIMATE — a real Zillow home-detail listing (1 day on market, 13 contacts) by a private ' +
+      '✅ Reads LEGITIMATE — a real Zillow home-detail listing (10 days on market, 53 contacts) by a private ' +
       'owner (Nelly Chin) with standard terms: first month + an equal $2,400 deposit + a $30 credit report, ' +
-      'proof of income required. Central Daly City near Serramonte, Target, Home Depot, Gellert Park, and BART ' +
+      'and proof of income (3 months of bank statements or pay stubs). Central Daly City near Serramonte, ' +
+      'Target, Home Depot, Gellert Park, and BART ' +
       '(Daly City + Colma). 🟢 LEASE FIT: "6 month lease, then month to month" — a 6-mo minimum that then goes ' +
       'flexible, an exact match for your 6-mo goal. Utilities mostly included (water, garbage, gas — you only ' +
       'pay electricity + internet).\n' +
+      '⚠️ HIGH DEMAND: 53 contacts in 10 days on market — this one is moving fast, so reach out TODAY if it ' +
+      'interests you (it may be gone soon).\n' +
       'Reality check before signing: (1) PARKING — the owner says "No assigned parking, ONLY STREET PARKING." ' +
       'Zillow\'s structured field mislabels it "Off Street," but per the owner\'s own words there is NO dedicated ' +
       'parking; the card shows a "No parking" flag on that basis — confirm with them. (2) 3rd-FLOOR WALK-UP — ' +

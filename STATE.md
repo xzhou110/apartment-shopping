@@ -1,23 +1,24 @@
 # STATE — apartment-shopping
 
 **Phase:** ✅ **DEPLOYED & LIVE.** Iterating on features per user requests.
-**Updated:** 2026-07-07
+**Updated:** 2026-07-10
 **Live:** https://xzhou110.github.io/apartment-shopping/ (GitHub Pages; push to `main` auto-deploys)
 
 ## Current status
-- **258 tests pass**, `tsc --noEmit` clean, production build clean, live site verified 200 + serves current bundle.
+- **265 tests pass**, `tsc --noEmit` clean, production build clean, live site verified 200 + serves current bundle.
 - Deployed from `main`; local == remote == GitHub HEAD (in sync).
-- **12 real listings seeded (a6–a17)**, each geocoded + scam-screened. (a3/a4/a5 retired 2026-07-07 — no longer available; a17 = Verandas, Menlo Park, added 2026-07-07. Ids are stable and never renumbered, so gaps are expected.)
+- **17 real listings seeded (a6–a22)**, each geocoded + scam-screened. (a3/a4/a5 retired 2026-07-07 — no longer available. Ids are stable and never renumbered, so gaps from retirements are expected.)
 
 ## Feature set (as shipped)
 - **Capture → compare:** screenshot + link → I extract fields, geocode, append to `data/apartments.ts`. Grid + Compare views, filters, sorts, status pipeline, ratings, Sheets export.
-- **Distance ranking:** offline Bay Area ZIP/city table (429 ZIP + 106 city centroids) + cached Nominatim fallback; per-card chip + Nearest sort; runtime anchors in Settings.
+- **Distance ranking:** offline Bay Area ZIP/city table (429 ZIP + 106 city centroids) + cached Nominatim fallback; per-card chip + **Nearest sort (now the DEFAULT sort, 2026-07-10)**; runtime anchors in Settings. With no anchor set, Nearest degrades cleanly to insertion order (and no distance chips) until you pick one.
 - **Owner / management contact** (per listing): company/owner, contact person, phone, email, website — shown on the card (name + tap-to-call/email/website rows below it) and the detail modal; editable in the form; exported. Safe `tel:`/`mailto:`/`https:` links; `tel:` encodes extensions (`;ext=`).
 - **Your comments** (per listing): timestamped, add/delete; latest shown on the card below the flags, full thread in detail. Persisted as a user overlay and merged onto seed listings on reload (like ratings/status).
 - **Lease goal = 6 months** (single-point). The lease flag is always the **first non-scam flag** on a card (lease fit is the #1 decision factor): 12-mo term → **red** "doesn't fit your 6 mo goal"; no lease term stated → **amber** "confirm they'll do a 6 mo term"; true **month-to-month** → **green** "maximum flexibility". A safe localStorage migration bumps browsers still on the old 6/12 default → 6/6.
 - **Availability** (2026-07-07): a first-class `availability` status ('now' | 'unavailable' | 'unknown') behind `availableDate`. Card/detail/compare show a real date when stated, else **"Now"** (green) or **"Unavailable — ask"** (amber, rolling communities) + an amber warn to call. `leaseSummary()` renders friendly labels (Month-to-month / Flexible (1–N mo) / Short-term (N mo) / N mo / N–M mo). Amenity pill order: laundry, parking, balcony, gym.
 
 ## Recent changes (2026-07)
+- **2026-07-10:** Added listings **a18–a22** and enriched **a7**. New: a18 (1300 Hoover by-owner 1BR, Menlo Park), a19 (**Blueground FURNISHED** 1BR, San Bruno), a20 (**INCOME-RESTRICTED** Greystar Hillsdale Garden, San Mateo), a21 (**FURNISHED single-occupant** suite, San Carlos — **undisclosed address**), a22 (South Mary Place, Sunnyvale). Enriched a7 (Tradewind Surf) with its real per-unit table (747 sqft 1BR, $2,300, available Now — was previously null/inferred). Three new listing *shapes* handled honestly: **furnished** (marketRent left `null` — no clean unfurnished comp, like the a9 tiny house), **income-restricted** (surfaced in the card title + notes as an *eligibility gate*, not a price signal), and **undisclosed-address** by-owner listings (geocoded to the city/ZIP **centroid**, flagged approximate in the seed comment). Scam triage held: a19/a20/a22 are Verified-Source communities; a21 was assessed and cleared (at/above-market price + grounded copy + real photos → not a scam, no `scamRisk` flag, just by-owner prudence in the notes). **Default sort → "Nearest first (distance)"** (was "Recently added"): `sort` is NOT persisted (it inits from `DEFAULT_FILTERS`), so this takes effect on next load with no `STORE_KEY` bump; it degrades to insertion order when no Settings anchor is set (covered by an existing test).
 - **2026-07-07:** Added the `availability` status field + friendly lease-term labels; reordered card flags so the lease flag leads (after any scam flag); removed the "Unfurnished — extra setup" info flag (user brings own furniture); amenity order → parking/balcony/gym. **Retired listings a3/a4/a5** (no longer available) — and hardened `mergeWithSeed` so retiring a seed listing no longer resurrects a ghost card from stale localStorage (via `looksUserAdded`), so seed listings can be deleted WITHOUT a `STORE_KEY` bump (which would wipe the user's ratings/status/comments). See ADR-009/010.
 - **2026-07-02:** Added owner/contact + comments (data model, card, detail, form, export; `Contact`/`Comment` types). Retargeted lease to a single 6-mo goal; green month-to-month + amber "lease term not stated" flags; goal-aware copy. Populated real contact for a4/a7.
 

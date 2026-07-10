@@ -48,7 +48,8 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
    card to the data file / chat references — and the search box matches the id.
 4. **Filter / sort** — search (title / neighborhood / city / address / id); quick chips (Furnished only,
    Lease fits my target, Hide rejected, Show gone); a filter panel (max rent, min beds, must-have
-   amenities); and sorts (Nearest, Rent low→high / high→low, Beds, Sqft, Your rating, Added).
+   amenities); and sorts (**Nearest — the default**, Rent low→high / high→low, Beds, Sqft, Your rating, Added).
+   With no distance anchor set yet, Nearest falls back to insertion order (and no distance chips) until you pick one in Settings.
 5. **Compare** — tick ≥2 listings → the Compare tab shows them side-by-side and auto-highlights the
    **best (green) / worst (red)** in each row (cheapest rent, nearest, most amenities, biggest sqft).
 6. **Rate & comment** — click the **You ★** stars on a card (or in detail) to rate; **Expert ★** is my

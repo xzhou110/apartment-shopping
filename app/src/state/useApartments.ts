@@ -39,7 +39,10 @@ export const DEFAULT_FILTERS: Filters = {
   reqAmenities: [],
   hideRejected: false,
   showGone: false,
-  sort: 'added',
+  // Default = rank by distance from your primary Settings anchor. If no anchor is set, applySort's
+  // 'nearest' comparator degrades cleanly to insertion order (NaN→0, stable sort) and no distance
+  // chips show — so a fresh visitor still sees a sensible board until they pick an anchor.
+  sort: 'nearest',
 };
 
 // Bumped v1 → v2 when the seed switched from the 3 placeholder examples to real listings
