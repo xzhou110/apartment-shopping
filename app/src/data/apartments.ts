@@ -1206,4 +1206,80 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a21.webp',
     sourceUrl: 'https://www.zillow.com/homedetails/San-Carlos-CA-94070/15550757_zpid/',
   },
+  {
+    // a22 — South Mary Place Apartments, Sunnyvale. Rooftop geocode via Nominatim (2026-07-10,
+    // "437, South Mary Avenue, Sunnyvale, 94086" — "apartments" match). ✅ Reads LEGIT — a Zillow
+    // "Verified Source" (green check) managed community with a real unit table, floor plan, 8 photos, named
+    // leasing agents, and an online portal. Tracked row = Unit 22 (the only listed unit: 1BR, 600 sqft, $2,355).
+    id: 'a22',
+    status: 'New',
+    title: 'South Mary Place 1BR — Sunnyvale',
+    address: '437 S Mary Ave, Sunnyvale, CA 94086',
+    neighborhood: '',
+    city: 'Sunnyvale',
+    lat: 37.374724,
+    lng: -122.048387,
+
+    beds: 1,
+    baths: 1,
+    sqft: 600, // Unit 22
+    floor: '',
+
+    rent: 2355, // Unit 22 base rent (fees may apply); modestly under market for Sunnyvale (see marketRent)
+    parkingCost: null, // covered parking included
+    petRent: null, // pet-friendly (dogs + cats) but pet rent/deposit not captured — ask
+    utilitiesIncluded: false, // only HOT WATER is included in rent; you pay gas heat + electric + the rest (like a18's "only garbage")
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // offers both terms (see min/max)
+    minLeaseMonths: 6, // "Lease terms: One year, Six months" — explicit 6-mo option, a direct fit for your goal
+    maxLeaseMonths: 12,
+    availableDate: '2026-07-15', // Unit 22 available Jul 15
+    availability: 'unknown', // date above wins for display
+    furnished: false,
+
+    petPolicy: 'Allowed', // "Pet Friendly - Dogs and Cats are allowed"
+    listingType: 'Property mgmt', // managed community, Zillow "Verified Source", (669) 322-2815 (local South Bay area code)
+    contact: { company: 'South Mary Place Apartments', name: 'Leeonna Colter / Josie Hernandez', phone: '(669) 322-2815', email: '', website: '' }, // Verified Source; local 669 number
+    comments: [],
+
+    laundry: 'on-site', // "Laundry: Shared" — not in-unit
+    amen: {
+      parking: true, // "Covered Parking"
+      woodenFloor: true, // "Flooring: Carpet, Laminate, Vinyl" — laminate is wood-style (per a16/a14 handling)
+      balcony: null, // not mentioned — ask
+      gym: false, // building amenities captured (pool, gazebo, storage, portal) but NO fitness center
+    },
+    amenities: ['Remodeled units', 'Updated appliances + granite/quartz counters', 'Double-pane windows', 'Dishwasher', 'Microwave', 'Swimming pool', 'Gazebo', 'Storage space', 'Covered parking', 'Hot water included', 'Online rent + maintenance portal', 'Ceiling fans (no A/C)', '$1,000 lease-completion bonus (see notes)'],
+
+    dateSeen: '2026-07-10',
+    daysOnMarket: null,
+    marketRent: 2700, // Est. — Sunnyvale 1BR comp (Google/Caltrain-adjacent) for an older remodeled ~600 sqft unit; $2,355 is modestly under market (a genuine value, not a bait)
+
+    expertRating: 4, // strong practical VALUE + FIT: explicit 6-mo lease (your goal), modestly under-market $2,355 in pricey Sunnyvale, remodeled w/ granite/quartz + double-pane, covered parking, pool, storage, pet-friendly, prime Google/Caltrain/VTA location, $1k lease-completion bonus; held from 5 by shared (not in-unit) laundry, ceiling-fan-only cooling (no A/C), no gym, basic 600 sqft w/ carpet/vinyl
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" (green check) managed community (South Mary Place) with ' +
+      'a real unit table, floor plan, 8 photos, named leasing agents (Leeonna Colter / Josie Hernandez), an ' +
+      'online rent + maintenance portal, and a LOCAL (669) South Bay number — the opposite of the a1/a2 scam ' +
+      'pattern. 🟢 STANDOUT FITS: an explicit SIX-MONTH lease option (a direct match for your goal) and a ' +
+      'modestly UNDER-MARKET $2,355 in pricey, Google/Caltrain/VTA-adjacent Sunnyvale — a genuine value. Units ' +
+      'are remodeled (updated appliances, kitchen cabinets, granite/quartz counters, double-pane windows), with ' +
+      'covered parking, a pool, a gazebo, and storage space; pet-friendly (dogs + cats). 🎁 SPECIAL OFFER: ' +
+      '"$1,000 bonus once you complete your lease term" — nice, but note it pays out only AFTER you finish the ' +
+      'term (subject to terms); confirm whether a 6-mo term qualifies or only the 12-mo.\n' +
+      'Confirm before signing: (1) LAUNDRY is shared/on-site, NOT in-unit. (2) COOLING is a ceiling fan only — ' +
+      'there is NO A/C (heat is gas); ask if that matters to you in a Sunnyvale summer. (3) UTILITIES — only HOT ' +
+      'WATER is included; you pay gas heat + electric + the rest, so budget those on top of $2,355. (4) No gym. ' +
+      '(5) Basic finishes for the size (600 sqft, carpet/laminate/vinyl). (6) Deposit, application fee, and pet ' +
+      'rent/deposit are not stated — ask for exact move-in + monthly pet costs. (7) Office is appointment-based ' +
+      'on weekends (Mon–Fri 9–5; Sat/Sun by appointment) — plan a tour accordingly.',
+    image: 'img/a22.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/sunnyvale-ca/south-mary-place-apartments/5j4SxB/',
+  },
 ];
