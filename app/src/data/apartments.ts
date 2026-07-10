@@ -82,9 +82,9 @@ export const APARTMENTS: Apartment[] = [
   {
     // a7 — Tradewind Surf Apartments, Foster City. Exact house-level geocode (Nominatim,
     // 2026-07-01 — "1110, Polynesia Drive, Foster City, 94404"). ✅ Reads LEGIT — a Zillow
-    // "Verified Source" community. No per-unit table was captured (page shows a Studio–2BR
-    // range only) — rent/beds below are USER-PROVIDED (you confirmed $2,300 / 1 bed), not
-    // scraped from a unit row like the others.
+    // "Verified Source" community. Per-unit table captured 2026-07-10: Studio 562 sqft $1,975 ·
+    // 1BR/1BA 747 sqft $2,300 · 2BR/1BA 1,020 sqft $2,850 · 2BR/2BA 1,163 sqft $2,995 (all "Now").
+    // Tracked row = the One Bedroom One Bath (747 sqft, $2,300) — confirms the $2,300/1bd given earlier.
     id: 'a7',
     status: 'New',
     title: 'Tradewind Surf Apartments — Foster City',
@@ -94,12 +94,12 @@ export const APARTMENTS: Apartment[] = [
     lat: 37.5589561,
     lng: -122.2629116,
 
-    beds: 1, // you confirmed
-    baths: 1, // inferred (typical for a 1BR) — not explicitly confirmed, no per-unit table shown
-    sqft: null, // not stated — no per-unit table captured
+    beds: 1, // "One Bedroom One Bath" row
+    baths: 1, // confirmed — "One Bedroom One Bath" (previously inferred)
+    sqft: 747, // "One Bedroom One Bath" floor plan (unit table, 2026-07-10) — a roomy 1BR
     floor: '', // not stated
 
-    rent: 2300, // you confirmed
+    rent: 2300, // "One Bedroom One Bath $2,300+" base rent (unit table) — matches the figure you'd given
     parkingCost: null, // parking not mentioned anywhere in the listing — ask
     petRent: 50, // "Monthly dog rent $50" / "Monthly cat rent $50"
     utilitiesIncluded: null, // not stated
@@ -112,8 +112,8 @@ export const APARTMENTS: Apartment[] = [
     leaseTermMonths: null, // no single fixed term — this IS month-to-month, not a "1-mo-only" lease (see min below)
     minLeaseMonths: 1, // Policies: "Lease terms: 1 month" = billed monthly, open-ended commitment
     maxLeaseMonths: null, // open-ended — month-to-month has no max
-    availableDate: '', // not stated
-    availability: 'unknown', // no date and no "now"/"unavailable" signal anywhere on the page
+    availableDate: '', // no exact date — unit table shows "Now" (availability below carries it)
+    availability: 'now', // unit table: all floor plans available "Now"
     furnished: false,
 
     petPolicy: 'Allowed', // Dogs Allowed + Cats Allowed, 2 max each, 45 lb weight limit
@@ -144,9 +144,10 @@ export const APARTMENTS: Apartment[] = [
       'temporarily closed. Notable: lease term is stated as 1 MONTH — true month-to-month, the most flexible ' +
       'term of any listing you\'ve tracked so far, and a perfect fit for your 6-month goal (it shows a green ' +
       'month-to-month flag on the card).\n' +
-      'Confirm before signing: (1) UNIT SPECIFICS — the page shows a Studio–2BR range with no per-unit table; ' +
-      'the $2,300 / 1 bed you gave me should be checked against their current "Available units" list (exact ' +
-      'unit, sqft, floor). (2) Laundry type isn\'t stated anywhere — ask if it\'s in-unit, on-site, or none. ' +
+      'Confirm before signing: (1) UNIT LINEUP (now captured, all available "Now"): Studio 562 sqft $1,975 · ' +
+      '1BR/1BA 747 sqft $2,300 (tracked here) · 2BR/1BA 1,020 sqft $2,850 · 2BR/2BA 1,163 sqft $2,995 — the 1BR ' +
+      'is a roomy 747 sqft (~$3.08/sqft) at $2,300, a strong value; confirm the exact unit/floor + that pricing ' +
+      'is current. (2) Laundry type isn\'t stated anywhere — ask if it\'s in-unit, on-site, or none. ' +
       '(3) Parking isn\'t mentioned at all — ask if it\'s included, assigned, or extra. (4) Pool is temporarily ' +
       'closed — ask when it reopens if that matters. (5) Pet rent is $50/mo per pet (dogs + cats, up to 2, ' +
       '45 lb limit) — budget that on top of rent if bringing a pet. (6) Utilities, deposit, and application ' +
