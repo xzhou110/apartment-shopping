@@ -1038,4 +1038,89 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a19.webp',
     sourceUrl: 'https://www.zillow.com/b/853-commodore-dr-san-bruno-ca-5j45xb/',
   },
+  {
+    // a20 — Hillsdale Garden, San Mateo (Northeast Hillsdale). Rooftop geocode via Nominatim
+    // (2026-07-10, "3500, Edison Street, San Mateo, 94403"). ✅ Reads LEGIT — a Zillow "Verified Source"
+    // (green check) Greystar-managed community with a real 5-unit table + floor plans. ⚠️ KEY GATE: this is
+    // an INCOME-RESTRICTED (affordable) property — you must income-QUALIFY to rent (see notes). Tracked row =
+    // Unit 313677B, the cheapest + roomiest 1BR (782 sqft, $2,965 all-in, avail Aug 3).
+    id: 'a20',
+    status: 'New',
+    title: 'Hillsdale Garden 1BR (income-restricted) — San Mateo',
+    address: '3500 Edison St, San Mateo, CA 94403',
+    neighborhood: 'Northeast Hillsdale',
+    city: 'San Mateo',
+    lat: 37.533875,
+    lng: -122.299351,
+
+    beds: 1,
+    baths: 1,
+    sqft: 782, // Unit 313677B (and 25192B) — the two roomiest 1BRs; Unit 46248D is smaller at 676 sqft
+    floor: '',
+
+    rent: 2965, // Unit 313677B "Total monthly price" — INCLUDES base rent + all mandatory monthly fees (transparent all-in; see notes)
+    parkingCost: null, // no paid parking option — the listing states Parking: None (see amen.parking)
+    petRent: 50, // "Monthly dog rent $50" / "Monthly cat rent $50"
+    utilitiesIncluded: null, // not stated
+    utilitiesEstimate: null,
+
+    deposit: null, // unit security deposit not stated (pet deposit is $500 per pet)
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // a menu of terms (see min/max)
+    minLeaseMonths: 6, // "Lease terms: 6, 7, 8, 9, 10, 11, 12, 13, 14, 15" — explicit 6-mo option, a direct fit for your goal
+    maxLeaseMonths: 15,
+    availableDate: '2026-08-03', // Unit 313677B (Unit 25192B is the same $2,965 but avail Aug 16)
+    availability: 'unknown', // date above wins for display
+    furnished: false, // unfurnished (note: an OPTIONAL "Furniture Rental Partnership With Cort" is offered)
+
+    petPolicy: 'Allowed', // Dogs + Cats allowed ($50/mo + $500 deposit each); dog BREED restrictions apply (see notes)
+    listingType: 'Property mgmt', // Greystar (the largest US apartment manager), Zillow "Verified Source", (415) 936-1214
+    contact: { company: 'Greystar', name: '', phone: '(415) 936-1214', email: '', website: '' }, // Verified Source; local 415 number
+    comments: [],
+
+    laundry: 'on-site', // "Shared: On-site Laundry Facilities" — not in-unit
+    amen: {
+      parking: false, // listing explicitly states "Parking: None" — no on-site parking (drives a "no parking" flag; mitigated by Walk Score 90)
+      woodenFloor: true, // "Flooring: Hardwood"
+      balcony: null, // not stated in the captured unit features — ask
+      gym: true, // "Fitness Center"
+    },
+    amenities: ['Total price incl. all mandatory fees', 'Swimming pool', 'Spa', 'Fitness center', 'Bocce ball court', 'Playground', 'Picnic area', 'Dog park', 'Hardwood floors', 'On-site resident services', 'Optional Cort furniture rental', 'Newly renovated (select units)'],
+
+    dateSeen: '2026-07-10',
+    daysOnMarket: null,
+    marketRent: 3100, // Est. — San Mateo 1BR comp; $2,965 all-in (fees included) is at/slightly under market for the size + amenities
+
+    expertRating: 4, // CONDITIONAL 4 — genuinely strong IF two gates clear: (1) you income-QUALIFY and (2) you're OK with NO on-site parking. Upside: a roomy 782 sqft 1BR, explicit 6-mo lease, resort amenities (pool/spa/gym/dog park/bocce), Greystar-managed + Verified, transparent all-in pricing, Walk Score 90. Held from 5 by the income gate, no parking, shared (not in-unit) laundry, and only 1 bath even on the 2BRs
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '⚠️ READ FIRST — INCOME-RESTRICTED (affordable) HOUSING: this is a real, well-run community, but you must ' +
+      'INCOME-QUALIFY to rent it. For affordable housing that almost always means a MAXIMUM income cap (your ' +
+      'household must earn UNDER a limit tied to Area Median Income), and Greystar "may have additional ' +
+      'eligibility criteria." As a founder with variable income this can cut both ways — you might be over the ' +
+      'cap, or you might qualify. Use the listing\'s "Check income qualification" tool BEFORE you invest any time; ' +
+      'if you don\'t qualify, skip it.\n' +
+      '✅ Otherwise LEGITIMATE — a Zillow "Verified Source" (green check) Greystar-managed community in Northeast ' +
+      'Hillsdale, San Mateo, (415) 936-1214, with a real 5-unit table, floor plans, and resort-style amenities: ' +
+      'swimming pool, spa, fitness center, bocce court, dog park, playground, picnic area, on-site resident ' +
+      'services. 🟢 STANDOUT FITS: an explicit SIX-MONTH lease option (6–15 mo menu — a direct match for your ' +
+      'goal), a roomy 782 sqft 1BR (one of the largest on your list), hardwood floors, pet-friendly, Walk Score ' +
+      '90 (Very Walkable). 💡 PRICING IS TRANSPARENT: the $2,965 is the "Total monthly price" — it already ' +
+      'includes base rent + all mandatory monthly fees (most listings quote base-only), so it\'s a cleaner ' +
+      'apples-to-apples number than it looks.\n' +
+      'Confirm before signing: (1) 🚗 NO PARKING — the listing states "Parking: None"; there is no on-site ' +
+      'parking, so you\'d rely on street parking (the card shows a no-parking flag). Walk Score 90 helps, but ' +
+      'confirm your options if you have a car. (2) LAUNDRY is shared/on-site, NOT in-unit. (3) PETS — cats + dogs ' +
+      'OK ($50/mo + $500 deposit each), but DOG BREED restrictions apply (Rottweiler, doberman, pit bull, ' +
+      'staffordshire terrier, chow, presa canaria, akita, alaskan malamute, wolf hybrid, or mixes). (4) The 2BR ' +
+      'units are 2bd/1BA only — one bathroom. (5) Deposit + utilities not stated — ask move-in costs and what ' +
+      'utilities you pay. (6) UNIT CHOICE — 5 units: 1BRs at $2,965 (782 sqft, Aug 3 / Aug 16) or $3,159 ' +
+      '(676 sqft, Aug 9); 2BR/1BAs at $3,389 (955 sqft, Aug 15 / Sep 30). This row tracks the cheapest+biggest ' +
+      '1BR — tell me if you want a different one.',
+    image: 'img/a20.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/san-mateo-ca/hillsdale-garden/5Zc8my/',
+  },
 ];
