@@ -954,4 +954,88 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a18.webp',
     sourceUrl: 'https://www.zillow.com/homedetails/1300-Hoover-St-APT-2-Menlo-Park-CA-94025/2060137151_zpid/',
   },
+  {
+    // a19 — 853 Commodore Dr, San Bruno ("The Crossing San Bruno" community). Rooftop geocode via
+    // Nominatim (2026-07-10, structured "853, Commodore Drive, San Bruno, 94066"). ✅ Reads LEGIT but
+    // is a DIFFERENT PRODUCT: this is a **Blueground FURNISHED corporate-housing** listing (theblueground.com
+    // watermarks, "1-12+ months", furnished perks), the FIRST furnished unit on your list — raw rent is NOT
+    // apples-to-apples with the unfurnished listings. Page lists 7 units ($2,840 1BR → $4,510 2BR); tracked
+    // row = Unit 5-ID988, the cheapest 1BR (568 sqft, $2,840, avail Jul 11). The hero photo you sent is of
+    // Unit 5-ID2093 (the 2BR/2BA $4,510) — Blueground stages every unit alike, so it represents the finish.
+    id: 'a19',
+    status: 'New',
+    title: 'Blueground Furnished 1BR — San Bruno',
+    address: '853 Commodore Dr, San Bruno, CA 94066',
+    neighborhood: 'The Crossing',
+    city: 'San Bruno',
+    lat: 37.634549,
+    lng: -122.42204,
+
+    beds: 1,
+    baths: 1,
+    sqft: 568, // Unit 5-ID988 (all three 1BRs are 568 sqft)
+    floor: '', // not stated
+
+    rent: 2840, // Unit 5-ID988, 568 sqft, avail Jul 11 (other 1BRs: ID583 $2,890 Oct 31, ID975 $2,920 Nov 1). FURNISHED — see notes
+    parkingCost: null, // not stated on this Blueground view — ask (The Crossing community typically has garage parking)
+    petRent: null, // not stated
+    utilitiesIncluded: null, // not stated — Blueground rates sometimes bundle wifi/utilities on shorter terms; confirm what's included
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated (Blueground usually charges a set deposit + a one-time cleaning fee — ask)
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // flexible — the "1-12+ months" badge; modeled via min/max below
+    minLeaseMonths: 1, // Blueground does flexible terms from ~1 month (open-ended up)
+    maxLeaseMonths: null, // "12+" — open-ended; the 6-mo term you want is squarely in range
+    availableDate: '2026-07-11', // Unit 5-ID988 available Jul 11 (essentially now)
+    availability: 'unknown', // date above wins for display
+    furnished: true, // ⭐ FULLY FURNISHED — the first furnished listing on your list (King bed, Smart TV, decor, kitchenware)
+
+    petPolicy: 'Unknown', // not stated on this view — Blueground pet rules vary by building; confirm
+    listingType: 'Property mgmt', // Blueground — a large, established furnished-apartment operator (professional leasing flow)
+    contact: { company: 'Blueground', name: '', phone: '', email: '', website: 'https://www.theblueground.com/' },
+    comments: [],
+
+    laundry: 'in-unit', // "In-unit laundry (W/D)" chip + "IN-APARTMENT LAUNDRY" tag + Washer/Dryer in appliances
+    amen: {
+      parking: null, // not stated — ask
+      woodenFloor: true, // wide-plank wood-look flooring throughout the photos
+      balcony: true, // photo shows a private balcony with bistro seating
+      gym: null, // not stated on the Blueground view (the wider community may have one) — ask
+    },
+    amenities: ['Fully furnished', 'Smart TV', 'King bed', 'Modern decor', 'Premium wireless speaker', 'In-unit washer/dryer', 'Dishwasher', 'Private balcony', 'Flexible 1–12+ mo lease', 'Move-in ready (turnkey)'],
+
+    dateSeen: '2026-07-10',
+    daysOnMarket: null,
+    marketRent: null, // deliberately null — furnished corporate housing has no clean unfurnished comp in your set (like the a9 tiny house); the raw $/sqft on the card is the honest signal, but read it knowing it's FURNISHED
+
+    expertRating: 4, // strong FIT *if* you want furnished/flexible: fully furnished + move-in-ready + a flexible 1-12+ mo term (your 6-mo goal fits perfectly) + in-unit W/D + balcony + BART/SFO-adjacent; held from 5 by the top-of-range raw rent, small 568 sqft, likely extra fees (cleaning/booking), and unconfirmed parking/pets/utilities
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ LEGITIMATE, but a DIFFERENT PRODUCT than the rest of your list — this is BLUEGROUND, a large, ' +
+      'established furnished-apartment operator, at "The Crossing San Bruno," a real BART-adjacent community ' +
+      '(the theblueground.com watermarks are their own marketing, not a scam tell). ⭐ THE ANGLE: it\'s FULLY ' +
+      'FURNISHED and move-in-ready (King bed, Smart TV, modern decor, kitchenware, premium speaker) with a ' +
+      'FLEXIBLE 1–12+ month term — which is arguably the BEST fit on your whole list for a 6-month stay: you ' +
+      'bring a suitcase, buy/move no furniture, and hand it back at the end. In-unit W/D, a private balcony, and ' +
+      'great transit (San Bruno BART + The Shops at Tanforan next door, 101/280, ~10 min to SFO).\n' +
+      'Read the price honestly: (1) FURNISHED ≠ your other rows — $2,840 for a 568 sqft 1BR is the top of your ' +
+      '1BR range in RAW dollars, but it bundles all the furniture; furnished San Bruno 1BRs typically run ' +
+      '$3,200–3,600, so as furnished housing it\'s fair-to-good value (Blueground\'s pitch is literally "furnished ' +
+      'at unfurnished prices"). If you already OWN furniture, the cheaper unfurnished options (a17/a18 Menlo Park ' +
+      '~$2,425–2,495) win on cost; if you DON\'T, this likely nets out ahead for 6 months. I set market-rent to ' +
+      '"—" on purpose (no clean unfurnished comp), so don\'t read an over/under-market flag into it.\n' +
+      'Confirm before booking: (1) FEES — Blueground usually adds a one-time cleaning fee (and sometimes a ' +
+      'booking/membership fee); the $2,840 is likely the 12-mo rate — a 6-mo term often prices a bit higher. Ask ' +
+      'for the ALL-IN monthly at a 6-month term. (2) WHAT\'S INCLUDED — confirm whether wifi/utilities are ' +
+      'bundled (Blueground varies by plan). (3) PETS — not stated here; their policy varies by building. ' +
+      '(4) PARKING — not shown on this view; ask if there\'s a garage spot and what it costs. (5) UNIT CHOICE — ' +
+      '7 units total: three 568 sqft 1BRs ($2,840 Jul 11 / $2,890 Oct 31 / $2,920 Nov 1) and four 2BR/2BAs ' +
+      '($4,010–$4,510); this row tracks the cheapest 1BR, but tell me if you want a 2BR row instead.',
+    image: 'img/a19.webp',
+    sourceUrl: 'https://www.zillow.com/b/853-commodore-dr-san-bruno-ca-5j45xb/',
+  },
 ];
