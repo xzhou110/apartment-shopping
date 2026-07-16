@@ -25,6 +25,7 @@ interface Props {
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
   onMarkGone: (id: string) => void;
+  onRuleOut: (id: string) => void;
   onSetExpert: (id: string, n: number) => void;
   onSetYou: (id: string, n: number) => void;
   onAddComment: (id: string, text: string) => void;
@@ -167,6 +168,7 @@ export function DetailModal({
   onEdit,
   onDelete,
   onMarkGone,
+  onRuleOut,
   onSetExpert,
   onSetYou,
   onAddComment,
@@ -350,6 +352,15 @@ export function DetailModal({
               {apt.status !== 'Gone' && (
                 <button className="btn-mini" onClick={() => onMarkGone(apt.id)}>
                   Mark as gone
+                </button>
+              )}
+              {apt.status !== 'Ruled out' && (
+                <button
+                  className="btn-mini"
+                  onClick={() => onRuleOut(apt.id)}
+                  title="Not available to you / didn't qualify — hides the listing (the Show ruled out chip brings it back)"
+                >
+                  Rule out
                 </button>
               )}
               <button className="btn-mini" onClick={() => onDelete(apt.id)} style={{ color: 'var(--risk)' }}>

@@ -24,6 +24,7 @@ function filters(overrides: Partial<Filters> = {}): Filters {
     reqAmenities: [],
     hideRejected: false,
     showGone: false,
+    showRuledOut: false,
     sort: 'added',
     ...overrides,
   };
@@ -107,7 +108,7 @@ describe('applyFilters: showGone (criterion #9 — Gone hidden by default)', () 
 
   it('showGone:true reveals Gone listings', () => {
     const res = applyFilters(apts, filters({ showGone: true }), DEFAULT_SETTINGS);
-    expect(res).toHaveLength(3);
+    expect(res.map((a) => a.id)).toEqual(['a1', 'a2', 'a3']);
   });
 
   it('seed has 1 Gone listing (a3); only 2 shown by default', () => {
@@ -116,6 +117,43 @@ describe('applyFilters: showGone (criterion #9 — Gone hidden by default)', () 
     // the live APARTMENTS array but the logic is identical.
     const gone = apts.filter((a) => a.status === 'Gone');
     expect(gone).toHaveLength(2);
+  });
+});
+
+// ===========================================================================
+// applyFilters — showRuledOut ("Ruled out" = not available / didn't qualify, hidden by default)
+// ===========================================================================
+describe('applyFilters: showRuledOut (Ruled out hidden by default, like Gone)', () => {
+  const apts = [
+    makeApt({ id: 'r1', status: 'New' }),
+    makeApt({ id: 'r2', status: 'Ruled out' }),
+    makeApt({ id: 'r3', status: 'Gone' }),
+  ];
+
+  it('default hides Ruled out (and Gone), keeps the rest', () => {
+    const res = applyFilters(apts, filters(), DEFAULT_SETTINGS);
+    expect(res.map((a) => a.id)).toEqual(['r1']);
+  });
+
+  it('showRuledOut:true reveals Ruled out but NOT Gone (independent chips)', () => {
+    const res = applyFilters(apts, filters({ showRuledOut: true }), DEFAULT_SETTINGS);
+    expect(res.map((a) => a.id)).toEqual(['r1', 'r2']);
+  });
+
+  it('showGone:true alone still hides Ruled out', () => {
+    const res = applyFilters(apts, filters({ showGone: true }), DEFAULT_SETTINGS);
+    expect(res.map((a) => a.id)).toEqual(['r1', 'r3']);
+  });
+
+  it('both chips on reveals everything', () => {
+    const res = applyFilters(apts, filters({ showGone: true, showRuledOut: true }), DEFAULT_SETTINGS);
+    expect(res.map((a) => a.id)).toEqual(['r1', 'r2', 'r3']);
+  });
+
+  it('hideRejected does not affect Ruled out (distinct statuses)', () => {
+    const mixed = [makeApt({ id: 'x1', status: 'Rejected' }), makeApt({ id: 'x2', status: 'Ruled out' })];
+    const res = applyFilters(mixed, filters({ hideRejected: true, showRuledOut: true }), DEFAULT_SETTINGS);
+    expect(res.map((a) => a.id)).toEqual(['x2']);
   });
 });
 

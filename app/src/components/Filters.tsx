@@ -109,6 +109,13 @@ export function Filters({
           >
             {filters.showGone ? 'Hide gone' : 'Show gone'}
           </button>
+          <button
+            className={`chip ${filters.showRuledOut ? 'on' : ''}`}
+            onClick={() => setFilters({ showRuledOut: !filters.showRuledOut })}
+            title="Ruled out = not available to you / didn't qualify — hidden by default"
+          >
+            {filters.showRuledOut ? 'Hide ruled out' : 'Show ruled out'}
+          </button>
         </div>
 
         <div className="controls-right">

@@ -96,6 +96,16 @@ export default function App() {
     [g, showToast],
   );
 
+  // "Ruled out" = not available to you / didn't qualify (vs Gone = off the market entirely).
+  const handleRuleOut = useCallback(
+    (id: string) => {
+      g.setStatus(id, 'Ruled out');
+      setDetailId(null);
+      showToast('Ruled out — hidden from the list ("Show ruled out" brings it back)');
+    },
+    [g, showToast],
+  );
+
   // Distance anchors are managed in Settings → Distance anchors (the inline "rank by distance"
   // bar was removed 2026-06-30). primaryAnchor/anchorLabel above still drive the Nearest sort,
   // the per-card distance chip, and the flag context.
@@ -224,6 +234,7 @@ export default function App() {
         onEdit={handleEdit}
         onDelete={handleDelete}
         onMarkGone={handleMarkGone}
+        onRuleOut={handleRuleOut}
         onSetExpert={(id, n) => g.setRating(id, 'expert', n)}
         onSetYou={(id, n) => g.setRating(id, 'you', n)}
         onAddComment={g.addComment}

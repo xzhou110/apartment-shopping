@@ -34,6 +34,7 @@ export const STATUS_BADGE: Record<Status, string> = {
   Applied: 'b-warn',
   Rejected: 'b-risk',
   Leased: 'b-good',
+  'Ruled out': 'b-warn', // amber: blocked (unavailable / didn't qualify) — vs Gone's neutral "off market"
   Gone: 'b-neutral',
 };
 
@@ -78,6 +79,7 @@ export function applyFilters(apts: Apartment[], f: Filters, settings: Settings):
     }
     if (f.hideRejected && a.status === 'Rejected') return false;
     if (!f.showGone && a.status === 'Gone') return false;
+    if (!f.showRuledOut && a.status === 'Ruled out') return false;
     if (f.maxRent != null && (a.rent == null || a.rent > f.maxRent)) return false;
     if (f.minBeds != null && (a.beds == null || a.beds < f.minBeds)) return false;
     if (f.furnishedOnly && a.furnished !== true) return false;

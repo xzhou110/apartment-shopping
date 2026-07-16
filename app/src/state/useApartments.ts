@@ -27,6 +27,7 @@ export interface Filters {
   reqAmenities: AmenityKey[];
   hideRejected: boolean;
   showGone: boolean;
+  showRuledOut: boolean;
   sort: SortKey;
 }
 
@@ -38,6 +39,7 @@ export const DEFAULT_FILTERS: Filters = {
   leaseFitsTarget: false,
   reqAmenities: [],
   hideRejected: false,
+  showRuledOut: false,
   showGone: false,
   // Default = rank by distance from your primary Settings anchor. If no anchor is set, applySort's
   // 'nearest' comparator degrades cleanly to insertion order (NaN→0, stable sort) and no distance

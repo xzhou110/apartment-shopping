@@ -43,6 +43,7 @@ export type Status =
   | 'Applied'
   | 'Rejected'
   | 'Leased' // you signed it (won) — kept, but flagged as the chosen one
+  | 'Ruled out' // not available to you / didn't qualify (e.g. income cap) — hidden by default like Gone
   | 'Gone'; // off the market / leased to someone else — hidden from the active list by default
 
 export type ListingType = 'Property mgmt' | 'Landlord' | 'Sublet' | 'Broker' | 'Unknown';

@@ -13,7 +13,7 @@ interface Props {
   onSave: (apt: Apartment) => void;
 }
 
-const STATUSES: Status[] = ['New', 'Shortlist', 'Contacted', 'Toured', 'Applied', 'Rejected', 'Leased', 'Gone'];
+const STATUSES: Status[] = ['New', 'Shortlist', 'Contacted', 'Toured', 'Applied', 'Rejected', 'Leased', 'Ruled out', 'Gone'];
 const LISTING_TYPES: ListingType[] = ['Property mgmt', 'Landlord', 'Sublet', 'Broker', 'Unknown'];
 const PET_POLICIES: PetPolicy[] = ['Allowed', 'Cats only', 'Dogs only', 'No pets', 'Unknown'];
 

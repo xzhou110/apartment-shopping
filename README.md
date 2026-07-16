@@ -58,7 +58,7 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
    latest **comment** shows on the card below the flags. A small id badge (e.g. `a6`) on each photo maps the
    card to the data file / chat references — and the search box matches the id.
 5. **Filter / sort** — search (title / neighborhood / city / address / id); quick chips (Furnished only,
-   Lease fits my target, Hide rejected, Show gone); a filter panel (max rent, min beds, must-have
+   Lease fits my target, Hide rejected, Show gone, Show ruled out); a filter panel (max rent, min beds, must-have
    amenities); and sorts (**Nearest — the default**, Rent low→high / high→low, Beds, Sqft, Your rating, Added).
    With no distance anchor set yet, Nearest falls back to insertion order (and no distance chips) until you pick one in Settings.
 6. **Compare** — tick ≥2 listings → the Compare tab shows them side-by-side and auto-highlights the
@@ -69,9 +69,14 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
    (on the card and in the detail thread) — income qualification is a hard eligibility gate, not a
    nice-to-know. Ratings, status, and comments are your per-listing state and persist in your
    browser even when I refresh the seed data.
-8. **Track status** — New → Shortlist → Contacted → Toured → Applied → Rejected → **Leased** / **Gone**.
-   Marking a listing **Gone** (off market / leased to someone else) hides it; the **Show gone** chip
-   brings it back.
+8. **Track status** — New → Shortlist → Contacted → Toured → Applied → Rejected → **Leased** /
+   **Ruled out** / **Gone**. Two statuses hide a listing from the board (each has a chip to bring it
+   back): **Gone** = off the market entirely (leased to someone else, delisted) — the market took it
+   away; **Ruled out** = not available *to you* or you don't qualify (e.g. an income-restricted
+   community over/under your income cap, a unit that turned out not to be open) — reality took it
+   away. **Rejected** (= you passed on it by preference) stays visible unless you turn on Hide
+   rejected. Both "Mark as gone" and "Rule out" are one-click buttons in a listing's detail view;
+   any status can also be set via Edit.
 9. **Export to Google Sheets** — the **Export** button: **Sync** (push every listing straight into your
    sheet, updated in place), **Copy for Sheets** / **Download CSV** (zero-setup), and **JSON for Claude**
    (paste back to me so I can save your in-app edits into the data file). One-time Sheet setup is the same
