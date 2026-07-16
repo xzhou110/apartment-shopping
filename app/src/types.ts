@@ -127,6 +127,7 @@ export interface Apartment {
   // ratings / notes / media
   expertRating: number; // 0–5 — my (Claude's) rating
   scamRisk: boolean; // true = I judged it a possible scam → a red 'risk' flag shows on the card
+  incomeRestricted: boolean; // true = income-qualified (affordable/AMI) housing → a red 'risk' flag: you must income-qualify to rent (e.g. a20/a24)
   rating: number; // 0–5 — your rating
   notes: string; // supports \n
   comments: Comment[]; // your own running notes on this listing (persisted as a user overlay)

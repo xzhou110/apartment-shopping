@@ -46,6 +46,14 @@ describe('buildSheetCols', () => {
     expect(cell('Other amenities')).toBe('Roof deck; Bike room');
   });
 
+  it('income-restricted exports YES when set, empty otherwise (like scam risk)', () => {
+    const cell = (a: ReturnType<typeof makeApt>, title: string) =>
+      SHEET_COLS.find((c) => c[0] === title)![1](a);
+    expect(cell(makeApt({ incomeRestricted: true }), 'Income-restricted')).toContain('YES');
+    expect(cell(makeApt({ incomeRestricted: false }), 'Income-restricted')).toBe('');
+    expect(cell(makeApt({ scamRisk: true }), 'Scam risk')).toContain('YES');
+  });
+
   it('null numeric fields export as empty string, not 0', () => {
     const a = makeApt({ parkingCost: null, sqft: null });
     const cell = (title: string) => SHEET_COLS.find((c) => c[0] === title)![1](a);

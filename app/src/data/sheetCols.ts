@@ -87,6 +87,7 @@ export function buildSheetCols(settings: Settings = DEFAULT_SETTINGS): SheetCol[
 
     ['Expert rating', (a) => a.expertRating ?? ''],
     ['Scam risk', (a) => (a.scamRisk ? 'YES — verify' : '')],
+    ['Income-restricted', (a) => (a.incomeRestricted ? 'YES — must income-qualify' : '')],
     ['Your rating', (a) => a.rating ?? ''],
 
     ...AMENITIES.map(([k, , long]): SheetCol => [

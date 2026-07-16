@@ -29,11 +29,16 @@ function parseDate(iso: string): Date | null {
 
 /**
  * Risk / warn / info / good flags for one apartment. PURE: no DOM, no Date.now()
- * except via the injectable ctx.today. Order (2026-07-07, user): scam risk stays absolutely
- * first (the "don't touch this" override), then the LEASE-TERM flag — whatever its level
- * (risk / warn / good) — because lease fit is the user's #1 decision factor, then the
- * remaining warns, infos, goods. The card previews only the first 3 flags, so this order
- * guarantees the lease verdict is always visible.
+ * except via the injectable ctx.today.
+ *
+ * Order (2026-07-15, user): RED (risk) flags always sort to the TOP — enforced by a stable
+ * partition on the way out, so it holds for any future rule too. Within the risks, insertion
+ * order sets precedence: scam (the "don't touch this" override) > income-restricted (a hard
+ * eligibility gate) > lease-conflict. After the risks, the earlier rule (2026-07-07) still
+ * applies: the LEASE-TERM flag — whatever its level (warn / good) — leads the remaining
+ * warns, infos, goods, because lease fit is the user's #1 decision factor. The card previews
+ * only the first 3 flags, so this order guarantees the dealbreakers + the lease verdict are
+ * always visible.
  */
 export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
   const f: Flag[] = [];
@@ -50,7 +55,16 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
   if (apt.scamRisk)
     f.push({ lvl: 'risk', t: 'Possible scam — verify the listing before you contact or pay.' });
 
-  // ---- lease term (always the first non-scam flag, whatever its level) ----
+  // Income-restricted (affordable/AMI) housing — a hard ELIGIBILITY gate, not a price signal:
+  // if you don't income-qualify, nothing else about the listing matters. Set by hand
+  // (apt.incomeRestricted) when I add such a listing (e.g. a20/a24); program specifics live in notes.
+  if (apt.incomeRestricted)
+    f.push({
+      lvl: 'risk',
+      t: 'Income-restricted — you must income-qualify to rent; check the income cap before you invest time.',
+    });
+
+  // ---- lease term (the first flag after any risks, whatever its level) ----
   // Lease window can't be met — only fires on a definite false, never null.
   if (leaseFits(apt, settings) === false)
     f.push({
@@ -169,7 +183,10 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
       t: 'Furnished, in-unit laundry, parking, fits your lease window — low-friction short stay.',
     });
 
-  return f;
+  // RED flags always surface first (user rule 2026-07-15). Stable partition: relative order is
+  // preserved within each group, so scam > income-restricted > lease-conflict holds among the
+  // risks, and the lease-verdict-leads rule holds among the rest.
+  return [...f.filter((x) => x.lvl === 'risk'), ...f.filter((x) => x.lvl !== 'risk')];
 }
 
 /**

@@ -64,6 +64,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4,
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing managed by Zac Amero, with professional ' +
@@ -136,6 +137,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4,
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing managed by Blvd Residential (Leasing Agent, ' +
@@ -212,6 +214,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4,
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" community (Three21@Belmont) with a real per-unit ' +
@@ -286,6 +289,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 3, // flexible + utilities-included + in-unit laundry + parking are strong, BUT 300 sqft for a nominal "2 beds," no pets, and high $/sqft are real limits
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Reads LEGITIMATE but VERY NICHE — a real Zillow home-detail listing (24 days on market, 39 contacts, ' +
@@ -359,6 +363,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 3, // fair price + utilities mostly included + a 6-mo-then-M2M lease that fits perfectly, BUT 3rd-floor walk-up (no elevator), street parking only, coin laundry, no pets — a basic unit
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Reads LEGITIMATE — a real Zillow home-detail listing (10 days on market, 53 contacts) by a private ' +
@@ -433,6 +438,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // strong amenity set (pool, spa, gym, clubhouse, covered parking, balcony, A/C) + reduced-rent offer + pet-friendly; downsides are the low 20 lb pet limit, unstated laundry/lease term, and a non-local contact number
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" community (Gatewood Village, run by Brighthaven ' +
@@ -506,6 +512,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // excellent fit: month-to-month + in-unit W/D + covered parking + balcony + pool/gym/clubhouse + Bay views + the largest 1BR (717 sqft) & nicest finishes on your list — held from 5 only by the top-of-list price and current unavailability
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" hillside community (Carlmont Heights, spanning ~4 acres ' +
@@ -579,6 +586,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // strong practical fit: EXPLICIT 6-mo lease option (exactly your goal) + gated + off-street parking + water/sewer/garbage included + under market + 700 sqft; basic finishes (carpet/vinyl), on-site (not in-unit) laundry, no gym keep it from higher
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing by a management company (GPS/Logos Property ' +
@@ -652,6 +660,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // strong: EXPLICIT 6-mo lease option + balcony + covered parking + heated pool + prime location (5 min to Google, walk to Caltrain, Los Altos schools) + under market + hot-water/water/sewer/garbage included; held from 5 by shared (not in-unit) laundry, no gym, and a Saturday-only leasing office
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" 85-unit community (Del Medio Garden, run by Gibraltar ' +
@@ -722,6 +731,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // big draws: the LARGEST 1BR (800 sqft) + heated pool + gym + very flexible lease menu (7–12 mo all fit); held back by cats-only (odd 5 lb limit) and — notably — parking + laundry are NOT mentioned at all
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing by Blvd Residential (the same management ' +
@@ -793,6 +803,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // strong VALUE angle: a 2BR/850sqft for $2,850 = more room than the 1BRs at similar money, + large balcony + carport-with-storage + monthly/6-mo lease options + water/sewer/garbage/hot-water included + open 7 days; tradeoffs are NO PETS, only 1 bath, older finishes, and current unavailability
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" quiet 18-unit garden community (managed by Don Dilbeck), ' +
@@ -866,6 +877,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // one of your best FITS: prime Menlo Park (near Meta + Stanford + top schools), under-market $2,425, EXPLICIT 6–12 mo + short-term lease, likely in-unit W/D, a balcony/patio, hardwood, pool, $0 admin + low $500 deposit; held from 5 by small 600 sqft, a 1958 building (1 bath), and unconfirmed parking/pets
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — an apartments.com managed community (Verandas; built 1958, 34 units, Property ' +
@@ -940,6 +952,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // strong FIT: prime Menlo Park + a STATED 6-MONTH lease (your exact target) + assigned covered parking + cats/dogs OK + hardwood + under market + a 5★-reviewed agent; held from 5 by the TINY 533 sqft, shared coin laundry, wall-furnace-only heat, and utilities mostly tenant-paid
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a real Zillow unit listed by a NAMED, well-reviewed agent (Tim Proschold, ' +
@@ -1017,6 +1030,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // strong FIT *if* you want furnished/flexible: fully furnished + move-in-ready + a flexible 1-12+ mo term (your 6-mo goal fits perfectly) + in-unit W/D + balcony + BART/SFO-adjacent; held from 5 by the top-of-range raw rent, small 568 sqft, likely extra fees (cleaning/booking), and unconfirmed parking/pets/utilities
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ LEGITIMATE, but a DIFFERENT PRODUCT than the rest of your list — this is BLUEGROUND, a large, ' +
@@ -1099,6 +1113,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // CONDITIONAL 4 — genuinely strong IF two gates clear: (1) you income-QUALIFY and (2) you're OK with NO on-site parking. Upside: a roomy 782 sqft 1BR, explicit 6-mo lease, resort amenities (pool/spa/gym/dog park/bocce), Greystar-managed + Verified, transparent all-in pricing, Walk Score 90. Held from 5 by the income gate, no parking, shared (not in-unit) laundry, and only 1 bath even on the 2BRs
     scamRisk: false,
+    incomeRestricted: true, // affordable/AMI property — must income-qualify (the red flag; details in notes)
     rating: 0,
     notes:
       '⚠️ READ FIRST — INCOME-RESTRICTED (affordable) HOUSING: this is a real, well-run community, but you must ' +
@@ -1185,6 +1200,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // strong FIT for a SOLO short stay: fully furnished + ALL utilities + free internet + flexible month-to-month + in-unit W/D + off-street parking + private entrance + walk to Caltrain + high-end bath, and reads legit; held from 5 by the SINGLE-OCCUPANT cap, KITCHENETTE-only (no oven), no pets, top-of-list $3,000, and the undisclosed address (area pin only)
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Reads LEGITIMATE (I do NOT think this is a scam) — a private upstairs 1-bedroom in-law/ADU suite with ' +
@@ -1266,6 +1282,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // strong practical VALUE + FIT: explicit 6-mo lease (your goal), modestly under-market $2,355 in pricey Sunnyvale, remodeled w/ granite/quartz + double-pane, covered parking, pool, storage, pet-friendly, prime Google/Caltrain/VTA location, $1k lease-completion bonus; held from 5 by shared (not in-unit) laundry, ceiling-fan-only cooling (no A/C), no gym, basic 600 sqft w/ carpet/vinyl
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" (green check) managed community (South Mary Place) with ' +
@@ -1342,6 +1359,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 4, // one of your best VALUE + FLEXIBILITY picks: an exceptionally wide 3–12 mo lease menu (your 6-mo goal fits easily, even shorter possible), well under-market $2,350 in prime Old Mountain View (walk to downtown/Castro St/Caltrain), wood-style floors, pool, carport parking, storage, pet-friendly, available Now; held from 5 by shared (not in-unit) laundry, wall/in-home heat + NO A/C, carport (not garage), basic older complex, small 620 sqft
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" (green check) managed community (Station 245, run by ' +
@@ -1420,6 +1438,7 @@ export const APARTMENTS: Apartment[] = [
 
     expertRating: 3, // the BUILDING is genuinely nice — brand-new, central A/C (rare on your list!), clubhouse/gym/lounge, contemporary, and cheap. But for a SOLO, FLEXIBLE 6-MONTH stay it's a weak fit: (1) income-restricted (must qualify), (2) NOT OPEN YET (under construction, Summer 2026), (3) NO pets, (4) no stated lease term (affordable = usually 12-mo, not 6), (5) family-oriented (playground/homework room) + likely a lottery/waitlist application. Rating reflects FIT, not build quality
     scamRisk: false,
+    incomeRestricted: true, // affordable/AMI property — must income-qualify (the red flag; details in notes)
     rating: 0,
     notes:
       '⚠️ READ FIRST — this has TWO hard gates that make it a weak fit for your solo, flexible 6-month search, ' +

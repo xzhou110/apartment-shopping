@@ -49,8 +49,12 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
    phone, email, website), and auto **flags**. Lease flags track your **6-month goal**: a stated 12-mo term
    reads **red** (doesn't fit — ask if they'll do 6), a listing with **no lease term stated** reads **amber**
    (confirm before you commit), and a true **month-to-month** listing reads **green** (maximum flexibility).
-   Other flags: no laundry, over/under market, utilities not included, available date passed, broker fee, far
-   from your anchor. A colored top border flags overall risk (red) / caution (amber) / good (green). Your
+   Two hand-set **red flags** mark hard gates when I add (or you edit) a listing: **possible scam** and
+   **income-restricted** (affordable/AMI housing — you must income-qualify to rent, e.g. a20/a24; both are
+   checkboxes in the Edit form). Other flags: no laundry, over/under market, utilities not included, available
+   date passed, broker fee, far from your anchor. **Red (risk) flags always sort to the top** of the flag
+   list — order: scam, income-restricted, lease conflict — so a dealbreaker is never pushed out of the card's
+   3-flag preview. A colored top border flags overall risk (red) / caution (amber) / good (green). Your
    latest **comment** shows on the card below the flags. A small id badge (e.g. `a6`) on each photo maps the
    card to the data file / chat references — and the search box matches the id.
 5. **Filter / sort** — search (title / neighborhood / city / address / id); quick chips (Furnished only,

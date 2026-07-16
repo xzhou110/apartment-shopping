@@ -56,6 +56,65 @@ describe('risk: possible scam', () => {
   });
 });
 
+// ---- risk: income-restricted ------------------------------------------------
+describe('risk: income-restricted (hard eligibility gate)', () => {
+  it('incomeRestricted true → red risk flag', () => {
+    const f = getFlags(makeApt({ incomeRestricted: true }), ctx());
+    const flag = f.find((x) => x.t.includes('Income-restricted'));
+    expect(flag).toBeTruthy();
+    expect(flag!.lvl).toBe('risk');
+  });
+  it('incomeRestricted false → no flag', () => {
+    expect(has(makeApt({ incomeRestricted: false }), ctx(), 'Income-restricted')).toBe(false);
+  });
+  it('sorts to the TOP, above warns (red flags always first)', () => {
+    // amber "lease not stated" + warn "no laundry" would otherwise lead
+    const apt = makeApt({
+      incomeRestricted: true,
+      minLeaseMonths: null,
+      maxLeaseMonths: null,
+      leaseTermMonths: null,
+      laundry: 'none',
+    });
+    const f = getFlags(apt, ctx());
+    expect(f[0].lvl).toBe('risk');
+    expect(f[0].t).toContain('Income-restricted');
+  });
+  it('scam stays first when both fire; income-restricted is second', () => {
+    const f = getFlags(makeApt({ scamRisk: true, incomeRestricted: true }), ctx());
+    expect(f[0].t.toLowerCase()).toContain('scam');
+    expect(f[1].t).toContain('Income-restricted');
+    expect(f[0].lvl).toBe('risk');
+    expect(f[1].lvl).toBe('risk');
+  });
+  it('drives the card signal to risk (red top border)', () => {
+    expect(signalLevel(makeApt({ incomeRestricted: true, leaseTermMonths: null }), ctx())).toBe('risk');
+  });
+});
+
+// ---- ordering: red flags always on top ---------------------------------------
+describe('flag ordering: risk (red) flags always sort first', () => {
+  it('every risk flag precedes every non-risk flag (scam + income + red lease vs warns)', () => {
+    const apt = makeApt({
+      scamRisk: true,
+      incomeRestricted: true,
+      minLeaseMonths: 18, // red lease conflict
+      maxLeaseMonths: 24,
+      laundry: 'none', // warn
+      utilitiesIncluded: false, // warn
+    });
+    const f = getFlags(apt, ctx());
+    const lastRisk = f.map((x) => x.lvl).lastIndexOf('risk');
+    const firstNonRisk = f.findIndex((x) => x.lvl !== 'risk');
+    expect(lastRisk).toBeGreaterThanOrEqual(0);
+    expect(firstNonRisk).toBeGreaterThan(lastRisk);
+    // and the within-risk precedence: scam > income-restricted > lease
+    expect(f[0].t.toLowerCase()).toContain('scam');
+    expect(f[1].t).toContain('Income-restricted');
+    expect(f[2].t).toContain('Lease');
+  });
+});
+
 // ---- warn -----------------------------------------------------------------
 describe('warn rules', () => {
   it('no laundry (none in-unit or on-site)', () => {

@@ -44,6 +44,7 @@ export function makeApt(overrides: Partial<Apartment> = {}): Apartment {
     marketRent: null,
     expertRating: 0,
     scamRisk: false,
+    incomeRestricted: false,
     rating: 0,
     notes: '',
     comments: [],

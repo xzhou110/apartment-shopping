@@ -67,6 +67,7 @@ interface Draft {
   image: string;
   expertRating: string;
   scamRisk: boolean;
+  incomeRestricted: boolean;
   rating: string;
   notes: string;
 }
@@ -114,6 +115,7 @@ function emptyDraft(): Draft {
     image: '',
     expertRating: '',
     scamRisk: false,
+    incomeRestricted: false,
     rating: '',
     notes: '',
   };
@@ -169,6 +171,7 @@ function aptToDraft(a: Apartment): Draft {
     image: a.image,
     expertRating: s(a.expertRating),
     scamRisk: a.scamRisk,
+    incomeRestricted: a.incomeRestricted,
     rating: s(a.rating),
     notes: a.notes,
   };
@@ -240,6 +243,7 @@ function draftToApt(d: Draft, existing: Apartment | null): Apartment {
     marketRent: num(d.marketRent),
     expertRating: num(d.expertRating) ?? 0,
     scamRisk: d.scamRisk,
+    incomeRestricted: d.incomeRestricted,
     rating: num(d.rating) ?? 0,
     notes: d.notes,
     comments: existing?.comments ?? [], // user overlay — never edited via this form, preserve as-is
@@ -441,6 +445,16 @@ export function ApartmentForm({ apt, onClose, onSave }: Props): ReactElement {
                 onChange={(e) => set('scamRisk', e.target.checked)}
               />{' '}
               Mark as possible scam <span className="opt">— shows a red flag on the card</span>
+            </label>
+          </div>
+          <div className="field span2">
+            <label>
+              <input
+                type="checkbox"
+                checked={draft.incomeRestricted}
+                onChange={(e) => set('incomeRestricted', e.target.checked)}
+              />{' '}
+              Income-restricted (affordable housing) <span className="opt">— must income-qualify; shows a red flag on the card</span>
             </label>
           </div>
           <div className="field span2">
