@@ -10,77 +10,6 @@ import type { Apartment } from '../types';
 // ============================================================================
 export const APARTMENTS: Apartment[] = [
   {
-    // a6 — Imperial Apartments, Burlingame. Exact house-level geocode (Nominatim, 2026-07-01 —
-    // "1900, Trousdale Drive, Burlingame, 94010"). ✅ Reads LEGIT — a Zillow "Verified Source" managed
-    // property with a full cost calculator + GreatSchools/Walk Score data (most detailed listing yet).
-    id: 'a6',
-    status: 'New',
-    title: 'Imperial Apartments — Burlingame',
-    address: '1900 Trousdale Dr, Burlingame, CA 94010',
-    neighborhood: '',
-    city: 'Burlingame',
-    lat: 37.591785,
-    lng: -122.386339,
-
-    beds: 1,
-    baths: 1,
-    sqft: 720, // Unit 109
-    floor: '', // not stated
-
-    rent: 2450, // Unit 109 base rent; cost calculator confirms $2,450/mo est. total (utilities below are included)
-    parkingCost: null, // attached garage + covered parking — no separate charge stated
-    petRent: null, // n/a — no pets allowed
-    utilitiesIncluded: true, // garbage, hot water, sewer, water included; electric/gas not listed — likely tenant-paid
-    utilitiesEstimate: null,
-
-    deposit: 2000, // cost calculator: "Security deposit $2,000"
-    appFee: 30, // cost calculator: "Application fee $30"
-    brokerFee: null,
-
-    leaseTermMonths: 12, // "Lease terms: One year" — stated explicitly
-    minLeaseMonths: null,
-    maxLeaseMonths: null,
-    availableDate: '', // Unit 109 "Currently unavailable" (Available "--") — ask what's open
-    availability: 'unavailable',
-    furnished: false,
-
-    petPolicy: 'No pets', // "Dogs are not allowed" + "Cats are not allowed" — both explicit
-    listingType: 'Property mgmt', // Zac Amero, Verified Source; professional screening (2.5x rent, 660+ credit)
-    contact: { company: 'Imperial Apartments', name: 'Zac Amero', phone: '', email: '', website: '' }, // Zillow "Verified Source"; contact via Zillow
-    comments: [],
-
-    laundry: 'on-site', // "Laundry: Shared"
-    amen: {
-      parking: true, // attached garage + covered parking
-      woodenFloor: true, // "Hardwood floors + carpet"
-      balcony: true, // "Large balcony" — private outdoor space
-      gym: false, // building amenities listed (elevator, pool, package, laundry) but NO fitness center
-    },
-    amenities: ['Large balcony', 'Elevator', 'Pool', 'Dishwasher', 'Hardwood floors + carpet', 'Gas heating', 'On-site management'],
-
-    dateSeen: '2026-07-01',
-    daysOnMarket: null,
-    marketRent: 2900, // Est. — Burlingame 1BR comp (top schools + hospital-adjacent premium); $2,450 is under market
-
-    expertRating: 4,
-    scamRisk: false,
-    incomeRestricted: false,
-    rating: 0,
-    notes:
-      '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing managed by Zac Amero, with professional ' +
-      'screening (2.5× gross monthly income, 660+ credit score) and a transparent built-in cost calculator. ' +
-      'Excellent location: 2 blocks to groceries/pharmacy/Starbucks, 1 block to Mills Peninsula Hospital, ' +
-      '4 blocks to BART/Caltrain, near 101/280. Walk Score 80 (Very Walkable), Bike Score 56. ' +
-      'Nearby schools all GreatSchools 10/10 (Franklin Elementary, Burlingame Intermediate, Burlingame HS).\n' +
-      'Confirm before signing: (1) AVAILABILITY — Unit 109 shows "Currently unavailable"; call to ask what\'s open now. ' +
-      '(2) NO PETS — both cats and dogs disallowed (dealbreaker if you have a pet). ' +
-      '(3) Utilities — garbage/hot water/sewer/water included, but electric & gas are NOT listed as included (likely tenant-paid PG&E). ' +
-      '(4) Lease is a stated 12-mo term — that does NOT fit your 6-month goal; confirm they\'ll do a 6-month term. ' +
-      '(5) Move-in cost per their calculator: $30 application fee + $2,000 deposit = ~$2,030, on top of first month\'s rent.',
-    image: 'img/a6.webp',
-    sourceUrl: 'https://www.zillow.com/apartments/burlingame-ca/imperial-apartments/CkBCvC/',
-  },
-  {
     // a7 — Tradewind Surf Apartments, Foster City. Exact house-level geocode (Nominatim,
     // 2026-07-01 — "1110, Polynesia Drive, Foster City, 94404"). ✅ Reads LEGIT — a Zillow
     // "Verified Source" community. Per-unit table captured 2026-07-10: Studio 562 sqft $1,975 ·
@@ -120,7 +49,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Allowed', // Dogs Allowed + Cats Allowed, 2 max each, 45 lb weight limit
     listingType: 'Property mgmt', // Blvd Residential, "Leasing Agent," Verified Source, (650) 547-8025
     contact: { company: 'Blvd Residential', name: 'Leasing Agent', phone: '(650) 547-8025', email: '', website: '' }, // Zillow "Verified Source"; phone from the listing
-    comments: [],
+    comments: [
+      { id: 'c1784194114884', text: 'Plenty of parking behind the building\nPoor management review 2.1/5 stars;\nFlooded twice a year; smells bad', ts: '2026-07-16T09:28:34.884Z' },
+    ],
 
     laundry: 'unknown', // not mentioned anywhere (no chip, no unit-feature line)
     amen: {
@@ -138,7 +69,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4,
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 1,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing managed by Blvd Residential (Leasing Agent, ' +
       '(650) 547-8025), a long-standing pet-friendly community in a quiet Foster City neighborhood near ' +
@@ -197,7 +128,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Allowed', // Dogs + Cats Allowed, 2 max each; $50/mo pet rent + $500 deposit per pet
     listingType: 'Property mgmt', // Vasona (Leasing Agent), Zillow "Verified Source", (214) 833-5650
     contact: { company: 'Vasona', name: 'Leasing Agent', phone: '(214) 833-5650', email: '', website: '' }, // Zillow "Verified Source"; note: 214 = a Dallas TX area code (likely a central leasing line)
-    comments: [],
+    comments: [
+      { id: 'c1784194085370', text: 'At the end of street/closed loop. \n3/5 management review;', ts: '2026-07-16T09:28:05.370Z' },
+    ],
 
     laundry: 'on-site', // "Shared: Laundry" — community/shared, not in-unit
     amen: {
@@ -215,7 +148,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4,
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 3,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" community (Three21@Belmont) with a real per-unit ' +
       'availability table, floor plans, and a 3D tour — the opposite of the a1/a2 scam pattern. Managed by ' +
@@ -272,7 +205,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'No pets', // "Pets allowed: No" + "No pets" chip — explicit
     listingType: 'Landlord', // private tiny-house/ADU (unit "#B"), "Contact manager," no mgmt company named
     contact: { company: '', name: '', phone: '', email: '', website: '' }, // no contact published in the listing — inquire via Zillow
-    comments: [],
+    comments: [
+      { id: 'c1783725581679', text: 'Too small for the price', ts: '2026-07-10T23:19:41.679Z' },
+    ],
 
     laundry: 'in-unit', // "In unit laundry" chip + "Laundry: In Unit" + washer/dryer in appliances
     amen: {
@@ -290,7 +225,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 3, // flexible + utilities-included + in-unit laundry + parking are strong, BUT 300 sqft for a nominal "2 beds," no pets, and high $/sqft are real limits
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 1,
     notes:
       '✅ Reads LEGITIMATE but VERY NICHE — a real Zillow home-detail listing (24 days on market, 39 contacts, ' +
       'accepts Zillow applications) for a 300 sqft TINY HOUSE / backyard ADU in quiet Emerald Hills, a 5-min walk ' +
@@ -313,7 +248,7 @@ export const APARTMENTS: Apartment[] = [
     // ✅ Reads LEGIT — a real Zillow home-detail listing (zpid) by a private owner (Nelly Chin),
     // standard terms, market price. A basic 3rd-floor walk-up unit.
     id: 'a10',
-    status: 'New',
+    status: 'Gone', // user-marked 2026-07-16 (baked from the PC overlay)
     title: 'Bright 1BR (3rd floor) — Daly City',
     address: '4711 Callan Blvd #16, Daly City, CA 94015',
     neighborhood: '',
@@ -346,7 +281,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'No pets', // "No animals" + "Pets allowed: No" — explicit
     listingType: 'Landlord', // "Listed by property owner — Nelly Chin"
     contact: { company: '', name: 'Nelly Chin', phone: '', email: '', website: '' }, // property owner; inquire via Zillow ("Contact manager for more details")
-    comments: [],
+    comments: [
+      { id: 'c1783725457179', text: 'Can\'t find reviews', ts: '2026-07-10T23:17:37.179Z' },
+    ],
 
     laundry: 'on-site', // "Shared laundry" / "Coin operated laundry facilities in the building"
     amen: {
@@ -364,7 +301,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 3, // fair price + utilities mostly included + a 6-mo-then-M2M lease that fits perfectly, BUT 3rd-floor walk-up (no elevator), street parking only, coin laundry, no pets — a basic unit
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 3,
     notes:
       '✅ Reads LEGITIMATE — a real Zillow home-detail listing (10 days on market, 53 contacts) by a private ' +
       'owner (Nelly Chin) with standard terms: first month + an equal $2,400 deposit + a $30 credit report, ' +
@@ -421,7 +358,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Allowed', // Dogs + Cats allowed, but a LOW 20 lb weight limit each + $300 deposit per pet
     listingType: 'Property mgmt', // Brighthaven Communities, Zillow "Verified Source", (760) 546-5420
     contact: { company: 'Brighthaven Communities', name: 'Gatewood Village', phone: '(760) 546-5420', email: '', website: '' }, // Verified Source; note: 760 = a San Diego-area code (likely a central leasing line)
-    comments: [],
+    comments: [
+      { id: 'c1784194206816', text: 'Huge community. Parking is kind of tight. \n4.4/5 among 175 google reviews and 1.9/5among  yelp reviews', ts: '2026-07-16T09:30:06.816Z' },
+    ],
 
     laundry: 'unknown', // not listed in the captured facts — ask (in-unit vs on-site)
     amen: {
@@ -439,7 +378,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4, // strong amenity set (pool, spa, gym, clubhouse, covered parking, balcony, A/C) + reduced-rent offer + pet-friendly; downsides are the low 20 lb pet limit, unstated laundry/lease term, and a non-local contact number
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 4,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" community (Gatewood Village, run by Brighthaven ' +
       'Communities) with a real per-unit table and its own website — the opposite of the a1/a2 scam pattern. ' +
@@ -462,7 +401,7 @@ export const APARTMENTS: Apartment[] = [
     // (2026-07-01). ✅ Reads LEGIT — a Zillow "Verified Source" hillside community (4 acres) with a
     // real unit table, floor plan, and premium finishes. The most premium (and priciest) 1BR so far.
     id: 'a12',
-    status: 'New',
+    status: 'Gone', // user-marked 2026-07-16 — "1 bed no longer available" (baked from the PC overlay)
     title: 'Carlmont Heights 1BR — Belmont',
     address: '2203 Hastings Dr, Belmont, CA 94002',
     neighborhood: 'Belmont Hills',
@@ -495,7 +434,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Allowed', // small dogs + large dogs + cats allowed — pet-friendly
     listingType: 'Property mgmt', // large managed community (leasing office, on-site mgmt, online rent); Zillow byline says "property owner" but it's professionally managed — Verified Source
     contact: { company: 'Carlmont Heights Apartments', name: 'Leasing Agent', phone: '', email: '', website: '' }, // Zillow "Verified Source"; no phone published — inquire via Zillow
-    comments: [],
+    comments: [
+      { id: 'c1784087385247', text: '3/5 rating among 50 reviews\n1 bed no longer available', ts: '2026-07-15T03:49:45.247Z' },
+    ],
 
     laundry: 'in-unit', // "In-unit laundry (W/D)" chip + "Laundry: In Unit" + washer/dryer in appliances
     amen: {
@@ -569,7 +510,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Allowed', // cats + small dogs (2 each) confirmed; large dogs shown on a pet card but criteria says "Cats and small dogs" — see notes
     listingType: 'Property mgmt', // GPS/Logos Property Investment (Nate Chen), Zillow "Verified Source"
     contact: { company: 'GPS/Logos Property Investment', name: 'Nate Chen', phone: '', email: '', website: '' }, // Verified Source; no phone published — inquire via Zillow
-    comments: [],
+    comments: [
+      { id: 'c1784194172503', text: 'Parking is tight. Old building. \nIt seems not available?\nPrivate owner. Can\'t find review for this one', ts: '2026-07-16T09:29:32.503Z' },
+    ],
 
     laundry: 'on-site', // "Shared laundry" / "Laundry: Shared" — not in-unit
     amen: {
@@ -587,7 +530,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4, // strong practical fit: EXPLICIT 6-mo lease option (exactly your goal) + gated + off-street parking + water/sewer/garbage included + under market + 700 sqft; basic finishes (carpet/vinyl), on-site (not in-unit) laundry, no gym keep it from higher
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 3,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing by a management company (GPS/Logos Property ' +
       'Investment, Nate Chen), a quiet, well-maintained 30-unit gated complex in central Daly City with an ' +
@@ -860,7 +803,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Unknown', // a Pets fees tab exists but pet rules weren't shown — confirm (building is not labeled pet-friendly in the captured sections)
     listingType: 'Property mgmt', // managed 34-unit community, Property Manager on Site, (650) 469-8458
     contact: { company: 'Verandas Apartments', name: '', phone: '(650) 469-8458', email: '', website: '' }, // apartments.com listing; local 650 number + a property website (URL not captured)
-    comments: [],
+    comments: [
+      { id: 'c1784194018212', text: 'Check if this is still available? \nEnvironment looks okayish. Limited parking spots + street parking\n2-3/5 rating among 5 reviews', ts: '2026-07-16T09:26:58.212Z' },
+    ],
 
     laundry: 'in-unit', // "Washer/Dryer" listed under Apartment Features (unit-level); NOTE the community also has shared "Laundry Facilities" — confirm the actual unit has in-unit W/D (see notes)
     amen: {
@@ -878,7 +823,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4, // one of your best FITS: prime Menlo Park (near Meta + Stanford + top schools), under-market $2,425, EXPLICIT 6–12 mo + short-term lease, likely in-unit W/D, a balcony/patio, hardwood, pool, $0 admin + low $500 deposit; held from 5 by small 600 sqft, a 1958 building (1 bath), and unconfirmed parking/pets
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 3,
     notes:
       '✅ Looks LEGITIMATE — an apartments.com managed community (Verandas; built 1958, 34 units, Property ' +
       'Manager on Site, (650) 469-8458) in prime Menlo Park near Meta/Facebook, Stanford, and top-rated schools. ' +
@@ -902,7 +847,7 @@ export const APARTMENTS: Apartment[] = [
     // ✅ Reads LEGIT — a Zillow homedetails unit listed by a named, 5★-reviewed agent (Tim Proschold,
     // Luxuriant Realty). Small garden-style 1BR with a STATED 6-MONTH lease (your exact target).
     id: 'a18',
-    status: 'New',
+    status: 'Gone', // user-marked 2026-07-15 — "No longer available" (baked from the PC overlay)
     title: 'Charming 1BR (garden-style) — Menlo Park',
     address: '1300 Hoover St APT 2, Menlo Park, CA 94025',
     neighborhood: '',
@@ -935,7 +880,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Allowed', // "Cats and dogs" OK (Negotiable)
     listingType: 'Property mgmt', // Tim Proschold, Luxuriant Realty (5★, 13 reviews), (415) 223-8548
     contact: { company: 'Luxuriant Realty', name: 'Tim Proschold', phone: '(415) 223-8548', email: '', website: '' }, // named agent w/ 5/5 rating (13 reviews); 415 = SF area code
-    comments: [],
+    comments: [
+      { id: 'c1784087732291', text: 'No longer available', ts: '2026-07-15T03:55:32.291Z' },
+    ],
 
     laundry: 'on-site', // "Shared" coin-operated laundry facility — not in-unit
     amen: {
@@ -953,7 +900,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4, // strong FIT: prime Menlo Park + a STATED 6-MONTH lease (your exact target) + assigned covered parking + cats/dogs OK + hardwood + under market + a 5★-reviewed agent; held from 5 by the TINY 533 sqft, shared coin laundry, wall-furnace-only heat, and utilities mostly tenant-paid
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 4,
     notes:
       '✅ Looks LEGITIMATE — a real Zillow unit listed by a NAMED, well-reviewed agent (Tim Proschold, ' +
       'Luxuriant Realty, 5★ / 13 reviews, (415) 223-8548) with standard screening (2.5× income, 680+ credit). ' +
@@ -1013,7 +960,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Unknown', // not stated on this view — Blueground pet rules vary by building; confirm
     listingType: 'Property mgmt', // Blueground — a large, established furnished-apartment operator (professional leasing flow)
     contact: { company: 'Blueground', name: '', phone: '', email: '', website: 'https://www.theblueground.com/' },
-    comments: [],
+    comments: [
+      { id: 'c1784194253844', text: '1 bed not available now.\n4/5 rating among 400 google reviews.\nI don\'t like furnished though', ts: '2026-07-16T09:30:53.844Z' },
+    ],
 
     laundry: 'in-unit', // "In-unit laundry (W/D)" chip + "IN-APARTMENT LAUNDRY" tag + Washer/Dryer in appliances
     amen: {
@@ -1031,7 +980,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4, // strong FIT *if* you want furnished/flexible: fully furnished + move-in-ready + a flexible 1-12+ mo term (your 6-mo goal fits perfectly) + in-unit W/D + balcony + BART/SFO-adjacent; held from 5 by the top-of-range raw rent, small 568 sqft, likely extra fees (cleaning/booking), and unconfirmed parking/pets/utilities
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 4,
     notes:
       '✅ LEGITIMATE, but a DIFFERENT PRODUCT than the rest of your list — this is BLUEGROUND, a large, ' +
       'established furnished-apartment operator, at "The Crossing San Bruno," a real BART-adjacent community ' +
@@ -1063,7 +1012,7 @@ export const APARTMENTS: Apartment[] = [
     // an INCOME-RESTRICTED (affordable) property — you must income-QUALIFY to rent (see notes). Tracked row =
     // Unit 313677B, the cheapest + roomiest 1BR (782 sqft, $2,965 all-in, avail Aug 3).
     id: 'a20',
-    status: 'New',
+    status: 'Gone', // user-marked 2026-07-15 — income-restricted, skipping (baked from the PC overlay)
     title: 'Hillsdale Garden 1BR (income-restricted) — San Mateo',
     address: '3500 Edison St, San Mateo, CA 94403',
     neighborhood: 'Northeast Hillsdale',
@@ -1096,7 +1045,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Allowed', // Dogs + Cats allowed ($50/mo + $500 deposit each); dog BREED restrictions apply (see notes)
     listingType: 'Property mgmt', // Greystar (the largest US apartment manager), Zillow "Verified Source", (415) 936-1214
     contact: { company: 'Greystar', name: '', phone: '(415) 936-1214', email: '', website: '' }, // Verified Source; local 415 number
-    comments: [],
+    comments: [
+      { id: 'c1784087116024', text: 'Income restricted', ts: '2026-07-15T03:45:16.024Z' },
+    ],
 
     laundry: 'on-site', // "Shared: On-site Laundry Facilities" — not in-unit
     amen: {
@@ -1114,7 +1065,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4, // CONDITIONAL 4 — genuinely strong IF two gates clear: (1) you income-QUALIFY and (2) you're OK with NO on-site parking. Upside: a roomy 782 sqft 1BR, explicit 6-mo lease, resort amenities (pool/spa/gym/dog park/bocce), Greystar-managed + Verified, transparent all-in pricing, Walk Score 90. Held from 5 by the income gate, no parking, shared (not in-unit) laundry, and only 1 bath even on the 2BRs
     scamRisk: false,
     incomeRestricted: true, // affordable/AMI property — must income-qualify (the red flag; details in notes)
-    rating: 0,
+    rating: 2,
     notes:
       '⚠️ READ FIRST — INCOME-RESTRICTED (affordable) HOUSING: this is a real, well-run community, but you must ' +
       'INCOME-QUALIFY to rent it. For affordable housing that almost always means a MAXIMUM income cap (your ' +
@@ -1183,7 +1134,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'No pets', // "No pets" chip + "Pets allowed: No" — explicit (note: owner's own dog appears in photos)
     listingType: 'Landlord', // "Listed by property owner — Edrica O." (private owner, not a mgmt company)
     contact: { company: '', name: 'Edrica O.', phone: '', email: '', website: '' }, // private owner — inquire via Zillow
-    comments: [],
+    comments: [
+      { id: 'c1784088539286', text: 'Single occupant', ts: '2026-07-15T04:08:59.286Z' },
+    ],
 
     laundry: 'in-unit', // "In unit laundry" chip + "Laundry: In Unit" + Washer/Dryer in appliances
     amen: {
@@ -1201,7 +1154,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4, // strong FIT for a SOLO short stay: fully furnished + ALL utilities + free internet + flexible month-to-month + in-unit W/D + off-street parking + private entrance + walk to Caltrain + high-end bath, and reads legit; held from 5 by the SINGLE-OCCUPANT cap, KITCHENETTE-only (no oven), no pets, top-of-list $3,000, and the undisclosed address (area pin only)
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 2,
     notes:
       '✅ Reads LEGITIMATE (I do NOT think this is a scam) — a private upstairs 1-bedroom in-law/ADU suite with ' +
       'its own separate entrance, listed by owner Edrica O. on a real Zillow home-detail page (2 days on market, ' +
@@ -1421,7 +1374,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'No pets', // "Dogs are not allowed" + "Cats are not allowed" — both explicit
     listingType: 'Property mgmt', // Belmont Family Apartments Asset Management, Zillow "Verified Source", (646) 791-3446
     contact: { company: 'Belmont Family Apartments (Asset Mgmt)', name: '', phone: '(646) 791-3446', email: '', website: '' }, // Verified Source; note: 646 = a NYC area code (out-of-state affordable-housing owner — common, not a red flag given Verified Source)
-    comments: [],
+    comments: [
+      { id: 'c1784194144364', text: 'Nice location. Next to a square.', ts: '2026-07-16T09:29:04.364Z' },
+    ],
 
     laundry: 'on-site', // "Shared: Communal Laundry Room" — not in-unit
     amen: {
@@ -1439,7 +1394,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 3, // the BUILDING is genuinely nice — brand-new, central A/C (rare on your list!), clubhouse/gym/lounge, contemporary, and cheap. But for a SOLO, FLEXIBLE 6-MONTH stay it's a weak fit: (1) income-restricted (must qualify), (2) NOT OPEN YET (under construction, Summer 2026), (3) NO pets, (4) no stated lease term (affordable = usually 12-mo, not 6), (5) family-oriented (playground/homework room) + likely a lottery/waitlist application. Rating reflects FIT, not build quality
     scamRisk: false,
     incomeRestricted: true, // affordable/AMI property — must income-qualify (the red flag; details in notes)
-    rating: 0,
+    rating: 4,
     notes:
       '⚠️ READ FIRST — this has TWO hard gates that make it a weak fit for your solo, flexible 6-month search, ' +
       'even though the building itself is nice: (A) INCOME-RESTRICTED affordable housing — you must ' +
@@ -1506,7 +1461,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'No pets', // "No pets, no smoking of any kind, no drugs, no vaping, no sublease" — explicit
     listingType: 'Landlord', // craigslist by-owner; no company/name published — contact via the CL email relay
     contact: { company: '', name: '', phone: '', email: '', website: '' }, // no contact published — email via craigslist to set up an appointment
-    comments: [],
+    comments: [
+      { id: 'c1784194275212', text: 'Pretty close', ts: '2026-07-16T09:31:15.212Z' },
+    ],
 
     laundry: 'on-site', // "laundry in bldg" / "laundry in the building" (+ an extra storage closet in the laundry room) — not in-unit
     amen: {
@@ -1524,7 +1481,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4, // strong, flexible FIT: reads clearly legit + full address, month-to-month (modifiable — fits your 6-mo goal), fair/under-market $2,450, a private balcony, 1 covered parking space, granite counters, water+garbage included, corner unit w/ lots of light, and a prime location (across from Central Park, near BART/101/downtown Millbrae, minutes to SFO); held from 5 by shared (not in-unit) laundry, NO pets, heater-only (no A/C), and standard by-owner/craigslist verify-in-person caution
     scamRisk: false,
     incomeRestricted: false, // market-rate by-owner rental — no income cap
-    rating: 0,
+    rating: 4,
     notes:
       '✅ Reads LEGITIMATE (I do NOT think this is a scam), despite being a by-owner CRAIGSLIST post — which I ' +
       'triaged carefully. The scam tells are ABSENT and the legit signals are strong: it gives a FULL street ' +
