@@ -1286,4 +1286,80 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a22.webp',
     sourceUrl: 'https://www.zillow.com/apartments/sunnyvale-ca/south-mary-place-apartments/5j4SxB/',
   },
+  {
+    // a23 — Station 245, Mountain View (Old Mountain View). Rooftop geocode via Nominatim (2026-07-10,
+    // "245, Bush Street, Mountain View, 94041" — house match). ✅ Reads LEGIT — a Zillow "Verified Source"
+    // (green check) managed community (Rutherford Management Company) with a real unit row. Tracked = the
+    // 1X1 (1BR, 620 sqft, $2,350, available Now). Photo pulled at _1152 (higher-res than the _384 you gave).
+    id: 'a23',
+    status: 'New',
+    title: 'Station 245 1BR — Mountain View',
+    address: '245 Bush St, Mountain View, CA 94041',
+    neighborhood: 'Old Mountain View',
+    city: 'Mountain View',
+    lat: 37.391881,
+    lng: -122.075878,
+
+    beds: 1,
+    baths: 1,
+    sqft: 620, // Unit 1X1
+    floor: '',
+
+    rent: 2350, // Unit 1X1 base rent (fees may apply); well under market for Old Mountain View (see marketRent)
+    parkingCost: null, // carport parking included
+    petRent: null, // pet-friendly (dogs + cats, 2 each) but pet rent/deposit not stated — ask
+    utilitiesIncluded: null, // not stated
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // a wide menu of terms (see min/max)
+    minLeaseMonths: 3, // "Lease terms: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 months" — as short as 3 mo; the 6-mo you want is squarely in range
+    maxLeaseMonths: 12,
+    availableDate: '', // "Available Now"
+    availability: 'now', // Unit 1X1 available Now
+    furnished: false,
+
+    petPolicy: 'Allowed', // Dogs Allowed (2) + Cats Allowed (2)
+    listingType: 'Property mgmt', // Rutherford Management Company (Leasing Agent), Zillow "Verified Source"
+    contact: { company: 'Rutherford Management Company', name: 'Leasing Agent', phone: '', email: '', website: '' }, // Verified Source; no phone published — inquire via Zillow
+    comments: [],
+
+    laundry: 'on-site', // "Laundry: Shared" — not in-unit
+    amen: {
+      parking: true, // carport parking (Unit Features: Parking)
+      woodenFloor: true, // "all homes include wood-style flooring"
+      balcony: null, // not mentioned — ask
+      gym: false, // building amenities captured (pool, shared laundry) but NO fitness center
+    },
+    amenities: ['Wood-style flooring', 'Swimming pool', 'Carport parking', 'Generous storage', 'In-home heater (no A/C)', 'Stainless-steel appliances (select units)', 'Walk to downtown MV / Castro St / Caltrain', 'Easy access to US-101 + SR-82'],
+
+    dateSeen: '2026-07-10',
+    daysOnMarket: null,
+    marketRent: 2850, // Est. — Old Mountain View 1BR comp (prime walkable location near downtown + Caltrain); $2,350 is well under market (a genuine value — the "why" is the older/basic complex, not a bait)
+
+    expertRating: 4, // one of your best VALUE + FLEXIBILITY picks: an exceptionally wide 3–12 mo lease menu (your 6-mo goal fits easily, even shorter possible), well under-market $2,350 in prime Old Mountain View (walk to downtown/Castro St/Caltrain), wood-style floors, pool, carport parking, storage, pet-friendly, available Now; held from 5 by shared (not in-unit) laundry, wall/in-home heat + NO A/C, carport (not garage), basic older complex, small 620 sqft
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" (green check) managed community (Station 245, run by ' +
+      'Rutherford Management Company) with a real unit row — the opposite of the a1/a2 scam pattern. 🟢 TWO BIG ' +
+      'WINS FOR YOU: (a) an exceptionally FLEXIBLE lease — they list 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12-month ' +
+      'terms, so your 6-mo goal fits with zero negotiation (and you could even go shorter); (b) it\'s WELL UNDER ' +
+      'MARKET at $2,350 for a 620 sqft 1BR in prime OLD MOUNTAIN VIEW — a walkable neighborhood near downtown ' +
+      'MV, Castro St dining, and Caltrain, with easy US-101/SR-82 access. Wood-style flooring throughout, a ' +
+      'swimming pool, carport parking, generous storage, pet-friendly (dogs + cats, 2 each), available NOW. The ' +
+      'card shows a mild "rent well below market — verify why" info flag; the honest "why" here is simply that ' +
+      'it\'s an older, basic complex (see caveats), NOT a bait — the price is real.\n' +
+      'Confirm before signing: (1) LAUNDRY is shared/on-site, NOT in-unit. (2) HEAT/COOLING — "in-home heaters" ' +
+      '(likely wall heaters) and NO A/C mentioned; ask about summer cooling. (3) PARKING is a CARPORT (covered ' +
+      'space, not a garage) — confirm it\'s included + assigned. (4) STAINLESS appliances are "select units" ' +
+      'only — confirm the actual unit you\'d get. (5) Basic older complex, small 620 sqft — value + location, ' +
+      'not luxury. (6) Deposit, application fee, utilities, and pet rent/deposit are not stated — ask for exact ' +
+      'move-in + monthly costs.',
+    image: 'img/a23.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/mountain-view-ca/station-245/5ZtKYB/',
+  },
 ];
