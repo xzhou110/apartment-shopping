@@ -162,7 +162,9 @@ Every pure module gets a spec. Key cases:
   (UI lane), but the lib fns they call are covered above. UI lane should add a small helpers.test.ts:
   search across id/title/neighborhood/city/address; `reqAmenities` honors implications;
   `leaseFitsTarget` drops null; `nearest` sort orders by distance and is a stable no-op with a null
-  anchor; `cost-asc` orders by effectiveMonthly; `showGone` default-hides Gone.
+  anchor; `cost-asc` orders by effectiveMonthly; `showGone` default-hides Gone. *(2026-07-16:
+  `showRuledOut` likewise default-hides `'Ruled out'`, independently of `showGone`; and
+  `toggleStatus(current, target)` — the pure un-mark rule — is covered in `helpers.test.ts`.)*
 
 ## 6. Integration notes (cross-lane)
 

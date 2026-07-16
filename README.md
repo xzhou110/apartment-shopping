@@ -75,8 +75,13 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
    away; **Ruled out** = not available *to you* or you don't qualify (e.g. an income-restricted
    community over/under your income cap, a unit that turned out not to be open) — reality took it
    away. **Rejected** (= you passed on it by preference) stays visible unless you turn on Hide
-   rejected. Both "Mark as gone" and "Rule out" are one-click buttons in a listing's detail view;
-   any status can also be set via Edit.
+   rejected. Both live in a listing's detail view as **toggles you can select and unselect** —
+   click **Mark as gone** / **Rule out** to hide it (the button lights up and its label flips to
+   **Put back on list**); click it again to undo a mis-click and put the listing straight back on
+   the board. The detail view **stays open** while you toggle, so the undo is always one click
+   away, and clicking the *other* one switches over directly (a listing can only be one or the
+   other). Un-marking resets the status to **New** — it doesn't restore a previous Shortlist/Toured,
+   so the toast says so and you can re-set any status via **Edit**.
 9. **Export to Google Sheets** — the **Export** button: **Sync** (push every listing straight into your
    sheet, updated in place), **Copy for Sheets** / **Download CSV** (zero-setup), and **JSON for Claude**
    (paste back to me so I can save your in-app edits into the data file). One-time Sheet setup is the same

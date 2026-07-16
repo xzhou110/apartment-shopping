@@ -24,8 +24,10 @@ interface Props {
   onToggleCompare: (id: string) => void;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
-  onMarkGone: (id: string) => void;
-  onRuleOut: (id: string) => void;
+  /** Toggle: sets 'Gone', or un-marks back to 'New' when it's already Gone. */
+  onToggleGone: (id: string) => void;
+  /** Toggle: sets 'Ruled out', or un-marks back to 'New' when it's already Ruled out. */
+  onToggleRuledOut: (id: string) => void;
   onSetExpert: (id: string, n: number) => void;
   onSetYou: (id: string, n: number) => void;
   onAddComment: (id: string, text: string) => void;
@@ -167,8 +169,8 @@ export function DetailModal({
   onToggleCompare,
   onEdit,
   onDelete,
-  onMarkGone,
-  onRuleOut,
+  onToggleGone,
+  onToggleRuledOut,
   onSetExpert,
   onSetYou,
   onAddComment,
@@ -349,20 +351,32 @@ export function DetailModal({
                 />
                 Compare
               </label>
-              {apt.status !== 'Gone' && (
-                <button className="btn-mini" onClick={() => onMarkGone(apt.id)}>
-                  Mark as gone
-                </button>
-              )}
-              {apt.status !== 'Ruled out' && (
-                <button
-                  className="btn-mini"
-                  onClick={() => onRuleOut(apt.id)}
-                  title="Not available to you / didn't qualify — hides the listing (the Show ruled out chip brings it back)"
-                >
-                  Rule out
-                </button>
-              )}
+              {/* Gone / Ruled out are TOGGLES (user 2026-07-16: "select them and unselect them, in
+                  case mistakes"). Both always render — a button that unmounts once clicked is a
+                  one-way door. Lit (`.on`) = the listing currently has that status; the label always
+                  names what the next click does, matching the filter chips' Show/Hide convention. */}
+              <button
+                className={`btn-mini ${apt.status === 'Gone' ? 'on' : ''}`}
+                onClick={() => onToggleGone(apt.id)}
+                title={
+                  apt.status === 'Gone'
+                    ? 'Undo — puts it back on the active list with status New'
+                    : "Off the market entirely — hides the listing (the Show gone chip brings it back)"
+                }
+              >
+                {apt.status === 'Gone' ? 'Put back on list' : 'Mark as gone'}
+              </button>
+              <button
+                className={`btn-mini ${apt.status === 'Ruled out' ? 'on' : ''}`}
+                onClick={() => onToggleRuledOut(apt.id)}
+                title={
+                  apt.status === 'Ruled out'
+                    ? 'Undo — puts it back on the active list with status New'
+                    : "Not available to you / didn't qualify — hides the listing (the Show ruled out chip brings it back)"
+                }
+              >
+                {apt.status === 'Ruled out' ? 'Put back on list' : 'Rule out'}
+              </button>
               <button className="btn-mini" onClick={() => onDelete(apt.id)} style={{ color: 'var(--risk)' }}>
                 Delete
               </button>

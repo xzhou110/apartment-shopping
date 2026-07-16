@@ -7,7 +7,7 @@
  * over plain data arrays; no React, no DOM needed.
  */
 import { describe, it, expect } from 'vitest';
-import { applyFilters, applySort } from './helpers';
+import { applyFilters, applySort, toggleStatus } from './helpers';
 import { makeApt } from '../lib/_fixtures';
 import { DEFAULT_SETTINGS } from '../types';
 import type { Filters, SortKey } from '../state/useApartments';
@@ -154,6 +154,51 @@ describe('applyFilters: showRuledOut (Ruled out hidden by default, like Gone)', 
     const mixed = [makeApt({ id: 'x1', status: 'Rejected' }), makeApt({ id: 'x2', status: 'Ruled out' })];
     const res = applyFilters(mixed, filters({ hideRejected: true, showRuledOut: true }), DEFAULT_SETTINGS);
     expect(res.map((a) => a.id)).toEqual(['x2']);
+  });
+});
+
+// ===========================================================================
+// toggleStatus — Gone / Ruled out are reversible (user 2026-07-16: "select them
+// and unselect them, incase mistakes")
+// ===========================================================================
+describe('toggleStatus: marking is reversible', () => {
+  it('marks an unjudged listing', () => {
+    expect(toggleStatus('New', 'Gone')).toBe('Gone');
+    expect(toggleStatus('New', 'Ruled out')).toBe('Ruled out');
+  });
+
+  it('clicking the SAME status again un-marks it back to New (the mistake fix)', () => {
+    expect(toggleStatus('Gone', 'Gone')).toBe('New');
+    expect(toggleStatus('Ruled out', 'Ruled out')).toBe('New');
+  });
+
+  it('clicking the OTHER hiding status switches straight over (no un-mark step)', () => {
+    expect(toggleStatus('Gone', 'Ruled out')).toBe('Ruled out');
+    expect(toggleStatus('Ruled out', 'Gone')).toBe('Gone');
+  });
+
+  it('marking from any pipeline status works (and never returns that status)', () => {
+    for (const s of ['Shortlist', 'Contacted', 'Toured', 'Applied', 'Rejected', 'Leased'] as const) {
+      expect(toggleStatus(s, 'Gone')).toBe('Gone');
+      expect(toggleStatus(s, 'Ruled out')).toBe('Ruled out');
+    }
+  });
+
+  it('is an involution on the hiding statuses: mark → un-mark → New (round-trip)', () => {
+    const once = toggleStatus('New', 'Gone');
+    expect(toggleStatus(once as 'Gone', 'Gone')).toBe('New');
+  });
+
+  it('un-marked listings are visible again under default filters (the point of the toggle)', () => {
+    const apt = makeApt({ id: 'u1', status: toggleStatus('Gone', 'Gone') });
+    const res = applyFilters([apt], filters(), DEFAULT_SETTINGS);
+    expect(res.map((a) => a.id)).toEqual(['u1']);
+  });
+
+  it('un-marking a Ruled-out listing likewise returns it to the board', () => {
+    const apt = makeApt({ id: 'u2', status: toggleStatus('Ruled out', 'Ruled out') });
+    const res = applyFilters([apt], filters(), DEFAULT_SETTINGS);
+    expect(res.map((a) => a.id)).toEqual(['u2']);
   });
 });
 

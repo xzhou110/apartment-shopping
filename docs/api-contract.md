@@ -54,6 +54,38 @@
 >   doc-comment "defaults 6 / 12" is superseded.
 > - **Seed inventory:** 12 listings, ids **a6–a17** (a3/a4/a5 retired 2026-07-07; a1/a2 were earlier placeholders).
 
+> **POST-LAUNCH ADDENDUM — 2026-07-16.** Further changes; where they conflict with the body OR any earlier
+> addendum, **this wins**. See `DECISIONS.md` ADR-011.
+> - **New required field `Apartment.incomeRestricted: boolean`** (2026-07-15) — affordable/AMI housing you must
+>   income-qualify for. Pushes a red `risk` flag right after the scam flag. Set on seeds a20/a24. Exported as an
+>   **Income-restricted** column after Scam risk. Form checkbox alongside "Mark as possible scam".
+> - **Flag order (§6) refined again (2026-07-15):** `getFlags` now ends with a **stable partition putting ALL
+>   `risk` flags first**, so a red flag can never sink below an amber one. Within the risks the insertion order is
+>   scam > income-restricted > lease-conflict; the lease verdict still leads the non-risk group. This supersedes
+>   the 2026-07-07 addendum's flag-order note.
+> - **Status union (§3) gained `'Ruled out'`** (2026-07-16) — *not available to you / didn't qualify* (income cap,
+>   phantom availability), as distinct from `'Gone'` (off the market entirely) and `'Rejected'` (passed by
+>   preference). Full union, in declaration order: `'New' | 'Shortlist' | 'Contacted' | 'Toured' | 'Applied' |
+>   'Rejected' | 'Leased' | 'Ruled out' | 'Gone'`. Badge class `b-warn` (Gone stays `b-neutral`). Exports through
+>   the existing **Status** column — no export-schema change.
+> - **`Filters` (§10) gained `showRuledOut: boolean`** — when false (default), drop `status === 'Ruled out'`,
+>   **independently** of `showGone`. The §10 interface below is otherwise unchanged. Chip: "Show ruled out" /
+>   "Hide ruled out" (Filters.tsx), sibling to the gone chip. Filters are session-only (never persisted), so no
+>   migration and no `STORE_KEY` bump.
+> - **NEW pure export `toggleStatus(current: Status, target: HidingStatus): Status`** (`components/helpers.tsx`,
+>   with `type HidingStatus = Extract<Status, 'Gone' | 'Ruled out'>`): returns `'New'` when `current === target`
+>   (un-mark), else `target` (mark / cross-switch). This is the whole select-and-unselect rule — the two
+>   DetailModal buttons are toggles that always render, lit via `.btn-mini.on` when active, label flipping to
+>   "Put back on list". Un-mark is a RESET to `'New'`, not a restore of a prior status (no memory is kept — the
+>   toast discloses it). DetailModal props: `onToggleGone` / `onToggleRuledOut` (were `onMarkGone`/`onRuleOut`).
+>   The detail modal deliberately stays OPEN after a toggle (`App.tsx` no longer calls `setDetailId(null)` there)
+>   — safe because `detailApt` resolves from the **unfiltered** `g.apartments`.
+> - **Seed inventory (supersedes the 2026-07-07 line above):** **19 listings, ids `a7`–`a25`** — a6 retired
+>   2026-07-16 (user-removed); a3/a4/a5 retired 2026-07-07; a1/a2 were earlier placeholders. Seeds a10/a12/a18/a20
+>   carry a baked `status: 'Gone'` and a20/a24 carry `incomeRestricted: true` (the user's PC curation, baked
+>   2026-07-16); user comment threads + ratings are baked into the seed too, and a browser's own overlay always
+>   wins over them via `mergeWithSeed`.
+
 This is the **keystone seam** between the two build lanes. The **data/pure-lib lane**
 (`data-engineer`) implements every signature below; the **UI lane** (`frontend-engineer`)
 imports them. Both lanes import data shapes from the frozen `app/src/types.ts`.

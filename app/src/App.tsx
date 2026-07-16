@@ -1,9 +1,10 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { Apartment } from './types';
 import type { Coord } from './lib/distance';
 import type { FlagCtx } from './lib/flags';
 import { useApartments } from './state/useApartments';
-import { applyFilters, applySort } from './components/helpers';
+import type { HidingStatus } from './components/helpers';
+import { applyFilters, applySort, toggleStatus } from './components/helpers';
 import { Filters } from './components/Filters';
 import { Grid } from './components/Grid';
 import { CompareTable } from './components/CompareTable';
@@ -14,6 +15,10 @@ import { SettingsModal } from './components/SettingsModal';
 import { FindModal } from './components/FindModal';
 import { ThemeToggle } from './components/ThemeToggle';
 import { IconBrand, IconCompare, IconExport, IconGrid, IconPlus, IconSearch, IconSettings } from './components/icons';
+
+/** Popover API support (Chrome 114+ / Safari 17+ / Firefox 125+) — see the toast comment below. */
+const POPOVER_SUPPORTED =
+  typeof HTMLElement !== 'undefined' && typeof HTMLElement.prototype.showPopover === 'function';
 
 export default function App() {
   const g = useApartments();
@@ -31,6 +36,37 @@ export default function App() {
     window.clearTimeout(toastTimer.current);
     toastTimer.current = window.setTimeout(() => setToast(null), 2400);
   }, []);
+
+  /**
+   * Toasts must out-paint an open modal. `<dialog>.showModal()` promotes the dialog into the
+   * browser's TOP LAYER, which paints above ALL normal-flow content no matter its z-index — so a
+   * plain z-index toast fired while the detail / export / settings modal is open is invisible
+   * underneath it (it's in the DOM and reads correctly, which is exactly why a DOM assertion
+   * misses this). The fix: make the toast a popover, which also lives in the top layer, where
+   * entries stack in the order they open — a toast shown after the dialog therefore paints above.
+   * Feature-guarded: the `popover` attribute is only attached when supported, because the UA rule
+   * `[popover]:not(:popover-open) { display: none }` would otherwise hide the toast outright.
+   * useLayoutEffect so the attach + show happen before paint (no flash).
+   */
+  const toastRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const el = toastRef.current;
+    if (!el || !toast || !POPOVER_SUPPORTED) return;
+    try {
+      // Re-enter the top layer on EVERY toast. Entries stack in INSERTION order, and
+      // showPopover() throws on an already-open popover (leaving it where it was) — so a toast
+      // still on screen when a modal opened would otherwise stay stranded UNDER that dialog.
+      // hide→show reinserts it last, i.e. topmost. (Verified in a real browser: without this,
+      // a stale popover renders beneath a dialog opened after it.)
+      if (el.matches(':popover-open')) el.hidePopover();
+      el.showPopover();
+    } catch {
+      // If the UA refuses to show it, drop the attribute — otherwise the UA rule
+      // `[popover]:not(:popover-open) { display: none }` would hide the toast ENTIRELY,
+      // which is worse than the old z-index behaviour we're falling back to.
+      el.removeAttribute('popover');
+    }
+  }, [toast]);
 
   // The integration seam (tech-plan §6 "sort-context trap"): resolve the primary anchor coord ONCE
   // and thread it — plus unit + settings — into applySort AND the flag context. g.primaryAnchor is
@@ -87,23 +123,32 @@ export default function App() {
     [g, showToast],
   );
 
-  const handleMarkGone = useCallback(
-    (id: string) => {
-      g.setStatus(id, 'Gone');
-      setDetailId(null);
-      showToast('Marked gone — hidden from the list ("Show gone" brings it back)');
+  /**
+   * Gone / Ruled out are toggles — clicking the status a listing already has un-marks it back to
+   * 'New' (mistake recovery). The modal deliberately STAYS OPEN either way: `detailApt` resolves
+   * from the unfiltered `g.apartments`, so the card can vanish from the grid behind it while the
+   * undo button stays right there under the cursor. Closing on mark would make the undo a hunt.
+   */
+  const toggleHidingStatus = useCallback(
+    (id: string, target: HidingStatus) => {
+      const apt = g.apartments.find((a) => a.id === id);
+      if (!apt) return;
+      const next = toggleStatus(apt.status, target);
+      g.setStatus(id, next);
+      const chip = target === 'Gone' ? 'Show gone' : 'Show ruled out';
+      showToast(
+        next === 'New'
+          ? 'Back on the list — status reset to New'
+          : `${target === 'Gone' ? 'Marked gone' : 'Ruled out'} — hidden from the list ("${chip}" brings it back)`,
+      );
     },
     [g, showToast],
   );
 
-  // "Ruled out" = not available to you / didn't qualify (vs Gone = off the market entirely).
-  const handleRuleOut = useCallback(
-    (id: string) => {
-      g.setStatus(id, 'Ruled out');
-      setDetailId(null);
-      showToast('Ruled out — hidden from the list ("Show ruled out" brings it back)');
-    },
-    [g, showToast],
+  const handleToggleGone = useCallback((id: string) => toggleHidingStatus(id, 'Gone'), [toggleHidingStatus]);
+  const handleToggleRuledOut = useCallback(
+    (id: string) => toggleHidingStatus(id, 'Ruled out'),
+    [toggleHidingStatus],
   );
 
   // Distance anchors are managed in Settings → Distance anchors (the inline "rank by distance"
@@ -233,8 +278,8 @@ export default function App() {
         onToggleCompare={g.toggleCompare}
         onEdit={handleEdit}
         onDelete={handleDelete}
-        onMarkGone={handleMarkGone}
-        onRuleOut={handleRuleOut}
+        onToggleGone={handleToggleGone}
+        onToggleRuledOut={handleToggleRuledOut}
         onSetExpert={(id, n) => g.setRating(id, 'expert', n)}
         onSetYou={(id, n) => g.setRating(id, 'you', n)}
         onAddComment={g.addComment}
@@ -267,7 +312,12 @@ export default function App() {
       />
 
       {toast && (
-        <div className="toast" role="status">
+        <div
+          className="toast"
+          role="status"
+          ref={toastRef}
+          {...(POPOVER_SUPPORTED ? ({ popover: 'manual' } as Record<string, string>) : {})}
+        >
           {toast}
         </div>
       )}

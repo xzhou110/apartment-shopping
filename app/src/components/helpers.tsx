@@ -25,6 +25,26 @@ export function flagIcon(lvl: FlagLevel, className?: string): ReactElement {
   return <IconWarn className={className} />;
 }
 
+/**
+ * The two terminal statuses that HIDE a listing from the board (each has its own reveal chip).
+ * Both are set from the detail view by a toggle — see `toggleStatus`.
+ */
+export type HidingStatus = Extract<Status, 'Gone' | 'Ruled out'>;
+
+/**
+ * Next status when the user clicks the Gone / Ruled-out toggle in the detail view.
+ *   same status again → 'New'   — UN-marks it (mistake recovery; the user's ask 2026-07-16)
+ *   different status  → target  — switches straight over (Status is single-valued, so Gone and
+ *                                 Ruled out are mutually exclusive; no un-mark step needed)
+ * 'New' is this app's "no disposition yet" value — it's what DEFAULT_APARTMENT and the empty form
+ * assign, and both Card and DetailModal suppress it from display. Restoring to it is honest: after
+ * an un-mark the app genuinely doesn't know the disposition. It does NOT recover a pre-existing
+ * Shortlist/Toured (there's no memory of one), which is why the un-mark toast names the reset.
+ */
+export function toggleStatus(current: Status, target: HidingStatus): Status {
+  return current === target ? 'New' : target;
+}
+
 /** Status → badge color class. */
 export const STATUS_BADGE: Record<Status, string> = {
   New: 'b-neutral',
