@@ -172,7 +172,7 @@ export const APARTMENTS: Apartment[] = [
     // Nominatim had no record of this small residential way. ✅ Reads LEGIT (real Zillow home-detail
     // page w/ zpid, 24 days on market, 39 contacts, accepts Zillow applications) but very niche.
     id: 'a9',
-    status: 'New',
+    status: 'Gone', // user-marked 2026-07-16 — "Too small for the price" (baked from the PC overlay)
     title: 'Tiny House — Redwood City (Emerald Hills)',
     address: '735 Glenmere Way #B, Redwood City, CA 94062',
     neighborhood: 'Emerald Hills',
@@ -325,7 +325,7 @@ export const APARTMENTS: Apartment[] = [
     // a Zillow "Verified Source" community (Brighthaven Communities) w/ a real unit table + a
     // "reduced rent" special offer. Tracked row = Unit 618 (1BR, 570 sqft, $2,500, available now).
     id: 'a11',
-    status: 'New',
+    status: 'Ruled out', // user-ruled-out 2026-07-16 — 12-mo lease only, doesn't fit the 6-mo goal (baked from the PC overlay)
     title: 'Gatewood Village 1BR — Daly City',
     address: '500 King Dr, Daly City, CA 94015',
     neighborhood: '',
@@ -359,7 +359,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Brighthaven Communities, Zillow "Verified Source", (760) 546-5420
     contact: { company: 'Brighthaven Communities', name: 'Gatewood Village', phone: '(760) 546-5420', email: '', website: '' }, // Verified Source; note: 760 = a San Diego-area code (likely a central leasing line)
     comments: [
-      { id: 'c1784194206816', text: 'Huge community. Parking is kind of tight. \n4.4/5 among 175 google reviews and 1.9/5among  yelp reviews', ts: '2026-07-16T09:30:06.816Z' },
+      { id: 'c1784243892732', text: 'Only 1 year lease term is allowed.\nHuge community. Parking is kind of tight. \n4.4/5 among 175 google reviews and 1.9/5among  yelp reviews', ts: '2026-07-16T23:18:12.732Z' },
     ],
 
     laundry: 'unknown', // not listed in the captured facts — ask (in-unit vs on-site)
@@ -927,7 +927,7 @@ export const APARTMENTS: Apartment[] = [
     // row = Unit 5-ID988, the cheapest 1BR (568 sqft, $2,840, avail Jul 11). The hero photo you sent is of
     // Unit 5-ID2093 (the 2BR/2BA $4,510) — Blueground stages every unit alike, so it represents the finish.
     id: 'a19',
-    status: 'New',
+    status: 'Ruled out', // user-ruled-out 2026-07-16 — 1BR not available + doesn't want furnished (baked from the PC overlay)
     title: 'Blueground Furnished 1BR — San Bruno',
     address: '853 Commodore Dr, San Bruno, CA 94066',
     neighborhood: 'The Crossing',
@@ -1341,7 +1341,7 @@ export const APARTMENTS: Apartment[] = [
     // "Now" but it's pre-leasing, not move-in-ready). Also NO PETS + no stated lease term. Photo pulled at
     // _1152 (higher-res than the _576 you gave). Tracked = the 1BR (540 sqft, $2,278 — all 5 shown units).
     id: 'a24',
-    status: 'New',
+    status: 'Ruled out', // user-ruled-out 2026-07-16 — income-restricted eligibility gate (baked from the PC overlay)
     title: 'Belmont Family Apts 1BR (income-restricted) — Belmont',
     address: '803 Belmont Ave, Belmont, CA 94002',
     neighborhood: 'Central',
