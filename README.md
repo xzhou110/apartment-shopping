@@ -27,17 +27,24 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
 > state (see DECISIONS ADR-010).
 
 ## How you'll use it
-1. **Add a listing** — paste me a listing screenshot (+ the URL). I extract rent, beds/baths/sqft, lease
+1. **Find listings** — the header **Find** button opens pre-built external searches with the criteria
+   baked in (within ~15 mi of San Mateo or Redwood City · **$1,500–3,000** · 1+ bd / 1+ ba · 6-mo /
+   1-mo / short-term): Zillow + Apartments.com + Craigslist (each covering both cities) + Facebook
+   Marketplace. Craigslist opens **sorted nearest-first** (distance from the search ZIP). A **Copy**
+   button next to the criteria line copies it for pasting anywhere. These sites block automated
+   fetching, so the links open in *your* browser — skim, then feed me the hits (step 2). Criteria live
+   in one place (`app/src/data/searches.ts` `CRITERIA`) so every link + label retunes together.
+2. **Add a listing** — paste me a listing screenshot (+ the URL). I extract rent, beds/baths/sqft, lease
    term, furnished, utilities, amenities, address, etc., **geocode the address** (so distance works),
    and append it to `app/src/data/apartments.ts`. You can also click **+ Add** to enter one by hand, and
    **Edit** any card.
-2. **Rank by distance** — type a **city, ZIP, or address** into "Rank by distance from …". Each card then
+3. **Rank by distance** — type a **city, ZIP, or address** into "Rank by distance from …". Each card then
    shows "≈ X mi to {your place}", and **Sort → Nearest** orders the board by it. Common Bay Area ZIPs and
    cities resolve **instantly and offline** (a bundled Census centroid table — no API key, no cost);
    arbitrary street addresses fall back to a free geocoder and are cached. *Straight-line distance* — fast
    and free; it doesn't account for bridges/traffic (driving time is a future add). Save several places
    (Work, Gym, …) in **Settings** and pick which one is primary.
-3. **Triage** — each card shows rent + the cost fields, beds/baths/sqft, the amenity pill row (✓ / ✕ /
+4. **Triage** — each card shows rent + the cost fields, beds/baths/sqft, the amenity pill row (✓ / ✕ /
    **? = unknown**), a distance chip, the **owner / management contact** (company/owner name + tap-to-call
    phone, email, website), and auto **flags**. Lease flags track your **6-month goal**: a stated 12-mo term
    reads **red** (doesn't fit — ask if they'll do 6), a listing with **no lease term stated** reads **amber**
@@ -46,20 +53,22 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
    from your anchor. A colored top border flags overall risk (red) / caution (amber) / good (green). Your
    latest **comment** shows on the card below the flags. A small id badge (e.g. `a6`) on each photo maps the
    card to the data file / chat references — and the search box matches the id.
-4. **Filter / sort** — search (title / neighborhood / city / address / id); quick chips (Furnished only,
+5. **Filter / sort** — search (title / neighborhood / city / address / id); quick chips (Furnished only,
    Lease fits my target, Hide rejected, Show gone); a filter panel (max rent, min beds, must-have
    amenities); and sorts (**Nearest — the default**, Rent low→high / high→low, Beds, Sqft, Your rating, Added).
    With no distance anchor set yet, Nearest falls back to insertion order (and no distance chips) until you pick one in Settings.
-5. **Compare** — tick ≥2 listings → the Compare tab shows them side-by-side and auto-highlights the
+6. **Compare** — tick ≥2 listings → the Compare tab shows them side-by-side and auto-highlights the
    **best (green) / worst (red)** in each row (cheapest rent, nearest, most amenities, biggest sqft).
-6. **Rate & comment** — click the **You ★** stars on a card (or in detail) to rate; **Expert ★** is my
+7. **Rate & comment** — click the **You ★** stars on a card (or in detail) to rate; **Expert ★** is my
    rating. Open a card and add **comments** (timestamped, delete any) in the detail view — your latest one
-   also shows on the card. Ratings, status, and comments are your per-listing state and persist in your
+   also shows on the card. A comment that mentions **"income restricted"** renders highlighted **red**
+   (on the card and in the detail thread) — income qualification is a hard eligibility gate, not a
+   nice-to-know. Ratings, status, and comments are your per-listing state and persist in your
    browser even when I refresh the seed data.
-7. **Track status** — New → Shortlist → Contacted → Toured → Applied → Rejected → **Leased** / **Gone**.
+8. **Track status** — New → Shortlist → Contacted → Toured → Applied → Rejected → **Leased** / **Gone**.
    Marking a listing **Gone** (off market / leased to someone else) hides it; the **Show gone** chip
    brings it back.
-8. **Export to Google Sheets** — the **Export** button: **Sync** (push every listing straight into your
+9. **Export to Google Sheets** — the **Export** button: **Sync** (push every listing straight into your
    sheet, updated in place), **Copy for Sheets** / **Download CSV** (zero-setup), and **JSON for Claude**
    (paste back to me so I can save your in-app edits into the data file). One-time Sheet setup is the same
    as garage — see that project's README for the Apps Script recipe and the "access = Anyone" gotcha.
@@ -104,7 +113,7 @@ data to avoid the ghost — no longer. See `DECISIONS.md` ADR-010.)
 ```
 app/src/
   types.ts             data model (Apartment, Amen, Anchor, Settings, Flag)
-  data/                apartments.ts (seed = source of truth) · amenities.ts · sheetCols.ts · geocode.ts (anchor resolver)
+  data/                apartments.ts (seed = source of truth) · searches.ts (Find-launcher links + CRITERIA) · amenities.ts · sheetCols.ts · geocode.ts (anchor resolver)
   data/geo/            bayAreaGeo.ts (offline ZIP+city centroids)
   lib/                 distance.ts · derive.ts · flags.ts · format.ts · exportSheet.ts  (PURE, unit-tested)
   state/useApartments.ts  listings + settings + filters + comments; localStorage autosave (+ seed-merge)

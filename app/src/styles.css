@@ -447,6 +447,10 @@ td.worst { background: var(--risk-soft); }
 .card-comment-more { font-weight: 600; color: var(--accent-2); opacity: .8; text-transform: none; letter-spacing: 0; }
 .card-comment-ts { margin-left: auto; font-weight: 500; color: var(--ink-3); text-transform: none; letter-spacing: 0; }
 .card-comment-text { font-size: 12.5px; color: var(--ink); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; }
+/* Income-restricted comment — a hard eligibility gate, so it reads RED (matched in lib/derive). */
+.card-comment.card-comment-risk { background: var(--risk-soft); border-color: var(--risk); }
+.card-comment-risk .card-comment-head, .card-comment-risk .card-comment-more { color: var(--risk); }
+.card-comment-risk .card-comment-text { color: var(--risk); font-weight: 600; }
 
 /* ---- Detail: contact links ---- */
 .clink { color: var(--accent-2); font-weight: 600; text-decoration: none; }
@@ -455,7 +459,10 @@ td.worst { background: var(--risk-soft); }
 /* ---- Detail: comments thread ---- */
 .cmt-empty { font-size: 13px; color: var(--ink-3); padding: 4px 0 12px; }
 .cmt-list { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.cmt { display: flex; align-items: flex-start; gap: 10px; background: var(--surface-2); border-radius: 10px; padding: 10px 12px; }
+.cmt { display: flex; align-items: flex-start; gap: 10px; background: var(--surface-2); border: 1px solid transparent; border-radius: 10px; padding: 10px 12px; }
+/* Income-restricted comment — a hard eligibility gate, so it reads RED (matched in lib/derive). */
+.cmt.cmt-risk { background: var(--risk-soft); border-color: var(--risk); }
+.cmt-risk .cmt-text { color: var(--risk); font-weight: 600; }
 .cmt-main { flex: 1; min-width: 0; }
 .cmt-text { font-size: 13.5px; color: var(--ink); line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
 .cmt-ts { font-size: 11px; color: var(--ink-3); margin-top: 4px; font-weight: 500; }

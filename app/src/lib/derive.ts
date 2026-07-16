@@ -74,6 +74,15 @@ export function leaseSummary(apt: Apartment): string {
   return '';
 }
 
+/**
+ * Does a user comment call out the income-restricted eligibility gate? ("income restricted",
+ * "income-restricted", any case/spacing.) Such comments render highlighted RED wherever comments
+ * show (card "Your note" + detail thread) — income qualification is a hard gate, not a nice-to-know.
+ */
+export function isIncomeRestrictedComment(text: string): boolean {
+  return /income[\s-]*restricted/i.test(text);
+}
+
 /** Total amenities in the "X/N" tally: the tracked tri-state amenities PLUS the laundry field. */
 export const AMENITY_TOTAL = AMENITIES.length + 1;
 

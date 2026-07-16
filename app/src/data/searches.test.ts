@@ -33,6 +33,15 @@ describe('search launcher links', () => {
     }
   });
 
+  it('craigslist links sort nearest-first (sort=dist — distance ascending from the search ZIP)', () => {
+    const cl = SEARCH_LINKS.filter((s) => s.url.includes('craigslist.org'));
+    expect(cl.length).toBeGreaterThanOrEqual(1);
+    for (const s of cl) {
+      expect(s.url).toContain('sort=dist');
+      expect(s.sub.toLowerCase()).toContain('nearest first');
+    }
+  });
+
   it('covers both San Mateo (94402) and Redwood City (94063)', () => {
     expect(SEARCH_LINKS.some((s) => s.url.includes('postal=94402'))).toBe(true);
     expect(SEARCH_LINKS.some((s) => s.url.includes('postal=94063'))).toBe(true);

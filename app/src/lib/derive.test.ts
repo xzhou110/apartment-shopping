@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { pricePerSqft, leaseFits, leaseSummary, isMonthToMonth, amenCount } from './derive';
+import { pricePerSqft, leaseFits, leaseSummary, isMonthToMonth, amenCount, isIncomeRestrictedComment } from './derive';
 import { makeApt } from './_fixtures';
 import { DEFAULT_SETTINGS } from '../types';
 import type { Settings } from '../types';
@@ -119,5 +119,25 @@ describe('amenCount', () => {
   it('all tracked when all true (laundry + parking + gym + balcony = 4)', () => {
     const apt = makeApt({ laundry: 'in-unit', amen: { parking: true, gym: true, balcony: true } });
     expect(amenCount(apt)).toBe(4);
+  });
+});
+
+describe('isIncomeRestrictedComment — red-highlight matcher for user comments', () => {
+  it('matches the plain phrase in any case', () => {
+    expect(isIncomeRestrictedComment('income restricted')).toBe(true);
+    expect(isIncomeRestrictedComment('INCOME RESTRICTED — check the cap')).toBe(true);
+    expect(isIncomeRestrictedComment('This one is Income Restricted, verify first')).toBe(true);
+  });
+  it('matches the hyphenated form', () => {
+    expect(isIncomeRestrictedComment('income-restricted — must qualify')).toBe(true);
+    expect(isIncomeRestrictedComment('Income-Restricted housing')).toBe(true);
+  });
+  it('matches mid-sentence with extra spacing', () => {
+    expect(isIncomeRestrictedComment('called mgmt: unit is income  restricted per Greystar')).toBe(true);
+  });
+  it('does not match unrelated comments', () => {
+    expect(isIncomeRestrictedComment('Called Chris — tour booked Sat 2pm')).toBe(false);
+    expect(isIncomeRestrictedComment('income verification required')).toBe(false);
+    expect(isIncomeRestrictedComment('')).toBe(false);
   });
 });

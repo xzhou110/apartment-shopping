@@ -4,7 +4,7 @@ import type { Apartment } from '../types';
 import type { FlagCtx } from '../lib/flags';
 import { AMENITIES } from '../data/amenities';
 import { amenState, availabilityLabel, money, num, bedsLabel, safeHref, shortDate } from '../lib/format';
-import { amenCount, leaseSummary, pricePerSqft, AMENITY_TOTAL } from '../lib/derive';
+import { amenCount, isIncomeRestrictedComment, leaseSummary, pricePerSqft, AMENITY_TOTAL } from '../lib/derive';
 import { distanceToAnchor, formatDistance } from '../lib/distance';
 import { getFlags, signalLevel } from '../lib/flags';
 import { assetUrl, flagIcon, LAUNDRY_LABEL, laundryState, LISTED_BY_LABEL, STATUS_BADGE } from './helpers';
@@ -217,7 +217,10 @@ export function Card({ apt, ctx, anchorLabel, inCompare, onToggleCompare, onOpen
         )}
 
         {latestComment && (
-          <div className="card-comment" title="Your latest comment — open the card to see all">
+          <div
+            className={`card-comment${isIncomeRestrictedComment(latestComment.text) ? ' card-comment-risk' : ''}`}
+            title="Your latest comment — open the card to see all"
+          >
             <div className="card-comment-head">
               <IconChat />
               <span>Your note</span>

@@ -4,7 +4,7 @@ import type { Apartment, Settings } from '../types';
 import type { Coord } from '../lib/distance';
 import { AMENITIES } from '../data/amenities';
 import { amenState, availabilityLabel, money, num, bedsLabel, safeHref, telHref, mailtoHref, siteHref } from '../lib/format';
-import { pricePerSqft, leaseFits, leaseSummary } from '../lib/derive';
+import { isIncomeRestrictedComment, pricePerSqft, leaseFits, leaseSummary } from '../lib/derive';
 import { distanceToAnchor, formatDistance } from '../lib/distance';
 import { getFlags } from '../lib/flags';
 import { Modal } from './Modal';
@@ -115,7 +115,7 @@ function CommentsSection({
       {apt.comments.length > 0 ? (
         <ul className="cmt-list">
           {apt.comments.map((c) => (
-            <li key={c.id} className="cmt">
+            <li key={c.id} className={`cmt${isIncomeRestrictedComment(c.text) ? ' cmt-risk' : ''}`}>
               <div className="cmt-main">
                 <div className="cmt-text">{c.text}</div>
                 <div className="cmt-ts">{fmtTs(c.ts)}</div>
