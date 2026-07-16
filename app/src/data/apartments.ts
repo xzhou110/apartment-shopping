@@ -1465,4 +1465,86 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a24.webp',
     sourceUrl: 'https://www.zillow.com/apartments/belmont-ca/belmont-family-apartments/9NGwRq/',
   },
+  {
+    // a25 — 432 Lincoln Cir, Millbrae. Rooftop geocode via Nominatim (2026-07-10, "432, Lincoln Circle,
+    // Millbrae, 94030"). Source is CRAIGSLIST (by-owner) — so triaged carefully, and it reads clearly LEGIT
+    // (NOT a scam): FULL street address + real map pin + a real photo of the actual building, price is
+    // fair/at-market (not a cheap bait), grounded specific copy (2nd-floor corner unit, extra storage in
+    // the laundry room), and a standard small-landlord application (income/credit/refs, tour by appt — no
+    // up-front fee, no wire-money, no off-platform push). Photo pulled at 1200x900 (first .jpg on the list).
+    id: 'a25',
+    status: 'New',
+    title: 'Bright 1BR (2nd-floor, balcony) — Millbrae',
+    address: '432 Lincoln Cir, Millbrae, CA 94030',
+    neighborhood: '', // across from Central Park & Rec Center, near Richmond Dr (no named neighborhood)
+    city: 'Millbrae',
+    lat: 37.600618,
+    lng: -122.400416,
+
+    beds: 1,
+    baths: 1,
+    sqft: 675,
+    floor: '2nd floor', // "located on the 2nd floor, at the corner of the building" — corner unit, lots of light
+
+    rent: 2450, // "$2,450/mo"; fair-to-slightly-under market for Millbrae (see marketRent)
+    parkingCost: null, // "1 covered parking space" included (carport)
+    petRent: null, // n/a — no pets
+    utilitiesIncluded: true, // "We pay for water and garbage" — WATER + GARBAGE included; tenant pays gas/electric/cable/internet (see notes)
+    utilitiesEstimate: null,
+
+    deposit: 2450, // "1st month $2,450 plus $2,450 security deposit" — equal deposit
+    appFee: null, // credit report required but no fee amount stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // "Contract is month to month, by default, but can be modified based on your needs"
+    minLeaseMonths: 1, // month-to-month by default — maximally flexible; a 6-mo term is explicitly negotiable
+    maxLeaseMonths: null, // modifiable / open-ended
+    availableDate: '', // "available now"
+    availability: 'now',
+    furnished: false,
+
+    petPolicy: 'No pets', // "No pets, no smoking of any kind, no drugs, no vaping, no sublease" — explicit
+    listingType: 'Landlord', // craigslist by-owner; no company/name published — contact via the CL email relay
+    contact: { company: '', name: '', phone: '', email: '', website: '' }, // no contact published — email via craigslist to set up an appointment
+    comments: [],
+
+    laundry: 'on-site', // "laundry in bldg" / "laundry in the building" (+ an extra storage closet in the laundry room) — not in-unit
+    amen: {
+      parking: true, // "1 covered parking space" / carport
+      woodenFloor: null, // flooring not described (granite counters are, floors aren't) — ask
+      balcony: true, // "a balcony off the living room"
+      gym: false, // small apartment building — no building gym (the "Recreation Center" across the street is a public park facility, not a building amenity)
+    },
+    amenities: ['Private balcony (off living room)', '1 covered parking space', 'Granite countertops', 'Lots of closet space + extra storage in laundry room', 'Water + garbage included', 'Heater', 'Across from Central Park + Rec Center', 'Near BART · 101 · downtown Millbrae · SFO'],
+
+    dateSeen: '2026-07-10',
+    daysOnMarket: null, // craigslist doesn't surface a days-on-market count
+    marketRent: 2700, // Est. — Millbrae 1BR comp (BART + SFO-adjacent Peninsula city); $2,450 is fair, modestly under market — reinforces this is NOT a cheap-bait scam
+
+    expertRating: 4, // strong, flexible FIT: reads clearly legit + full address, month-to-month (modifiable — fits your 6-mo goal), fair/under-market $2,450, a private balcony, 1 covered parking space, granite counters, water+garbage included, corner unit w/ lots of light, and a prime location (across from Central Park, near BART/101/downtown Millbrae, minutes to SFO); held from 5 by shared (not in-unit) laundry, NO pets, heater-only (no A/C), and standard by-owner/craigslist verify-in-person caution
+    scamRisk: false,
+    incomeRestricted: false, // market-rate by-owner rental — no income cap
+    rating: 0,
+    notes:
+      '✅ Reads LEGITIMATE (I do NOT think this is a scam), despite being a by-owner CRAIGSLIST post — which I ' +
+      'triaged carefully. The scam tells are ABSENT and the legit signals are strong: it gives a FULL street ' +
+      'address (432 Lincoln Cir) with a real map pin + a photo of the actual building; the price ($2,450) is ' +
+      'fair/at-market for Millbrae, NOT a cheap bait; the copy is specific and grounded (2nd-floor corner unit, ' +
+      'across from Central Park, granite counters, extra storage in the laundry room, 1 covered space); and the ' +
+      'application is a standard small-landlord flow (proof of income, credit report, verifiable references, 3× ' +
+      'income, valid ID, tour by appointment) with NO up-front holding fee, NO wire-money ask, and NO ' +
+      'off-platform push. 🟢 GOOD FITS FOR YOU: MONTH-TO-MONTH by default and explicitly "can be modified based ' +
+      'on your needs" (so a 6-mo term is negotiable), a private BALCONY off the living room, 1 COVERED parking ' +
+      'space, granite counters, water + garbage included, and a prime spot — across from Central Park, near BART ' +
+      '+ 101 + downtown Millbrae, minutes to SFO. Occupancy up to 3, so fine solo.\n' +
+      'Confirm before signing: (1) UTILITIES — water + garbage are included, but YOU pay gas + electric + cable ' +
+      '+ internet (heat is a gas/electric heater), so budget those on top of $2,450. (2) NO PETS (and no ' +
+      'smoking/vaping/subletting). (3) LAUNDRY is in-building/shared, NOT in-unit. (4) Heater only — no A/C ' +
+      'mentioned. (5) Move-in = $2,450 first month + an equal $2,450 deposit; no application fee is stated ' +
+      '(they ask for a credit report). (6) 🔒 BY-OWNER PRUDENCE (standard for any craigslist listing, not a red ' +
+      'flag specific to this one): tour in person, confirm the landlord actually controls the unit, and never ' +
+      'wire a deposit before you\'ve seen it and signed a lease.',
+    image: 'img/a25.jpg',
+    sourceUrl: 'https://www.craigslist.org/view/d/millbrae-bedroom-apartment-for-rent-2450/jT6US1kCMBURYGH6tuLhSX',
+  },
 ];
