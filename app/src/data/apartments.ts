@@ -1362,4 +1362,88 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a23.webp',
     sourceUrl: 'https://www.zillow.com/apartments/mountain-view-ca/station-245/5ZtKYB/',
   },
+  {
+    // a24 — Belmont Family Apartments, Belmont (Central). Rooftop geocode via Nominatim (2026-07-10,
+    // "803, Belmont Avenue, Belmont, 94002"). ✅ Reads LEGIT — a Zillow "Verified Source" (green check)
+    // managed community. ⚠️ TWO HARD GATES: (1) INCOME-RESTRICTED affordable housing (must income-qualify,
+    // like a20); (2) BRAND-NEW, UNDER CONSTRUCTION — the description says it opens **Summer 2026** (units show
+    // "Now" but it's pre-leasing, not move-in-ready). Also NO PETS + no stated lease term. Photo pulled at
+    // _1152 (higher-res than the _576 you gave). Tracked = the 1BR (540 sqft, $2,278 — all 5 shown units).
+    id: 'a24',
+    status: 'New',
+    title: 'Belmont Family Apts 1BR (income-restricted) — Belmont',
+    address: '803 Belmont Ave, Belmont, CA 94002',
+    neighborhood: 'Central',
+    city: 'Belmont',
+    lat: 37.527063,
+    lng: -122.285525,
+
+    beds: 1,
+    baths: 1,
+    sqft: 540, // all 5 listed 1BR units (310/408/403/303/406) are 540 sqft @ $2,278
+    floor: '',
+
+    rent: 2278, // all listed 1BR units $2,278 (an AMI-set affordable rent, not a market rent — see marketRent)
+    parkingCost: null, // parking lot + EV spaces — no separate charge stated
+    petRent: null, // n/a — no pets
+    utilitiesIncluded: null, // not stated
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // NO lease terms shown — affordable housing is typically 12-mo (fires the "confirm 6-mo" flag)
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // units say "Now" but the building is UNDER CONSTRUCTION, opening Summer 2026 — not move-in-ready
+    availability: 'unknown', // deliberately not 'now' — pre-leasing an unbuilt community; the notes carry the real timing
+    furnished: false,
+
+    petPolicy: 'No pets', // "Dogs are not allowed" + "Cats are not allowed" — both explicit
+    listingType: 'Property mgmt', // Belmont Family Apartments Asset Management, Zillow "Verified Source", (646) 791-3446
+    contact: { company: 'Belmont Family Apartments (Asset Mgmt)', name: '', phone: '(646) 791-3446', email: '', website: '' }, // Verified Source; note: 646 = a NYC area code (out-of-state affordable-housing owner — common, not a red flag given Verified Source)
+    comments: [],
+
+    laundry: 'on-site', // "Shared: Communal Laundry Room" — not in-unit
+    amen: {
+      parking: true, // parking lot + EV parking spaces
+      woodenFloor: true, // "Vinyl Plank Flooring Throughout" — wood-look LVP (like a14's wood-vinyl)
+      balcony: null, // not mentioned — ask
+      gym: true, // "Fitness Center"
+    },
+    amenities: ['Brand-new construction (opens Summer 2026)', 'Central A/C + heat', 'Vinyl plank flooring', 'Clubhouse', 'Fitness center', 'Lobby lounge', 'Communal office space', 'Homework room', 'BBQ common area', 'Playground', 'EV parking spaces', 'Parking lot'],
+
+    dateSeen: '2026-07-10',
+    daysOnMarket: null,
+    marketRent: null, // deliberately null — affordable-housing rent is set by an AMI formula, not the open market, so a "market" comp would be apples-to-oranges (the low rent is the program, gated behind income-qualifying — not a market deal)
+
+    expertRating: 3, // the BUILDING is genuinely nice — brand-new, central A/C (rare on your list!), clubhouse/gym/lounge, contemporary, and cheap. But for a SOLO, FLEXIBLE 6-MONTH stay it's a weak fit: (1) income-restricted (must qualify), (2) NOT OPEN YET (under construction, Summer 2026), (3) NO pets, (4) no stated lease term (affordable = usually 12-mo, not 6), (5) family-oriented (playground/homework room) + likely a lottery/waitlist application. Rating reflects FIT, not build quality
+    scamRisk: false,
+    rating: 0,
+    notes:
+      '⚠️ READ FIRST — this has TWO hard gates that make it a weak fit for your solo, flexible 6-month search, ' +
+      'even though the building itself is nice: (A) INCOME-RESTRICTED affordable housing — you must ' +
+      'income-QUALIFY (an affordable/AMI program usually caps your MAX income; "may have additional eligibility ' +
+      'criteria"). (B) NOT OPEN YET — it\'s "currently under construction and anticipated to open Summer 2026"; ' +
+      'the units show "Now" but that\'s PRE-LEASING an unbuilt community, so real move-in timing + a likely ' +
+      'lottery/waitlist application are unknowns. Use their site/leasing office to check eligibility + the actual ' +
+      'open date BEFORE investing time.\n' +
+      '✅ Otherwise LEGITIMATE — a Zillow "Verified Source" (green check) community (Belmont Family Apartments, ' +
+      'Central Belmont). The build is a real plus: brand-new contemporary interiors, 🟢 CENTRAL A/C + heat (rare ' +
+      'on your list — most of your others have wall heat / no A/C), vinyl-plank floors, a clubhouse (Zillow: <11% ' +
+      'of Belmont buildings have one), fitness center, lobby lounge, communal office space, BBQ area, playground, ' +
+      'and EV parking — at a low $2,278 for a 540 sqft 1BR. (I left market-rent blank on purpose: affordable rent ' +
+      'is set by an AMI formula, not the open market, so it isn\'t a "market deal" — it\'s a program price gated ' +
+      'behind qualifying.)\n' +
+      'Confirm before you invest time: (1) LEASE — no term is stated; affordable housing is usually 12-mo, so ' +
+      'confirm whether a 6-mo term is even possible (the card shows the amber "confirm they\'ll do 6 mo" flag). ' +
+      '(2) 🐾 NO PETS — dogs AND cats disallowed (dealbreaker if you have one). (3) FAMILY-ORIENTED — it\'s ' +
+      '"Belmont FAMILY Apartments" with a playground + homework room; the unit is fine solo, but the community ' +
+      'is aimed at families. (4) LAUNDRY is shared/communal, NOT in-unit. (5) Small 540 sqft. (6) Deposit, ' +
+      'application fee, utilities not stated. (7) Contact is a NYC (646) number — an out-of-state affordable ' +
+      'housing owner (common; not a red flag given Verified Source), but confirm the local Belmont leasing path.',
+    image: 'img/a24.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/belmont-ca/belmont-family-apartments/9NGwRq/',
+  },
 ];
