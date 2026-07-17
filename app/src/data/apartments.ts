@@ -766,9 +766,10 @@ export const APARTMENTS: Apartment[] = [
   },
   {
     // a17 — Verandas Apartments, Menlo Park. Rooftop geocode via US Census (2026-07-01, 720 Coleman Ave).
-    // Source is apartments.com (not Zillow). NOTE: the primary photo could NOT be fetched — apartments.com
-    // blocks server-side image requests (403, anti-hotlinking), unlike Zillow's static CDN. image left ''
-    // (placeholder) until a fetchable image URL is provided. Tracked row = the "Matches" 1x1 ($2,425).
+    // Source is apartments.com (not Zillow). PHOTO BACKFILLED 2026-07-16: apartments.com 403s server-side
+    // image fetches (even with a browser UA + Referer), so the photo is pulled via the in-app BROWSER —
+    // navigate to the image URL (making it same-origin), fetch it, re-encode to WebP on a canvas, and POST
+    // the bytes to a localhost catcher. Tracked row = the "Matches" 1x1 ($2,425).
     id: 'a17',
     status: 'New',
     title: 'Verandas Apartments 1BR — Menlo Park',
@@ -837,9 +838,8 @@ export const APARTMENTS: Apartment[] = [
       'extra. (3) PETS — a Pets fees tab exists but the policy wasn\'t shown; confirm if pets are allowed. ' +
       '(4) SIZE/AGE — it\'s a small 600 sqft, 1-bath unit in a 1958 building — charming/value, not luxury. ' +
       '(5) MOVE-IN SPECIAL applies to 1-YEAR leases (a concession on the 6th month), so a 6-mo lease likely ' +
-      'won\'t get it — ask. (6) 📷 No photo yet — apartments.com blocked the image download; send me a photo URL ' +
-      '(e.g. from Zillow) and I\'ll add it.',
-    image: '', // apartments.com blocked the photo fetch (403) — placeholder shown until a fetchable URL is provided
+      'won\'t get it — ask.',
+    image: 'img/a17.webp', // backfilled 2026-07-16 via the in-app browser (apartments.com 403s server-side fetches)
     sourceUrl: 'https://www.apartments.com/verandas-apartments-menlo-park-ca/e7kcxrp/',
   },
   {
@@ -1503,5 +1503,106 @@ export const APARTMENTS: Apartment[] = [
       'wire a deposit before you\'ve seen it and signed a lease.',
     image: 'img/a25.jpg',
     sourceUrl: 'https://www.craigslist.org/view/d/millbrae-bedroom-apartment-for-rent-2450/jT6US1kCMBURYGH6tuLhSX',
+  },
+  {
+    // a26 — Peninsula Pines Apartments, South San Francisco (Orange Park). FIRST listing captured via the
+    // in-app BROWSER rather than a screenshot (2026-07-16) — so the whole page was read, incl. the fee tabs,
+    // FAQ, and the published neighborhood rent averages. Photo also pulled through the browser (apartments.com
+    // 403s server-side image fetches). Rooftop geocode via Nominatim; lat/lng = midpoint of the 842/858 range.
+    // ✅ LEGIT — apartments.com "Verified Listing" (CoStar), Property Manager on Site, 4.0/5 (n=5).
+    // Tracked = The Bishop Pine / Unit 836-D — the only EXACT-1BR plan and the cheapest plan meeting 1+ bd.
+    id: 'a26',
+    status: 'New',
+    title: 'Peninsula Pines 1BR — South San Francisco',
+    address: '842-858 Antoinette Ln, South San Francisco, CA 94080',
+    neighborhood: 'Orange Park',
+    city: 'South San Francisco',
+    lat: 37.655286,
+    lng: -122.43273,
+
+    beds: 1,
+    baths: 1,
+    sqft: 650, // The Bishop Pine / Unit 836-D
+    floor: '', // not stated — and the building is a tagged "Walk-Up" (3 stories), so the unit's level matters; ask
+
+    rent: 2803, // Unit 836-D BASE rent. NOT confirmed to be the 6-mo price, and excludes required move-in/out charges (see notes)
+    parkingCost: null, // Parking fees tab says only "Covered" with NO price; FAQ: "Contact this property for details" — cost unknown, NOT confirmed included
+    petRent: 65, // DOG rate (worst case). Cats are $35/mo. Deposits: dog $500, cat $300 (1) / $400 (2). Plus a $25/animal ANNUAL pet-screening fee
+    utilitiesIncluded: false, // FAQ verbatim: "Utilities are not included in rent." — fires the budget-extra flag
+    utilitiesEstimate: null, // no number published; the base-rent asterisk mentions "variable or usage-based fees" (RUBS-style passthrough)
+
+    deposit: null, // "Varies by unit" — genuinely unknown, and the page concedes further unnamed required move-in charges
+    appFee: 50, // "$50 Per APPLICANT" (not per application) — 2 adults = $100
+    brokerFee: null, // not stated (direct property-manager listing; the Required Fees tab lists no broker fee)
+
+    leaseTermMonths: null, // a wide menu (see min/max) — but NO term-based pricing is published (see notes)
+    minLeaseMonths: 3, // "Lease Options: 3 - 13 Month Leases" — your 6-mo goal sits squarely inside
+    maxLeaseMonths: 13,
+    availableDate: '2026-08-23', // Unit 836-D — 38 days out; the ONLY 1BR unit listed (see notes)
+    availability: 'unknown', // the valid date above wins for display
+    furnished: false,
+
+    petPolicy: 'Allowed', // Dogs + Cats — BUT dogs have a hard 30 lb weight limit (see notes)
+    listingType: 'Property mgmt', // apartments.com "Verified Listing" (CoStar); Property Manager on Site
+    contact: { company: 'Peninsula Pines Apartments', name: '', phone: '(415) 993-7697', email: '', website: '' },
+    comments: [],
+
+    laundry: 'on-site', // FAQ verbatim: "does not provide in-unit laundry, on-site laundry facilities are available for shared resident use"
+    amen: {
+      parking: true, // covered parking exists ("Covered") — but cost/assignment unstated; treat as present, not free
+      woodenFloor: null, // unknown for THIS unit: Apartment Features say "Carpet" + blurb says "berber-style carpeting"; the "wood-look flooring" text describes a 2BR TOWNHOUSE tour, not the 1BR
+      balcony: true, // "Balcony" in both Highlights and Apartment Features
+      gym: true, // "Fitness Center"
+    },
+    amenities: ['Gas fireplace', 'Balcony', 'Covered parking (cost unstated)', 'Fitness center', 'Spa', 'Clubhouse', 'Cabana', 'Gated', 'Grill/BBQ', 'Playground', 'Storage space', 'Dishwasher', 'Microwave', 'Disposal', 'Crown molding', 'High-speed internet ready', 'Cable ready', 'Smoke Free (building-wide policy)', 'Walk-up — 3 stories, no elevator', '7 Matterport 3D tours'],
+
+    dateSeen: '2026-07-16',
+    daysOnMarket: null,
+    marketRent: 2581, // The page's OWN published "Orange Park" 1BR average (the building's actual neighborhood). Fires the over-market warn (~$222 / +8.6%). Deliberate — see notes for why this comp over the $3,262 city figure, and for the dissenting view.
+
+    expertRating: 3, // The 4-rated siblings (a22, a23) earn it by pairing a flexible short lease WITH a price advantage. Peninsula Pines nails the lease half (3-13 mo is arguably the best menu on your list) and INVERTS the price half: $2,803 is 8.6% ABOVE its own neighborhood's 1BR average, utilities excluded, no in-unit laundry, 1964 walk-up. Good building, wrong side of the price line.
+    scamRisk: false,
+    incomeRestricted: false,
+    rating: 0,
+    notes:
+      '✅ LEGITIMATE — an apartments.com "Verified Listing" (CoStar) with a Property Manager on Site, 74 photos, ' +
+      '7 Matterport 3D tours, and a real per-unit table. Captured by reading the LIVE page (not a screenshot), so ' +
+      'the fee tabs + FAQ below are verbatim. 🟢 THE REAL STRENGTH: a 3-13 MONTH lease menu — your 6-mo goal fits ' +
+      'with zero negotiation, arguably the best lease flexibility on your list. Nice building for the money: gas ' +
+      'fireplace, balcony, covered parking, fitness center, spa, clubhouse, cabana, gated, grill, storage, ' +
+      'dishwasher, smoke-free. Walk 10 min to Kaiser, 1 min to shopping; BART 1.1 mi, SFO 5.1 mi.\n' +
+      '💲 THE PRICE IS THE PROBLEM — and the page proves it against ITSELF. It publishes its own neighborhood ' +
+      'averages, and this property prices ABOVE the Orange Park average at EVERY bed count (studio +2.0%, 1BR ' +
+      '+8.6%, 2BR +4.7%, 3BR +10.5%) while looking "cheap" against the wider SSF city average only because that ' +
+      'city figure is inflated by newer East-of-101 biotech stock. So I benchmarked against Orange Park ($2,581 ' +
+      '1BR avg) — the card\'s "~$222 over market" flag is real, not an artifact. Worse: your tracked 1BR is the ' +
+      'WORST-VALUE plan in the building ($4.31/sqft vs the 900 sqft 2BR at $3.58). Counterpoint, in fairness: an ' +
+      'unadjusted neighborhood mean ignores this property\'s amenity bundle, so a fair "adjusted" comp might be ' +
+      '~$2,730 (which would fire no flag) — i.e. you may simply be paying a real premium for the pool/spa/gym. ' +
+      'And note there are NO rent specials ("not currently offering any"), so the premium is deliberate, not stale.\n' +
+      '⚠️ Things the listing does NOT tell you (ask before you spend the $50): (1) 🎯 THE PRICE MAY NOT BE THE ' +
+      '6-MONTH PRICE — they publish a 3-13 mo menu but NO term-based pricing; short terms usually carry a ' +
+      'premium, so confirm what a 6-mo term actually costs. This is the single biggest unknown, since the lease ' +
+      'flexibility is the whole reason this listing fits you. (2) 💸 HIDDEN MOVE-IN/OUT COST — the deposit ' +
+      '"Varies by unit" AND the fine print concedes "required charges due at or prior to move-in or at move-out" ' +
+      'that it never names; on a 6-mo stay those amortize over 6 months, not 12, so they bite twice as hard. ' +
+      'Utilities are NOT included either. The $50 app fee is PER APPLICANT — and you must pay it before you can ' +
+      'learn the real move-in cost. (3) 📅 ONE UNIT, 38 DAYS OUT — Unit 836-D is the ONLY 1BR listed in a ' +
+      '210-unit building, available Aug 23. If it goes, this listing is dead, not delayed; and you\'d wait ~5.5 ' +
+      'weeks (~20% of a 6-mo stay) before the clock starts. 💡 Live alternative: the Monterey Pine 2BR, $3,224, ' +
+      '900 sqft, available NOW — +$421/mo for +250 sqft and an extra room, 5 weeks sooner, and it\'s the only ' +
+      'plan priced UNDER the neighborhood average.\n' +
+      'Also confirm: (4) 🐕 DOGS HAVE A HARD 30 LB LIMIT (the page contradicts itself — Pets tab says ' +
+      '"Restrictions: None", the FAQ says breed/weight restrictions may apply). Dog $65/mo + $500 dep; cat ' +
+      '$35/mo + $300; plus a $25/animal ANNUAL screening fee. (5) LAUNDRY is shared/on-site, NOT in-unit. ' +
+      '(6) 🪜 "Walk-Up" is a tagged fact — 3 stories, no elevator, and 836-D\'s floor is unpublished; on a ' +
+      'short stay you haul in and out twice as often. (7) 🚗 PARKING is "Covered" but with NO price and "contact ' +
+      'for details" — do not assume it\'s free/assigned. The page implies car-dependence (Drivability 90 vs ' +
+      'Transit 50, and BART is quoted as a 2-min DRIVE, not a walk). (8) 🔥 NO heating or A/C appears anywhere ' +
+      'in Apartment Features — only the gas fireplace. An Aug 23 start on a 6-mo term runs through late ' +
+      'February, and utilities are on you; ask what actually heats the unit. (9) The 4.0 rating is only 5 ' +
+      'reviews on 210 units, and bimodal (3x5-star + 1x1-star) — thin signal. (10) Building is 1964.',
+    image: 'img/a26.webp',
+    sourceUrl: 'https://www.apartments.com/peninsula-pines-apartments-south-san-francisco-ca/f19cymv/',
   },
 ];
