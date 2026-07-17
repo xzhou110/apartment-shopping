@@ -1602,6 +1602,11 @@ export const APARTMENTS: Apartment[] = [
       'in Apartment Features — only the gas fireplace. An Aug 23 start on a 6-mo term runs through late ' +
       'February, and utilities are on you; ask what actually heats the unit. (9) The 4.0 rating is only 5 ' +
       'reviews on 210 units, and bimodal (3x5-star + 1x1-star) — thin signal. (10) Building is 1964.',
+    // EXTERIOR shot (user preference: show the building, not the interior). NOTE apartments.com's
+    // "building-photo.jpg" filename is a generic bucket, NOT an exterior marker — 34 of the 35
+    // "building-photo" hashes on this page are interiors. Had to eyeball a contact sheet to find a real
+    // one. This shot also visually confirms the carports ("Parking: Covered"). Carries a RealPage watermark
+    // (kept intact — it's the property's own marketing photo).
     image: 'img/a26.webp',
     sourceUrl: 'https://www.apartments.com/peninsula-pines-apartments-south-san-francisco-ca/f19cymv/',
   },

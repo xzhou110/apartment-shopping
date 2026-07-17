@@ -34,10 +34,13 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
    button next to the criteria line copies it for pasting anywhere. These sites block automated
    fetching, so the links open in *your* browser — skim, then feed me the hits (step 2). Criteria live
    in one place (`app/src/data/searches.ts` `CRITERIA`) so every link + label retunes together.
-2. **Add a listing** — paste me a listing screenshot (+ the URL). I extract rent, beds/baths/sqft, lease
-   term, furnished, utilities, amenities, address, etc., **geocode the address** (so distance works),
-   and append it to `app/src/data/apartments.ts`. You can also click **+ Add** to enter one by hand, and
-   **Edit** any card.
+2. **Add a listing — just send the link.** I open the page in my own browser and read the whole thing
+   (rent, beds/baths/sqft, lease terms, fees, pet rules, utilities, amenities, address), **geocode the
+   address** (so distance works), grab an **exterior photo of the building**, and append it to
+   `app/src/data/apartments.ts`. Reading the live page beats a screenshot — it surfaces fee tabs, FAQs,
+   and the site's own neighborhood rent comps that a hero image never shows. Screenshots are still
+   welcome as a supplement, and remain the fallback for anything login-walled. You can also click
+   **+ Add** to enter one by hand, and **Edit** any card.
 3. **Rank by distance** — type a **city, ZIP, or address** into "Rank by distance from …". Each card then
    shows "≈ X mi to {your place}", and **Sort → Nearest** orders the board by it. Common Bay Area ZIPs and
    cities resolve **instantly and offline** (a bundled Census centroid table — no API key, no cost);
