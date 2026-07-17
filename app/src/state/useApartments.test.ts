@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { mergeWithSeed, looksUserAdded } from './useApartments';
+import { mergeWithSeed, looksUserAdded, parsePersist } from './useApartments';
 import { makeApt } from '../lib/_fixtures';
+import { DEFAULT_ANCHOR, DEFAULT_SETTINGS } from '../types';
 
 describe('looksUserAdded — timestamp id vs short seed id', () => {
   it('a timestamp id (a + Date.now(), 13 digits) → true', () =>
@@ -46,5 +47,36 @@ describe('mergeWithSeed — retiring a seed listing leaves no ghost', () => {
   it('a seed listing marked removed is skipped', () => {
     const out = mergeWithSeed([], ['a6'], seed);
     expect(out.map((a) => a.id)).toEqual(['a7']);
+  });
+});
+
+describe('default distance anchor — Millbrae 94030', () => {
+  it('DEFAULT_SETTINGS ships the 94030 anchor as primary', () => {
+    expect(DEFAULT_ANCHOR.query).toBe('94030');
+    expect(DEFAULT_ANCHOR.lat).not.toBeNull();
+    expect(DEFAULT_ANCHOR.lng).not.toBeNull();
+    expect(DEFAULT_SETTINGS.anchors).toEqual([DEFAULT_ANCHOR]);
+    expect(DEFAULT_SETTINGS.primaryAnchorId).toBe(DEFAULT_ANCHOR.id);
+  });
+
+  const raw = (settings: object) =>
+    JSON.stringify({ apartments: [], settings, removed: [] });
+
+  it('a browser that never set an anchor (empty list) gets the default injected', () => {
+    const out = parsePersist(raw({ anchors: [], primaryAnchorId: null }))!;
+    expect(out.settings.anchors).toEqual([DEFAULT_ANCHOR]);
+    expect(out.settings.primaryAnchorId).toBe(DEFAULT_ANCHOR.id);
+  });
+
+  it('a settings object with no anchors key at all also gets the default', () => {
+    const out = parsePersist(raw({ distanceUnit: 'mi' }))!;
+    expect(out.settings.primaryAnchorId).toBe(DEFAULT_ANCHOR.id);
+  });
+
+  it("a user's own custom anchor is left untouched (non-destructive)", () => {
+    const custom = { id: 'my-work', label: 'Work', query: 'Palo Alto', lat: 37.44, lng: -122.14 };
+    const out = parsePersist(raw({ anchors: [custom], primaryAnchorId: 'my-work' }))!;
+    expect(out.settings.anchors).toEqual([custom]);
+    expect(out.settings.primaryAnchorId).toBe('my-work');
   });
 });

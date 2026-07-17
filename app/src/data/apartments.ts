@@ -50,7 +50,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Blvd Residential, "Leasing Agent," Verified Source, (650) 547-8025
     contact: { company: 'Blvd Residential', name: 'Leasing Agent', phone: '(650) 547-8025', email: '', website: '' }, // Zillow "Verified Source"; phone from the listing
     comments: [
-      { id: 'c1784194114884', text: 'Plenty of parking behind the building\nPoor management review 2.1/5 stars;\nFlooded twice a year; smells bad', ts: '2026-07-16T09:28:34.884Z' },
+      { id: 'c1784330709521', text: 'Not available, check back next month\nPlenty of parking behind the building\nPoor management review 2.1/5 stars;\nFlooded twice a year; smells bad', ts: '2026-07-17T23:25:09.521Z' },
     ],
 
     laundry: 'unknown', // not mentioned anywhere (no chip, no unit-feature line)
@@ -69,7 +69,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4,
     scamRisk: false,
     incomeRestricted: false,
-    rating: 1,
+    rating: 2,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing managed by Blvd Residential (Leasing Agent, ' +
       '(650) 547-8025), a long-standing pet-friendly community in a quiet Foster City neighborhood near ' +
@@ -129,7 +129,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Vasona (Leasing Agent), Zillow "Verified Source", (214) 833-5650
     contact: { company: 'Vasona', name: 'Leasing Agent', phone: '(214) 833-5650', email: '', website: '' }, // Zillow "Verified Source"; note: 214 = a Dallas TX area code (likely a central leasing line)
     comments: [
-      { id: 'c1784194085370', text: 'At the end of street/closed loop. \n3/5 management review;', ts: '2026-07-16T09:28:05.370Z' },
+      { id: 'c1784330947484', text: 'The property may no longer be available\nNo response from the property at all\nNice location\n3/5 management review', ts: '2026-07-17T23:29:07.484Z' },
     ],
 
     laundry: 'on-site', // "Shared: Laundry" — community/shared, not in-unit
@@ -511,7 +511,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // GPS/Logos Property Investment (Nate Chen), Zillow "Verified Source"
     contact: { company: 'GPS/Logos Property Investment', name: 'Nate Chen', phone: '', email: '', website: '' }, // Verified Source; no phone published — inquire via Zillow
     comments: [
-      { id: 'c1784194172503', text: 'Parking is tight. Old building. \nIt seems not available?\nPrivate owner. Can\'t find review for this one', ts: '2026-07-16T09:29:32.503Z' },
+      { id: 'c1784330680270', text: 'It seems not available?\nParking is tight. Old building. \nPrivate owner. Can\'t find review for this one', ts: '2026-07-17T23:24:40.270Z' },
     ],
 
     laundry: 'on-site', // "Shared laundry" / "Laundry: Shared" — not in-unit
@@ -927,7 +927,7 @@ export const APARTMENTS: Apartment[] = [
     // row = Unit 5-ID988, the cheapest 1BR (568 sqft, $2,840, avail Jul 11). The hero photo you sent is of
     // Unit 5-ID2093 (the 2BR/2BA $4,510) — Blueground stages every unit alike, so it represents the finish.
     id: 'a19',
-    status: 'Ruled out', // user-ruled-out 2026-07-16 — 1BR not available + doesn't want furnished (baked from the PC overlay)
+    status: 'Gone', // user-marked 2026-07-17 — Blueground/Avalon, income-restricted for short-term + 1BR unavailable (baked from the PC overlay)
     title: 'Blueground Furnished 1BR — San Bruno',
     address: '853 Commodore Dr, San Bruno, CA 94066',
     neighborhood: 'The Crossing',
@@ -961,7 +961,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Blueground — a large, established furnished-apartment operator (professional leasing flow)
     contact: { company: 'Blueground', name: '', phone: '', email: '', website: 'https://www.theblueground.com/' },
     comments: [
-      { id: 'c1784194253844', text: '1 bed not available now.\n4/5 rating among 400 google reviews.\nI don\'t like furnished though', ts: '2026-07-16T09:30:53.844Z' },
+      { id: 'c1784331365391', text: 'The real company is Avalon. \nThe real leasing company is Avalon. \nContact blueground directly for short term lease, but it\'s income restricted\n4/5 rating among 400 google reviews.', ts: '2026-07-17T23:36:05.391Z' },
     ],
 
     laundry: 'in-unit', // "In-unit laundry (W/D)" chip + "IN-APARTMENT LAUNDRY" tag + Washer/Dryer in appliances
@@ -1428,7 +1428,7 @@ export const APARTMENTS: Apartment[] = [
     // the laundry room), and a standard small-landlord application (income/credit/refs, tour by appt — no
     // up-front fee, no wire-money, no off-platform push). Photo pulled at 1200x900 (first .jpg on the list).
     id: 'a25',
-    status: 'New',
+    status: 'Gone', // user-marked 2026-07-17 — "someone paid security deposit," likely no longer available (baked from the PC overlay)
     title: 'Bright 1BR (2nd-floor, balcony) — Millbrae',
     address: '432 Lincoln Cir, Millbrae, CA 94030',
     neighborhood: '', // across from Central Park & Rec Center, near Richmond Dr (no named neighborhood)
@@ -1462,7 +1462,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Landlord', // craigslist by-owner; no company/name published — contact via the CL email relay
     contact: { company: '', name: '', phone: '', email: '', website: '' }, // no contact published — email via craigslist to set up an appointment
     comments: [
-      { id: 'c1784194275212', text: 'Pretty close', ts: '2026-07-16T09:31:15.212Z' },
+      { id: 'c1784330653219', text: 'Someone paid security deposit. so likely no longer available', ts: '2026-07-17T23:24:13.219Z' },
     ],
 
     laundry: 'on-site', // "laundry in bldg" / "laundry in the building" (+ an extra storage closet in the laundry room) — not in-unit
@@ -1545,7 +1545,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Allowed', // Dogs + Cats — BUT dogs have a hard 30 lb weight limit (see notes)
     listingType: 'Property mgmt', // apartments.com "Verified Listing" (CoStar); Property Manager on Site
     contact: { company: 'Peninsula Pines Apartments', name: '', phone: '(415) 993-7697', email: '', website: '' },
-    comments: [],
+    comments: [
+      { id: 'c1784330621190', text: 'The landlord doesn\'t allow any families or friends to use amenities. \nParking is extremely limited -- no more parking after 3 pm', ts: '2026-07-17T23:23:41.190Z' },
+    ],
 
     laundry: 'on-site', // FAQ verbatim: "does not provide in-unit laundry, on-site laundry facilities are available for shared resident use"
     amen: {
@@ -1563,7 +1565,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 3, // The 4-rated siblings (a22, a23) earn it by pairing a flexible short lease WITH a price advantage. Peninsula Pines nails the lease half (3-13 mo is arguably the best menu on your list) and INVERTS the price half: $2,803 is 8.6% ABOVE its own neighborhood's 1BR average, utilities excluded, no in-unit laundry, 1964 walk-up. Good building, wrong side of the price line.
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 2,
     notes:
       '✅ LEGITIMATE — an apartments.com "Verified Listing" (CoStar) with a Property Manager on Site, 74 photos, ' +
       '7 Matterport 3D tours, and a real per-unit table. Captured by reading the LIVE page (not a screenshot), so ' +

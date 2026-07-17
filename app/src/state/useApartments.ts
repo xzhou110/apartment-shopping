@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Anchor, Apartment, AmenityKey, Settings, Status } from '../types';
-import { DEFAULT_SETTINGS } from '../types';
+import { DEFAULT_SETTINGS, DEFAULT_ANCHOR } from '../types';
 import type { Coord } from '../lib/distance';
 import { APARTMENTS } from '../data/apartments';
 
@@ -187,7 +187,7 @@ export function mergeWithSeed(
   return out;
 }
 
-function parsePersist(raw: string | null): RawPersist | null {
+export function parsePersist(raw: string | null): RawPersist | null {
   if (!raw) return null;
   try {
     const data = JSON.parse(raw) as {
@@ -201,6 +201,13 @@ function parsePersist(raw: string | null): RawPersist | null {
     // still holding the exact OLD default (6/12) is bumped to 6/6 so the deployed app reflects the new
     // target; anyone who deliberately set a different window is left untouched.
     if (settings.targetMinLease === 6 && settings.targetMaxLease === 12) settings.targetMaxLease = 6;
+    // Migration (2026-07-17): a default distance anchor (Millbrae 94030) now ships so a fresh install
+    // ranks by distance out of the box. A browser that never added an anchor (empty list) gets it too,
+    // so the default reflects on refresh across devices; anyone who added their own anchor is untouched.
+    if (!Array.isArray(settings.anchors) || settings.anchors.length === 0) {
+      settings.anchors = [DEFAULT_ANCHOR];
+      settings.primaryAnchorId = DEFAULT_ANCHOR.id;
+    }
     return {
       apartments: data.apartments,
       settings,

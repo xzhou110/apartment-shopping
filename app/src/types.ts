@@ -154,9 +154,24 @@ export interface Settings {
   sheetUrl?: string; // Google Apps Script Web App URL for direct Sheets sync ('' = not configured)
 }
 
+/**
+ * Default distance anchor a fresh install ranks against — Millbrae ZIP 94030, resolved offline from
+ * the bundled Census table (data/geo/bayAreaGeo.ts: "94030" → [37.5997, -122.4033]). Stable id so the
+ * parsePersist migration can inject it for existing browsers that never set an anchor (so the default
+ * reflects on refresh across devices). Fully editable in Settings → Distance anchors: rename, remove,
+ * make another primary, or add your own.
+ */
+export const DEFAULT_ANCHOR: Anchor = {
+  id: 'anchor-default-94030',
+  label: '94030',
+  query: '94030',
+  lat: 37.5997,
+  lng: -122.4033,
+};
+
 export const DEFAULT_SETTINGS: Settings = {
-  anchors: [],
-  primaryAnchorId: null,
+  anchors: [DEFAULT_ANCHOR],
+  primaryAnchorId: DEFAULT_ANCHOR.id,
   distanceUnit: 'mi',
   targetMinLease: 6, // the user is looking for a 6-month lease (single-point goal, updated 2026-07)
   targetMaxLease: 6,

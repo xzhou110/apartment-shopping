@@ -41,12 +41,15 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
    and the site's own neighborhood rent comps that a hero image never shows. Screenshots are still
    welcome as a supplement, and remain the fallback for anything login-walled. You can also click
    **+ Add** to enter one by hand, and **Edit** any card.
-3. **Rank by distance** — type a **city, ZIP, or address** into "Rank by distance from …". Each card then
-   shows "≈ X mi to {your place}", and **Sort → Nearest** orders the board by it. Common Bay Area ZIPs and
-   cities resolve **instantly and offline** (a bundled Census centroid table — no API key, no cost);
-   arbitrary street addresses fall back to a free geocoder and are cached. *Straight-line distance* — fast
-   and free; it doesn't account for bridges/traffic (driving time is a future add). Save several places
-   (Work, Gym, …) in **Settings** and pick which one is primary.
+3. **Rank by distance** — out of the box the board ranks from **ZIP 94030 (Millbrae)**, the default anchor,
+   so a fresh browser (or your phone) shows distance chips immediately. Change it any time in **Settings →
+   Distance anchors**: rename it, remove it, add your own (Work, Gym, …), or make another primary. Type a
+   **city, ZIP, or address**; each card then shows "≈ X mi to {your place}", and **Sort → Nearest** orders
+   the board by it. Common Bay Area ZIPs and cities resolve **instantly and offline** (a bundled Census
+   centroid table — no API key, no cost); arbitrary street addresses fall back to a free geocoder and are
+   cached. *Straight-line distance* — fast and free; it doesn't account for bridges/traffic (driving time is
+   a future add). The default reflects on every device on refresh (a fresh install ships it; a browser that
+   never set an anchor gets it injected on load).
 4. **Triage** — each card shows rent + the cost fields, beds/baths/sqft, the amenity pill row (✓ / ✕ /
    **? = unknown**), a distance chip, the **owner / management contact** (company/owner name + tap-to-call
    phone, email, website), and auto **flags**. Lease flags track your **6-month goal**: a stated 12-mo term
@@ -63,7 +66,7 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
 5. **Filter / sort** — search (title / neighborhood / city / address / id); quick chips (Furnished only,
    Lease fits my target, Hide rejected, Show gone, Show ruled out); a filter panel (max rent, min beds, must-have
    amenities); and sorts (**Nearest — the default**, Rent low→high / high→low, Beds, Sqft, Your rating, Added).
-   With no distance anchor set yet, Nearest falls back to insertion order (and no distance chips) until you pick one in Settings.
+   Nearest ranks from your primary anchor (default **94030 / Millbrae**); if you delete every anchor it falls back to insertion order (no distance chips) until you add one — but on the next refresh the 94030 default is re-injected.
 6. **Compare** — tick ≥2 listings → the Compare tab shows them side-by-side and auto-highlights the
    **best (green) / worst (red)** in each row (cheapest rent, nearest, most amenities, biggest sqft).
 7. **Rate & comment** — click the **You ★** stars on a card (or in detail) to rate; **Expert ★** is my
