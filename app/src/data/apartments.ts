@@ -2090,4 +2090,156 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a32.webp',
     sourceUrl: 'https://www.zillow.com/apartments/belmont-ca/village-court/Cm5rH9/',
   },
+  {
+    // a33 — 7 Garden Ct #5, Belmont (Western Hills). Rooftop geocode via Nominatim (2026-07-21). ✅ Reads
+    // LEGIT — a real Zillow home-detail listing by Pacific Garden Properties, LLC (listing agent), 18 real
+    // photos matching the copy (heavy owner-style marketing, but grounded). Hero = the (modest) building
+    // exterior/carport shot. ⚠️ HARD 10–12 MONTH LEASE, "NO SHORT TERM" — a direct conflict with the 6-mo goal.
+    id: 'a33',
+    status: 'New',
+    title: 'Updated 1BR w/ rare A/C (carport) — Belmont',
+    address: '7 Garden Ct APT 5, Belmont, CA 94002',
+    neighborhood: 'Western Hills',
+    city: 'Belmont',
+    lat: 37.508376,
+    lng: -122.29197,
+
+    beds: 1,
+    baths: 1,
+    sqft: 650,
+    floor: '',
+
+    rent: 2775, // "$2,775" ("true net ~$2,600" after owner-paid utilities/parking/gardener)
+    parkingCost: null, // "1 Designated Carport Space (FREE / No Extra Fee)" — included
+    petRent: 65, // "$65/month for 1 cat"
+    utilitiesIncluded: true, // owner pays water, sewer, garbage + a professional gardener; tenant pays PG&E (gas+electric) + internet
+    utilitiesEstimate: null,
+
+    deposit: 2775, // "Security Deposit: first month's rent"
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // range 10–12, explicitly "NO SHORT TERM" (see min/max) → RED "doesn't fit your 6-mo goal" flag
+    minLeaseMonths: 10,
+    maxLeaseMonths: 12,
+    availableDate: '2026-08-01', // "Available: August 1, 2026"
+    availability: 'unknown', // date above wins
+    furnished: false,
+
+    petPolicy: 'Cats only', // "1 Cat Welcome ($65/month pet rent)"; no dogs
+    listingType: 'Property mgmt', // Pacific Garden Properties, LLC (listing agent/manager) — NOT a Zillow "Verified Source"
+    contact: { company: 'Pacific Garden Properties, LLC', name: '', phone: '', email: '', website: '' }, // no phone published — inquire via Zillow
+    comments: [],
+
+    laundry: 'on-site', // "on-site shared laundry facilities" — not in-unit
+    amen: {
+      parking: true, // free covered carport (1 space)
+      woodenFloor: true, // "fresh flooring" — wood/wood-look throughout the photos
+      balcony: true, // "private deck/balcony"
+      gym: false, // small building — no gym
+    },
+    amenities: ['Rare in-unit wall A/C', 'Fully updated (kitchen + bath + flooring)', 'Free carport (1 space)', 'Private deck/balcony', 'On-site laundry', 'Water/sewer/garbage + GARDENER included', 'Cat OK ($65/mo)', 'Western Hills — near Carlmont Shopping Center · Caltrain · 101/280'],
+
+    dateSeen: '2026-07-21',
+    daysOnMarket: 17, // "17 days on Zillow" · 75 contacts
+    marketRent: 2850, // Est. — Belmont 1BR comp; $2,775 (with owner-paid water/sewer/garbage/gardener) is about at market — the listing pitches it vs "$2,995+ corporate complexes"
+
+    expertRating: 3, // the UNIT is genuinely nice — RARE in-unit A/C (uncommon in Belmont), fully updated, a free carport, a private balcony, and owner pays water/sewer/garbage + a gardener (real savings), cat-friendly. But it's a HARD 10–12 MONTH LEASE, explicitly "NO SHORT TERM," with strict screening (700+ credit, 3× income, move-in within ~30 days) — a direct conflict with your 6-mo goal (red flag). Would be a 4 if you could do a year
+    scamRisk: false,
+    incomeRestricted: false,
+    rating: 0,
+    notes:
+      '✅ Reads LEGITIMATE — a real Zillow home-detail listing (zpid, 17 days on market, 75 contacts) by a ' +
+      'listing agent (Pacific Garden Properties, LLC), with a full address and 18 real, consistent photos that ' +
+      'match the copy. The listing is written in a very salesy, owner-marketing style ("HUGE SAVINGS," "best ' +
+      'value in Belmont") — that\'s enthusiasm, not a scam tell; the substance checks out. 🟢 GENUINELY NICE ' +
+      'UNIT: a fully updated 1BR with RARE in-unit wall A/C (uncommon for Belmont — great for heatwaves), a free ' +
+      'covered carport, a private deck/balcony, on-site laundry, and the owner pays water + sewer + garbage + a ' +
+      'professional gardener (you only add PG&E + internet). Cat-friendly ($65/mo). Quiet Western Hills near the ' +
+      'Carlmont Shopping Center, Caltrain, and 101/280.\n' +
+      '⚠️ THE CATCH FOR YOU: it\'s a HARD 10–12 MONTH lease and the listing says "NO SHORT TERM" outright — a ' +
+      'direct conflict with your ~6-month goal (the card shows the red "doesn\'t fit your 6-mo goal" flag). If a ' +
+      'year works, it\'s a strong unit; if not, this one\'s out. Also note the STRICT requirements they say are ' +
+      'enforced: 700+ credit score, verifiable income ≥ 3× rent ($8,325/mo), and ready to move within ~30 days. ' +
+      'Available Aug 1, 2026. Non-smoking. Deposit = one month\'s rent. Priced about at market ($2,775) — the ' +
+      'value is the included utilities + A/C, not the base rent.',
+    image: 'img/a33.webp',
+    sourceUrl: 'https://www.zillow.com/homedetails/7-Garden-Ct-APT-5-Belmont-CA-94002/2061580510_zpid/',
+  },
+  {
+    // a34 — 520 Hilton St, Redwood City (Stambaugh-Heller / Redwood Junction). Rooftop geocode via Nominatim
+    // (2026-07-21). ✅ Reads LEGIT — a real Zillow listing by CREI LLC / Redwood Landing Properties, INC
+    // (valid CA DRE #01476187), full address, 8 real photos incl. the actual BUILDING w/ a "FOR RENT" sign +
+    // hardwood interiors matching the copy. Hero = the building exterior. NOTE: this is a 2-BEDROOM (955 sqft)
+    // at $2,400 — well UNDER market (fires the "verify why below market" info flag). ⚠️ 1-year lease.
+    id: 'a34',
+    status: 'New',
+    title: 'Spacious 2BR (hardwood, carport) — Redwood City',
+    address: '520 Hilton St, Redwood City, CA 94063',
+    neighborhood: 'Stambaugh-Heller',
+    city: 'Redwood City',
+    lat: 37.484191,
+    lng: -122.221914,
+
+    beds: 2, // a 2-bedroom (still fits "1+ bd") — a lot of space for the price
+    baths: 1,
+    sqft: 955,
+    floor: '', // 2-story 7-unit building; unit level not stated
+
+    rent: 2400, // "$2,400"; well under market for a 955 sqft RWC 2BR (see marketRent)
+    parkingCost: null, // "carport" included
+    petRent: null, // not stated
+    utilitiesIncluded: false, // "Tenant pays PG&E, Water and Garbage Separately" — nothing included → budget-extra flag
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: 12, // "1 year lease" → RED "doesn't fit your 6-mo goal" flag
+    minLeaseMonths: 12,
+    maxLeaseMonths: 12,
+    availableDate: '', // "1 unit available", by appointment only — no concrete date
+    availability: 'now',
+    furnished: false,
+
+    petPolicy: 'Unknown', // not stated — ask
+    listingType: 'Property mgmt', // CREI LLC (Zillow) / Redwood Landing Properties, INC — valid CA DRE #01476187 (but NOT a Zillow "Verified Source")
+    contact: { company: 'CREI LLC / Redwood Landing Properties (DRE #01476187)', name: '', phone: '', email: '', website: '' }, // no phone published; by appointment — inquire via Zillow
+    comments: [],
+
+    laundry: 'unknown', // not mentioned — ask (in-unit / on-site / none)
+    amen: {
+      parking: true, // "carport"
+      woodenFloor: true, // "hardwood floors throughout" (+ photos)
+      balcony: null, // the building has balconies (exterior photo) but the unit's isn't stated — ask
+      gym: false, // small 7-unit building — no gym
+    },
+    amenities: ['Hardwood floors throughout', 'Carport parking', 'Spacious 955 sqft 2BR', 'Ample kitchen cabinet storage', '7-unit building', 'Quick access to El Camino Real', 'Central Redwood City (Stambaugh-Heller)'],
+
+    dateSeen: '2026-07-21',
+    daysOnMarket: null,
+    marketRent: 3000, // Est. — RWC 2BR comp; $2,400 for a 955 sqft 2BR is WELL under market ($2.51/sqft) → fires the "verify why below market" info flag (the "why" is the older/basic building + all-tenant-paid utilities)
+
+    expertRating: 4, // STANDOUT VALUE + LEGIT (valid DRE, real building-with-for-rent-sign photo): a spacious 955 sqft 2-BEDROOM with HARDWOOD floors + a carport, at just $2,400 — well under market for Redwood City, central near El Camino. For the same money as your 1BRs you get a second room. Held from 5 by the 1-YEAR lease (conflicts with your 6-mo goal — red flag), all utilities tenant-paid, an older/basic building (wall heat, no A/C), and laundry not stated
+    scamRisk: false,
+    incomeRestricted: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a real Zillow listing by CREI LLC / Redwood Landing Properties, INC, with a VALID ' +
+      'CA DRE license (#01476187), a full address, and 8 real photos including a shot of the ACTUAL BUILDING ' +
+      'with a "FOR RENT" sign out front + hardwood interiors that match the copy. 💡 THE ANGLE: this is a ' +
+      'SPACIOUS 2-BEDROOM (955 sqft) with HARDWOOD floors throughout and a carport, at just $2,400 — WELL under ' +
+      'market for Redwood City (~$2.51/sqft). For about the same money as your 1BRs, you get a second room ' +
+      '(great for a home office/guest). Central location near El Camino Real; quiet 7-unit building.\n' +
+      'Read the deal honestly: (1) 💲 WHY SO CHEAP? — the card shows a "rent well below market — verify why" ' +
+      'flag; the "why" here looks benign (an older, basic building — wall heat, no A/C, a simple kitchen — and ' +
+      'YOU pay all utilities), not a scam. But confirm condition + total monthly cost on a tour. (2) 📅 IT\'S A ' +
+      '1-YEAR LEASE — a direct conflict with your ~6-month goal (red flag); ask if they\'ll do 6 months (a ' +
+      'private 7-unit owner may be flexible). (3) 💡 UTILITIES — you pay PG&E + water + garbage separately ' +
+      '(nothing included), so budget those on top of $2,400. (4) 🧺 LAUNDRY isn\'t mentioned — ask. (5) Pet ' +
+      'policy + deposit not stated — ask. (6) Showings are BY APPOINTMENT only.',
+    image: 'img/a34.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/redwood-city-ca/520-hilton-street/5Zyxrs/',
+  },
 ];
