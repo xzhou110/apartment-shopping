@@ -1703,4 +1703,84 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a27.jpg',
     sourceUrl: 'https://www.craigslist.org/view/d/san-mateo-cozy-2br-1ba-adu/rn88b7TxE5hpkAPZwnSSnF',
   },
+  {
+    // a28 — 1450 Laurel St #4, San Carlos (downtown). Rooftop geocode via Nominatim (2026-07-21,
+    // "1450, Laurel Street, San Carlos, 94070"). ✅ Reads LEGIT — a real Zillow home-detail listing (zpid)
+    // by a "Verified Source" management company (The Housing Guild), full street address, 9 real photos
+    // (incl. TWO exterior shots + a floor plan) that match the copy, at-market price. Hero = the EXTERIOR
+    // front shot (user preference). Zillow CDN fetches server-side (no browser-capture needed).
+    id: 'a28',
+    status: 'New',
+    title: 'Renovated 1BR (downtown, walk 94) — San Carlos',
+    address: '1450 Laurel St APT 4, San Carlos, CA 94070',
+    neighborhood: 'Downtown',
+    city: 'San Carlos',
+    lat: 37.496418,
+    lng: -122.249123,
+
+    beds: 1,
+    baths: 1,
+    sqft: 600,
+    floor: '', // the building is a 2-story small multiplex (unit #4); the unit's level isn't stated — ask
+
+    rent: 2895, // "$2,895/mo"; at/near market for downtown San Carlos, pricey per foot at 600 sqft (~$4.83/sqft)
+    parkingCost: null, // "dedicated carport parking spot" included
+    petRent: null, // not stated
+    utilitiesIncluded: null, // not stated — ask
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // no lease term stated → amber "confirm they'll do a 6-mo term" flag
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // "Available now"
+    availability: 'now',
+    furnished: false, // "Unit will be delivered vacant" (any staging is virtual)
+
+    petPolicy: 'Unknown', // not stated — ask
+    listingType: 'Property mgmt', // The Housing Guild, Zillow "Verified Source", (415) 419-8279
+    contact: { company: 'The Housing Guild', name: '', phone: '(415) 419-8279', email: '', website: '' }, // Verified Source; 415 = SF-area mgmt co (manages regionally)
+    comments: [],
+
+    laundry: 'on-site', // "Laundry on site" / "on-site laundry" — not in-unit
+    amen: {
+      parking: true, // "dedicated carport parking spot" (visible in the exterior photos)
+      woodenFloor: true, // "engineered hardwood floors throughout"
+      balcony: null, // not mentioned — ask
+      gym: false, // small multiplex — no gym
+    },
+    amenities: ['Fully renovated', 'Granite counters + eat-in bar', 'Full-size range + fridge', 'Dishwasher', 'Renovated bath (tile shower/tub)', 'Engineered hardwood floors', 'Dedicated carport parking', 'On-site laundry', 'Walk Score 94 (Walker’s Paradise)', 'Steps to Laurel St + El Camino + Caltrain', 'Across from Trader Joe’s + Walgreens'],
+
+    dateSeen: '2026-07-21',
+    daysOnMarket: 1, // "1 day on Zillow" · 24 contacts — fresh + high early interest (acts fast)
+    marketRent: 2900, // Est. — downtown San Carlos 1BR comp (prime, Walk Score 94, renovated); $2,895 is right at market (not a deal, not a bait)
+
+    expertRating: 4, // genuinely appealing + LEGIT: fully renovated (engineered hardwood, granite, tile bath), DEDICATED carport parking, an ELITE walkable downtown San Carlos location (Walk Score 94, steps to Caltrain + Trader Joe's), Verified-Source management, real exterior/interior photos + a floor plan; held from 5 by the AT-MARKET (not a deal) $2,895 for a small 600 sqft unit, ON-SITE (not in-unit) laundry, and no stated lease term
+    scamRisk: false,
+    incomeRestricted: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a real Zillow home-detail listing (zpid, 1 day on market, 24 contacts) by a ' +
+      '"Verified Source" management company (The Housing Guild, (415) 419-8279), with a FULL street address, 9 ' +
+      'real photos (including TWO exterior shots of the green two-story building + a floor plan), and grounded ' +
+      'copy that matches the photos — the opposite of the a1/a2 scam pattern. 🟢 THE DRAW: a fully RENOVATED 1BR ' +
+      '(engineered hardwood throughout, granite counters + eat-in bar, full-size range/fridge + dishwasher, a ' +
+      'tiled renovated bath) with a DEDICATED CARPORT spot, in an ELITE walkable spot — Walk Score 94 ("Walker\'s ' +
+      'Paradise"), literally steps to Laurel St dining/nightlife, across from Trader Joe\'s + Walgreens, and a ' +
+      'few blocks to the Caltrain station. If you want a car-optional downtown lifestyle, this is one of the ' +
+      'best-located units on your list.\n' +
+      '⚠️ ACT FAST: 24 contacts on day one — high demand; call today if it interests you.\n' +
+      'Confirm before signing: (1) 💲 PRICE — $2,895 for a small 600 sqft 1BR is right AT market (~$4.83/sqft), ' +
+      'not a deal; you\'re paying for the location + reno, not a bargain. (2) LAUNDRY is ON-SITE/shared, NOT ' +
+      'in-unit. (3) 📅 NO LEASE TERM stated — confirm they\'ll do your ~6-month term (the card shows the amber ' +
+      '"confirm 6-mo" flag). (4) Deposit, application fee, utilities, and pet policy are NOT stated — ask for ' +
+      'exact move-in + monthly costs and whether pets are allowed. (5) The unit\'s floor isn\'t stated (2-story ' +
+      'building) — ask if #4 is upstairs or down. (6) It\'s a management-company relet, so expect standard ' +
+      'screening (credit + income); tour in person before you commit.',
+    image: 'img/a28.webp',
+    sourceUrl: 'https://www.zillow.com/homedetails/1450-Laurel-St-APT-4-San-Carlos-CA-94070/444584983_zpid/',
+  },
 ];
