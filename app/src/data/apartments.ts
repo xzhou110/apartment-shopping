@@ -2140,7 +2140,7 @@ export const APARTMENTS: Apartment[] = [
 
     petPolicy: 'Cats only', // "1 Cat Welcome ($65/month pet rent)"; no dogs
     listingType: 'Property mgmt', // Pacific Garden Properties, LLC (listing agent/manager) — NOT a Zillow "Verified Source"
-    contact: { company: 'Pacific Garden Properties, LLC', name: '', phone: '', email: '', website: '' }, // no phone published — inquire via Zillow
+    contact: { company: 'Pacific Garden Properties, LLC', name: '', phone: '(650) 918-6323', email: '', website: '' }, // phone added by user 2026-07-22
     comments: [
       { id: "c1784696231813", text: "Contacted via zillow. The landlord is pretty active and quick on response\n10 month lease\nParking could be very limited -- check", ts: "2026-07-22T04:57:11.813Z" },
     ],
