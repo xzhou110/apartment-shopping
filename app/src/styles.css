@@ -452,9 +452,13 @@ td.worst { background: var(--risk-soft); }
 .card-comment-head svg { width: 12px; height: 12px; flex: none; }
 .card-comment-more { font-weight: 600; color: var(--accent-2); opacity: .8; text-transform: none; letter-spacing: 0; }
 .card-comment-ts { margin-left: auto; font-weight: 500; color: var(--ink-3); text-transform: none; letter-spacing: 0; }
-/* Show the FULL latest comment on the card (user ask 2026-07-22) — no line clamp / ellipsis.
-   white-space: pre-wrap keeps the line breaks the user typed (matches the detail thread's .cmt-text). */
-.card-comment-text { font-size: 12.5px; color: var(--ink); line-height: 1.45; white-space: pre-wrap; word-break: break-word; }
+/* Show the full comment WITHOUT ballooning the card (user asks 2026-07-22): no ellipsis truncation,
+   but cap the box at ~6 lines and let it scroll internally, so one long comment can't stretch its card
+   taller than its row-mates. white-space: pre-wrap keeps the user's typed line breaks (like .cmt-text). */
+.card-comment-text { font-size: 12.5px; color: var(--ink); line-height: 1.45; white-space: pre-wrap; word-break: break-word; max-height: 8.7em; overflow-y: auto; overscroll-behavior: contain; }
+.card-comment-text::-webkit-scrollbar { width: 6px; }
+.card-comment-text::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
+.card-comment-text::-webkit-scrollbar-track { background: transparent; }
 /* Income-restricted comment — a hard eligibility gate, so it reads RED (matched in lib/derive). */
 .card-comment.card-comment-risk { background: var(--risk-soft); border-color: var(--risk); }
 .card-comment-risk .card-comment-head, .card-comment-risk .card-comment-more { color: var(--risk); }
