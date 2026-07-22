@@ -71,7 +71,8 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
    **best (green) / worst (red)** in each row (cheapest rent, nearest, most amenities, biggest sqft).
 7. **Rate & comment** — click the **You ★** stars on a card (or in detail) to rate; **Expert ★** is my
    rating. Open a card and add **comments** (timestamped, delete any) in the detail view — your latest one
-   also shows on the card. A comment that mentions **"income restricted"** renders highlighted **red**
+   also shows on the card. **Line breaks you type are preserved** on both the card (up to 3 lines, then
+   truncated) and the full detail thread. A comment that mentions **"income restricted"** renders highlighted **red**
    (on the card and in the detail thread) — income qualification is a hard eligibility gate, not a
    nice-to-know. Ratings, status, and comments are your per-listing state and persist in your
    browser even when I refresh the seed data.
