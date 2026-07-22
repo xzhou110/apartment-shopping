@@ -1938,4 +1938,81 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a30.webp',
     sourceUrl: 'https://www.zillow.com/homedetails/1591-Laurel-St-San-Carlos-CA-94070/82963671_zpid/',
   },
+  {
+    // a31 — 425 Walnut St, San Carlos (near downtown). Rooftop geocode via Nominatim (2026-07-21).
+    // ✅ Reads LEGIT — a Zillow listing by a real brokerage (Westbay / Coldwell Banker Commercial), full
+    // address, 9 real photos (spacious hardwood interior + a private balcony + a building EXTERIOR) matching
+    // the copy. Hero = the exterior. ⚠️ Zillow shows "374 sqft" — a CLEAR DATA ERROR (the photos show a
+    // spacious 1BR far bigger than a studio), so sqft is left null rather than baking a misleading $/sqft.
+    id: 'a31',
+    status: 'New',
+    title: 'Spacious 1BR (hardwood, balcony) — San Carlos',
+    address: '425 Walnut St, San Carlos, CA 94070',
+    neighborhood: '',
+    city: 'San Carlos',
+    lat: 37.507837,
+    lng: -122.264377,
+
+    beds: 1,
+    baths: 1,
+    sqft: null, // Zillow says 374 sqft, but that's studio-sized and the photos clearly show a spacious 1BR — treating it as unknown (confirm on tour) rather than baking a bogus ~$6/sqft
+    floor: '',
+
+    rent: 2325, // "Monthly Rent: $2,325"; under market for a hardwood San Carlos 1BR w/ balcony+parking (see marketRent)
+    parkingCost: null, // "One dedicated parking space" — included
+    petRent: null, // not stated
+    utilitiesIncluded: true, // "Owner pays: Water and garbage" — you pay electricity + gas
+    utilitiesEstimate: null,
+
+    deposit: 2325, // "Security Deposit: $2,325"
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // no lease term stated → amber "confirm they'll do a 6-mo term" flag
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // "1 unit available" — no concrete date shown
+    availability: 'now',
+    furnished: false,
+
+    petPolicy: 'Unknown', // not stated — ask
+    listingType: 'Property mgmt', // Westbay Commercial RE Group DBA Coldwell Banker Commercial — a real brokerage (but NOT a Zillow "Verified Source")
+    contact: { company: 'Coldwell Banker Commercial (Westbay)', name: '', phone: '', email: '', website: '' }, // no phone published — inquire via Zillow
+    comments: [],
+
+    laundry: 'unknown', // NOT mentioned anywhere in the listing — ask (in-unit / on-site / none)
+    amen: {
+      parking: true, // "One dedicated parking space"
+      woodenFloor: true, // "Beautiful hardwood flooring throughout" (+ photos)
+      balcony: true, // "Private balcony" (+ photo)
+      gym: false, // small building — no gym
+    },
+    amenities: ['Hardwood floors throughout', 'Private balcony', '1 dedicated parking space', 'Private storage unit', 'Updated kitchen + stainless steel', 'Granite counters', 'Water + garbage included', 'Near downtown San Carlos · Caltrain · 101/280'],
+
+    dateSeen: '2026-07-21',
+    daysOnMarket: null,
+    marketRent: 2700, // Est. — San Carlos 1BR comp; $2,325 for a spacious hardwood 1BR w/ balcony + parking + storage + water/garbage is under market (good value)
+
+    expertRating: 4, // strong VALUE + LEGIT: a spacious 1BR with HARDWOOD floors throughout, a private balcony, a dedicated parking space, a storage unit, an updated stainless/granite kitchen, water + garbage included, at an UNDER-market $2,325 in prime downtown San Carlos — listed by a real brokerage (Coldwell Banker Commercial). Held from 5 by: not a Zillow "Verified Source", no stated lease term, laundry not mentioned, and Zillow's bogus 374-sqft figure (verify the real size)
+    scamRisk: false,
+    incomeRestricted: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow listing by a real brokerage (Westbay Commercial Real Estate Group, DBA ' +
+      'Coldwell Banker Commercial), with a full street address and 9 real, consistent photos (a spacious ' +
+      'hardwood interior, an updated stainless/granite kitchen, a private balcony, and a shot of the building ' +
+      'exterior) that match the copy. 🟢 STRONG VALUE: a spacious 1BR with HARDWOOD floors throughout, a private ' +
+      'balcony, a DEDICATED parking space, a private storage unit, and an updated kitchen — at an UNDER-market ' +
+      '$2,325, with water + garbage included (you\'d only add electric + gas). Prime downtown San Carlos: minutes ' +
+      'to Laurel St dining, Caltrain, and 101/280.\n' +
+      'Confirm before signing: (1) 📐 SIZE — Zillow lists it as "374 sqft," which is studio-sized and clearly ' +
+      'WRONG given the photos (the living room alone looks bigger than that); it\'s a normal spacious 1BR, so I ' +
+      'left the size blank — just confirm the actual square footage on a tour. (2) 🧺 LAUNDRY is not mentioned ' +
+      'anywhere — ask whether it\'s in-unit, on-site, or none. (3) 📅 NO LEASE TERM stated — confirm they\'ll do ' +
+      'your ~6-month term (amber flag on the card). (4) It\'s listed by a brokerage but is NOT a Zillow ' +
+      '"Verified Source" badge — do the normal diligence (tour in person, standard screening). (5) Pet policy ' +
+      'not stated — ask. (6) Move-in = first month + an equal $2,325 deposit.',
+    image: 'img/a31.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/san-carlos-ca/425-walnut-street/5j468n/',
+  },
 ];
