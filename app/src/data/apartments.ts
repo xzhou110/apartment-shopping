@@ -1857,4 +1857,85 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a29.webp',
     sourceUrl: 'https://www.zillow.com/apartments/san-carlos-ca/chest640/5ZtHwj/',
   },
+  {
+    // a30 — 1591 Laurel St, San Carlos (near downtown; same street as a28, a few blocks south). Rooftop
+    // geocode via Nominatim (2026-07-21). ✅ Reads LEGIT — a real Zillow home-detail listing (zpid) by owner
+    // (Shant Bezdjian; "call Garbis"), full address, 9 real photos (renovated interior + genuine exterior
+    // walkway shots) that match the copy. Hero = an exterior-walkway shot (best "outer look" available — it's
+    // a 2-story exterior-corridor building, no front-facade shot exists). ⚠️ 488 DAYS on market — see notes.
+    id: 'a30',
+    status: 'New',
+    title: 'Renovated 1BR (utilities incl.) — San Carlos',
+    address: '1591 Laurel St, San Carlos, CA 94070',
+    neighborhood: '',
+    city: 'San Carlos',
+    lat: 37.495253,
+    lng: -122.247516,
+
+    beds: 1,
+    baths: 1,
+    sqft: 600,
+    floor: '', // 2-story exterior-walkway building; the unit appears to be upstairs (photos) — confirm
+
+    rent: 2400, // "$2,400/month"; under market for a renovated San Carlos 1BR w/ utilities included (see marketRent)
+    parkingCost: null, // parking NOT mentioned anywhere — ask (the "garage" is used for laundry)
+    petRent: null, // not stated
+    utilitiesIncluded: true, // "Landlord pays for water, sewer and trash" — you still pay electric/gas
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // no lease term stated → amber "confirm they'll do a 6-mo term" flag
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // "Available now" (but see the 488-days note — confirm it's actually current)
+    availability: 'now',
+    furnished: false,
+
+    petPolicy: 'Unknown', // not stated — ask
+    listingType: 'Landlord', // "Listed by property owner" Shant Bezdjian; description says to call Garbis — NOT a Verified Source
+    contact: { company: '', name: 'Shant Bezdjian (call Garbis)', phone: '', email: '', website: '' }, // no phone published — inquire via Zillow
+    comments: [],
+
+    laundry: 'on-site', // "Laundry facility in the garage" — not in-unit
+    amen: {
+      parking: null, // not mentioned — ask
+      woodenFloor: true, // wood-look laminate floors in the kitchen/hall/one room (one bedroom is carpeted)
+      balcony: null, // not mentioned (exterior-walkway building) — ask
+      gym: false, // small older building — no gym
+    },
+    amenities: ['Recently renovated', 'Large living room + dining room', 'Water/sewer/trash included', 'On-site laundry (in the garage)', 'Wood-look floors', 'Near downtown San Carlos', 'No smoking'],
+
+    dateSeen: '2026-07-21',
+    daysOnMarket: 488, // "488 days on Zillow" · 565 contacts — UNUSUALLY long on market (fires the info flag; see notes)
+    marketRent: 2700, // Est. — San Carlos 1BR comp; $2,400 for a renovated unit WITH water/sewer/trash included is under market (good value on price)
+
+    expertRating: 3, // legit + genuinely GOOD VALUE on paper: renovated 1BR near downtown San Carlos, UNDER market at $2,400, and the landlord pays water/sewer/trash. BUT the standout caveat is 488 DAYS on market (why hasn't it rented?), plus it's BY-OWNER (not Verified Source), on-site (garage) laundry, an older exterior-walkway building, and no stated lease term. Price/value is a 4; the 488-day question + unverified owner pull it to 3
+    scamRisk: false,
+    incomeRestricted: false,
+    rating: 0,
+    notes:
+      '✅ Reads LEGITIMATE (not a scam) — a real Zillow home-detail listing (zpid) by owner (Shant Bezdjian; the ' +
+      'blurb says to "call Garbis"), with a FULL street address and 9 real, consistent photos (a renovated ' +
+      'interior + genuine exterior-walkway shots) that match the copy. 🟢 GOOD VALUE ON PAPER: a recently ' +
+      'renovated 1BR (large living + dining room) near downtown San Carlos at an UNDER-market $2,400, and the ' +
+      'LANDLORD PAYS water, sewer + trash — you\'d only add electric/gas.\n' +
+      '⚠️ THE ONE THING TO CHECK FIRST — it has been on Zillow for **488 DAYS** (with ~565 contacts). That is ' +
+      'extraordinarily long for a Peninsula rental, and it usually means one of two things: (a) it\'s an ' +
+      'EVERGREEN / perpetually-relisted ad (the owner keeps a standing Zillow post and rents/re-rents behind it ' +
+      '— so "available now" and these exact photos/terms may not be current), or (b) something about the unit ' +
+      'keeps it from renting. Neither is a scam, but BOTH mean you should confirm it\'s actually available right ' +
+      'now, at $2,400, as shown, before you invest time. (The card shows an info flag about the long time on ' +
+      'market.)\n' +
+      'Also confirm: (1) 👤 BY-OWNER, NOT "Verified Source" — less vetted than the managed listings; do the ' +
+      'standard by-owner prudence (tour in person, confirm they control the unit, never wire a deposit ' +
+      'sight-unseen). (2) 📅 NO LEASE TERM stated — confirm they\'ll do your ~6-month term (amber flag on the ' +
+      'card). (3) LAUNDRY is on-site in the garage, NOT in-unit. (4) 🚗 PARKING isn\'t mentioned at all — ask ' +
+      'if there\'s a space. (5) It\'s an older EXTERIOR-WALKWAY building (units open onto an outdoor corridor). ' +
+      '(6) NO SMOKING. (7) Deposit + application terms not stated — ask move-in costs.',
+    image: 'img/a30.webp',
+    sourceUrl: 'https://www.zillow.com/homedetails/1591-Laurel-St-San-Carlos-CA-94070/82963671_zpid/',
+  },
 ];
