@@ -452,9 +452,9 @@ td.worst { background: var(--risk-soft); }
 .card-comment-head svg { width: 12px; height: 12px; flex: none; }
 .card-comment-more { font-weight: 600; color: var(--accent-2); opacity: .8; text-transform: none; letter-spacing: 0; }
 .card-comment-ts { margin-left: auto; font-weight: 500; color: var(--ink-3); text-transform: none; letter-spacing: 0; }
-/* white-space: pre-wrap preserves the line breaks the user typed (matches the detail thread's .cmt-text);
-   it composes with -webkit-line-clamp, which still caps the card preview at 3 lines + ellipsis. */
-.card-comment-text { font-size: 12.5px; color: var(--ink); line-height: 1.45; white-space: pre-wrap; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; }
+/* Show the FULL latest comment on the card (user ask 2026-07-22) — no line clamp / ellipsis.
+   white-space: pre-wrap keeps the line breaks the user typed (matches the detail thread's .cmt-text). */
+.card-comment-text { font-size: 12.5px; color: var(--ink); line-height: 1.45; white-space: pre-wrap; word-break: break-word; }
 /* Income-restricted comment — a hard eligibility gate, so it reads RED (matched in lib/derive). */
 .card-comment.card-comment-risk { background: var(--risk-soft); border-color: var(--risk); }
 .card-comment-risk .card-comment-head, .card-comment-risk .card-comment-more { color: var(--risk); }

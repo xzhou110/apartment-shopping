@@ -72,8 +72,8 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
 7. **Rate & comment** — click the **You ★** stars on a card (or in detail) to rate; **Expert ★** is my
    rating. Open a card to add **comments** (timestamped) in the detail view; each one has an **edit** (pencil)
    and **delete** button — editing updates the note in place, keeping its timestamp and position (⌘/Ctrl+Enter
-   saves, Esc cancels). Your latest comment also shows on the card. **Line breaks you type are preserved** on
-   both the card (up to 3 lines, then truncated) and the full detail thread. A comment that mentions **"income restricted"** renders highlighted **red**
+   saves, Esc cancels). Your latest comment also shows on the card **in full** (no truncation — the card grows
+   to fit), with the line breaks you type preserved, same as the detail thread. A comment that mentions **"income restricted"** renders highlighted **red**
    (on the card and in the detail thread) — income qualification is a hard eligibility gate, not a
    nice-to-know. Ratings, status, and comments are your per-listing state and persist in your
    browser even when I refresh the seed data.
