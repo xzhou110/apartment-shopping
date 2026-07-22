@@ -2015,4 +2015,79 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a31.webp',
     sourceUrl: 'https://www.zillow.com/apartments/san-carlos-ca/425-walnut-street/5j468n/',
   },
+  {
+    // a32 — Village Court, 2200 Village Ct #9, Belmont (Belmont Hills). Rooftop geocode via Nominatim
+    // (2026-07-21). ✅ Reads LEGIT — a Zillow "Verified Source" community by GPS/Logos Property Investment
+    // (the SAME manager as a13 / Kent Court), full address, 14 real photos (multiple building EXTERIORS + a
+    // POOL + covered carports + interiors) matching the copy. Hero = the front-building exterior.
+    id: 'a32',
+    status: 'New',
+    title: 'Village Court 1BR (covered parking, pool) — Belmont',
+    address: '2200 Village Ct APT 9, Belmont, CA 94002',
+    neighborhood: 'Belmont Hills',
+    city: 'Belmont',
+    lat: 37.50838,
+    lng: -122.294479,
+
+    beds: 1,
+    baths: 1,
+    sqft: 644, // Unit APT 9 (per Zillow search); the community page shows a 608 sqft plan too — confirm the exact unit's size
+    floor: '',
+
+    rent: 2495, // "$2,495/mo" (fees may apply); under market for a Belmont 1BR w/ covered parking + pool (see marketRent)
+    parkingCost: null, // "Assigned covered parking" — included
+    petRent: null, // not stated
+    utilitiesIncluded: null, // not stated — ask
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // no lease term stated → amber "confirm they'll do a 6-mo term" flag
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // "1 unit available" — no concrete date shown
+    availability: 'now',
+    furnished: false,
+
+    petPolicy: 'Unknown', // not stated — ask
+    listingType: 'Property mgmt', // GPS/Logos Property Investment (Leasing Agent), Zillow "Verified Source" — same mgmt co as a13
+    contact: { company: 'GPS/Logos Property Investment', name: 'Leasing Agent', phone: '', email: '', website: '' }, // Verified Source; no phone published — inquire via Zillow
+    comments: [],
+
+    laundry: 'on-site', // "On-site laundry facilities" (+ photo of the laundry room) — not in-unit
+    amen: {
+      parking: true, // "Assigned covered parking" (carports visible in photos)
+      woodenFloor: false, // photos show CARPET throughout the living areas (kitchen is tile) — not hardwood
+      balcony: true, // "Private patio or balcony (select units)" (+ a balcony photo) — confirm THIS unit has one
+      gym: false, // no gym (there IS a pool, but no fitness center)
+    },
+    amenities: ['Assigned covered parking', 'Swimming pool', 'On-site laundry', 'Private patio/balcony (select units)', 'Bright interiors + large windows', 'Generous closets + storage', 'Secure building + on-site management', 'Belmont Hills — near Caltrain · 101/280 · Belmont Village shops'],
+
+    dateSeen: '2026-07-21',
+    daysOnMarket: null,
+    marketRent: 2750, // Est. — Belmont 1BR comp; $2,495 for a ~644 sqft 1BR w/ covered parking + pool is under market (good value)
+
+    expertRating: 4, // strong + LEGIT: a Zillow "Verified Source" Belmont-Hills community by GPS/Logos (the same manager as your a13), with ASSIGNED COVERED parking, a swimming POOL, on-site laundry, and a private patio/balcony (select units) — at an under-market $2,495, near Caltrain + 101/280 + Belmont Village. Held from 5 by carpet floors (not hardwood), no stated lease term, no gym, and an older building
+    scamRisk: false,
+    incomeRestricted: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" Belmont-Hills community (Village Court) managed by ' +
+      'GPS/Logos Property Investment — the SAME management company as your a13 (Kent Court, Daly City) — with a ' +
+      'full address and 14 real, consistent photos (several building exteriors, a swimming pool, covered ' +
+      'carports, and clean interiors) that match the copy. 🟢 GOOD VALUE: assigned COVERED parking, a POOL, ' +
+      'on-site laundry, a private patio/balcony (select units), generous storage, and a secure well-maintained ' +
+      'building — at an under-market $2,495, in quiet Belmont Hills near Caltrain, 101/280, and Belmont Village ' +
+      'shops.\n' +
+      'Confirm before signing: (1) 🛏️ SIZE — Zillow\'s search shows Unit APT 9 at 644 sqft, but the community ' +
+      'page lists a 608 sqft plan too; confirm the exact unit\'s square footage. (2) 🪟 BALCONY is "select units" ' +
+      'only — confirm THIS unit has the private patio/balcony. (3) FLOORS are CARPET (not hardwood). (4) 📅 NO ' +
+      'LEASE TERM stated — confirm they\'ll do your ~6-month term (amber flag on the card). (5) Deposit, ' +
+      'application fee, utilities, and pet policy are NOT stated — ask for exact move-in + monthly costs and ' +
+      'whether pets are allowed. (6) No gym (there is a pool). (7) Older building — tour to check unit condition.',
+    image: 'img/a32.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/belmont-ca/village-court/Cm5rH9/',
+  },
 ];
