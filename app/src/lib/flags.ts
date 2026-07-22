@@ -159,10 +159,20 @@ export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[] {
       });
   }
 
-  if (apt.daysOnMarket != null && apt.daysOnMarket >= 30)
+  // Time on market, tiered (user 2026-07-21). Under 30 days: no flag. 30–60 days: AMBER warn — slow to
+  // rent, some negotiation leverage. Over 60 days: RED risk — an unusually long listing is often stale /
+  // OUTDATED (unit already gone, an evergreen re-list, or the price/terms no longer current), so verify
+  // it's actually available before investing time. The risk variant is surfaced first by the partition
+  // below (after scam / income-restricted / lease-conflict, which are pushed earlier).
+  if (apt.daysOnMarket != null && apt.daysOnMarket > 60)
     f.push({
-      lvl: 'info',
-      t: `On market ${apt.daysOnMarket} days — possible negotiation leverage.`,
+      lvl: 'risk',
+      t: `On market ${apt.daysOnMarket} days — likely stale/outdated; verify it's still available before you invest time.`,
+    });
+  else if (apt.daysOnMarket != null && apt.daysOnMarket >= 30)
+    f.push({
+      lvl: 'warn',
+      t: `On market ${apt.daysOnMarket} days — slow to rent; possible negotiation leverage.`,
     });
 
   if (apt.marketRent != null && apt.rent < apt.marketRent * 0.85)

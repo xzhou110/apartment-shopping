@@ -206,8 +206,28 @@ describe('info rules', () => {
     const farApt = makeApt({ lat: 37.2956, lng: -121.8941 });
     expect(has(farApt, ctx({ primaryAnchor: null }), 'farther than most')).toBe(false);
   });
-  it('stale listing (≥ 30 days)', () => {
-    expect(has(makeApt({ daysOnMarket: 41 }), ctx(), 'negotiation leverage')).toBe(true);
+  it('time on market < 30 days: no flag', () => {
+    expect(has(makeApt({ daysOnMarket: 20 }), ctx(), 'On market')).toBe(false);
+  });
+  it('time on market 30–60 days: AMBER warn (negotiation leverage)', () => {
+    const m = getFlags(makeApt({ daysOnMarket: 41 }), ctx()).find((x) => x.t.includes('On market'));
+    expect(m?.lvl).toBe('warn');
+    expect(m?.t).toContain('negotiation leverage');
+  });
+  it('time on market boundary 60 days: still AMBER warn (not red)', () => {
+    expect(getFlags(makeApt({ daysOnMarket: 60 }), ctx()).find((x) => x.t.includes('On market'))?.lvl).toBe('warn');
+  });
+  it('time on market > 60 days: RED risk (likely stale/outdated)', () => {
+    const m = getFlags(makeApt({ daysOnMarket: 61 }), ctx()).find((x) => x.t.includes('On market'));
+    expect(m?.lvl).toBe('risk');
+    expect(m?.t).toContain('stale');
+  });
+  it('time on market > 60 days drives the red card signal + partitions ahead of non-risk flags', () => {
+    const apt = makeApt({ daysOnMarket: 488 });
+    expect(signalLevel(apt, ctx())).toBe('risk');
+    const f = getFlags(apt, ctx());
+    const firstNonRisk = f.findIndex((x) => x.lvl !== 'risk');
+    if (firstNonRisk !== -1) expect(f.findIndex((x) => x.lvl === 'risk')).toBeLessThan(firstNonRisk);
   });
   it('well below market (< 0.85×)', () => {
     expect(has(makeApt({ rent: 2400, marketRent: 3000 }), ctx(), 'well below market')).toBe(true);
