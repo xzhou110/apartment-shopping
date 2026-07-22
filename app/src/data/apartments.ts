@@ -50,7 +50,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Blvd Residential, "Leasing Agent," Verified Source, (650) 547-8025
     contact: { company: 'Blvd Residential', name: 'Leasing Agent', phone: '(650) 547-8025', email: '', website: '' }, // Zillow "Verified Source"; phone from the listing
     comments: [
-      { id: 'c1784330709521', text: 'Not available, check back next month\nPlenty of parking behind the building\nPoor management review 2.1/5 stars;\nFlooded twice a year; smells bad', ts: '2026-07-17T23:25:09.521Z' },
+      { id: "c1784330709521", text: "Not available, check back next month\nPlenty of parking behind the building\nPoor management review 2.1/5 stars;\nFlooded twice a year; smells bad", ts: "2026-07-17T23:25:09.521Z" },
     ],
 
     laundry: 'unknown', // not mentioned anywhere (no chip, no unit-feature line)
@@ -129,7 +129,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Vasona (Leasing Agent), Zillow "Verified Source", (214) 833-5650
     contact: { company: 'Vasona', name: 'Leasing Agent', phone: '(214) 833-5650', email: '', website: '' }, // Zillow "Verified Source"; note: 214 = a Dallas TX area code (likely a central leasing line)
     comments: [
-      { id: 'c1784330947484', text: 'The property may no longer be available\nNo response from the property at all\nNice location\n3/5 management review', ts: '2026-07-17T23:29:07.484Z' },
+      { id: "c1784330947484", text: "The property may no longer be available\nNo response from the property at all\nNice location\n3/5 management review", ts: "2026-07-17T23:29:07.484Z" },
     ],
 
     laundry: 'on-site', // "Shared: Laundry" — community/shared, not in-unit
@@ -206,7 +206,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Landlord', // private tiny-house/ADU (unit "#B"), "Contact manager," no mgmt company named
     contact: { company: '', name: '', phone: '', email: '', website: '' }, // no contact published in the listing — inquire via Zillow
     comments: [
-      { id: 'c1783725581679', text: 'Too small for the price', ts: '2026-07-10T23:19:41.679Z' },
+      { id: "c1783725581679", text: "Too small for the price", ts: "2026-07-10T23:19:41.679Z" },
     ],
 
     laundry: 'in-unit', // "In unit laundry" chip + "Laundry: In Unit" + washer/dryer in appliances
@@ -282,7 +282,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Landlord', // "Listed by property owner — Nelly Chin"
     contact: { company: '', name: 'Nelly Chin', phone: '', email: '', website: '' }, // property owner; inquire via Zillow ("Contact manager for more details")
     comments: [
-      { id: 'c1783725457179', text: 'Can\'t find reviews', ts: '2026-07-10T23:17:37.179Z' },
+      { id: "c1783725457179", text: "Can't find reviews", ts: "2026-07-10T23:17:37.179Z" },
     ],
 
     laundry: 'on-site', // "Shared laundry" / "Coin operated laundry facilities in the building"
@@ -359,7 +359,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Brighthaven Communities, Zillow "Verified Source", (760) 546-5420
     contact: { company: 'Brighthaven Communities', name: 'Gatewood Village', phone: '(760) 546-5420', email: '', website: '' }, // Verified Source; note: 760 = a San Diego-area code (likely a central leasing line)
     comments: [
-      { id: 'c1784243892732', text: 'Only 1 year lease term is allowed.\nHuge community. Parking is kind of tight. \n4.4/5 among 175 google reviews and 1.9/5among  yelp reviews', ts: '2026-07-16T23:18:12.732Z' },
+      { id: "c1784243892732", text: "Only 1 year lease term is allowed.\nHuge community. Parking is kind of tight. \n4.4/5 among 175 google reviews and 1.9/5among  yelp reviews", ts: "2026-07-16T23:18:12.732Z" },
     ],
 
     laundry: 'unknown', // not listed in the captured facts — ask (in-unit vs on-site)
@@ -435,7 +435,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // large managed community (leasing office, on-site mgmt, online rent); Zillow byline says "property owner" but it's professionally managed — Verified Source
     contact: { company: 'Carlmont Heights Apartments', name: 'Leasing Agent', phone: '', email: '', website: '' }, // Zillow "Verified Source"; no phone published — inquire via Zillow
     comments: [
-      { id: 'c1784087385247', text: '3/5 rating among 50 reviews\n1 bed no longer available', ts: '2026-07-15T03:49:45.247Z' },
+      { id: "c1784087385247", text: "3/5 rating among 50 reviews\n1 bed no longer available", ts: "2026-07-15T03:49:45.247Z" },
     ],
 
     laundry: 'in-unit', // "In-unit laundry (W/D)" chip + "Laundry: In Unit" + washer/dryer in appliances
@@ -511,7 +511,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // GPS/Logos Property Investment (Nate Chen), Zillow "Verified Source"
     contact: { company: 'GPS/Logos Property Investment', name: 'Nate Chen', phone: '', email: '', website: '' }, // Verified Source; no phone published — inquire via Zillow
     comments: [
-      { id: 'c1784330680270', text: 'It seems not available?\nParking is tight. Old building. \nPrivate owner. Can\'t find review for this one', ts: '2026-07-17T23:24:40.270Z' },
+      { id: "c1784330680270", text: "It seems not available?\nParking is tight. Old building. \nPrivate owner. Can't find review for this one", ts: "2026-07-17T23:24:40.270Z" },
     ],
 
     laundry: 'on-site', // "Shared laundry" / "Laundry: Shared" — not in-unit
@@ -805,7 +805,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // managed 34-unit community, Property Manager on Site, (650) 469-8458
     contact: { company: 'Verandas Apartments', name: '', phone: '(650) 469-8458', email: '', website: '' }, // apartments.com listing; local 650 number + a property website (URL not captured)
     comments: [
-      { id: 'c1784194018212', text: 'Check if this is still available? \nEnvironment looks okayish. Limited parking spots + street parking\n2-3/5 rating among 5 reviews', ts: '2026-07-16T09:26:58.212Z' },
+      { id: "c1784194018212", text: "Check if this is still available? \nEnvironment looks okayish. Limited parking spots + street parking\n2-3/5 rating among 5 reviews", ts: "2026-07-16T09:26:58.212Z" },
     ],
 
     laundry: 'in-unit', // "Washer/Dryer" listed under Apartment Features (unit-level); NOTE the community also has shared "Laundry Facilities" — confirm the actual unit has in-unit W/D (see notes)
@@ -881,7 +881,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Tim Proschold, Luxuriant Realty (5★, 13 reviews), (415) 223-8548
     contact: { company: 'Luxuriant Realty', name: 'Tim Proschold', phone: '(415) 223-8548', email: '', website: '' }, // named agent w/ 5/5 rating (13 reviews); 415 = SF area code
     comments: [
-      { id: 'c1784087732291', text: 'No longer available', ts: '2026-07-15T03:55:32.291Z' },
+      { id: "c1784087732291", text: "No longer available", ts: "2026-07-15T03:55:32.291Z" },
     ],
 
     laundry: 'on-site', // "Shared" coin-operated laundry facility — not in-unit
@@ -961,7 +961,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Blueground — a large, established furnished-apartment operator (professional leasing flow)
     contact: { company: 'Blueground', name: '', phone: '', email: '', website: 'https://www.theblueground.com/' },
     comments: [
-      { id: 'c1784331365391', text: 'The real company is Avalon. \nThe real leasing company is Avalon. \nContact blueground directly for short term lease, but it\'s income restricted\n4/5 rating among 400 google reviews.', ts: '2026-07-17T23:36:05.391Z' },
+      { id: "c1784331365391", text: "The real company is Avalon. \nThe real leasing company is Avalon. \nContact blueground directly for short term lease, but it's income restricted\n4/5 rating among 400 google reviews.", ts: "2026-07-17T23:36:05.391Z" },
     ],
 
     laundry: 'in-unit', // "In-unit laundry (W/D)" chip + "IN-APARTMENT LAUNDRY" tag + Washer/Dryer in appliances
@@ -1046,7 +1046,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Greystar (the largest US apartment manager), Zillow "Verified Source", (415) 936-1214
     contact: { company: 'Greystar', name: '', phone: '(415) 936-1214', email: '', website: '' }, // Verified Source; local 415 number
     comments: [
-      { id: 'c1784087116024', text: 'Income restricted', ts: '2026-07-15T03:45:16.024Z' },
+      { id: "c1784087116024", text: "Income restricted", ts: "2026-07-15T03:45:16.024Z" },
     ],
 
     laundry: 'on-site', // "Shared: On-site Laundry Facilities" — not in-unit
@@ -1135,7 +1135,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Landlord', // "Listed by property owner — Edrica O." (private owner, not a mgmt company)
     contact: { company: '', name: 'Edrica O.', phone: '', email: '', website: '' }, // private owner — inquire via Zillow
     comments: [
-      { id: 'c1784088539286', text: 'Single occupant', ts: '2026-07-15T04:08:59.286Z' },
+      { id: "c1784088539286", text: "Single occupant", ts: "2026-07-15T04:08:59.286Z" },
     ],
 
     laundry: 'in-unit', // "In unit laundry" chip + "Laundry: In Unit" + Washer/Dryer in appliances
@@ -1375,7 +1375,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Belmont Family Apartments Asset Management, Zillow "Verified Source", (646) 791-3446
     contact: { company: 'Belmont Family Apartments (Asset Mgmt)', name: '', phone: '(646) 791-3446', email: '', website: '' }, // Verified Source; note: 646 = a NYC area code (out-of-state affordable-housing owner — common, not a red flag given Verified Source)
     comments: [
-      { id: 'c1784194144364', text: 'Nice location. Next to a square.', ts: '2026-07-16T09:29:04.364Z' },
+      { id: "c1784194144364", text: "Nice location. Next to a square.", ts: "2026-07-16T09:29:04.364Z" },
     ],
 
     laundry: 'on-site', // "Shared: Communal Laundry Room" — not in-unit
@@ -1462,7 +1462,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Landlord', // craigslist by-owner; no company/name published — contact via the CL email relay
     contact: { company: '', name: '', phone: '', email: '', website: '' }, // no contact published — email via craigslist to set up an appointment
     comments: [
-      { id: 'c1784330653219', text: 'Someone paid security deposit. so likely no longer available', ts: '2026-07-17T23:24:13.219Z' },
+      { id: "c1784330653219", text: "Someone paid security deposit. so likely no longer available", ts: "2026-07-17T23:24:13.219Z" },
     ],
 
     laundry: 'on-site', // "laundry in bldg" / "laundry in the building" (+ an extra storage closet in the laundry room) — not in-unit
@@ -1546,7 +1546,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // apartments.com "Verified Listing" (CoStar); Property Manager on Site
     contact: { company: 'Peninsula Pines Apartments', name: '', phone: '(415) 993-7697', email: '', website: '' },
     comments: [
-      { id: 'c1784330621190', text: 'The landlord doesn\'t allow any families or friends to use amenities. \nParking is extremely limited -- no more parking after 3 pm', ts: '2026-07-17T23:23:41.190Z' },
+      { id: "c1784330621190", text: "The landlord doesn't allow any families or friends to use amenities. \nParking is extremely limited -- no more parking after 3 pm", ts: "2026-07-17T23:23:41.190Z" },
     ],
 
     laundry: 'on-site', // FAQ verbatim: "does not provide in-unit laundry, on-site laundry facilities are available for shared resident use"
@@ -1655,7 +1655,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Unknown', // not stated — ADUs often no-pets; confirm
     listingType: 'Landlord', // by-owner ADU; the owner lives in the attached main house (contact via the CL email relay)
     contact: { company: '', name: '', phone: '', email: '', website: '' }, // no name/phone published — email via craigslist
-    comments: [],
+    comments: [
+      { id: "c1784696208541", text: "Contacted via email. Private ADU. In house laundry. May have flexibility with lease term", ts: "2026-07-22T04:56:48.541Z" },
+    ],
 
     laundry: 'in-unit', // photo shows a stacked washer/dryer INSIDE the unit + description says "in-unit laundry" (the CL category line "laundry in bldg" is overridden by the photo)
     amen: {
@@ -1673,7 +1675,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 3, // solid but CONSTRAINED: legit + fully remodeled + a genuine 2nd room usable as a home office (real plus for a founder) + IN-UNIT laundry + available now + central San Mateo (CSM, 92/101). Held down by: TINY 550 sqft, NO parking (street only), utilities SPLIT BY HEADCOUNT (unpredictable), "some noise from main house", NO stated lease term, at-market (not a deal), and a general-area address
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 4,
     notes:
       '✅ Reads LEGITIMATE (I do NOT think this is a scam), despite being a by-owner CRAIGSLIST ADU — which I ' +
       'triaged carefully. The scam tells are ABSENT and the legit signals are strong: the price ($2,600) is ' +
@@ -1743,7 +1745,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Unknown', // not stated — ask
     listingType: 'Property mgmt', // The Housing Guild, Zillow "Verified Source", (415) 419-8279
     contact: { company: 'The Housing Guild', name: '', phone: '(415) 419-8279', email: '', website: '' }, // Verified Source; 415 = SF-area mgmt co (manages regionally)
-    comments: [],
+    comments: [
+      { id: "c1784696187192", text: "Contacted on zillow. I like the location. Lease term- contact for details.", ts: "2026-07-22T04:56:27.192Z" },
+    ],
 
     laundry: 'on-site', // "Laundry on site" / "on-site laundry" — not in-unit
     amen: {
@@ -1761,7 +1765,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4, // genuinely appealing + LEGIT: fully renovated (engineered hardwood, granite, tile bath), DEDICATED carport parking, an ELITE walkable downtown San Carlos location (Walk Score 94, steps to Caltrain + Trader Joe's), Verified-Source management, real exterior/interior photos + a floor plan; held from 5 by the AT-MARKET (not a deal) $2,895 for a small 600 sqft unit, ON-SITE (not in-unit) laundry, and no stated lease term
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 4,
     notes:
       '✅ Looks LEGITIMATE — a real Zillow home-detail listing (zpid, 1 day on market, 24 contacts) by a ' +
       '"Verified Source" management company (The Housing Guild, (415) 419-8279), with a FULL street address, 9 ' +
@@ -1822,7 +1826,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Cats only', // "Cat okay with additional deposit"; no dogs mentioned
     listingType: 'Property mgmt', // Whitley Property Management Inc, Zillow "Verified Source", (650) 376-7843 (local)
     contact: { company: 'Whitley Property Management Inc', name: '', phone: '(650) 376-7843', email: '', website: '' },
-    comments: [],
+    comments: [
+      { id: "c1784696309355", text: "Contacted via zillow. I like the location", ts: "2026-07-22T04:58:29.355Z" },
+    ],
 
     laundry: 'on-site', // "Laundry facility on site" — not in-unit
     amen: {
@@ -1840,7 +1846,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 3, // genuinely good VALUE + LEGIT: a roomy 836 sqft 1BR (one of your largest) at an under-market $2,450 with water+garbage+a parking space+a private balcony+granite+storage, near downtown San Carlos, Verified-Source mgmt. But the 1-YEAR LEASE directly conflicts with your 6-mo goal (red flag), plus on-site (not in-unit) laundry, carpet (not hardwood), and cats-only. Would be a 4 if they'd do a 6-mo term
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 4,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing by Whitley Property Management Inc, (650) ' +
       '376-7843, with a full street address and 9 real photos (an exterior of the "Chest640" building plus ' +
@@ -1897,7 +1903,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Unknown', // not stated — ask
     listingType: 'Landlord', // "Listed by property owner" Shant Bezdjian; description says to call Garbis — NOT a Verified Source
     contact: { company: '', name: 'Shant Bezdjian (call Garbis)', phone: '', email: '', website: '' }, // no phone published — inquire via Zillow
-    comments: [],
+    comments: [
+      { id: "c1784696616077", text: "Contacted via Zillow. One year lease. Find out why this has been outstanding for so long", ts: "2026-07-22T05:03:36.077Z" },
+    ],
 
     laundry: 'on-site', // "Laundry facility in the garage" — not in-unit
     amen: {
@@ -1915,7 +1923,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 3, // legit + genuinely GOOD VALUE on paper: renovated 1BR near downtown San Carlos, UNDER market at $2,400, and the landlord pays water/sewer/trash. BUT the standout caveat is 488 DAYS on market (why hasn't it rented?), plus it's BY-OWNER (not Verified Source), on-site (garage) laundry, an older exterior-walkway building, and no stated lease term. Price/value is a 4; the 488-day question + unverified owner pull it to 3
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 3,
     notes:
       '✅ Reads LEGITIMATE (not a scam) — a real Zillow home-detail listing (zpid) by owner (Shant Bezdjian; the ' +
       'blurb says to "call Garbis"), with a FULL street address and 9 real, consistent photos (a renovated ' +
@@ -1978,7 +1986,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Unknown', // not stated — ask
     listingType: 'Property mgmt', // Westbay Commercial RE Group DBA Coldwell Banker Commercial — a real brokerage (but NOT a Zillow "Verified Source")
     contact: { company: 'Coldwell Banker Commercial (Westbay)', name: '', phone: '', email: '', website: '' }, // no phone published — inquire via Zillow
-    comments: [],
+    comments: [
+      { id: "c1784696278520", text: "Contacted via zillow. Ask for lease term. I like the location. Balcony included", ts: "2026-07-22T04:57:58.520Z" },
+    ],
 
     laundry: 'unknown', // NOT mentioned anywhere in the listing — ask (in-unit / on-site / none)
     amen: {
@@ -1996,7 +2006,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4, // strong VALUE + LEGIT: a spacious 1BR with HARDWOOD floors throughout, a private balcony, a dedicated parking space, a storage unit, an updated stainless/granite kitchen, water + garbage included, at an UNDER-market $2,325 in prime downtown San Carlos — listed by a real brokerage (Coldwell Banker Commercial). Held from 5 by: not a Zillow "Verified Source", no stated lease term, laundry not mentioned, and Zillow's bogus 374-sqft figure (verify the real size)
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 4,
     notes:
       '✅ Looks LEGITIMATE — a Zillow listing by a real brokerage (Westbay Commercial Real Estate Group, DBA ' +
       'Coldwell Banker Commercial), with a full street address and 9 real, consistent photos (a spacious ' +
@@ -2021,7 +2031,7 @@ export const APARTMENTS: Apartment[] = [
     // (the SAME manager as a13 / Kent Court), full address, 14 real photos (multiple building EXTERIORS + a
     // POOL + covered carports + interiors) matching the copy. Hero = the front-building exterior.
     id: 'a32',
-    status: 'New',
+    status: 'Ruled out',
     title: 'Village Court 1BR (covered parking, pool) — Belmont',
     address: '2200 Village Ct APT 9, Belmont, CA 94002',
     neighborhood: 'Belmont Hills',
@@ -2129,7 +2139,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Cats only', // "1 Cat Welcome ($65/month pet rent)"; no dogs
     listingType: 'Property mgmt', // Pacific Garden Properties, LLC (listing agent/manager) — NOT a Zillow "Verified Source"
     contact: { company: 'Pacific Garden Properties, LLC', name: '', phone: '', email: '', website: '' }, // no phone published — inquire via Zillow
-    comments: [],
+    comments: [
+      { id: "c1784696231813", text: "Contacted via zillow. 10 month lease", ts: "2026-07-22T04:57:11.813Z" },
+    ],
 
     laundry: 'on-site', // "on-site shared laundry facilities" — not in-unit
     amen: {
@@ -2147,7 +2159,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 3, // the UNIT is genuinely nice — RARE in-unit A/C (uncommon in Belmont), fully updated, a free carport, a private balcony, and owner pays water/sewer/garbage + a gardener (real savings), cat-friendly. But it's a HARD 10–12 MONTH LEASE, explicitly "NO SHORT TERM," with strict screening (700+ credit, 3× income, move-in within ~30 days) — a direct conflict with your 6-mo goal (red flag). Would be a 4 if you could do a year
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 4,
     notes:
       '✅ Reads LEGITIMATE — a real Zillow home-detail listing (zpid, 17 days on market, 75 contacts) by a ' +
       'listing agent (Pacific Garden Properties, LLC), with a full address and 18 real, consistent photos that ' +
@@ -2206,7 +2218,9 @@ export const APARTMENTS: Apartment[] = [
     petPolicy: 'Unknown', // not stated — ask
     listingType: 'Property mgmt', // CREI LLC (Zillow) / Redwood Landing Properties, INC — valid CA DRE #01476187 (but NOT a Zillow "Verified Source")
     contact: { company: 'CREI LLC / Redwood Landing Properties (DRE #01476187)', name: '', phone: '', email: '', website: '' }, // no phone published; by appointment — inquire via Zillow
-    comments: [],
+    comments: [
+      { id: "c1784696738765", text: "Contacted via zillow. Okay location okay room", ts: "2026-07-22T05:05:38.765Z" },
+    ],
 
     laundry: 'unknown', // not mentioned — ask (in-unit / on-site / none)
     amen: {

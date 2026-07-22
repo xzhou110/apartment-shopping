@@ -176,7 +176,7 @@ export function mergeWithSeed(
             rating: s.rating ?? base.rating,
             status: s.status ?? base.status,
             // Comments are USER content → the saved overlay wins WHOLESALE (replace, not union).
-            // The seed MAY carry baked-in comments (the user's PC curation snapshot, 2026-07-16) —
+            // The seed MAY carry baked-in comments (the user's PC curation snapshot, latest 2026-07-22) —
             // those are only the baseline for a browser with no saved copy of the listing; any
             // browser that has one keeps exactly its own thread (so baking never duplicates).
             comments: Array.isArray(s.comments) ? s.comments.map((c) => ({ ...c })) : base.comments,
