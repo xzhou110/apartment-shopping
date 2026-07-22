@@ -1612,4 +1612,95 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a26.webp',
     sourceUrl: 'https://www.apartments.com/peninsula-pines-apartments-south-san-francisco-ca/f19cymv/',
   },
+  {
+    // a27 — Cozy 2BR/1BA ADU, San Mateo (West Hillsdale / Laurelwood). Source = CRAIGSLIST by-owner ADU,
+    // triaged carefully and reads clearly LEGIT (NOT a scam): at/near-market price (not a cheap bait),
+    // grounded specific copy, and 5 REAL, CONSISTENT remodel photos that MATCH the description exactly
+    // (stainless kitchen + stacked in-unit W/D, marble walk-in shower + LED mirror, wood-look-floor rooms +
+    // closet) — the opposite of scraped stock. Geocode = the craigslist map pin (37.531936,-122.308480,
+    // accuracy 20 ≈ street-level fuzz) — APPROXIMATE, since ADUs list a general area, not a house number.
+    // ⚠️ NO EXTERIOR PHOTO exists (owner shot only the unit — it's attached to their home); hero = the
+    // kitchen (the most informative interior). Craigslist images fetch fine server-side (unlike apartments.com).
+    id: 'a27',
+    status: 'New',
+    title: 'Remodeled ADU (2BR/office) — San Mateo',
+    address: 'W Hillsdale Blvd area (Laurelwood), San Mateo, CA 94403 (exact address shared on inquiry)',
+    neighborhood: 'Laurelwood',
+    city: 'San Mateo',
+    lat: 37.531936, // ⚠️ APPROXIMATE — the craigslist pin (accuracy 20), not a rooftop; exact address withheld
+    lng: -122.30848,
+
+    beds: 2, // a "2BR" but 550 sqft — one room is smaller, "could be used as an office" (effectively 1BR + den)
+    baths: 1,
+    sqft: 550,
+    floor: '', // ground-level ADU attached to the main house, private backyard entrance
+
+    rent: 2600, // "$2,600/month"; at/near market for a small San Mateo ADU (see marketRent)
+    parkingCost: null, // street parking only — no dedicated/paid space
+    petRent: null, // pets not mentioned
+    utilitiesIncluded: false, // "Utilities (electric/water/garbage) split by headcount" — you pay a SHARE (unusual; see notes) → budget-extra flag
+    utilitiesEstimate: null,
+
+    deposit: 2600, // "Deposit: $2,600" — equal to one month
+    appFee: null, // "Application required (credit score + payroll info)" — no fee amount stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // NO lease term stated ("rent period: monthly" is the rent cadence, not the term) → amber "confirm 6-mo" flag
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // "available now"
+    availability: 'now',
+    furnished: false,
+
+    petPolicy: 'Unknown', // not stated — ADUs often no-pets; confirm
+    listingType: 'Landlord', // by-owner ADU; the owner lives in the attached main house (contact via the CL email relay)
+    contact: { company: '', name: '', phone: '', email: '', website: '' }, // no name/phone published — email via craigslist
+    comments: [],
+
+    laundry: 'in-unit', // photo shows a stacked washer/dryer INSIDE the unit + description says "in-unit laundry" (the CL category line "laundry in bldg" is overridden by the photo)
+    amen: {
+      parking: false, // street parking only — no dedicated space (drives the "No parking" flag)
+      woodenFloor: true, // light wood-look plank flooring throughout the photos
+      balcony: null, // not mentioned (has a private backyard entrance, not a balcony) — ask
+      gym: false, // private ADU — no gym
+    },
+    amenities: ['Fully remodeled', 'Stainless steel appliances', 'In-unit stacked washer/dryer', 'Walk-in shower + LED mirror', 'Recessed LED lighting', 'Wood-look floors', 'Private backyard entrance', '2nd room usable as office (WFH)', 'Fast Wi-Fi available', 'Near CSM · Hillsdale + Laurelwood shops · Hwy 92/101'],
+
+    dateSeen: '2026-07-21',
+    daysOnMarket: 8, // "Posted 8 days ago"
+    marketRent: 2700, // Est. — small San Mateo ADU/1BR comp; $2,600 is at/near market (a fair price, NOT a cheap-bait — reinforces it's not a scam)
+
+    expertRating: 3, // solid but CONSTRAINED: legit + fully remodeled + a genuine 2nd room usable as a home office (real plus for a founder) + IN-UNIT laundry + available now + central San Mateo (CSM, 92/101). Held down by: TINY 550 sqft, NO parking (street only), utilities SPLIT BY HEADCOUNT (unpredictable), "some noise from main house", NO stated lease term, at-market (not a deal), and a general-area address
+    scamRisk: false,
+    incomeRestricted: false,
+    rating: 0,
+    notes:
+      '✅ Reads LEGITIMATE (I do NOT think this is a scam), despite being a by-owner CRAIGSLIST ADU — which I ' +
+      'triaged carefully. The scam tells are ABSENT and the legit signals are strong: the price ($2,600) is ' +
+      'at/near market for a small San Mateo ADU (NOT a cheap bait); the copy is specific and grounded; and — the ' +
+      'clincher — its 5 photos are REAL and CONSISTENT and MATCH the description exactly (a remodeled stainless ' +
+      'kitchen with a stacked in-unit washer/dryer, a marble walk-in shower with an LED mirror, and wood-look ' +
+      'floored rooms with a closet), not the scraped luxury-stock a scam reuses. Screening is a standard ' +
+      'owner flow (credit score + payroll, email your headcount/occupation/move-in date) with NO up-front fee, ' +
+      'NO wire-money ask, and NO off-platform push. 🟢 WHAT\'S GOOD FOR YOU: fully remodeled + move-in-ready, a ' +
+      'genuine SECOND ROOM you can use as a home OFFICE (nice for a founder), IN-UNIT laundry (rare on your ' +
+      'list), available now, and a central San Mateo spot near the College of San Mateo, Hillsdale + Laurelwood ' +
+      'shopping, and Hwy 92/101.\n' +
+      'Know what this IS before you get attached: (1) 📐 TINY — 550 sqft for a "2BR"; the second bedroom is a ' +
+      'small office/den, so treat it as a 1BR-plus-nook, not two real bedrooms. (2) 🚗 NO PARKING — street only ' +
+      '("plenty of street parking," but nothing dedicated); the card shows a No-parking flag. (3) 💡 UTILITIES ' +
+      'ARE SPLIT BY HEADCOUNT — you pay a SHARE of electric/water/garbage based on total occupants across the ' +
+      'ADU + main house, which is unusual and can be unpredictable; ask exactly how it\'s calculated and for a ' +
+      'typical monthly. (4) 🔊 SHARED LOT — it\'s attached to the owner\'s house and the post says you "must be ' +
+      'okay with some noise from the main house"; you\'ll be living beside your landlord. (5) 📅 NO LEASE TERM ' +
+      'stated — confirm they\'ll do your ~6-month term (the card shows the amber "confirm 6-mo" flag). (6) 💲 ' +
+      '$2,600 is at market, not a deal; move-in = first month + an equal $2,600 deposit. (7) 📍 ADDRESS is a ' +
+      'general-area pin (W Hillsdale/Laurelwood) — the map distance is approximate; the exact address comes on ' +
+      'inquiry. (8) 📷 No exterior photo in the listing (all 5 are interiors of the unit) — the card hero is the ' +
+      'kitchen. (9) 🔒 BY-OWNER PRUDENCE (standard for any craigslist listing, not a red flag specific to this ' +
+      'one): tour in person, confirm the owner actually controls the property, and never wire a deposit before ' +
+      'you\'ve seen it and signed a lease.',
+    image: 'img/a27.jpg',
+    sourceUrl: 'https://www.craigslist.org/view/d/san-mateo-cozy-2br-1ba-adu/rn88b7TxE5hpkAPZwnSSnF',
+  },
 ];
