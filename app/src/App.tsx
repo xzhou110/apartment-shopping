@@ -284,6 +284,7 @@ export default function App() {
         onSetYou={(id, n) => g.setRating(id, 'you', n)}
         onAddComment={g.addComment}
         onDeleteComment={g.deleteComment}
+        onEditComment={g.editComment}
       />
 
       <ApartmentForm apt={formApt} onClose={() => setFormApt(undefined)} onSave={handleSave} />

@@ -11,7 +11,7 @@ import { Modal } from './Modal';
 import { RatingStars } from './RatingStars';
 import { hasContact } from './ContactLinks';
 import { assetUrl, flagIcon, LAUNDRY_LABEL, LISTED_BY_LABEL } from './helpers';
-import { IconExt, IconClose, IconHome, IconTrash } from './icons';
+import { IconExt, IconClose, IconHome, IconTrash, IconEdit } from './icons';
 
 interface Props {
   apt: Apartment | null;
@@ -32,6 +32,7 @@ interface Props {
   onSetYou: (id: string, n: number) => void;
   onAddComment: (id: string, text: string) => void;
   onDeleteComment: (id: string, commentId: string) => void;
+  onEditComment: (id: string, commentId: string, text: string) => void;
 }
 
 /** Renders a labelled field only when the value is meaningful. */
@@ -95,44 +96,117 @@ function fmtTs(iso: string): string {
   });
 }
 
-/** Your comments on a listing: newest-at-bottom list with delete, plus an add box. */
+/** Your comments on a listing: newest-at-bottom list with edit + delete, plus an add box. */
 function CommentsSection({
   apt,
   onAdd,
+  onEdit,
   onDelete,
 }: {
   apt: Apartment;
   onAdd: (id: string, text: string) => void;
+  onEdit: (id: string, commentId: string, text: string) => void;
   onDelete: (id: string, commentId: string) => void;
 }): ReactElement {
   const [text, setText] = useState('');
+  // Which comment is being edited (null = none) + its working draft. One-at-a-time editing.
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editText, setEditText] = useState('');
+
   const submit = () => {
     const t = text.trim();
     if (!t) return;
     onAdd(apt.id, t);
     setText('');
   };
+  const startEdit = (commentId: string, current: string) => {
+    setEditingId(commentId);
+    setEditText(current);
+  };
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditText('');
+  };
+  const saveEdit = (commentId: string) => {
+    const t = editText.trim();
+    if (!t) return; // empty → no-op (use delete to remove)
+    onEdit(apt.id, commentId, t);
+    cancelEdit();
+  };
+
   return (
     <section className="det-section">
       <h4>Comments</h4>
       {apt.comments.length > 0 ? (
         <ul className="cmt-list">
-          {apt.comments.map((c) => (
-            <li key={c.id} className={`cmt${isIncomeRestrictedComment(c.text) ? ' cmt-risk' : ''}`}>
-              <div className="cmt-main">
-                <div className="cmt-text">{c.text}</div>
-                <div className="cmt-ts">{fmtTs(c.ts)}</div>
-              </div>
-              <button
-                className="cmt-del"
-                onClick={() => onDelete(apt.id, c.id)}
-                aria-label="Delete comment"
-                title="Delete comment"
+          {apt.comments.map((c) => {
+            const isEditing = editingId === c.id;
+            return (
+              <li
+                key={c.id}
+                className={`cmt${isIncomeRestrictedComment(isEditing ? editText : c.text) ? ' cmt-risk' : ''}${isEditing ? ' is-editing' : ''}`}
               >
-                <IconTrash />
-              </button>
-            </li>
-          ))}
+                {isEditing ? (
+                  <div className="cmt-main">
+                    <textarea
+                      className="cmt-input cmt-edit-input"
+                      value={editText}
+                      onChange={(e) => setEditText(e.target.value)}
+                      rows={3}
+                      autoFocus
+                      aria-label="Edit comment"
+                      onKeyDown={(e) => {
+                        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+                          e.preventDefault();
+                          saveEdit(c.id);
+                        } else if (e.key === 'Escape') {
+                          e.preventDefault();
+                          cancelEdit();
+                        }
+                      }}
+                    />
+                    <div className="cmt-edit-actions">
+                      <button className="btn-mini" onClick={cancelEdit}>
+                        Cancel
+                      </button>
+                      <button
+                        className="btn btn-accent cmt-edit-save"
+                        onClick={() => saveEdit(c.id)}
+                        disabled={!editText.trim()}
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="cmt-main">
+                      <div className="cmt-text">{c.text}</div>
+                      <div className="cmt-ts">{fmtTs(c.ts)}</div>
+                    </div>
+                    <div className="cmt-actions">
+                      <button
+                        className="cmt-edit"
+                        onClick={() => startEdit(c.id, c.text)}
+                        aria-label="Edit comment"
+                        title="Edit comment"
+                      >
+                        <IconEdit />
+                      </button>
+                      <button
+                        className="cmt-del"
+                        onClick={() => onDelete(apt.id, c.id)}
+                        aria-label="Delete comment"
+                        title="Delete comment"
+                      >
+                        <IconTrash />
+                      </button>
+                    </div>
+                  </>
+                )}
+              </li>
+            );
+          })}
         </ul>
       ) : (
         <div className="cmt-empty">No comments yet — add your first note below.</div>
@@ -175,6 +249,7 @@ export function DetailModal({
   onSetYou,
   onAddComment,
   onDeleteComment,
+  onEditComment,
 }: Props): ReactElement {
   const open = !!apt;
   const unit = settings.distanceUnit;
@@ -331,7 +406,13 @@ export function DetailModal({
               </section>
             )}
 
-            <CommentsSection key={apt.id} apt={apt} onAdd={onAddComment} onDelete={onDeleteComment} />
+            <CommentsSection
+              key={apt.id}
+              apt={apt}
+              onAdd={onAddComment}
+              onEdit={onEditComment}
+              onDelete={onDeleteComment}
+            />
 
             <div className="det-actions">
               {safeHref(apt.sourceUrl) && (

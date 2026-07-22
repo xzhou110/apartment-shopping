@@ -70,9 +70,10 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
 6. **Compare** — tick ≥2 listings → the Compare tab shows them side-by-side and auto-highlights the
    **best (green) / worst (red)** in each row (cheapest rent, nearest, most amenities, biggest sqft).
 7. **Rate & comment** — click the **You ★** stars on a card (or in detail) to rate; **Expert ★** is my
-   rating. Open a card and add **comments** (timestamped, delete any) in the detail view — your latest one
-   also shows on the card. **Line breaks you type are preserved** on both the card (up to 3 lines, then
-   truncated) and the full detail thread. A comment that mentions **"income restricted"** renders highlighted **red**
+   rating. Open a card to add **comments** (timestamped) in the detail view; each one has an **edit** (pencil)
+   and **delete** button — editing updates the note in place, keeping its timestamp and position (⌘/Ctrl+Enter
+   saves, Esc cancels). Your latest comment also shows on the card. **Line breaks you type are preserved** on
+   both the card (up to 3 lines, then truncated) and the full detail thread. A comment that mentions **"income restricted"** renders highlighted **red**
    (on the card and in the detail thread) — income qualification is a hard eligibility gate, not a
    nice-to-know. Ratings, status, and comments are your per-listing state and persist in your
    browser even when I refresh the seed data.

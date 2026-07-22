@@ -477,6 +477,16 @@ td.worst { background: var(--risk-soft); }
 .cmt-del { flex: none; width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; color: var(--ink-3); background: transparent; transition: color .12s, background .12s; }
 .cmt-del:hover { color: var(--risk); background: var(--surface); }
 .cmt-del svg { width: 15px; height: 15px; }
+/* Edit + delete sit together to the right of each comment. */
+.cmt-actions { flex: none; display: flex; gap: 2px; }
+.cmt-edit { flex: none; width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; color: var(--ink-3); background: transparent; transition: color .12s, background .12s; }
+.cmt-edit:hover { color: var(--accent); background: var(--surface); }
+.cmt-edit svg { width: 15px; height: 15px; }
+/* Inline edit mode: the whole row becomes the editor (textarea + Save/Cancel). */
+.cmt.is-editing { border-color: var(--accent); background: var(--surface-2); }
+.cmt-edit-input { min-height: 60px; }
+.cmt-edit-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
+.cmt-edit-save:disabled { opacity: .5; cursor: not-allowed; }
 .cmt-add { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
 .cmt-input { width: 100%; padding: 10px 12px; border: 1px solid var(--line-2); border-radius: 10px; font-size: 13.5px; font-family: var(--body); color: var(--ink); background: var(--surface); resize: vertical; min-height: 46px; line-height: 1.5; }
 .cmt-input::placeholder { color: var(--ink-3); }

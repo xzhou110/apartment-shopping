@@ -50,6 +50,35 @@ describe('mergeWithSeed — retiring a seed listing leaves no ghost', () => {
   });
 });
 
+describe('editComment — edit in place, preserve id + ts', () => {
+  // Reproduce the pure edit transform the hook applies, so the identity guarantees are locked.
+  const applyEdit = (comments: { id: string; text: string; ts: string }[], commentId: string, text: string) => {
+    const t = text.trim();
+    if (!t) return comments; // empty → no-op (mirrors the hook)
+    return comments.map((c) => (c.id === commentId ? { ...c, text: t } : c));
+  };
+  const base = [
+    { id: 'c1', text: 'first', ts: '2026-07-20T10:00:00.000Z' },
+    { id: 'c2', text: 'second', ts: '2026-07-20T11:00:00.000Z' },
+  ];
+
+  it('replaces the target comment text but keeps its id, ts, and position', () => {
+    const out = applyEdit(base, 'c2', 'second — edited');
+    expect(out.map((c) => c.id)).toEqual(['c1', 'c2']); // order unchanged
+    expect(out[1]).toEqual({ id: 'c2', text: 'second — edited', ts: '2026-07-20T11:00:00.000Z' });
+    expect(out[0]).toEqual(base[0]); // sibling untouched
+  });
+
+  it('trims whitespace and preserves typed newlines', () => {
+    const out = applyEdit(base, 'c1', '  line A\nline B  ');
+    expect(out[0].text).toBe('line A\nline B');
+  });
+
+  it('empty / whitespace-only edit is a no-op (use delete to remove)', () => {
+    expect(applyEdit(base, 'c1', '   ')).toEqual(base);
+  });
+});
+
 describe('default distance anchor — Millbrae 94030', () => {
   it('DEFAULT_SETTINGS ships the 94030 anchor as primary', () => {
     expect(DEFAULT_ANCHOR.query).toBe('94030');

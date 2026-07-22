@@ -323,6 +323,20 @@ export function useApartments() {
     );
   }, []);
 
+  // Edit a comment in place: keep its id + ts (so it stays the SAME comment in its position),
+  // just replace the text. Empty/whitespace text is ignored (use delete to remove).
+  const editComment = useCallback((id: string, commentId: string, text: string) => {
+    const t = text.trim();
+    if (!t) return;
+    setApartments((prev) =>
+      prev.map((a) =>
+        a.id === id
+          ? { ...a, comments: a.comments.map((c) => (c.id === commentId ? { ...c, text: t } : c)) }
+          : a,
+      ),
+    );
+  }, []);
+
   // ---- compare ----
   const toggleCompare = useCallback((id: string) => {
     setCompareSet((prev) => {
@@ -452,6 +466,7 @@ export function useApartments() {
     setStatus,
     addComment,
     deleteComment,
+    editComment,
     toggleCompare,
     clearCompare,
     setSettings,
