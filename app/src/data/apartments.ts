@@ -1783,4 +1783,78 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a28.webp',
     sourceUrl: 'https://www.zillow.com/homedetails/1450-Laurel-St-APT-4-San-Carlos-CA-94070/444584983_zpid/',
   },
+  {
+    // a29 — Chest640 / 640 Chestnut St #4, San Carlos (near downtown). Rooftop geocode via Nominatim
+    // (2026-07-21). ✅ Reads LEGIT — a Zillow "Verified Source" listing by Whitley Property Management, full
+    // address, 9 real photos (incl. an EXTERIOR of the "Chest640" building + interiors matching the copy).
+    // Hero = the exterior shot (user preference). ⚠️ 1-YEAR LEASE ONLY — a direct conflict with the 6-mo goal.
+    id: 'a29',
+    status: 'New',
+    title: 'Roomy 1BR (836 sqft, balcony) — San Carlos',
+    address: '640 Chestnut St APT 4, San Carlos, CA 94070',
+    neighborhood: '',
+    city: 'San Carlos',
+    lat: 37.503827,
+    lng: -122.263413,
+
+    beds: 1,
+    baths: 1,
+    sqft: 836, // one of the roomiest 1BRs on your list
+    floor: '',
+
+    rent: 2450, // "$2,450 per month"; good value for 836 sqft (see marketRent)
+    parkingCost: null, // "One parking space provided" — included
+    petRent: null, // "Cat okay with additional deposit" — a pet DEPOSIT, not monthly rent (amount unstated)
+    utilitiesIncluded: true, // "Water and garbage included in rent" — you still pay electric/gas
+    utilitiesEstimate: null,
+
+    deposit: 2450, // "$2,450 security deposit"
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: 12, // "1 year lease" — a stated 12-mo term → RED "doesn't fit your 6-mo goal" flag
+    minLeaseMonths: 12,
+    maxLeaseMonths: 12,
+    availableDate: '', // listed as "1 unit available" — no concrete date shown
+    availability: 'now',
+    furnished: false,
+
+    petPolicy: 'Cats only', // "Cat okay with additional deposit"; no dogs mentioned
+    listingType: 'Property mgmt', // Whitley Property Management Inc, Zillow "Verified Source", (650) 376-7843 (local)
+    contact: { company: 'Whitley Property Management Inc', name: '', phone: '(650) 376-7843', email: '', website: '' },
+    comments: [],
+
+    laundry: 'on-site', // "Laundry facility on site" — not in-unit
+    amen: {
+      parking: true, // one assigned parking space
+      woodenFloor: false, // "New carpet throughout" (kitchen has vinyl); the living areas are carpeted per the photos
+      balcony: true, // "Private balcony off living room"
+      gym: false, // small building — no gym
+    },
+    amenities: ['Private balcony', '1 assigned parking space', 'Granite counters', 'New carpet + paint', 'Storage closet', 'On-site laundry', 'Built-in shelving', 'Separate dining area + ceiling fan', 'Water + garbage included', 'Near downtown San Carlos'],
+
+    dateSeen: '2026-07-21',
+    daysOnMarket: null,
+    marketRent: 2800, // Est. — San Carlos 1BR comp; $2,450 for a roomy 836 sqft (w/ water+garbage+parking) is modestly under market — good value
+
+    expertRating: 3, // genuinely good VALUE + LEGIT: a roomy 836 sqft 1BR (one of your largest) at an under-market $2,450 with water+garbage+a parking space+a private balcony+granite+storage, near downtown San Carlos, Verified-Source mgmt. But the 1-YEAR LEASE directly conflicts with your 6-mo goal (red flag), plus on-site (not in-unit) laundry, carpet (not hardwood), and cats-only. Would be a 4 if they'd do a 6-mo term
+    scamRisk: false,
+    incomeRestricted: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing by Whitley Property Management Inc, (650) ' +
+      '376-7843, with a full street address and 9 real photos (an exterior of the "Chest640" building plus ' +
+      'interiors that match the copy). 🟢 STRONG VALUE: at 836 sqft this is one of the ROOMIEST 1BRs on your ' +
+      'list, at an under-market $2,450 — and rent INCLUDES water + garbage, one assigned parking space, a ' +
+      'private balcony off the living room, granite counters, a storage closet, and a separate dining area. ' +
+      'Fresh new carpet + paint, near downtown San Carlos and shopping.\n' +
+      '⚠️ THE CATCH FOR YOU: it\'s a 1-YEAR LEASE (stated) — a direct conflict with your ~6-month goal, so the ' +
+      'card shows the red "doesn\'t fit your 6-mo goal" flag. If a year works for you (or they\'ll negotiate a ' +
+      '6-mo term), the value is genuinely good; if not, this one\'s out. Also confirm: (1) LAUNDRY is on-site/' +
+      'shared, NOT in-unit. (2) Floors are CARPET (new), not hardwood. (3) CATS OK (with an extra deposit); no ' +
+      'dogs mentioned. (4) A minimum $100k RENTER\'S INSURANCE policy is required. (5) You still pay electric + ' +
+      'gas (only water + garbage are included). (6) Move-in = first month + an equal $2,450 deposit.',
+    image: 'img/a29.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/san-carlos-ca/chest640/5ZtHwj/',
+  },
 ];
