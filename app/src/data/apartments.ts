@@ -69,7 +69,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4,
     scamRisk: false,
     incomeRestricted: false,
-    rating: 2,
+    rating: 3,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing managed by Blvd Residential (Leasing Agent, ' +
       '(650) 547-8025), a long-standing pet-friendly community in a quiet Foster City neighborhood near ' +
@@ -129,7 +129,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Vasona (Leasing Agent), Zillow "Verified Source", (214) 833-5650
     contact: { company: 'Vasona', name: 'Leasing Agent', phone: '(214) 833-5650', email: '', website: '' }, // Zillow "Verified Source"; note: 214 = a Dallas TX area code (likely a central leasing line)
     comments: [
-      { id: "c1784330947484", text: "The property may no longer be available\nNo response from the property at all\nNice location\n3/5 management review", ts: "2026-07-17T23:29:07.484Z" },
+      { id: "c1784330947484", text: "Contacted via zillow, phone, email.\nThe property almost never respond to message, phone call, or email, and no one is ever leasing office - concern\nVery nice location though\n3/5 management review", ts: "2026-07-17T23:29:07.484Z" },
     ],
 
     laundry: 'on-site', // "Shared: Laundry" — community/shared, not in-unit
@@ -500,9 +500,9 @@ export const APARTMENTS: Apartment[] = [
     appFee: null, // not stated
     brokerFee: null,
 
-    leaseTermMonths: null, // offers BOTH terms (see min/max)
-    minLeaseMonths: 6, // "Lease terms: One year, Six months" — they explicitly offer a 6-mo lease (a perfect fit for your goal)
-    maxLeaseMonths: 12, // …and a 12-mo option
+    leaseTermMonths: 12, // ONE-YEAR lease per the listing (user update 2026-07-22) — was recorded as also offering a 6-mo option; corrected to a fixed 12-mo term
+    minLeaseMonths: 12, // one-year lease per the listing (user update 2026-07-22) → conflicts with the 6-mo goal (red flag)
+    maxLeaseMonths: 12, // one-year term
     availableDate: '', // Unit 25 "Currently unavailable" (rolling) — ask what's open
     availability: 'unavailable',
     furnished: false,
@@ -511,7 +511,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // GPS/Logos Property Investment (Nate Chen), Zillow "Verified Source"
     contact: { company: 'GPS/Logos Property Investment', name: 'Nate Chen', phone: '', email: '', website: '' }, // Verified Source; no phone published — inquire via Zillow
     comments: [
-      { id: "c1784330680270", text: "It seems not available?\nParking is tight. Old building. \nPrivate owner. Can't find review for this one", ts: "2026-07-17T23:24:40.270Z" },
+      { id: "c1784330680270", text: "It seems not available\nParking is tight. Old building. \nPrivate owner. Can't find review for this one", ts: "2026-07-17T23:24:40.270Z" },
     ],
 
     laundry: 'on-site', // "Shared laundry" / "Laundry: Shared" — not in-unit
@@ -527,17 +527,19 @@ export const APARTMENTS: Apartment[] = [
     daysOnMarket: null,
     marketRent: 2600, // Est. — Daly City 1BR comp; $2,350 (w/ water/sewer/garbage included) is under market
 
-    expertRating: 4, // strong practical fit: EXPLICIT 6-mo lease option (exactly your goal) + gated + off-street parking + water/sewer/garbage included + under market + 700 sqft; basic finishes (carpet/vinyl), on-site (not in-unit) laundry, no gym keep it from higher
+    expertRating: 3, // solid VALUE (under market, gated, off-street parking, water/sewer/garbage included, 700 sqft) — but the lease is a ONE-YEAR term per the listing (user update 2026-07-22) that conflicts with your 6-mo goal (red flag); losing that 6-mo fit drops it from 4 (now on par with a29, the other Verified-Source 1-year value). Basic finishes (carpet/vinyl), on-site (not in-unit) laundry, no gym
     scamRisk: false,
     incomeRestricted: false,
     rating: 3,
     notes:
       '✅ Looks LEGITIMATE — a Zillow "Verified Source" listing by a management company (GPS/Logos Property ' +
       'Investment, Nate Chen), a quiet, well-maintained 30-unit gated complex in central Daly City with an ' +
-      'online rent/maintenance portal and standard screening (2.5× income, 660+ credit, negotiable). 🟢 BEST ' +
-      'LEASE FIT ON YOUR LIST: they explicitly offer a SIX-MONTH lease (as well as a 12-mo) — a direct match for ' +
-      'your 6-mo goal, no negotiation needed. Also under market at $2,350 with water/sewer/garbage included, ' +
-      'gated entry, and an off-street parking lot.\n' +
+      'online rent/maintenance portal and standard screening (2.5× income, 660+ credit, negotiable). ' +
+      '⚠️ LEASE UPDATE (per the listing): this is a ONE-YEAR (12-mo) lease — a direct conflict with your ~6-month ' +
+      'goal, so the card now shows the red "doesn\'t fit your 6-mo goal" flag. (An earlier note here said they ' +
+      'also offered a 6-mo term; the listing states a one-year lease — ask if they\'ll negotiate a shorter term.) ' +
+      'Otherwise a solid value: under market at $2,350 with water/sewer/garbage included, gated entry, and an ' +
+      'off-street parking lot.\n' +
       'Confirm before signing: (1) AVAILABILITY — Unit 25 shows "Currently unavailable"; call to ask what\'s open ' +
       '(office Mon–Fri 9–5). (2) PETS — cats + small dogs (2 each) are confirmed, but the criteria says "Cats and ' +
       'small dogs" while a pet card also shows "Large dogs" — clarify if large dogs are actually allowed. ' +
@@ -1656,7 +1658,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Landlord', // by-owner ADU; the owner lives in the attached main house (contact via the CL email relay)
     contact: { company: '', name: '', phone: '', email: '', website: '' }, // no name/phone published — email via craigslist
     comments: [
-      { id: "c1784696208541", text: "Contacted via email. Private ADU. In house laundry. May have flexibility with lease term", ts: "2026-07-22T04:56:48.541Z" },
+      { id: "c1784696208541", text: "Contacted via Craigslist email. \nPrivate ADU. \nIn house laundry. \nMay have flexibility with lease term", ts: "2026-07-22T04:56:48.541Z" },
     ],
 
     laundry: 'in-unit', // photo shows a stacked washer/dryer INSIDE the unit + description says "in-unit laundry" (the CL category line "laundry in bldg" is overridden by the photo)
@@ -1675,7 +1677,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 3, // solid but CONSTRAINED: legit + fully remodeled + a genuine 2nd room usable as a home office (real plus for a founder) + IN-UNIT laundry + available now + central San Mateo (CSM, 92/101). Held down by: TINY 550 sqft, NO parking (street only), utilities SPLIT BY HEADCOUNT (unpredictable), "some noise from main house", NO stated lease term, at-market (not a deal), and a general-area address
     scamRisk: false,
     incomeRestricted: false,
-    rating: 4,
+    rating: 5,
     notes:
       '✅ Reads LEGITIMATE (I do NOT think this is a scam), despite being a by-owner CRAIGSLIST ADU — which I ' +
       'triaged carefully. The scam tells are ABSENT and the legit signals are strong: the price ($2,600) is ' +
@@ -1712,7 +1714,7 @@ export const APARTMENTS: Apartment[] = [
     // (incl. TWO exterior shots + a floor plan) that match the copy, at-market price. Hero = the EXTERIOR
     // front shot (user preference). Zillow CDN fetches server-side (no browser-capture needed).
     id: 'a28',
-    status: 'New',
+    status: 'Gone', // user-marked 2026-07-22 — "called and confirmed no longer available" (baked from the PC overlay)
     title: 'Renovated 1BR (downtown, walk 94) — San Carlos',
     address: '1450 Laurel St APT 4, San Carlos, CA 94070',
     neighborhood: 'Downtown',
@@ -1746,7 +1748,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // The Housing Guild, Zillow "Verified Source", (415) 419-8279
     contact: { company: 'The Housing Guild', name: '', phone: '(415) 419-8279', email: '', website: '' }, // Verified Source; 415 = SF-area mgmt co (manages regionally)
     comments: [
-      { id: "c1784696187192", text: "Contacted on zillow. I like the location. Lease term- contact for details.", ts: "2026-07-22T04:56:27.192Z" },
+      { id: "c1784696187192", text: "Called and confirmed no longer available\nContacted on zillow. \nI like the location. \nLease term- contact for details.", ts: "2026-07-22T04:56:27.192Z" },
     ],
 
     laundry: 'on-site', // "Laundry on site" / "on-site laundry" — not in-unit
@@ -1827,7 +1829,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Whitley Property Management Inc, Zillow "Verified Source", (650) 376-7843 (local)
     contact: { company: 'Whitley Property Management Inc', name: '', phone: '(650) 376-7843', email: '', website: '' },
     comments: [
-      { id: "c1784696309355", text: "Contacted via zillow. I like the location", ts: "2026-07-22T04:58:29.355Z" },
+      { id: "c1784696309355", text: "Contacted via zillow. \nI like the location. Location is convenient, not far away from main street", ts: "2026-07-22T04:58:29.355Z" },
     ],
 
     laundry: 'on-site', // "Laundry facility on site" — not in-unit
@@ -1904,7 +1906,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Landlord', // "Listed by property owner" Shant Bezdjian; description says to call Garbis — NOT a Verified Source
     contact: { company: '', name: 'Shant Bezdjian (call Garbis)', phone: '', email: '', website: '' }, // no phone published — inquire via Zillow
     comments: [
-      { id: "c1784696616077", text: "Contacted via Zillow. One year lease. Find out why this has been outstanding for so long", ts: "2026-07-22T05:03:36.077Z" },
+      { id: "c1784696616077", text: "Contacted via Zillow. \nOne year lease. \nFind out why this has been outstanding for so long\nWalking distance to downtown", ts: "2026-07-22T05:03:36.077Z" },
     ],
 
     laundry: 'on-site', // "Laundry facility in the garage" — not in-unit
@@ -1923,7 +1925,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 3, // legit + genuinely GOOD VALUE on paper: renovated 1BR near downtown San Carlos, UNDER market at $2,400, and the landlord pays water/sewer/trash. BUT the standout caveat is 488 DAYS on market (why hasn't it rented?), plus it's BY-OWNER (not Verified Source), on-site (garage) laundry, an older exterior-walkway building, and no stated lease term. Price/value is a 4; the 488-day question + unverified owner pull it to 3
     scamRisk: false,
     incomeRestricted: false,
-    rating: 3,
+    rating: 4,
     notes:
       '✅ Reads LEGITIMATE (not a scam) — a real Zillow home-detail listing (zpid) by owner (Shant Bezdjian; the ' +
       'blurb says to "call Garbis"), with a FULL street address and 9 real, consistent photos (a renovated ' +
@@ -1987,7 +1989,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Westbay Commercial RE Group DBA Coldwell Banker Commercial — a real brokerage (but NOT a Zillow "Verified Source")
     contact: { company: 'Coldwell Banker Commercial (Westbay)', name: '', phone: '', email: '', website: '' }, // no phone published — inquire via Zillow
     comments: [
-      { id: "c1784696278520", text: "Contacted via zillow. Ask for lease term. I like the location. Balcony included", ts: "2026-07-22T04:57:58.520Z" },
+      { id: "c1784696278520", text: "Contacted via zillow. \nAsk for lease term. \nI like the location. \nBalcony included\n1st floow, similar to 491 chiquita st parking", ts: "2026-07-22T04:57:58.520Z" },
     ],
 
     laundry: 'unknown', // NOT mentioned anywhere in the listing — ask (in-unit / on-site / none)
@@ -2140,7 +2142,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // Pacific Garden Properties, LLC (listing agent/manager) — NOT a Zillow "Verified Source"
     contact: { company: 'Pacific Garden Properties, LLC', name: '', phone: '', email: '', website: '' }, // no phone published — inquire via Zillow
     comments: [
-      { id: "c1784696231813", text: "Contacted via zillow. 10 month lease", ts: "2026-07-22T04:57:11.813Z" },
+      { id: "c1784696231813", text: "Contacted via zillow. The landlord is pretty active and quick on response\n10 month lease\nParking could be very limited -- check", ts: "2026-07-22T04:57:11.813Z" },
     ],
 
     laundry: 'on-site', // "on-site shared laundry facilities" — not in-unit
@@ -2219,7 +2221,7 @@ export const APARTMENTS: Apartment[] = [
     listingType: 'Property mgmt', // CREI LLC (Zillow) / Redwood Landing Properties, INC — valid CA DRE #01476187 (but NOT a Zillow "Verified Source")
     contact: { company: 'CREI LLC / Redwood Landing Properties (DRE #01476187)', name: '', phone: '', email: '', website: '' }, // no phone published; by appointment — inquire via Zillow
     comments: [
-      { id: "c1784696738765", text: "Contacted via zillow. Okay location okay room", ts: "2026-07-22T05:05:38.765Z" },
+      { id: "c1784696738765", text: "Contacted via zillow. \nOkay location\nOkay room\nOkay neighbourhood", ts: "2026-07-22T05:05:38.765Z" },
     ],
 
     laundry: 'unknown', // not mentioned — ask (in-unit / on-site / none)
@@ -2238,7 +2240,7 @@ export const APARTMENTS: Apartment[] = [
     expertRating: 4, // STANDOUT VALUE + LEGIT (valid DRE, real building-with-for-rent-sign photo): a spacious 955 sqft 2-BEDROOM with HARDWOOD floors + a carport, at just $2,400 — well under market for Redwood City, central near El Camino. For the same money as your 1BRs you get a second room. Held from 5 by the 1-YEAR lease (conflicts with your 6-mo goal — red flag), all utilities tenant-paid, an older/basic building (wall heat, no A/C), and laundry not stated
     scamRisk: false,
     incomeRestricted: false,
-    rating: 0,
+    rating: 2,
     notes:
       '✅ Looks LEGITIMATE — a real Zillow listing by CREI LLC / Redwood Landing Properties, INC, with a VALID ' +
       'CA DRE license (#01476187), a full address, and 8 real photos including a shot of the ACTUAL BUILDING ' +
