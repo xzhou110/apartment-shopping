@@ -2258,4 +2258,84 @@ export const APARTMENTS: Apartment[] = [
     image: 'img/a34.webp',
     sourceUrl: 'https://www.zillow.com/apartments/redwood-city-ca/520-hilton-street/5Zyxrs/',
   },
+  {
+    // a35 — Chateau Sandel Apartments, Belmont (foothills, on Alameda de las Pulgas). Rooftop geocode via
+    // Nominatim (2026-07-24). ✅ Reads LEGIT — a Zillow "Verified Source" foothill community with a real unit
+    // row + 12 staged photos (all interiors/amenities — NO building exterior in the listing, so the hero is
+    // the kitchen). Tracked = Unit 33-17 (1BR, 660 sqft, $3,225, "Currently unavailable"). Priciest 1BR so far.
+    id: 'a35',
+    status: 'New',
+    title: 'Chateau Sandel 1BR (pool, elevator) — Belmont',
+    address: '1133 Alameda de las Pulgas, Belmont, CA 94002',
+    neighborhood: '',
+    city: 'Belmont',
+    lat: 37.509428,
+    lng: -122.292572,
+
+    beds: 1,
+    baths: 1,
+    sqft: 660, // Unit 33-17
+    floor: '',
+
+    rent: 3225, // Unit 33-17 base rent — the highest 1BR on your list ($4.89/sqft); above market (see marketRent)
+    parkingCost: null, // parking exists but type/cost not clearly stated — ask
+    petRent: null, // cats allowed (dogs NOT) — pet rent not stated
+    utilitiesIncluded: null, // not stated (heat is electric = tenant-paid)
+    utilitiesEstimate: null,
+
+    deposit: null, // not stated
+    appFee: null, // not stated
+    brokerFee: null,
+
+    leaseTermMonths: null, // "Lease terms" not stated as a number, but the listing invites "if you want a different lease... let us know" — flexible; still fires the amber "confirm 6-mo" flag
+    minLeaseMonths: null,
+    maxLeaseMonths: null,
+    availableDate: '', // Unit 33-17 "Currently unavailable" (rolling community) — ask what's open
+    availability: 'unavailable',
+    furnished: false,
+
+    petPolicy: 'Cats only', // "Dogs are not allowed"; cats allowed
+    listingType: 'Property mgmt', // Zillow "Verified Source", Leasing Agent, on-site management + online portal
+    contact: { company: 'Chateau Sandel Apartments', name: 'Leasing Agent', phone: '', email: '', website: '' }, // Verified Source; no phone published — inquire via Zillow
+    comments: [],
+
+    laundry: 'in-unit', // "Laundry: In Unit" + photos show a stacked W/D inside the unit — BUT appliances note "Washer/Dryer in SELECT units", so confirm 33-17 has it
+    amen: {
+      parking: null, // parking type/cost unclear — ask
+      woodenFloor: true, // "Laminate" + "Luxury Vinyl Plank (select units)" — wood-style (varies by unit; some are carpet)
+      balcony: true, // "Balcony Or Patio" / "Patio Balcony" + photos show a private balcony
+      gym: true, // "Fitness Center"
+    },
+    amenities: ['In-unit W/D (select units)', 'Elevator', 'Swimming pool (newly updated)', 'Fitness center', 'Private balcony/patio', 'BBQ area', 'Granite/quartz counters (select)', 'Luxury vinyl plank (select)', 'Dual-pane windows', 'Storage space', 'Intercom security + on-site mgmt', 'Foothill/creek setting · across from Belmont Library · 10 min to SFO'],
+
+    dateSeen: '2026-07-24',
+    daysOnMarket: null,
+    marketRent: 3000, // Est. — premium Belmont 1BR comp (pool/gym/elevator/reno); $3,225 is still ABOVE it (~$225 over), so the card shows an over-market flag. It's the priciest 1BR on your list at $4.89/sqft
+
+    expertRating: 3, // a genuinely NICE, legit community — foothill/creek setting, a newly-updated pool, fitness center, an ELEVATOR (rare on your list), in-unit W/D (select units), a private balcony, modern reno (quartz, LVP), across from the Belmont Library. But it's the PRICIEST 1BR on your list ($3,225, above market), CURRENTLY UNAVAILABLE, cats-only (no dogs), electric heat / no A/C, and the lease term isn't stated. You're paying a premium for the amenities + setting, not getting a value
+    scamRisk: false,
+    incomeRestricted: false,
+    rating: 0,
+    notes:
+      '✅ Looks LEGITIMATE — a Zillow "Verified Source" foothill community (Chateau Sandel) on Alameda de las ' +
+      'Pulgas, with on-site management, an online portal, and 12 real (staged) photos of a modern-renovated ' +
+      'unit. Lovely SETTING: tucked into the Belmont foothills with mature trees + a creek running through the ' +
+      'property, a newly-updated swimming pool, a fitness center, and it\'s literally across the street from the ' +
+      'Belmont Public Library; easy 280/101/92 access, ~10 min to SFO. 🟢 NICE UNIT FEATURES: an ELEVATOR (rare ' +
+      'on your list), IN-UNIT stacked washer/dryer (shown in the photos), a private balcony, quartz counters, ' +
+      'luxury-vinyl-plank floors, dual-pane windows, and storage.\n' +
+      '💲 THE CATCH — PRICE + AVAILABILITY: at $3,225 for a 660 sqft 1BR ($4.89/sqft) this is the MOST EXPENSIVE ' +
+      '1BR on your list and above market for Belmont (the card shows an over-market flag) — you\'re paying for ' +
+      'the amenities + setting, not a deal. And Unit 33-17 is "Currently unavailable" (rolling community), so ' +
+      'call to ask what\'s actually open. Also confirm: (1) 🐕 DOGS ARE NOT ALLOWED (cats OK) — dealbreaker if ' +
+      'you have a dog. (2) 📅 LEASE TERM isn\'t stated, but the listing says "if you want a different lease term, ' +
+      'let us know" — so a 6-mo term may be negotiable; confirm (amber flag on the card). (3) 🧺 IN-UNIT W/D and ' +
+      'the nicer finishes (quartz, LVP, glass-top stove) are "in SELECT units" — confirm THIS unit has them, or ' +
+      'you may get carpet + a plainer kitchen. (4) 🔥 Heat is ELECTRIC (tenant-paid) and no A/C is mentioned. ' +
+      '(5) 🚗 PARKING type/cost isn\'t clearly stated — ask. (6) Deposit, app fee, and utilities not stated — ask ' +
+      'move-in + monthly costs. (7) 📷 No building-exterior photo in the listing (all 12 are unit/amenity shots) ' +
+      '— the card hero is the kitchen.',
+    image: 'img/a35.webp',
+    sourceUrl: 'https://www.zillow.com/apartments/belmont-ca/chateau-sandel-apartments/5bCWgk/',
+  },
 ];
