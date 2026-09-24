@@ -4,7 +4,7 @@ summary: Single-user Bay Area rental shortlist — capture listings from a link/
 status: live
 live: https://xzhou110.github.io/apartment-shopping/
 repo: https://github.com/xzhou110/apartment-shopping
-updated: 2026-08-15
+updated: 2026-09-24
 ---
 
 # Apartment Shopping — shortlist, compare & rank rentals
