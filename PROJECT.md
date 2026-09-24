@@ -23,7 +23,7 @@ no backend; state lives in the browser; export to Google Sheets. It is the apart
 |---|---|
 | **Kind** | web app (static SPA, single user) |
 | **Stack** | Vite + React + TypeScript · Vitest (~300 tests) · CSS tokens, light/dark · localStorage |
-| **Local path** | `D:\Useful\AI\claude_projects\apartment-shopping` (Vite app in `app/`) |
+| **Local path** | `D:\Meaningful\AI\claude_projects\apartment-shopping` (Vite app in `app/`) |
 | **Run** | `cd app; npm run dev` → http://localhost:5173 · `npm test` · `npm run build` |
 | **Deploy** | push to `main` → `.github/workflows/deploy.yml` → GitHub Pages (a push **is** a deploy) |
 | **Data / backends** | Seed listings in `app/src/data/apartments.ts` (a7–a35, hand-curated); offline Bay Area ZIP/city centroids (Census); free Nominatim geocode fallback; Google Sheets sync via the user's own Apps Script (URL in localStorage only). **$0/month.** |
