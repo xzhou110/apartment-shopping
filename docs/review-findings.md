@@ -76,7 +76,7 @@ shape) — so this is **not** a crash bug; it's a trust/persistence bug.
 1. After consuming a hash, **clear it** (`history.replaceState(null, '', location.pathname + location.search)`)
    so a refresh doesn't re-apply and the link doesn't linger.
 2. Do **not** auto-persist hash-loaded state. Treat a share as a *preview*: load into memory, require an
-   explicit "Save these to my board" action before it touches `apt.v1`. (Mirrors garage's intent — explicit
+   explicit "Save these to my board" action before it touches `apt.v1`. (Mirrors car-shopping's intent — explicit
    share, explicit accept.)
 3. Never let a shared hash carry `settings.sheetUrl` (strip it on import). The Sheet URL is a capability;
    it should only ever come from the user typing it in Settings.
@@ -272,10 +272,10 @@ not a real value. Use `!= null` for consistency if touched.
   can't execute script, so that's safe. `target="_blank"` links carry `rel="noopener noreferrer"`.
 - **Sheets-sync POST** (`ExportModal.tsx:42-58`): sends only `{rows: sheetMatrix(...)}` (data), no secrets;
   `sheetUrl` lives only in `settings`/localStorage, never bundled (grep confirms no committed Sheet URL).
-  `no-cors` + opaque-response pattern is the correct garage-ported approach. (The only related risk is M2:
+  `no-cors` + opaque-response pattern is the correct car-shopping-ported approach. (The only related risk is M2:
   don't let a share hash plant `sheetUrl`.)
-- **No garage remnants / dead code:** every "car"/"garage" hit is a legitimate CSS class, comment, or the
-  "Detached garage" amenity string. No leftover TCO/`cost.ts`/`effectiveMonthly` — scope cut honored
+- **No car-shopping remnants / dead code:** every "car"/"car-shopping" hit is a legitimate CSS class, comment, or the
+  "Detached car-shopping" amenity string. No leftover TCO/`cost.ts`/`effectiveMonthly` — scope cut honored
   (no `cost-asc` sort, rent-only ranking, raw cost fields tracked/exported only). Contract §4 respected.
 - **Export columns** (`sheetCols.ts`): match §9 order; all 10 amenities via `amenState` (implications hold);
   `pricePerSqft` derived column present; nulls render blank, not 0.

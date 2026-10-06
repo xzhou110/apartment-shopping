@@ -1,6 +1,6 @@
 # Tech Plan — Apartment Shopping
 
-Architecture for the apartment adaptation of **garage**. Pairs with **api-contract.md** (the frozen
+Architecture for the apartment adaptation of **car-shopping**. Pairs with **api-contract.md** (the frozen
 seam between the two build lanes). Scope: the minimum architecture that satisfies the PRD — no more.
 
 > **Partially superseded (kept as the original build record).** For CURRENT behavior see `STATE.md`,
@@ -16,7 +16,7 @@ seam between the two build lanes). Scope: the minimum architecture that satisfie
 
 - **Vite + React 18 + TypeScript + Vitest.** Static SPA, deployed to **GitHub Pages**. **No backend,
   no auth, no accounts** — single user, per-browser `localStorage`. This is fixed by the PRD and
-  inherited from garage; it's the right call (one user, no server-side state, free hosting).
+  inherited from car-shopping; it's the right call (one user, no server-side state, free hosting).
 - **Rule 1 — pure core / thin UI.** ALL domain logic is pure functions in `lib/*` and `data/*`,
   fully unit-tested. Components only format and render; they never reimplement a calculation. This is
   what lets the two lanes build in parallel against the contract and what makes the logic testable
@@ -43,7 +43,7 @@ src/lib/distance.ts          + distance.test.ts
 src/lib/derive.ts            + derive.test.ts
 src/lib/flags.ts            + flags.test.ts
 src/lib/format.ts           + format.test.ts
-src/lib/exportSheet.ts      + exportSheet.test.ts   (ported verbatim from garage, Car→Apartment)
+src/lib/exportSheet.ts      + exportSheet.test.ts   (ported verbatim from car-shopping, Car→Apartment)
 src/data/apartments.ts      (the SEED — source of truth; geocoded lat/lng baked in)
 src/data/amenities.ts
 src/data/sheetCols.ts       + sheetCols.test.ts
@@ -54,12 +54,12 @@ scripts/buildGeo.*          (OPTIONAL — emits bayAreaGeo.ts from Census/GeoNam
 
 **UI lane → `frontend-engineer`** (every file this agent creates):
 ```
-src/state/useApartments.ts   (ported from garage useGarage; namespaces apt.v2 / apt.theme)
+src/state/useApartments.ts   (ported from car-shopping useGarage; namespaces apt.v2 / apt.theme)
 src/App.tsx
 src/styles.css
 src/components/*.tsx          (Card, Grid, CompareTable, DetailModal, ApartmentForm,
                               ExportModal, SettingsModal, Filters, Modal, RatingStars,
-                              ThemeToggle, icons, helpers — mirror garage's component set)
+                              ThemeToggle, icons, helpers — mirror car-shopping's component set)
 ```
 `components/helpers.tsx` owns `applyFilters` / `applySort` (they CALL lib fns; see contract §10).
 
@@ -126,11 +126,11 @@ pure upside.
 rent, utilities, deposit, app/broker fees) as plain tracked values for their own eyeball comparison.
 Cost ranking is by base **rent** (`rent-asc`/`rent-desc`); compare highlights lowest rent.
 
-**Flags (contract §6):** ported pattern from garage's pure, injectable-`today` engine. Concrete
+**Flags (contract §6):** ported pattern from car-shopping's pure, injectable-`today` engine. Concrete
 thresholds chosen to match the PRD's intent and the user's 6–12 mo short-term lens:
 - risk reserved for the one truly disqualifying case (lease window can't be met) — keep risk rare so
   the red border means something.
-- "over market" at **>1.05×** (garage used 1.04 for price; rent is noisier, 5% is a sensible floor).
+- "over market" at **>1.05×** (car-shopping used 1.04 for price; rent is noisier, 5% is a sensible floor).
 - "far from anchor" at **>10 mi / >16 km**, and ONLY when an anchor is set and the listing has coords
   (so it never fires spuriously before the user has set up distance).
 - "stale" at **>=30 days** (rentals turn faster than cars; 60d was the car threshold).
@@ -173,7 +173,7 @@ Every pure module gets a spec. Key cases:
   - `apt.theme` — `'light' | 'dark'`.
   - `apt.geocache` — the geocode cache (OWNED by `data/geocode.ts`, contract §3). Keep it separate
     from `apt.v2` so clearing app data doesn't wipe the cache and vice-versa.
-- **Seed-merge pattern (ported from garage `useGarage` → `useApartments`):** the seed
+- **Seed-merge pattern (ported from car-shopping `useGarage` → `useApartments`):** the seed
   `data/apartments.ts` is the **source of truth** for the listing SET + data. `localStorage` overlays
   only the user's **rating + status + comments**, keeps user-added listings, and remembers **removed** ids so a
   deleted seed listing doesn't reappear. Hydrate every saved apartment over a `DEFAULT_APARTMENT` so older

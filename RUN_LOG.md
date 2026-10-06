@@ -5,10 +5,10 @@ Append before and after every spawn. Times are local (PT).
 ---
 
 ### 2026-06-29 — Setup (Orchestrator/PM · Opus 4.8)
-- Triaged request → FULL BUILD, reuse-first (adapt `garage`). Wrote acceptance criteria into PRD.md.
-- Explored garage template: types.ts, state/useGarage.ts, lib/{flags,derive,format,exportSheet}.ts, data/{cars,features,sheetCols}.ts, App.tsx, vite/ts config, CI workflow. Result: architecture understood; reusable spine confirmed.
+- Triaged request → FULL BUILD, reuse-first (adapt `car-shopping`). Wrote acceptance criteria into PRD.md.
+- Explored car-shopping template: types.ts, state/useGarage.ts, lib/{flags,derive,format,exportSheet}.ts, data/{cars,features,sheetCols}.ts, App.tsx, vite/ts config, CI workflow. Result: architecture understood; reusable spine confirmed.
 - Clarified 3 decisions with the user (name, distance type, anchor model).
-- Scaffolded apartment-shopping by copying garage `app/` (excl. node_modules/dist/img/tco/_extract) + .github + .gitignore.
+- Scaffolded apartment-shopping by copying car-shopping `app/` (excl. node_modules/dist/img/tco/_extract) + .github + .gitignore.
 - Authored frozen contract app/src/types.ts; created STATE/DECISIONS/RUN_LOG + PRD.md.
 - Status: ✅ scaffold + contract ready.
 
@@ -17,7 +17,7 @@ Append before and after every spawn. Times are local (PT).
 
 ### 2026-06-29 — ✔ Reviewer (Opus 4.8) — DONE
 - Verdict: SHIP-WITH-MUST-FIXES. 3 must-fix, 6 should-fix, 6 nice-to-have. Report: docs/review-findings.md. (109k tok, 37 tools, 279s)
-- Confirmed clean: sort-context trap threaded, haversine/null-degrade, geocode precedence+cache, leaseFits, flag engine, hydrate/seed-merge, no dangerouslySetInnerHTML/eval, Sheets POST data-only, no garage/TCO remnants.
+- Confirmed clean: sort-context trap threaded, haversine/null-degrade, geocode precedence+cache, leaseFits, flag engine, hydrate/seed-merge, no dangerouslySetInnerHTML/eval, Sheets POST data-only, no car-shopping/TCO remnants.
 
 ### 2026-06-29 — ✔ PM remediation — DONE (re-verified)
 - Fixed M1 (XSS safeHref guard ×3 sites + form-save + 8 tests), M2 (removed share-hash import path → also resolves S4), M3 (mergeWithSeed order: user-added first), S2 (compare null no longer "best"), S5 (dropped forbidden fetch headers + test), QA reset-chips gap.
@@ -25,12 +25,12 @@ Append before and after every spawn. Times are local (PT).
 - Re-verify: `npm run build` exit 0; `npm test` **173/173**; browser reload — no console errors, distance persists (0.6/10.7mi), XSS guard rejects javascript:.
 
 ### 2026-06-29 — ✔ PM ACCEPTANCE GATE — PASSED
-- Vs original ask: named folder (apartment-shopping) ✓; garage-style compare ✓; dropped TCO/car fields, kept price/location/photo/your★/my★ ✓; screenshot+link → I append to seed ✓; search/filter/rank ✓; rank by distance (Bay Area, offline) ✓; 6–12mo lease fit ✓; cost tracked-not-computed (scope cut) ✓.
+- Vs original ask: named folder (apartment-shopping) ✓; car-shopping-style compare ✓; dropped TCO/car fields, kept price/location/photo/your★/my★ ✓; screenshot+link → I append to seed ✓; search/filter/rank ✓; rank by distance (Bay Area, offline) ✓; 6–12mo lease fit ✓; cost tracked-not-computed (scope cut) ✓.
 - Status: **product accepted.** Next: deploy gate (human approval) — NOT yet deployed.
 
 ### 2026-06-29 — ▶ Tech Lead (Opus 4.8) — STARTED
 - Why: freeze the api-contract (lib/* + data/* signatures) before the parallel build; design the distance/geocode subsystem + cost derive + file layout.
-- Inputs: docs/PRD.md, app/src/types.ts, garage template (lib/derive,flags,format; data/features,sheetCols).
+- Inputs: docs/PRD.md, app/src/types.ts, car-shopping template (lib/derive,flags,format; data/features,sheetCols).
 - Expected out: docs/tech-plan.md + docs/api-contract.md. Status: ✔ done (282s, 67k tok). Contract is complete: SortKey, Filters, distance resolver (offline-first), import DAG. 3 risks flagged (thresholds → PM accepted; Nominatim unverified → non-blocking, offline path primary; geo sourcing → PM handled below).
 
 ### 2026-06-29 — PM scope cut + geo data prep
@@ -57,7 +57,7 @@ Append before and after every spawn. Times are local (PT).
 - Untestable without DOM lib (covered by PM browser smoke): component render, localStorage round-trip, ExportModal sync fetch.
 
 ### 2026-06-29 — ✔ Data/Pure-Lib Engineer (Opus 4.8) — DONE
-- Output: lib/{distance,derive,flags,format,exportSheet}.ts + tests; data/{amenities,sheetCols,apartments}.ts; data/geo/bayAreaGeo.ts (429 ZIP + 106 city, BOM-stripped) + data/geocode.ts; _fixtures.ts. Deleted garage cars.ts/features.ts. (101k tok, 59 tools, 520s)
+- Output: lib/{distance,derive,flags,format,exportSheet}.ts + tests; data/{amenities,sheetCols,apartments}.ts; data/geo/bayAreaGeo.ts (429 ZIP + 106 city, BOM-stripped) + data/geocode.ts; _fixtures.ts. Deleted car-shopping cars.ts/features.ts. (101k tok, 59 tools, 520s)
 - Validation: `vitest run src/lib src/data` → **116 tests passing**; lane tsc-clean. Full build deferred to PM integration.
 - Nominatim probe: HTTP 000 (no egress from subagent). Non-blocking — offline table is primary. PM to verify browser CORS in-app at integration.
 - Product finding (ACCEPTED, no change): `leaseFits` per frozen formula treats a min-12mo lease as fitting a 6–12 target (12≤12). Correct for user intent ("6–12 mo" includes a standard 12-mo lease); only min≥13 trips the lease-risk flag. Seed a2 set to min-18 as the genuine "doesn't fit" example.

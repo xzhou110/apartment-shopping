@@ -15,7 +15,7 @@ from a listing link (or screenshot), auto-flagged (scam / income-restricted / le
 price / days-on-market), **ranked by straight-line distance** from an anchor (default ZIP 94030),
 compared side-by-side, rated, commented on, and tracked through a status pipeline. Static, free,
 no backend; state lives in the browser; export to Google Sheets. It is the apartment sibling of
-[`garage`](../garage/PROJECT.md) (used cars) — same architecture, adapted not greenfielded.
+[`car-shopping`](../car-shopping/PROJECT.md) (used cars) — same architecture, adapted not greenfielded.
 **Live and in daily use**; iterating on user requests.
 
 ## 2. Key facts
@@ -27,7 +27,7 @@ no backend; state lives in the browser; export to Google Sheets. It is the apart
 | **Run** | `cd app; npm run dev` → http://localhost:5173 · `npm test` · `npm run build` |
 | **Deploy** | push to `main` → `.github/workflows/deploy.yml` → GitHub Pages (a push **is** a deploy) |
 | **Data / backends** | Seed listings in `app/src/data/apartments.ts` (a7–a35, hand-curated); offline Bay Area ZIP/city centroids (Census); free Nominatim geocode fallback; Google Sheets sync via the user's own Apps Script (URL in localStorage only). **$0/month.** |
-| **Related** | [`garage`](../garage/PROJECT.md) (template it was adapted from) · built with the [`/build` plugin](../claude-marketplace/PROJECT.md) · skills: `web-data-snapshot` (browser-capture recipe), `web-sheets-sync`, `ship-web-app`, `web-ship-check` |
+| **Related** | [`car-shopping`](../car-shopping/PROJECT.md) (template it was adapted from) · built with the [`/build` plugin](../claude-marketplace/PROJECT.md) · skills: `web-data-snapshot` (browser-capture recipe), `web-sheets-sync`, `ship-web-app`, `web-ship-check` |
 | **Started · last major change** | 2026-06-29 · 2026-07-24 (a35 added) |
 
 ## 3. Key things to know
@@ -78,7 +78,7 @@ Detail: [STATE.md](STATE.md).
 - 2026-07-17 — default anchor ZIP 94030 (fresh devices + idempotent migration).
 - 2026-07-16 — capture-from-link workflow; apartments.com image unlock; "Ruled out" status + reversible toggles; toast→popover fix.
 - 2026-07-15 — income-restricted = first-class red flag; red-first ordering; Find price cap $3,000.
-- 2026-06-29/30 — built by `/build` (adapt garage), deployed, real listings replace placeholders.
+- 2026-06-29/30 — built by `/build` (adapt car-shopping), deployed, real listings replace placeholders.
 
 ## 5. Pointers
 - [README.md](README.md) — product face: how the user uses every feature (public).

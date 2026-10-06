@@ -1,11 +1,11 @@
 # DECISIONS — apartment-shopping (ADR log)
 
-## ADR-001 — Reuse the `garage` template; adapt, don't greenfield
-- **Decision:** Copy the garage (used-car comparator) app as the scaffold and adapt the domain, rather than build from scratch.
-- **Context:** garage is a clean Vite+React+TS SPA with a pure tested `lib/*` core, seed+localStorage+URL-share state, theming, Sheets export, and a GitHub Pages deploy workflow — ~90% of an apartment comparator is identical.
+## ADR-001 — Reuse the `car-shopping` template; adapt, don't greenfield
+- **Decision:** Copy the car-shopping (used-car comparator) app as the scaffold and adapt the domain, rather than build from scratch.
+- **Context:** car-shopping is a clean Vite+React+TS SPA with a pure tested `lib/*` core, seed+localStorage+URL-share state, theming, Sheets export, and a GitHub Pages deploy workflow — ~90% of an apartment comparator is identical.
 - **Alternatives:** Full greenfield pipeline (researcher→designer→…); a fresh `ship-web-app` scaffold.
 - **Rationale:** Fastest path to a high-fidelity result; reuses battle-tested patterns; cost-conscious. The only genuinely new subsystem is distance ranking.
-- **Reversible?** Yes — it's a copy; nothing in garage is touched.
+- **Reversible?** Yes — it's a copy; nothing in car-shopping is touched.
 
 ## ADR-002 — Drop the TCO engine; track cost fields, do NOT compute total cost
 - **Decision:** Remove the car TCO engine. Initially planned a lightweight `effectiveMonthly` + `moveInCost` derive — **reversed on 2026-06-29 per the user:** *"no need to compare total cost — I simply keep track of cost for my own compare purpose."* So there is **no `lib/cost.ts`**, no derived/effective/amortized cost, and no `cost-asc` sort. Raw cost fields (rent, parking, pet rent, utilities, deposit, app/broker fees) are tracked, displayed, and exported as plain values; cost ranking is by base **rent** only.
@@ -21,7 +21,7 @@
 - **Reversible?** Yes — distance is a pure module; a driving-time provider can slot in behind the same interface.
 
 ## ADR-004 — Skip the researcher and a standalone designer agent
-- **Decision:** Do not spawn `researcher` or `designer`. PM specifies the apartment amenity set + distance UX in the PRD; visual language is inherited from garage + the `frontend-baseline` tokens.
+- **Decision:** Do not spawn `researcher` or `designer`. PM specifies the apartment amenity set + distance UX in the PRD; visual language is inherited from car-shopping + the `frontend-baseline` tokens.
 - **Context:** This is a personal tool for the user; demand is self-evident (they asked for it), and a polished design system already exists in the template.
 - **Rationale:** Cost-conscious; scale ceremony to stakes. Spend agent budget on the genuinely new work (distance, data model, UI wiring).
 - **Reversible?** Yes — can add a design pass later if the look needs lifting.

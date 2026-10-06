@@ -104,7 +104,7 @@ Conventions used below:
 - `Coord = { lat: number; lng: number }` (a local alias, not exported from types; define it in
   `lib/distance.ts` and re-import where needed, OR inline the shape — implementer's choice, but
   keep the field names `lat`/`lng`).
-- "em-dash" = the string `"—"` (U+2014), the project's null-display token (ported from garage).
+- "em-dash" = the string `"—"` (U+2014), the project's null-display token (ported from car-shopping).
 
 ---
 
@@ -311,9 +311,9 @@ export interface FlagCtx {
 export function getFlags(apt: Apartment, ctx: FlagCtx): Flag[];
 
 /**
- * Overall card signal, mirroring garage's rule:
+ * Overall card signal, mirroring car-shopping's rule:
  *   risk if any risk → warn if any warn → good if any good → '' otherwise.
- * (garage escalates on >=2 warn OR any warn, which is equivalent to "any warn"; keep that.)
+ * (car-shopping escalates on >=2 warn OR any warn, which is equivalent to "any warn"; keep that.)
  */
 export function signalLevel(apt: Apartment, ctx: FlagCtx): SignalLevel;
 ```
@@ -375,12 +375,12 @@ import type { Apartment, AmenityKey, AmenState } from '../types';
 /**
  * Tri-state for an amenity: 'yes' | 'no' | 'unk'. 'unk' must NEVER collapse to 'no'.
  * Honors AMENITY_IMPLIES (data/amenities.ts): if a stronger amenity that implies `key`
- * is true, this returns 'yes' even if `key` itself is unset. (Mirror garage's featState.)
+ * is true, this returns 'yes' even if `key` itself is unset. (Mirror car-shopping's featState.)
  * Reads apt.amen[key]: true→'yes', false→'no', null/undefined→'unk' (unless implied).
  */
 export function amenState(apt: Apartment, key: AmenityKey): AmenState;
 
-/** "$2,750" — em-dash for null/undefined. 0 renders as "$0". (Ported verbatim from garage.) */
+/** "$2,750" — em-dash for null/undefined. 0 renders as "$0". (Ported verbatim from car-shopping.) */
 export function money(n: number | null | undefined): string;
 
 /** "1,150" with thousands separators — em-dash for null/undefined. 0 renders "0". */
@@ -389,7 +389,7 @@ export function num(n: number | null | undefined): string;
 /** Plain-text tri-state for export cells: 'yes'→"Yes", 'no'→"No", 'unk'→"?". */
 export function yn(state: AmenState): string;
 
-/** 0–5 rating as filled/empty stars "★★★★☆" (ported from garage). */
+/** 0–5 rating as filled/empty stars "★★★★☆" (ported from car-shopping). */
 export function stars(n: number): string;
 
 /** "Studio" when beds === 0, else "{beds} bd" — small helper for cards/compare (optional). */
@@ -443,7 +443,7 @@ export function buildSheetCols(settings: Settings): SheetCol[];
 export const SHEET_COLS: SheetCol[];
 ```
 
-Column order (apartment model; mirror garage's `buildSheetCols` structure — derived values via the
+Column order (apartment model; mirror car-shopping's `buildSheetCols` structure — derived values via the
 lib fns, all 10 amenities as Yes/No/? via `amenState`):
 ```
 Status, ID, Title, Address, Neighborhood, City,
@@ -461,7 +461,7 @@ Notes, Listing URL
 Notes:
 - `buildSheetCols` takes `Settings` for parity/forward-compat (e.g. to title a column with the
   lease target) even if v1 doesn't vary columns by settings. Keep the param.
-- `exportSheet.ts` (sheetMatrix/toTSV/toCSV/toJSON) is ported verbatim from garage and consumes
+- `exportSheet.ts` (sheetMatrix/toTSV/toCSV/toJSON) is ported verbatim from car-shopping and consumes
   `buildSheetCols`; it lives in `lib/` and is part of this contract by reference (same signatures,
   `Car`→`Apartment`).
 

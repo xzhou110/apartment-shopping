@@ -3,9 +3,9 @@
 A single-user web app to **capture, compare, and rank apartments** while hunting for a place. The user
 sends screenshots + links of listings; Claude extracts the data and appends it to the seed; the user
 searches, filters, ranks (including **by distance** from a place they type in), rates, and tracks each
-candidate through a pipeline. Static, free, no backend — deployable to GitHub Pages like its sibling `garage`.
+candidate through a pipeline. Static, free, no backend — deployable to GitHub Pages like its sibling `car-shopping`.
 
-This is the apartment adaptation of the **garage** used-car comparator. Read it alongside `garage/README.md`
+This is the apartment adaptation of the **car-shopping** used-car comparator. Read it alongside `car-shopping/README.md`
 for the patterns being reused. The frozen data model is `app/src/types.ts`.
 
 > **Original build spec — corrected inline to match what shipped (2026-07-07).** Several items changed after
@@ -21,7 +21,7 @@ for the patterns being reused. The frozen data model is `app/src/types.ts`.
   (price, real monthly cost, distance from work, amenities), record my take, and not lose track."
 - **Why a tool:** browser tabs and spreadsheets lose context (no photos, no flags, no distance, no compare).
 
-## What carries over from garage (reuse as-is, just retyped to `Apartment`)
+## What carries over from car-shopping (reuse as-is, just retyped to `Apartment`)
 - Card grid · **Compare** table (auto best/worst highlight) · **Detail** modal · **Add/Edit** form.
 - **Search / filter / sort.** Quick chips + a filter panel + a sort dropdown.
 - **Your ★ + my ★** ratings (persist instantly), **Status** pipeline, notes, source URL, per-listing photo.
@@ -57,7 +57,7 @@ service records, warranty. `sellerType` → `listingType` (Property mgmt / Landl
    pill; pets live in `petPolicy`; other extras (A/C, dishwasher, pool, elevator, EV…) go in free-text `amenities`.
 
 ## Flags (apartment engine — pure, in `lib/flags.ts`)
-Adapt garage's pattern. Suggested rules (tech-lead/data-engineer to finalize thresholds):
+Adapt car-shopping's pattern. Suggested rules (tech-lead/data-engineer to finalize thresholds):
 - **risk:** lease window can't be met (e.g. `minLeaseMonths` > `targetMaxLease`, or unit is long-term only when user wants short).
 - **warn:** no in-unit laundry; no parking (when `parking` confirmed absent); rent > `marketRent`×1.05; utilities not included AND no estimate; available date already passed.
 - **info:** broker fee present; far from primary anchor (> threshold, only if an anchor is set); listing stale (high `daysOnMarket` = negotiation leverage); rent well below market (verify why). *(The originally-planned "unfurnished for short-term" info flag was removed 2026-07-07 — user brings own furniture; the field + "Furnished only" filter remain.)*

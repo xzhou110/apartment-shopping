@@ -5,7 +5,7 @@ see auto flags, **rank by distance** from any place you type in (city / ZIP / ad
 side-by-side, record your rating, and track each listing through a pipeline. Static, free, no backend.
 
 Built for a **6-month Bay Area** search, but works anywhere (Bay Area ZIP/city distance is offline;
-other places fall back to on-the-fly geocoding). It's the apartment sibling of [`garage`](../garage) (used cars).
+other places fall back to on-the-fly geocoding). It's the apartment sibling of [`car-shopping`](../car-shopping) (used cars).
 
 **Live:** **https://xzhou110.github.io/apartment-shopping/** (GitHub Pages via `.github/workflows/deploy.yml`;
 push to `main` auto-deploys). The Google Sheet sync URL is **never** in the bundle (it lives only in your
@@ -95,7 +95,7 @@ Other commands (from `app/`): `npm run build` (type-check + production bundle), 
 9. **Export to Google Sheets** — the **Export** button: **Sync** (push every listing straight into your
    sheet, updated in place), **Copy for Sheets** / **Download CSV** (zero-setup), and **JSON for Claude**
    (paste back to me so I can save your in-app edits into the data file). One-time Sheet setup is the same
-   as garage — see that project's README for the Apps Script recipe and the "access = Anyone" gotcha.
+   as car-shopping — see that project's README for the Apps Script recipe and the "access = Anyone" gotcha.
 
 ## What's tracked (and what's deliberately not)
 **Tracked:** rent + all cost fields (deposit, app/broker fees, parking, pet rent, utilities) · beds/baths/
