@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-29  
 **QA Engineer:** Claude Sonnet 4.6  
-**Working dir:** `D:/Useful/AI/claude_projects/apartment-shopping/app`
+**Working dir:** `D:/Meaningful/AI/apartment-shopping/app`
 
 ---
 
@@ -38,7 +38,7 @@
 
 ## Tests Added
 
-**New file:** `D:/Useful/AI/claude_projects/apartment-shopping/app/src/components/helpers.test.ts`
+**New file:** `D:/Meaningful/AI/apartment-shopping/app/src/components/helpers.test.ts`
 
 49 tests across 13 describe blocks covering the previously untested `applyFilters` and `applySort` functions in `helpers.tsx`:
 
