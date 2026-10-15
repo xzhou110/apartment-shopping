@@ -43,6 +43,7 @@ no backend; state lives in the browser; export to Google Sheets. It is the apart
 - **No total-cost engine** (ADR-002): rent / deposit / fees / parking / pet / utilities are tracked for eyeballing only; ranking is by plain rent, distance or rating. Don't add amortization or a composite score.
 - **No scraping.** Craigslist 403s automated fetches (and blocks datacenter IPs harder), Facebook Marketplace is login-walled, Zillow and Apartments.com 403 automated verification — so search is the semi-auto **Find** launcher in the user's own browser (§4). A paid scraper cron and a local Playwright crawler were offered and declined; revisit only if the skim gets too heavy.
 - **The distance anchor is set only in Settings → Distance anchors** (plus the "Nearest first" sort); the inline "Rank by distance from" bar was removed as redundant — don't re-add it (`.anchor-bar` in `styles.css` is dead CSS).
+- **Days-on-market tiers** (`lib/flags.ts`): under 30 days nothing, 30 to 60 amber, over 60 red. A red means "confirm it is really available" before touring: a long-listed rental is usually an evergreen relisted ad or a unit that will not rent (the 488-day Zillow listing).
 - The Google Sheet Web-App URL is per-user secret: localStorage only, never in the bundle. Repo is **public**.
 - Standing OK to push/deploy after validation (tests + build + live check) — no need to ask each time.
 
