@@ -4,7 +4,7 @@ summary: Single-user Bay Area rental shortlist — capture listings from a link/
 status: live
 live: https://xzhou110.github.io/apartment-shopping/
 repo: https://github.com/xzhou110/apartment-shopping
-updated: 2026-10-15
+updated: 2026-10-16
 ---
 
 # Apartment Shopping — shortlist, compare & rank rentals
@@ -106,6 +106,7 @@ mis-resolve as a ZIP; URL-hash share writer not built; GitHub Actions Node-20 de
 Detail: [STATE.md](STATE.md).
 
 ### Change highlights
+- 2026-10-16 — Build-commit stamp: the built page carries `<meta name="build-commit">` with the deployed commit (GitHub Actions' `GITHUB_SHA`; `local` for a local build), so a deploy is proven live by that id, not by a `?t=` query the Pages CDN ignores (app/index.html, app/vite.config.ts).
 - 2026-07-24 — a35 (Chateau Sandel, Belmont) added.
 - 2026-07-22 — 4th curation re-bake; in-place comment editing; card comment cap-with-scroll.
 - 2026-07-21 — days-on-market flag tiered (30–60 amber, >60 red); San Carlos/Belmont batch; Zillow bot-wall lesson.
