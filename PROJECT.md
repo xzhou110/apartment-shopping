@@ -5,6 +5,7 @@ status: live
 live: https://xzhou110.github.io/apartment-shopping/
 repo: https://github.com/xzhou110/apartment-shopping
 updated: 2026-10-21
+category: products
 ---
 
 # Apartment Shopping — shortlist, compare & rank rentals
