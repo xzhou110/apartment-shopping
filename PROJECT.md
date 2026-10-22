@@ -4,7 +4,7 @@ summary: Single-user Bay Area rental shortlist — capture listings from a link/
 status: live
 live: https://xzhou110.github.io/apartment-shopping/
 repo: https://github.com/xzhou110/apartment-shopping
-updated: 2026-10-16
+updated: 2026-10-21
 ---
 
 # Apartment Shopping — shortlist, compare & rank rentals
@@ -22,10 +22,10 @@ no backend; state lives in the browser; export to Google Sheets. It is the apart
 | | |
 |---|---|
 | **Kind** | web app (static SPA, single user) |
-| **Stack** | Vite + React + TypeScript · Vitest (~300 tests) · CSS tokens, light/dark · localStorage |
+| **Stack** | Vite + React + TypeScript · Vitest (300 tests) · ESLint (the standard's boundary and size rules, `app/eslint.config.js`) · CSS tokens, light/dark · localStorage |
 | **Local path** | `D:\Meaningful\AI\apartment-shopping` (Vite app in `app/`) |
-| **Run** | `cd app; npm run dev` → http://localhost:5173 · `npm test` · `npm run build` |
-| **Deploy** | push to `main` → `.github/workflows/deploy.yml` → GitHub Pages (a push **is** a deploy) |
+| **Run** | `cd app; npm run dev` → http://localhost:5180 (`server.port` in `vite.config.ts`) · `npm run check` (= lint, typecheck, tests, build; the validation for any change) · `npm test` · `npm run lint` · `npm run build` |
+| **Deploy** | push to `main` → `.github/workflows/deploy.yml`: `check` job (`npm run check`) → `build` → GitHub Pages (a push **is** a deploy, once the gate is green); `check.yml` runs the same gate on every other branch and pull request (ADR-012) |
 | **Data / backends** | Seed listings in `app/src/data/apartments.ts` (a7–a35, hand-curated); offline Bay Area ZIP/city centroids (Census); free Nominatim geocode fallback; Google Sheets sync via the user's own Apps Script (URL in localStorage only). **$0/month.** |
 | **Related** | [`car-shopping`](../car-shopping/PROJECT.md) (template it was adapted from) · built with the [`/build` plugin](../claude-marketplace/PROJECT.md) · skills: `web-data-snapshot` (browser-capture recipe), `web-sheets-sync`, `ship-web-app`, `web-ship-check` |
 | **Started · last major change** | 2026-06-29 · 2026-07-24 (a35 added) |
@@ -65,6 +65,10 @@ app/src/
   components/         Card · Grid · CompareTable · DetailModal · Filters · ApartmentForm · Find/Export/Settings modals
 docs/                 PRD.md · tech-plan.md · api-contract.md · test-report.md · review-findings.md
 ```
+Skeleton aliases for the engineering standard (`D:/Meaningful/AI/agent-skills/rules/engineering-principles.md`):
+`lib/` = engine (pure; the lint forbids framework, I/O and upward imports there), `components/` = ui,
+`state/` = the hook that owns storage, the overlay merge and migrations (no adapters folder),
+`App.tsx` + `main.tsx` = the app shell.
 
 ### Data model decisions
 - **Laundry is its own field** (`laundry: LaundryType` = in-unit / on-site / none / unknown), not a tri-state amenity — in-unit vs on-site is a real distinction. It still counts in the card's "X/N" tally: `AMENITY_TOTAL = AMENITIES.length + 1` and `amenCount` in `lib/derive.ts`; flags warn on `none`, and the "low-friction" good flag needs `in-unit`.
@@ -81,9 +85,12 @@ docs/                 PRD.md · tech-plan.md · api-contract.md · test-report.m
 - A user comment mentioning "income restricted" renders red (`isIncomeRestrictedComment`, `lib/derive.ts`) — a bonus on top of the red flag, not the flag itself.
 
 ### How to work on it
-`cd app; npm install` (once) → `npm run dev` / `npm test` / `npm run build`. Validate every change
-in the running app (in-app browser or real Chrome for pixel truth), then commit + push (`main`
-auto-deploys) and confirm the live URL serves the new bundle. Standing workflow: user sends links
+`cd app; npm install` (once) → `npm run dev` while working, then `npm run check` (lint, typecheck,
+tests, build) before any push: it is the validation for every change and the same command Actions
+runs before anything deploys (ADR-012). Validate every change in the running app (in-app browser or
+real Chrome for pixel truth), then commit + push (`main` auto-deploys once the gate is green) and
+confirm the Actions run is green and the live page's `<meta name="build-commit">` equals the pushed
+commit. Standing workflow: user sends links
 → I extract, geocode, triage, append, validate, push. `Find` (header) opens pre-built Zillow /
 Apartments.com / Craigslist / FB searches with the criteria baked in (`data/searches.ts`): `CRITERIA`
 and the derived `PRICE_LABEL` are the single edit point — the criteria line, every link sub and every
@@ -104,8 +111,13 @@ Live and in daily use. 29 seed listings (a7–a35), curated statuses baked in as
 Deferred (accepted): lease-target min/max can't be cleared to null; a 5-digit street number can
 mis-resolve as a ZIP; URL-hash share writer not built; GitHub Actions Node-20 deprecation warning.
 Detail: [STATE.md](STATE.md).
+Engineering-standard debt (audit 2026-10-21): the lint found none; four files over the 300-line reading
+limit (`useApartments.ts` 486, `ApartmentForm.tsx` 479, `DetailModal.tsx` 470, `App.tsx` 327; the first
+three near the 500-line lint error) are split at their next touch (retrofit step 4); the Node version is
+not pinned (CI runs 20, the machine 24; both pass).
 
 ### Change highlights
+- 2026-10-21 — Command surface and CI gate (ADR-012): ESLint with the standard's boundary and size rules, `npm run lint` and `npm run check`, a `check` job the deploy's `build` job needs, and `check.yml` for other branches and pull requests; two unused symbols removed from `helpers.test.ts`. No behavior or UI change.
 - 2026-10-16 — Build-commit stamp: the built page carries `<meta name="build-commit">` with the deployed commit (GitHub Actions' `GITHUB_SHA`; `local` for a local build), so a deploy is proven live by that id, not by a `?t=` query the Pages CDN ignores (app/index.html, app/vite.config.ts).
 - 2026-07-24 — a35 (Chateau Sandel, Belmont) added.
 - 2026-07-22 — 4th curation re-bake; in-place comment editing; card comment cap-with-scroll.
@@ -118,7 +130,7 @@ Detail: [STATE.md](STATE.md).
 ## 5. Pointers
 - [README.md](README.md) — product face: how the user uses every feature (public).
 - [docs/PRD.md](docs/PRD.md) · [docs/tech-plan.md](docs/tech-plan.md) · [docs/api-contract.md](docs/api-contract.md) — spec + architecture.
-- [DECISIONS.md](DECISIONS.md) — ADR-001…011 (why it is the way it is; ADR-010/011 matter most day to day).
+- [DECISIONS.md](DECISIONS.md) — ADR-001…012 (why it is the way it is; ADR-010/011 matter most day to day; ADR-012 the command surface and CI gate).
 - [STATE.md](STATE.md) — live status + detailed change log · [RUN_LOG.md](RUN_LOG.md) — build log.
 - Memory: the per-project memory files (`apartment-shopping-app.md`, `flag-scam-listings-before-adding.md`) were folded into this file on 2026-10-15 — this file is the source of truth; anything left in memory is history.
 - Skills: `web-data-snapshot` (browser-capture + bot-wall cheat sheet), `web-sheets-sync`, `web-ship-check`.

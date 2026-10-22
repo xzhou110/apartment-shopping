@@ -10,7 +10,7 @@ import { describe, it, expect } from 'vitest';
 import { applyFilters, applySort, toggleStatus } from './helpers';
 import { makeApt } from '../lib/_fixtures';
 import { DEFAULT_SETTINGS } from '../types';
-import type { Filters, SortKey } from '../state/useApartments';
+import type { Filters } from '../state/useApartments';
 import type { Coord } from '../lib/distance';
 
 // ---- baseline filter state -------------------------------------------------
@@ -30,7 +30,6 @@ function filters(overrides: Partial<Filters> = {}): Filters {
   };
 }
 
-const SFCoord: Coord = { lat: 37.7793, lng: -122.4193 };
 const sortCtx = (primaryAnchor: Coord | null = null) => ({
   primaryAnchor,
   unit: 'mi' as const,
