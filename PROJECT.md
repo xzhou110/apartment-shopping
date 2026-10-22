@@ -86,8 +86,8 @@ Skeleton aliases for the engineering standard (`D:/Meaningful/AI/agent-skills/ru
 
 ### How to work on it
 `cd app; npm install` (once) → `npm run dev` while working, then `npm run check` (lint, typecheck,
-tests, build) before any push: it is the validation for every change and the same command Actions
-runs before anything deploys (ADR-012). Validate every change in the running app (in-app browser or
+tests, build) before any push: it is the validation for every change; the machine's pre-push hook runs
+it through the root `package.json` forwarder, and Actions runs it again before anything deploys (ADR-012). Validate every change in the running app (in-app browser or
 real Chrome for pixel truth), then commit + push (`main` auto-deploys once the gate is green) and
 confirm the Actions run is green and the live page's `<meta name="build-commit">` equals the pushed
 commit. Standing workflow: user sends links
