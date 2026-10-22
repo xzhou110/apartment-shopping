@@ -15,10 +15,11 @@ browser's localStorage), so it's not exposed by the public site.
 ```bash
 cd app
 npm install        # first time only (already done)
-npm run dev        # → http://localhost:5173
+npm run dev        # → http://localhost:5180 (the port set in app/vite.config.ts)
 ```
-Other commands (from `app/`): `npm run build` (type-check + production bundle), `npm run preview`,
-`npm test` (pure-logic unit tests).
+Other commands (from `app/`): `npm run check` (lint + type-check + unit tests + production bundle: the
+validation before any push; GitHub Actions runs it before deploying), `npm run build` (type-check +
+production bundle), `npm run preview`, `npm test` (pure-logic unit tests), `npm run lint`.
 
 > Data persists in your browser's localStorage (your in-app edits: ratings, status, comments, deletions,
 > and listings you add). Clicking **Remove** on a listing keeps it gone in your browser — you don't need a
