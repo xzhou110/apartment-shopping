@@ -131,6 +131,7 @@ not pinned (CI runs 20, the machine 24; both pass).
 ## 5. Pointers
 - [README.md](README.md) — product face: how the user uses every feature (public).
 - [docs/PRD.md](docs/PRD.md) · [docs/tech-plan.md](docs/tech-plan.md) · [docs/api-contract.md](docs/api-contract.md) — spec + architecture.
+- [docs/BRANDING.md](docs/BRANDING.md) — the product icon (`app/public/favicon.svg`): concept, colors, quality bar, checks.
 - [DECISIONS.md](DECISIONS.md) — ADR-001…012 (why it is the way it is; ADR-010/011 matter most day to day; ADR-012 the command surface and CI gate).
 - [STATE.md](STATE.md) — live status + detailed change log · [RUN_LOG.md](RUN_LOG.md) — build log.
 - Memory: the per-project memory files (`apartment-shopping-app.md`, `flag-scam-listings-before-adding.md`) were folded into this file on 2026-10-15 — this file is the source of truth; anything left in memory is history.

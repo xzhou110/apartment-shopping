@@ -1,0 +1,4 @@
+<!-- Apartment Shopping product icon: an ivory home with a gold door on terracotta. How it was made: docs/BRANDING.md -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<defs><linearGradient id="ast" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8673f"/><stop offset="1" stop-color="#9b4128"/></linearGradient><linearGradient id="asi" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffaea"/><stop offset="1" stop-color="#f3e5c0"/></linearGradient><linearGradient id="asg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8c066"/><stop offset="1" stop-color="#c38f2c"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#ast)"/>
+<path d="M32 11.5 54 30.5h-5.5V52h-33V30.5H10Z" fill="url(#asi)" stroke="url(#asi)" stroke-width="3" stroke-linejoin="round"/><path d="M26.5 52V41.5a5.5 5.5 0 0 1 11 0V52Z" fill="url(#asg)"/></svg>
