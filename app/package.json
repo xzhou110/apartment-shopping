@@ -5,9 +5,9 @@
   "type": "module",
   "description": "Apartment shortlist & compare dashboard — capture, rank (incl. by distance), and track rentals",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 5180 --strictPort",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --port 4180 --strictPort",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
